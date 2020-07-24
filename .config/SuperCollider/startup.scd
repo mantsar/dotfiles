@@ -500,6 +500,6 @@ s.waitForBoot({
 // Quarks.install("MathLib")
 // Quarks.install("Dirt-Samples")
 // Quarks.install("SuperDirt")
-// Quarks.install("FoxDot")
+// Quarks.install("FoxDotQuark")
 // Quarks.install("BatLib")
 // Quarks.install("Esp")
