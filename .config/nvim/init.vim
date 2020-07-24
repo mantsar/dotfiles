@@ -1,6 +1,6 @@
-" ======================= GENERAL ============================================= {{{1
+" ======================= GENERAL ======================================== {{{1
 
-" GUI Neovide
+" GUI settings
 if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.9
@@ -14,77 +14,55 @@ if exists('g:neovide')
 		endif
 	endfunction
 	nnoremap <f9> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
-	inoremap <f9> <C-o>:let g:neovide_transparency=g:neovide_transparency-0.1<cr>
 	nnoremap <f10> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
-	inoremap <f10> <C-o>:let g:neovide_transparency=g:neovide_transparency+0.1<cr>
 	nnoremap <f11> :call Toggle_neovide_fullscreen()<cr>
-	inoremap <f11> <C-o>:call Toggle_neovide_fullscreen()<cr>
-	nnoremap <f12> :call Toggle_neovide_fullscreen()<cr>
-	inoremap <f12> <C-o>:call Toggle_neovide_fullscreen()<cr>
+	set termguicolors
+else
+	set notermguicolors
 endif
 
-" Fixes random freezing
-inoremap <f1> <nop>
-inoremap <f2> <nop>
-inoremap <f3> <nop>
-inoremap <f4> <nop>
-inoremap <f5> <nop>
-inoremap <f6> <nop>
-inoremap <f7> <nop>
-inoremap <f8> <nop>
-inoremap <f9> <nop>
-inoremap <f10> <nop>
-inoremap <f11> <nop>
-inoremap <f12> <nop>
-
-" ~~~~~~~~~~~~~~~~~~~~~~~ options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
-" UI
+" ~~~~~~~~~~~~~~~~~~~~~~~ options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" ui
 set number "Line numbers are good
 set relativenumber "Show numbers relative to current line
 set mouse=a "Enable mouse usage for all modes
-" set wrap "Wrap when textwidth is reached
 set clipboard+=unnamedplus "Yank command always copies to clipboard
-" set showmatch "Show matching parenthesis when inserted
-" set matchtime=20 "2 blinks on show match
 set splitbelow "Open split windows below by default
 set splitright "Open vsplit windows to the right by default
 set list listchars=tab:\|\ ,trail:· "Convert hidden chars to visible symbols
-" Search/Substition/Completion/Case
+set wrap "Wrap display when textwidth is reached
+" set textwidth=0 wrapmargin=0 "turn off auto-wrapping (plugins overwrites it)
+set formatoptions-=r formatoptions-=o "Turn off annoying auto commenting
+" search/substition/completion/case
 set inccommand=split "Show substitute changes immediately in separate split
 set ignorecase "Case insensitive search
 set smartcase "Case sensitive search if there is at least one uppercase letter
 set infercase "Inferring case when auto completing
 set shortmess+=c "Disable completion menu messages in command line
 set complete+=kspell "Enable dict completion when spelling is on
-" Indentation
+" indentation
 set tabstop=2 softtabstop=2 shiftwidth=2
 set shiftround "Use multiple of shiftwidth when indenting with '<' and '>'
 set noexpandtab "Don't use spaces when inserting a <Tab>.
 set smartindent "Do smart autoindenting when starting a new line.
-" Text/Moving
-" set tildeop " Enable ~ operator
-" Folding
-" set nofoldenable "Always show unfolded document on startup
-set foldlevel=99
-" Misc
+" folding
+set foldlevel=99 "Show unfolded document on startup
+set foldmethod=marker
+set foldcolumn=3
+" misc
 set history=5000 "Store lots of :cmdline history
 set hidden "Hide buffers in background
 set scrolloff=5
-set foldmethod=marker
+" }}}2
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~ variables ~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" ~~~~~~~~~~~~~~~~~~~~~~~~~ variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 let g:mapleader = "\<Space>" "Map leader key to space
+" }}}2
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~ ui ~~~~~~~~~~~~~~~~~~~~~~~ {{{2
-
-" ~~~~~~~~~~~~~~~~~~~~~~~ mappings ~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" ~~~~~~~~~~~~~~~~~~~~~~~ mappings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 nnoremap <M-w> :wa<cr>
 nnoremap <M-q> :qa<cr>
-map <M-c> mmgcc`m
-map <M-g> mmgccyypgcc`mj
 nnoremap <M-d> mmyyp`mj
-nnoremap <C-=> m`o<esc>``
-nnoremap <C--> m`O<esc>``
 " Additional bindings to leave insert mode
 inoremap jw <esc>
 inoremap wj <esc>
@@ -114,38 +92,35 @@ cnoremap g/ g/\v
 nnoremap <c-_> /\V
 xnoremap <c-_> /\V
 onoremap <c-_> /\V
-nnoremap <c-?> ?\v
-cnoremap %S %s/\V
-cnoremap G/ g/\V
-nnoremap <silent> <C-l> :<C-u>nohlsearch<cr>
 nnoremap <M-r> :%s/\v//g<left><left><left>
 xnoremap <M-r> :s/\v//g<left><left><left>
-" From autoloaded functions
-" Improvement upon vim-surround. Adds function text-object to act upon.
-" https://gist.github.com/romgrk/35186f3b5a71a7d89b2229b6f73e4f32
-nnoremap dsf  :call surroundfunc#DSurroundFunc()<cr>
-nnoremap csf  :call surroundfunc#CSurroundFunc()<cr>
+nnoremap <silent> <C-l> :<C-u>nohlsearch<cr>
+" Fixes random freezing
+inoremap <f1> <nop>
+inoremap <f2> <nop>
+inoremap <f3> <nop>
+inoremap <f4> <nop>
+inoremap <f5> <nop>
+inoremap <f6> <nop>
+inoremap <f7> <nop>
+inoremap <f8> <nop>
+inoremap <f9> <nop>
+inoremap <f10> <nop>
+inoremap <f11> <nop>
+inoremap <f12> <nop>
+" }}}2
 
-" ~~~~~~~~~~~~~~~~~~~~~~~ autocommands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" ~~~~~~~~~~~~~~~~~~~~~~~ autocommands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 augroup general
 	autocmd!
 	"Mapping for exiting help window with just q
 	autocmd BufEnter *.txt if &buftype == 'help' | noremap <buffer> q :q<cr> | endif
-	"Mapping for exiting quickfix window with just q
-	" autocmd BufWinEnter quickfix | noremap <buffer> q :q<cr>
 	"Open help window vertically
 	autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
-	" Turn off annoying auto commenting
-	autocmd BufEnter * setlocal formatoptions-=r formatoptions-=o
-	" Automatically enter insert mode when terminal is selected.
-	" autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-	autocmd VimResized * wincmd =
 augroup END
 
 augroup vimrc
 	autocmd!
-	" Marker folding for vimrc
-	autocmd BufWritePre,BufRead $MYVIMRC setlocal foldcolumn=3 foldmethod=marker
 	" Automatically reload changed config file (init.vim or .vimrc)
 	autocmd bufwritepost init.vim source $MYVIMRC
 augroup END
@@ -157,41 +132,42 @@ augroup END
 
 augroup rmode
 	autocmd!
-	" autocmd FileType r setlocal expandtab "Use spaces for tabs
+	autocmd FileType r setlocal expandtab "Use spaces for tabs
 	autocmd FileType r setlocal inoremap <M-=> <-
 	autocmd FileType r setlocal inoremap <M--> %>%
 augroup END
 
 augroup pymode
 	autocmd!
-	autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+	autocmd FileType python setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 
 augroup luamode
 	autocmd!
 	autocmd FileType lua setlocal tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
+" }}}2
 
-" ~~~~~~~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" ~~~~~~~~~~~~~~~~~~~~~~~ functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 
-command! -nargs=1 StartAsync
-         \ call jobstart(<f-args>)
-" \       execute('echom "command finished with exit status '.d.'"', '')
+command! -nargs=1 StartAsync call jobstart(<f-args>)
 
 function! Get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
+	" Why is this not a built-in Vim script function?!
+	let [line_start, column_start] = getpos("'<")[1:2]
+	let [line_end, column_end] = getpos("'>")[1:2]
+	let lines = getline(line_start, line_end)
+	if len(lines) == 0
+		return ''
+	endif
+	let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+	let lines[0] = lines[0][column_start - 1:]
+	return join(lines, "\n")
 endfunction
+" }}}2
+" }}}1
 
-" ======================= PACKAGES ============================================ {{{1
+" ======================= PACKAGES ======================================= {{{1
 
 packadd minpac
 call minpac#init()
@@ -199,20 +175,12 @@ call minpac#add('k-takata/minpac', {'type': 'opt'}) "Manage minpac for updates
 command! PackUpdate call minpac#update() "Install or update plugins
 command! PackClean call minpac#clean() "Uninstall unused plugins
 command! PackStatus call minpac#status() "See plugins status
-" Manually loaded plugins in /pack/*/opt/
-" Auto loaded plugins in /pack/*/start/
-"
-" ~~~~~~~~~~~~~~~~~~~~~~~~~ ui ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~ ui ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 " Colorscheme
 call minpac#add('liuchengxu/space-vim-dark')
-set termguicolors
-let g:colorscheme = 0
-if g:colorscheme
-	au VimEnter * hi Comment guifg=#5c6370 ctermfg=59
-	autocmd VimEnter * hi Sneak guifg=black guibg='#afff5f' ctermfg=black
-else
-	autocmd VimEnter * hi Sneak guifg=black guibg='#5FD7A7' ctermfg=black
-endif
+call minpac#add('owickstrom/vim-colors-paramount')
+
 function! Toggle_colorcheme()
 		if g:colorscheme
 			set colorcolumn=80 "Nicer code -> better code
@@ -227,7 +195,8 @@ function! Toggle_colorcheme()
 			colorscheme space-vim-dark
 			hi Comment guifg=#5c6370 ctermfg=59
 			hi Comment cterm=italic gui=italic
-			hi Sneak guifg=black guibg='#afff5f' ctermfg=black
+			hi Sneak guifg=black guibg=#afff5f ctermfg=black ctermbg=156
+			hi QuickScopePrimary guifg=NONE gui=underline guisp=#afff5f ctermfg=NONE cterm=underline 
 			let g:colorscheme = 0
 		else
 			set colorcolumn=999
@@ -237,26 +206,42 @@ function! Toggle_colorcheme()
 				autocmd!
 			augroup END
 			colorscheme paramount
-			hi Sneak guifg=black guibg='#afff5f' ctermbg=red ctermfg=black
-			hi Sneak guifg=black guibg='#5FD7A7' ctermfg=black
+			hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
+			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
 			let g:colorscheme = 1
 		endif
 endfunction
-call minpac#add('owickstrom/vim-colors-paramount')
+
+let g:colorscheme = 0
+if g:colorscheme
+	au VimEnter * hi Comment guifg=#5c6370 ctermfg=59
+	" https://github.com/liuchengxu/space-vim-dark/blob/master/colors/space-vim-dark.vim
+	au VimEnter * hi Sneak guifg=black guibg=#afff5f ctermfg=black ctermbg=156
+	au VimEnter * highlight QuickScopePrimary guifg=NONE gui=underline guisp=#afff5f
+				\ ctermfg=NONE cterm=underline 
+else
+	" https://github.com/owickstrom/vim-colors-paramount/blob/master/colors/paramount.vim
+	au VimEnter * hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
+	au VimEnter * highlight QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7
+				\ ctermfg=NONE cterm=underline 
+endif
 call Toggle_colorcheme()
+nnoremap <leader>oc :call Toggle_colorcheme()<cr>
+
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('itchyny/lightline.vim')
-set noshowmode
+" remove -- INSERT --
+set noshowmode 
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'scnvim' ] ]
-      \ },
-      \ 'component_function': {
-      \   'scnvim': 'scnvim#statusline#server_status'
-      \ },
-      \ }
+			\ 'colorscheme': 'Tomorrow_Night',
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'readonly', 'filename', 'modified', 'scnvim' ] ]
+			\ },
+			\ 'component_function': {
+			\   'scnvim': 'scnvim#statusline#server_status'
+			\ },
+			\ }
 let g:lightline.mode_map = {
 			\ 'n' : 'n',
 			\ 'i' : 'i',
@@ -271,23 +256,24 @@ let g:lightline.mode_map = {
 			\ 't': 't',
 			\ }
 call minpac#add('mboughaba/i3config.vim')
-" ~~~~~~~~~~~~~~~~~~~~~~~~~ general ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
+" }}}2
+" ~~~~~~~~~~~~~~~~~~~~~~~~~ mappings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 call minpac#add("liuchengxu/vim-which-key")
 packadd! vim-which-key "Add to runtimepath during init
 set timeoutlen=1000 "Delay to show which-key pop up
 call which_key#register('<Space>', "g:which_key_map") "Register prefix dict
 let g:which_key_map =  {} "Define prefix dictionary
 nnoremap <silent> <leader> :<c-u>WhichKey '<space>'<cr>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<space>'<cr>
+xnoremap <silent> <leader> :<c-u>WhichKeyVisual '<space>'<cr>
 " Don't use neovim's floating win, because it's ugly and not transparent
 let g:which_key_use_floating_win = 0 
 " Buffers
-nnoremap <Leader>bn :bnext<cr>
-nnoremap <Leader>bp :bprevious<cr>
+nnoremap <leader>bn :bnext<cr>
+nnoremap <leader>bp :bprevious<cr>
 "Alternate between buffers same as <C-^>
-nnoremap <Leader><Tab> :e #<cr>
-nnoremap <Leader>bd :bdelete<cr>
-nnoremap <Leader>bD :bdelete!<cr>
+nnoremap <leader><tab> :e #<cr>
+nnoremap <leader>bd :bdelete<cr>
+nnoremap <leader>bD :bdelete!<cr>
 let g:which_key_map.b = {
 			\ 'name' : '+buffer' ,
 			\ 'd' : 'delete-buffer',
@@ -309,10 +295,9 @@ let g:which_key_map.f = {
 			\ }, 
 			\ }
 " Tabs
-nnoremap <Leader>td :tabclose<cr>
-nnoremap <Leader>tn :tabnext<cr>
-nnoremap <Leader>tp :tabprevious<cr>
-" 1tabnext<cr>
+nnoremap <leader>td :tabclose<cr>
+nnoremap <leader>tn :tabnext<cr>
+nnoremap <leader>tp :tabprevious<cr>
 nnoremap <silent> <M-1> 1gt
 nnoremap <silent> <M-2> 2gt
 nnoremap <silent> <M-3> 3gt
@@ -328,24 +313,23 @@ let g:which_key_map.t = {
 			\ 'p' : 'prev-tab',
 			\ }
 " Windows
-" Moving between windows
-nnoremap <Leader>wj <C-w>j
-nnoremap <Leader>wk <C-w>k
-nnoremap <Leader>wh <C-w>h
-nnoremap <Leader>wl <C-w>l
-nnoremap <Leader>ww :call wincmd w<cr>
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>ww :call wincmd w<cr>
 " Opening windows
-nnoremap <Leader>ws <C-w>s
-nnoremap <Leader>wv <C-w>v
+nnoremap <leader>ws <C-w>s
+nnoremap <leader>wv <C-w>v
 " Delete window
-nnoremap <Leader>wd <C-w>c
+nnoremap <leader>wd <C-w>c
 " Delete all others windows
-nnoremap <Leader>wm <C-w>o
+nnoremap <leader>wm <C-w>o
 " Moving windows
-nnoremap <Leader>wJ <C-w>J
-nnoremap <Leader>wK <C-w>K
-nnoremap <Leader>wH <C-w>H
-nnoremap <Leader>wL <C-w>L
+nnoremap <leader>wJ <C-w>J
+nnoremap <leader>wK <C-w>K
+nnoremap <leader>wH <C-w>H
+nnoremap <leader>wL <C-w>L
 " Resizing
 nnoremap <leader>w= <c-w>=
 " Maximize horizontally
@@ -390,7 +374,6 @@ let g:which_key_map.h = {
 " Toggles/Options
 nnoremap <leader>ol :set list!<cr>
 nnoremap <leader>os :setlocal spell! spelllang=en_us<cr>
-nnoremap <leader>oc :call Toggle_colorcheme()<cr>
 let g:which_key_map.o = {
 			\ 'name' : '+options' ,
 			\ 's' : 'toggle-spelling',
@@ -431,20 +414,28 @@ let g:which_key_map.v = {
 			\ }
 " Text editing and moving {{{2
 call minpac#add('tpope/vim-commentary') "Comment stuff out
+map <M-c> mmgcc`m
+map <M-g> mmgccyypgcc`mj
 call minpac#add('tpope/vim-surround') "Quoting/parenthesizing made simple
+" Improvement upon vim-surround. Adds function text-object to act upon.
+" https://gist.github.com/romgrk/35186f3b5a71a7d89b2229b6f73e4f32
+nnoremap dsf  :call surroundfunc#DSurroundFunc()<cr>
+nnoremap csf  :call surroundfunc#CSurroundFunc()<cr>
 call minpac#add('tpope/vim-rsi') "Some Emacs bindings for insert and cmdline mode
-call minpac#add('tpope/vim-abolish') "Using only for coercion functionality
 call minpac#add('tpope/vim-unimpaired')
+nmap <leader>k mm[<space>`m
+nmap <leader>j mm]<space>`m
 " Bubble single lines
 nmap <C-k> [e
 nmap <C-j> ]e
 " Bubble multiple lines
 xmap <C-k> [egv
 xmap <C-j> ]egv
+call minpac#add('tpope/vim-repeat')
 call minpac#add('tommcdo/vim-exchange') "Easy text exchange operator for Vim
 call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
-call minpac#add('vim-scripts/ReplaceWithRegister') "Replace text with the contents of a register
-call minpac#add('wellle/targets.vim') "Vim plugin that provides additional text objects. Argument text-object etc...
+"Replace text with the contents of a register
+call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
 nnoremap <silent> <M-a> :ArgWrap<cr>
 call minpac#add('justinmk/vim-sneak') "Jump to any location specified by two characters
@@ -452,7 +443,7 @@ let g:sneak#label = 1
 let g:sneak#s_next = 1 "Move to next match by hitting `s` (or `S`) again
 " Case sensitivity is determined by 'ignorecase' and 'smartcase'
 let g:sneak#use_ic_scs = 1
-" One-character Sneak similar to clever-F plugin. 
+" One-character Sneak similar to clever-F plugin.
 map , <Plug>Sneak_,
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
@@ -460,42 +451,36 @@ map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 call minpac#add('unblevable/quick-scope') "Lightning fast left-right movement in Vim
 let g:qs_second_highlight = 0
-augroup quick
-	autocmd!
-	" Only higlight with colored underline
-	autocmd VimEnter * highlight QuickScopePrimary guifg='NONE' gui=underline ctermfg=NONE cterm=underline guisp='#afff5f'
-augroup END
-call minpac#add('mantsar/vim-closer')
-call minpac#add('kana/vim-textobj-user') " Create your own text objects. Required by plugins below
+call minpac#add('mantsar/vim-closer') "Added compatibility with SuperCollider
+call minpac#add('wellle/targets.vim') "Vim plugin that provides additional text objects.
+call minpac#add('kana/vim-textobj-user') "Required by plugins below
 call minpac#add('kana/vim-textobj-line') "Text objects for the current line
 call minpac#add('kana/vim-textobj-indent') "Text objects for indented blocks of lines
 call minpac#add('somini/vim-textobj-fold')
-call minpac#add('Julian/vim-textobj-variable-segment') "Provides a single text object (on iv and av) for Snake and underscore cases
-
+ "Provides a text object Snake and underscore cases
+call minpac#add('Julian/vim-textobj-variable-segment')
+" }}}2
+"
 " IDE like {{{2
-
-call minpac#add('Shougo/deoplete.nvim') "Dark powered asynchronous completion framework for neovim/Vim8
+call minpac#add('Shougo/deoplete.nvim') "Dark powered asynchronous completion framework
 let g:deoplete#enable_at_startup = 1
-call minpac#add('deoplete-plugins/deoplete-tag') "deoplete source for ctags
-call minpac#add('deathlyfrantic/deoplete-spell') "Deoplete source for spelling check. Requires :set spell
+call minpac#add('deoplete-plugins/deoplete-tag') "Deoplete source for ctags
+call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
 call minpac#add("SirVer/ultisnips")
-" Directs are searched. No entry in this list must be 'snippets'.
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 nnoremap <silent> <leader>fes :UltiSnipsEdit<cr>
 nnoremap <silent> <M-9> :UltiSnipsEdit<cr>
-" Fixes freezing when changing tabs
-au TabLeave * call UltiSnips#LeavingBuffer()
+au TabLeave * call UltiSnips#LeavingBuffer() "Fixes freezing when changing tabs
 call minpac#add('kassio/neoterm')
 let g:neoterm_autoscroll = 1 "scroll to the end of its buffer after running any
 " let neoterm_default_mod = "vertical"
 let g:neoterm_repl_enable_ipython_paste_magic = 1
 " Send the commands to the neoterm buffer linked to the current tab instead of the last active neoterm.
 let g:neoterm_term_per_tab=1
-" let g:neoterm_autoinsert=1
 nmap gx <Plug>(neoterm-repl-send)
 " Send selected contents in visual mode.
 xmap gx <Plug>(neoterm-repl-send)
@@ -538,15 +523,10 @@ nnoremap <leader>/ :History:<cr>
 nnoremap <leader>sl :Lines<cr>
 " Search lines in the current buffer
 nnoremap <C-s> :BLines<cr>
-inoremap <C-s> <Esc>:BLines<cr>
-xnoremap <C-s> <Esc>:BLines<cr>
+inoremap <C-s> <esc>:BLines<cr>
+xnoremap <C-s> <esc>:BLines<cr>
 " Vim help tags
 nnoremap <leader>hh :Helptags<cr>
-
-" call minpac#add('sbdchd/neoformat')
-" let g:neoformat_enabled_haskell = ['brittany']
-" let g:neoformat_haskell_ormolu = { 'exe': 'ormolu', 'args': [] }
-" let g:neoformat_enabled_haskell = ['ormolu']
 
 " Misc {{{2
 call minpac#add('junegunn/goyo.vim')
@@ -656,7 +636,7 @@ augroup sc_au
 augroup END
 
 " Tidal
-call minpac#add('itchyny/vim-haskell-indent')
+call minpac#add('mantsar/vim-haskell-indent')
 augroup hs_au
 	autocmd!
 	autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -675,6 +655,7 @@ function! Tidal_init()
 	:wincmd L
 	:vertical resize 70
 	:wincmd h
+	:normal G
 endfunction
 
 let g:tidal_no_mappings = 1
@@ -683,9 +664,6 @@ let g:tidal_target = "terminal"
 augroup tidal_au
 	autocmd!
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-	" for corrent indentation : cp
-	" ~/.config/nvim/pack/minpac/start/vim-haskell-indent/indent/haskell.vim 
-	" ~/.config/nvim/indent/tidal.vim
 	autocmd FileType tidal setlocal commentstring=--\ %s
 	autocmd FileType tidal setlocal dictionary+=./fzf/samples.txt
 	autocmd FileType tidal setlocal dictionary+=./tidal/all_functions.txt
@@ -698,25 +676,24 @@ augroup tidal_au
 	autocmd FileType tidal nmap <silent> <buffer> cx3 cxi#
 	autocmd FileType tidal nmap <silent> <buffer> d3 da#
 	autocmd FileType tidal nmap <silent> <buffer> c3 ci#<space><space><left>
-	autocmd FileType tidal xmap <buffer> <M-e>  <Plug>TidalRegionSend
-	autocmd FileType tidal xmap <buffer> <M-p>  <Plug>TidalRegionSend
-	autocmd FileType tidal xmap <buffer> <M-o>  <Plug>TidalRegionSend
-	autocmd FileType tidal nmap <buffer> <M-j>  <Plug>TidalLineSend
-	autocmd FileType tidal imap <buffer> <M-j>  <C-o><Plug>TidalLineSend
-	autocmd FileType tidal nmap <buffer> <M-e>  <Plug>TidalParagraphSend
-	autocmd FileType tidal nmap <buffer> <M-p>  <Plug>TidalParagraphSend
-	autocmd FileType tidal nmap <buffer> <M-o>  <Plug>TidalParagraphSend
-	autocmd FileType tidal imap <buffer> <M-e>  <C-o><Plug>TidalParagraphSend
-	autocmd FileType tidal imap <buffer> <M-o>  <C-o><Plug>TidalParagraphSend
-	autocmd FileType tidal nmap <buffer> <M-k>  :TidalHush<cr>
-	autocmd FileType tidal imap <buffer> <M-k>  <C-o>:TidalHush<cr>
-	autocmd FileType tidal nmap <buffer> <M-s>  :TidalSilence<space>
-	autocmd FileType tidal imap <buffer> <M-s>  <C-o>:TidalSilence<space>
+	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
+	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
+	autocmd FileType tidal xmap <buffer> <M-o> <Plug>TidalRegionSend
+	autocmd FileType tidal nmap <buffer> <M-j> <Plug>TidalLineSend
+	autocmd FileType tidal imap <buffer> <M-j> <C-o><Plug>TidalLineSend
+	autocmd FileType tidal nmap <buffer> <M-e> <Plug>TidalParagraphSend
+	autocmd FileType tidal nmap <buffer> <M-p> <Plug>TidalParagraphSend
+	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
+	autocmd FileType tidal imap <buffer> <M-e> <C-o><Plug>TidalParagraphSend
+	autocmd FileType tidal imap <buffer> <M-o> <C-o><Plug>TidalParagraphSend
+	autocmd FileType tidal nmap <buffer> <M-k> :TidalHush<cr>
+	autocmd FileType tidal imap <buffer> <M-k> <C-o>:TidalHush<cr>
+	autocmd FileType tidal nmap <buffer> <M-s> :TidalSilence<space>
+	autocmd FileType tidal imap <buffer> <M-s> <C-o>:TidalSilence<space>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
 augroup END
 
 " FoxDot
-
 let g:foxdot_activated = 0
 
 function! Foxdot_init()
@@ -724,6 +701,7 @@ function! Foxdot_init()
 	call scnvim#sclang#send("~foxdot_start.value()")
 	execute "tabe " . expand("%:r") . ".py"
 	:T ipython --no-autoindent -i foxdot/foxdot_cli.py
+	:normal G
 endfunction
 
 augroup foxdot_au
@@ -751,13 +729,13 @@ augroup END
 call minpac#add('rumblesan/improviz-vim')
 
 function! Improviz_init()
-	" execute "badd " . expand("%:r") . ".pz"
 	execute "tabe " . expand("%:r") . ".pz"
 	:StartAsync improviz
 	sleep 4
 	:StartAsync i3-msg '[instance="Improviz"]' move position 710 150
 	:StartAsync i3-msg '[instance="Improviz"]' focus mode_toggle
 	:ImprovizToggleText
+	:normal G
 endfunction
 
 function! Improviz_toggle()
@@ -775,7 +753,6 @@ augroup improviz_au
 augroup END
 
 " Espgrid
-
 function! Espgrid_init()
 	:StartAsync espgridd
 	sleep 3
