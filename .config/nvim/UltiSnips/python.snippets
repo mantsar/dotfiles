@@ -1,0 +1,161 @@
+global !p
+
+def player_index():
+	i = vim.current.window.cursor[0] - 1
+	regex = f'^\s*d([0-9]+)\s*>>.*'
+	while i > 0:
+		m = re.match(regex, snip.buffer[i])
+		if m:
+			return int(m.group(1))
+		i -= 1
+	return 1
+
+endglobal
+
+# JIT like
+
+snippet j "Play SynthDef" b
+d${1:`!p if not snip.c: snip.rv = player_index() + 1`} >> ${2:viola}(${VISUAL}$3)
+endsnippet
+
+snippet jd "Play sample" b
+d${1:`!p if not snip.c: snip.rv = player_index() + 1`} >> play("$2"$3)
+endsnippet
+
+snippet js "Stop player" b
+d${1:`!p if not snip.c: snip.rv = player_index()`}.stop()
+endsnippet
+
+# Patterns
+
+snippet v "By default duration is 4 beat (one bar)" w
+var([$1])
+endsnippet
+
+snippet v. "Solves a problem of need to reevaluate all places where var is used after chaning" w
+var.$1([$2])
+endsnippet
+
+snippet .t "Dynamically apply function on pattern. Usually on var" i
+.tranform($1)
+endsnippet
+
+snippet c "" w
+const($1)
+endsnippet
+
+snippet p "Pattern" w
+P[$1]$0
+endsnippet
+
+snippet p( "Pgroup" w
+P($1)$0
+endsnippet
+
+snippet p* "Spread over player dur value" w
+P*($1)$0
+endsnippet
+
+snippet p** "Same as P*, but randomizes order" w
+P**($1)$0
+endsnippet
+
+snippet p+ "Spread over player sus value" w
+P*($1)$0
+endsnippet
+
+snippet pst "Creates a Pattern of length n with the last element set to value. All other values are set to default" w
+Pstep(${1:5}, ${VISUAL}$1, 0)
+endsnippet
+
+snippet pe "Euclidian pattern" w
+PEuclid(${1:3}, ${2:8})
+endsnippet
+
+snippet pd "Returns the output of PEuclid as a series of durations where each element is a step of duration dur" w
+PDur(${1:3}, ${2:8}, ${3:0}, ${4:0.25})
+endsnippet
+
+snippet pser "Arithmetic series" w
+PRange(${1:0}, ${2:1}, ${3:1})
+endsnippet
+
+snippet ptr "Ascend $1 - 1 descend start + 1" w
+PTri($1)
+endsnippet
+
+snippet pr "Like Pwhite but for integers only or Prand if list is supplied instead. Start and end are included! Last argument - seed" w
+PRand(${1:0}, ${2:10})
+endsnippet
+
+snippet pxr "Same as Prand, but no elements are repeated" w
+PxRand(${1:0}, ${2:10})
+endsnippet
+
+snippet pwr "Controlled randomness. Weight of 2 means it is twice as likely to be picked as an item with a weight of 1" w
+PwRand([${VISUAL}$1], [$2])
+endsnippet
+
+snippet pw "Random values with uniform distribution" w
+PWhite(${1:0.0}, ${2:1.0})
+endsnippet
+
+snippet psq "Returns the series of square numbers" w
+PSquare()
+endsnippet
+
+snippet pi "Returns the series of whole numbers" w
+PIndex()
+endsnippet
+
+# Envelopes
+
+snippet el "" w
+linvar([$1]$2)
+endsnippet
+
+snippet es "" w
+sinvar([$1]$2)
+endsnippet
+
+snippet ep "" w
+expvar([$1]$2)
+endsnippet
+
+# Parameters
+
+snippet ,a "" i
+, amp=$0 
+endsnippet
+
+snippet ,s "" i
+, seed=${1:1} 
+endsnippet
+
+snippet ,am "" i
+, amplify=$0 
+endsnippet
+
+snippet ,d "" i
+, dur=$0 
+endsnippet
+
+snippet ,o "" i
+, oct=$0
+endsnippet
+
+# Clock
+
+snippet t "" b
+Clock.bpm = ${1:120}
+endsnippet
+
+snippet tp "Print value of pattern/timevar periodically" b
+Clock.every(${1:1/2}, lambda: print($2))
+endsnippet
+
+# Scales
+
+snippet sc "Scale" b
+Scale.default = $0
+endsnippet

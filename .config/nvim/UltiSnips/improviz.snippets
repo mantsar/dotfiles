@@ -1,0 +1,41 @@
+# Actions
+
+snippet ar "Rotate. 3 axis args" b
+rotate()
+endsnippet
+
+snippet ar "Move. 3 axis args" b
+move()
+endsnippet
+
+# Objects
+
+snippet oc "Cube. 3 axis args" b
+cube($1)
+endsnippet
+
+# Style
+
+snippet sb "Global background. 3 args" b
+background(255, 0, 0)
+endsnippet
+
+snippet sf "Fill. 4 args, last one alpha" b
+fill(${1:255}, ${2:100}, ${3:0}, ${4:20})
+endsnippet
+
+snippet ss "Edges. 4 args, last one alpha" b
+stroke(${1:255}, ${2:100}, ${3:0}, ${4:20})
+endsnippet
+
+# Language
+
+snippet lo "Loop variable" b
+${1:10} times
+	$2
+$0
+endsnippet
+
+snippet vo "OSC variable" b
+$1 = ext(:$1, $2)
+endsnippet

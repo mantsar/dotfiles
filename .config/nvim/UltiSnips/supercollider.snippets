@@ -1,0 +1,1849 @@
+global !p
+
+import time
+
+def ordinal(n):
+	try:
+		n = int(n)
+		o = (lambda n: "%s" % ("tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4]))(n)
+	except:
+		o = ""
+	s = f'{n}{o} section'
+	return f'{o} section {"-"*(31 - len(s))}'
+
+def temp_key():
+	return f'm{time.strftime("%H%M%S", time.localtime())[::-1]}'
+
+def rate(m):
+	return ".ar" if m.group(1) is None else ".kr"
+
+def ndef_key():
+	i = vim.current.window.cursor[0] - 1
+	regex = f'^\s*Ndef\(\\\\([a-zA-Z0-9_]+)'
+	while i > 0:
+		if snip.buffer[i].startswith("N"):
+			m = re.match(regex, snip.buffer[i])
+			if m:
+				return m.group(1)
+		i -= 1
+	return "main"
+
+def role_index():
+	i = vim.current.window.cursor[0] - 1
+	index = 0
+	regex = f'^\s*Ndef\(\\\\{t[1]}\)\[([0-9]+)\]'
+	while i > 0:
+		if snip.buffer[i].startswith("N"):
+			m = re.match(regex, snip.buffer[i])
+			if m:
+				return int(m.group(1)) + 1
+				# return "aaa"
+		i -= 1
+	return index + 1
+
+# def role_index():
+# 	i = vim.current.window.cursor[0] - 1
+# 	index = 0
+# 	while i > 0:
+# 		if re.match("^\s*// {{{ roles", snip.buffer[i]):
+# 			j = i
+# 			regex = f'^\s*(//)?\s*Ndef\(\\\\main\)\[([0-9]+)\]'
+# 			while j < len(snip.buffer):
+# 				if re.match("^\s*// }}}", snip.buffer[j]):
+# 					return index + 1
+# 				else:
+# 					m = re.match(regex, snip.buffer[j])
+# 					if m and int(m.group(2)) > index:
+# 						index = int(m.group(2))
+# 				j += 1
+# 		i -= 1
+# 	return index
+
+endglobal
+
+snippet b "" b 
+(
+${VISUAL}$0
+)
+endsnippet
+
+snippet d "" w
+d.$1[${2:0}]
+endsnippet
+
+snippet v "Global variable" b
+~$1 = $2;
+endsnippet
+
+snippet k "Named control style argument" w
+\\$1.kr($2)
+endsnippet
+
+snippet a "Named control style argument" w
+\\$1.ar($2)
+endsnippet
+
+snippet kk "Named control style argument" w
+\\$1.kr
+endsnippet
+
+snippet aa "Named control style argument" w
+\\$1.ar
+endsnippet
+
+snippet - "Separating sections" b
+// ------------------------------------
+endsnippet
+
+snippet ch "" w
+~ch.("$1", "$2"$3)
+endsnippet
+
+snippet ch0 "" w
+~$1.("$2", $3)
+endsnippet
+
+snippet ch1 "" w
+~ch1.("$1", "$2"$3)
+endsnippet
+
+snippet fx "" w
+~fx.("$1", "$2")
+endsnippet
+
+snippet fx0 "" w
+~$1_fx.("$2"$3)
+endsnippet
+
+snippet fx1 "" w
+~fx1.("$1", "$2", "$3"$4)
+endsnippet
+
+snippet fxa "" w
+~fxa.("$1", ["$2"], ["$3"])
+endsnippet
+
+snippet fxa0 "" w
+~$1_fxa.(["$2"], ["$3"])
+endsnippet
+
+snippet fxa1 "" w
+~fxa1.("$1", "$2", ["$3"], ["$4"]$5)
+endsnippet
+
+priority 5
+
+snippet cp "" b
+~cp.("$1", "$2"$3);
+// -----------------------------------
+endsnippet
+
+snippet ch "" b
+~ch.("$1", "$2"$3);
+// -----------------------------------
+endsnippet
+
+snippet ch0 "" b
+~$1 = ~ch0.("$1");
+// -----------------------------------
+endsnippet
+
+snippet ch1 "" b
+~ch1.("$1", "$2"$3);
+// -----------------------------------
+endsnippet
+
+snippet fx "" b
+~fx.("$1", "$2");
+// -----------------------------------
+endsnippet
+
+snippet fx0 "" b
+~$1_fx = ~fx0.("$1");
+~$1_fx.("$2");
+// -----------------------------------
+endsnippet
+
+snippet fx1 "" b
+~fx1.("$1", "$2", "$3");
+// -----------------------------------
+endsnippet
+
+snippet fxa "" b
+~fxa.("$1", ["$2"], ["$3"]);
+// -----------------------------------
+endsnippet
+
+snippet fxa0 "" b
+~$1_fxa = ~fxa0.("$1");
+~$1_fxa.(["$2"], ["$3"]);
+// -----------------------------------
+endsnippet
+
+snippet fxa1 "" b
+~fxa1.("$1", "$2", ["$3"], ["$4"]);
+// -----------------------------------
+endsnippet
+
+snippet ex "" b
+~ex.("$1", "$2");
+endsnippet
+
+snippet ex0 "" b
+~$1_ex = ~ex0.("$1");
+~$1_ex.("$2");
+endsnippet
+
+snippet ex1 "" b
+~ex1.("$1", "$1");
+endsnippet
+
+snippet exb "" b
+~exb.("$1", "$2", $3);
+endsnippet
+
+snippet ex0b "" b
+~$1_ex = ~ex0.("$1", $2);
+~$1_ex.("$3");
+endsnippet
+
+snippet ex1b "" b
+~ex1.("$1", "$1", $3);
+endsnippet
+
+snippet se "" w
+e.$1.set(\\$2, $0);
+endsnippet
+
+# Events
+
+snippet pb "Combine several value patterns to one event stream by binding keys to values" w
+Pbind(\\$1, $2,${VISUAL})
+endsnippet
+
+snippet pb< "Composite pattern" w
+Pbind(\\$2, $0) <> Pdef(\\$1)
+endsnippet
+
+snippet pb<~ "Composite pattern" w
+Pbind(\\$2, $0) <> ~$1
+endsnippet
+
+snippet pset "Way to control pattern with patterns and general synth controls e.g. (.set)" b
+~$1 = Synth(\\$2, [\gate, 0]);
+Pbind(\\instrument, \\$2,
+	\type, \set
+	\id, ~$1,
+	\args, #[\gate, \freq], // other args that need to be controlled
+	\gate, 1,$0
+);
+{
+	loop {
+		~$1.set;
+		$3.wait;
+	}
+}.fork;
+endsnippet
+
+snippet pm "Monophonic event stream. For continous sounds" w
+Pmono(\\$1, $2)
+endsnippet
+
+snippet pm< "Composite pattern" w
+Pmono(\\$2, $0) <> Pdef(\\$1)
+endsnippet
+
+snippet pma "Partly monophonic event stream. Legato < 1 does work on this one" w
+PmonoArtic(\\$1, $2)
+endsnippet
+
+snippet pma< "Composite pattern" w
+PmonoArtic(\\$2, $0) <> Pdef(\\$1)
+endsnippet
+
+snippet pbf "Bind several value patterns to one existing event stream by binding keys to values" w
+Pbindf($1, \\$2, $0)
+endsnippet
+
+snippet pd "Defining events" b
+Pdef(\\$1, ${VISUAL}$2);
+endsnippet
+
+snippet p "For referencing events" w
+Pdef(\\$1)
+endsnippet
+
+snippet pd< "Composite pattern" w
+Pdef(\\$2, Pbind(\\$3, $0) <> Pdef(\\$1))
+endsnippet
+
+snippet nd "Defining events" b
+Pdefn(\\$1, ${VISUAL}$2);
+endsnippet
+
+snippet n "For referencing events" w
+Pdefn(\\$1)
+endsnippet
+
+snippet ps "Sequentially embed values in a list. Repeats determines whole cycles" w
+Pseq(${VISUAL}$1, ${2:1})
+endsnippet
+
+snippet ps[ "" w
+Pseq([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet pcl "Sample and hold pattern. Second argument is either a seriers of Booleans or 0/1. If 0/false - previous value is kept" w
+Pclutch(${VISUAL}$1, ${2:true})
+endsnippet
+
+snippet pst "Timed, sample-and-hold embedding of values" w
+Pstep(${VISUAL}$1, ${2:1}, ${3:1})
+endsnippet
+
+snippet pti "Returns time in beats from moment of embedding in stream" w
+Ptime(${1:inf})
+endsnippet
+
+snippet pen "Envelope behaving like pattern" w
+Pn(Pif(Ptime(inf) <= ${1:time}, ${2:env})), inf)
+endsnippet
+
+snippet per "Envelope pattern with more control" w
+~${1:e} = $2;
+\time, Ptime(inf),
+\\$3, Pfunc({|e| ~$1.at(e.time).round($2)}),
+endsnippet
+
+snippet pn "Repeatdely embed a pattern" w
+Pn(${VISUAL}$1, ${2:inf})
+endsnippet
+
+snippet pser "Arithmetic series" w
+Pseries(${1:0}, ${2:1}, ${3:inf})
+endsnippet
+
+snippet pse "Similar to Pseq but repeats items instead of cycles" w
+Pser(${VISUAL}$1, ${2:1})
+endsnippet
+
+snippet pse[ "" w
+Pser([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet pge "Geometric series" w
+Pgeom(${1:1}, ${2:2}, ${3:inf})
+endsnippet
+
+snippet pwra "Constraint the range of output values by wrapping" w
+Pwrap(${VISUAL}$1, ${2:lo}, ${3:hi})
+endsnippet
+
+snippet pg "A gated stream that only advances when a particular event key is true" w
+Pgate(${VISUAL}$1, ${2:inf}, \\${3:step})
+endsnippet
+
+snippet pt "Combine a list of streams to a stream of lists. When any of the patterns returns a nil, Ptuple ends that 'repeat' and restarts all of the streams." w
+Ptuple([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet pstu "Just like .stutter on array. First argument is repeat of every array value" w
+Pstutter(${1:2}, ${VISUAL}$2)
+endsnippet
+
+snippet psw "Like switch, but for pattern. Works with embeded patterns. Which argument can (should) be pattern" w
+Pswitch([${VISUAL}$1], ${2:0})
+endsnippet
+
+snippet psw1 "If the element is itself a pattern, it embeds only one of its values for each index, and thus switches between all patterns in the list" w
+Pswitch1([${VISUAL}$1], ${2:0})
+endsnippet
+
+snippet pc "Good for making chords. Remaining values are picked, if not whole integer" w
+Pclump(${1:3}, ${VISUAL}$2)
+endsnippet
+
+snippet pk "Read values from pattern defined earlier" w
+Pkey(\\$1)
+endsnippet
+
+snippet pif "Pattern-based conditional expression" w
+Pif(${VISUAL}$1, $2, $3)
+endsnippet
+
+snippet pro "Routine pattern. Embeds in stream. Use yield to return value" w
+Prout({ ${VISUAL}$1 })
+endsnippet
+
+snippet prol "Routine pattern" w
+Prout({ loop { ${VISUAL}$1 } })
+endsnippet
+
+snippet pdk "Degrees with custom scale" w
+PdegreeToKey(${VISUAL}$1, ${2:scale}, ${3:12})
+endsnippet
+
+snippet pav "Applying ascending and descending scales to event stream" w
+Pavaroh(${VISUAL}$1, ${2:ascending}, ${3:descending})
+endsnippet
+
+snippet pl "Like .lace. Repeats determines how many lace cycles to do. Does not work with inner patterns" w
+Place([${VISUAL}$1], ${2:inf})
+endsnippet
+
+snippet ppl "Lace patterns. Repeats whole cycles, however it stops on shortest pattern repeat (even when lace inf)" w
+Ppatlace([${VISUAL}$1], ${2:inf})
+endsnippet
+
+snippet prw "L-system" w
+Prewrite(${1:0}, dict: 
+	${2:(0: #[2,0],
+	1: #[0,0,1],
+	2: #[1,0,1]
+	)},
+	levels: ${3:1}
+)
+endsnippet
+
+snippet psl "Slide over the list of values" w
+Pslide([${VISUAL}$1], repeats: ${2:inf}, len: ${2:3}, step: ${3:1})
+endsnippet
+
+# Randomness
+
+snippet pw "Random values with uniform distribution" w
+Pwhite(${1:0.0}, ${2:1.0}, ${3:inf})
+endsnippet
+
+snippet pga "Random values with normal distribution" w
+Pgauss(${1:0}, ${2:1}, ${3:inf})
+endsnippet
+
+snippet prb "Brownian motion (random walk). Step is continous range not a discrete value" w
+Pbrown(${1:0}, ${2:1}, ${3:0.125}, ${4:inf})
+endsnippet
+
+snippet pr "Select random values from collection. Whole patterns can be returned too" w
+Prand([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet psee "Set the random seed in subpattern. randSeed overwittes repeats of inner patterns and resets on inner cycle." w
+Pseed(${1:randSeed}, ${VISUAL}$2)
+endsnippet
+
+snippet r "Rest in event patterns" w
+Rest($1)
+endsnippet
+
+snippet .ll "Map to linear range" i
+${VISUAL}.linlin(${1:-1}, ${2:1}, ${3:1}, ${4:4})
+endsnippet
+
+snippet .c "Retrieve whole event on every step or apply the function to each return value from the pattern" i
+${VISUAL}.collect {|e| $1}
+endsnippet
+
+snippet .s "Preserve values from the output stream that pass the Boolean test; discard the rest" i
+${VISUAL}.select {|e| $1}
+endsnippet
+
+snippet .r "Discard values from the output stream that pass the test; return the rest to the user" i
+${VISUAL}.reject {|e| $1}
+endsnippet
+
+snippet psel "Filters values returned by a source pattern. Same as .select method" w
+Pselect({|v| $1}, ${VISUAL}$2)
+endsnippet
+
+snippet pfx "Add an effect synth to the synths of a given event stream" w
+Pfx(${VISUAL}$1, \\$0)
+endsnippet
+
+snippet pfm "Finite State Machine (Markov chain)" w
+Pfsm([ #[${1:entry states}], 
+	${VISUAL}$2, #[$3], 
+	nil, nil 
+])
+endsnippet
+
+snippet pxr "Select random values from a list, but never the same" w
+Pxrand([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet pre "Exponential randomness. Do not cross 0!!!" w
+Pexprand(${1:0.0001}, ${2:1.0}, ${3:inf})
+endsnippet
+
+snippet pwr "Controlled randomness. Patterns can be embedded too." w
+Pwrand([${VISUAL}$1], [$2], ${3:1})
+endsnippet
+
+snippet psf "Shuffle and repeat shuffled list n times" w
+Pshuf([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet pwa "Random walk. diractionPattern - 1 go in + direction, -1 reverse direction. Pattern can be just an integer" w
+Pwalk([${VISUAL}$1], stepPattern: $2, directionPattern: ${3:1}, startPos: ${4:0})
+endsnippet
+
+snippet pe "Euclidian pattern. $1-number of hits, $2-duration sum, $3-repeats. Min value returned is 1. Lowest value is last. Cycles through all values like in Pseq" w
+Pbjorklund2(${1:3}, ${2:8}, ${3:inf})
+endsnippet
+
+snippet psg "Timed embedding of values. Env.new concept applied to patterns. It's only dependant on beat itself. First arg is levels, second is durs" w
+Pseg(${VISUAL}$1, $2, ${3:\lin}, ${4:1})
+endsnippet
+
+snippet ppar "Embed event streams in parallel" w
+Ppar([${VISUAL}$1, $0])
+endsnippet
+
+snippet ptpar "Embed event streams in parallel, with time offset" w
+Ptpar([0, ${VISUAL}$1,$0])
+endsnippet
+
+snippet pdi "Returns the diff between the current and pervious values of an enclosed pattern" w
+Pdiff(${VISUAL}$1)
+endsnippet
+
+snippet pmod "Modify a given pattern before passing it into the stream" w
+Ppatmod(${VISUAL}$1, {|p, i| $2}, ${3:inf})
+endsnippet
+
+snippet pfi "Limit number of items embedded in a stream (event/pattern)" w
+Pfin($1, ${VISUAL}$2)
+endsnippet
+
+snippet pco "Constrain the sum of a value pattern. Rounds up last dur. Works for patterns not only for events. It can be used for anything, not only duration" w
+Pconst($1, ${VISUAL}$2)
+endsnippet
+
+snippet pfd "Limit total duration of events embedded in a stream. Rounds up last dur" w
+Pfindur($1, ${VISUAL}$2)
+endsnippet
+
+snippet pp "Use a pattern of symbols to embed Pdefs" w
+Psym(${VISUAL}$1)
+endsnippet
+
+snippet p1 "Like Pswitch1. Yields only one value from patterns" w
+Psym1(${VISUAL}$1)
+endsnippet
+
+snippet nn "Use a pattern of symbols to embed Pdefns" w
+Pnsym(${VISUAL}$1)
+endsnippet
+
+snippet n1 "Same as Psym1, but for patterns (not events)" w
+Pnsym1(${VISUAL}$1)
+endsnippet
+
+snippet pf "Return next value in a function" w
+Pfunc({|e| ${VISUAL}$1 })
+endsnippet
+
+snippet psp "Dynamic control of multiple event streams from a Routine" w
+Pspawner({|sp| var a, c;
+	${VISUAL}$1
+});
+endsnippet
+
+snippet s "Sequential" b
+sp.seq(${VISUAL}$1);
+endsnippet
+
+snippet pa "Parallel" b
+sp.par(${VISUAL}$1);
+endsnippet
+
+snippet w "Wait" b
+sp.wait(${VISUAL}$1);
+endsnippet
+
+snippet su "Suspend" b
+sp.suspend(${VISUAL}$1);
+endsnippet
+
+snippet sa "Suspend all" b
+sp.suspendAll(${VISUAL}$1);
+endsnippet
+
+snippet s- "Section (usually inside Pspawner)" b
+// {{{ $1`!p snip.rv = ordinal(t[1])`
+${VISUAL}$0
+// }}} -------------------------------- 
+endsnippet
+
+snippet pcr "Custom. Imitate PCR/replication" w
+Pcr([${VISUAL}$1], ${2:1}, ${3:0.1}, ${3:inf})
+endsnippet
+
+snippet pq "Custom. Reverse quantization" w
+Pquant([${VISUAL}$1], ${2:1}, ${3:inf})
+endsnippet
+
+# Envelopes
+
+snippet eb "Conver envelope to buffer object" w
+Buffer.sendCollection(s, $1).discretize(8192))
+endsnippet
+
+snippet eg "Envelope wrapper" w
+EnvGen.kr(${VISUAL}$1, gate:${2:gate}, doneAction:${3:0})
+endsnippet
+
+snippet es "One cycle sine wave > 0. Gaussian distribution" w
+Env.sine(${1:sustain})
+endsnippet
+
+snippet ep "Exponentialy declining curve" w
+Env.perc(${1:atk}, ${2:sustain}, curve:${4:curve})
+endsnippet
+
+snippet el "Simple linear envelope with sustain curve. atk, sus, rel" w
+Env.linen(${1:atk}, ${2:sustain}, ${3:rel}, curve:${4:curve})
+endsnippet
+
+snippet et "Linear triangle" w
+Env.triangle(${1:sustain})
+endsnippet
+
+snippet ee "Envelope with levels and n-1 times. Values inside arrays are reused similar to R." w
+Env([${1:levels}], [${2:times}], curve:${3:curve})
+endsnippet
+
+snippet ees "Sustained variant" w
+Env([${1:levels}], [${2:times}], curve:${3:curve}, releaseNode:${4:2})
+endsnippet
+
+snippet eel "Looping variant. Release node must be larger, but not last element. Also first loopNode index is played only once" w
+Env([${1:levels}], [${2:times}], curve: ${3:curve}, releaseNode:${4:4}, loopNode:${5:0})
+endsnippet
+
+snippet epr "Envelope with time, level pairs for more precision" w
+Env.pairs([[${1:time}, ${2:level}], [${3:time}, ${4:level}], [${5:time}, ${6:level}]$7], curve:${8:curve})
+endsnippet
+
+snippet easr "Attack sustain (level) release" w
+Env.asr(${1:atk}, ${2:1}, ${3:rel}, curve:${4:curve})
+endsnippet
+
+snippet ec "No attack segment" w
+Env.cutoff(${1:rel}, curve:${2:\\lin})
+endsnippet
+
+snippet eadsr "Attack decay sustain (level) release. 3rd argument sustainLevel is actually portion of peakLevel" w
+Env.adsr(${1:atk}, ${2:decay}, ${3:1}, ${4:rel}, ${5:peak}, curve:${6:curve})
+endsnippet
+
+### SCLANG FLOW STRUCTURES AND FUNCTIONS
+
+snippet lc "Routine comprehension skeleton" w
+{: $1, x <- $2 }
+endsnippet
+
+snippet lcc "Routine comprehension skeleton with inner loop" w
+{: $1, x <- $2, y <- $3 }
+endsnippet
+
+snippet af "Fill an array" w
+Array.fill(${1:size}, { ${VISUAL}$2 })
+endsnippet
+
+snippet mf "Mix Ugens define in function" w
+Mix.fill(${1:size}, {|v| ${VISUAL}$2 })
+endsnippet
+
+snippet do "Similar to python for loop" w
+$1.do {|v, i| $2 }
+endsnippet
+
+snippet cl "Like do but alose return resulting array" w
+$1.collect {|v, i| $2 }
+endsnippet
+
+snippet ls "New empty List" w
+List[${VISUAL}$1]
+endsnippet
+
+snippet ife "If else with syntax similar to R" w
+if ($1) { ${VISUAL}$2 } { $3 }
+endsnippet
+
+snippet if "If with syntax similar to R" w
+if ($1) { ${VISUAL}$2 }
+endsnippet
+
+snippet fn "Function definition" b
+~$1 = {|$2| ${VISUAL}$3 };
+endsnippet
+
+snippet wh "while loop" w
+{$1}.while { ${VISUAL}$2 });
+endsnippet
+
+snippet break "Cumbersome break from loop syntax. Break can return value and should be used inside with break.value(something) syntax" w
+block {|break|
+	${VISUAL}$1;
+	break.value($2);
+};
+endsnippet
+
+snippet sw "Switch satement" w
+switch (${1:val},
+	${2:testval1}, { ${3:trueFn1} },
+	{ ${4:defaultFn} }
+)
+endsnippet
+
+snippet case "Case" w
+$1 = case
+	{ $2 == $3 } { $4 };
+endsnippet
+
+snippet ro "Routine. Same as generator in python" w
+Routine { 
+	${VISUAL}$1 
+}.play;
+endsnippet
+
+snippet rs "For synth testing" w
+(
+Routine { 
+	${VISUAL}$1
+	s.sync;
+	Synth(\\$2, [$3]);
+}.play;
+)
+endsnippet
+
+snippet lo "loop (ususally routine)" w
+loop { 
+	${VISUAL}$1 
+}
+endsnippet
+
+snippet rl "Routine with loop, wait, play and global assignment" b
+~$1 = { loop { ${VISUAL}$2; ${3:1}.wait} }.fork;
+endsnippet
+
+snippet fo "Embed function in Routine and play it" w
+{ 
+	${VISUAL}$1 
+}.fork;
+endsnippet
+
+snippet ta "Task. Can be paused and resumed inside routine" w
+Task { 
+	${VISUAL}$1 
+}
+endsnippet
+
+snippet sched "Relative scheduling" b
+t.sched(t.timeToNextBeat, { $1; ${2:1} });
+endsnippet
+
+snippet sc "Scale" w
+Scale.$1
+endsnippet
+
+snippet scd "Scale degrees" w
+Scale.$1.degrees
+endsnippet
+
+snippet scr "Scale ratios" w
+Scale.$1.ratios
+endsnippet
+
+# UGens
+
+snippet .up "Poll UGen messages. 3rd argument is trig_id" w
+${VISUAL}.poll(${1:10}, \\${2:test})
+endsnippet
+
+snippet DynKlank "Similar to Klank, but ref values can be changed dynamically. Input usually noise or impulses. $3 is like decay times" w
+DynKlank.ar(\`[[$1], ${2:1}, [$3]], ${4:BrownNoise.ar})
+endsnippet
+
+snippet Klank "Combine Ringz modulated sounds" w
+Klank.ar(\`[[$1], 1, [$2]], ${3:Impulse.ar})
+endsnippet
+
+snippet Klang "Bank of fixed frequency sine oscillators. Klang is more efficient than creating individual oscillators but offers less flexibility (freq, amp, phase)" w
+Klang.ar(\`[[[$1], [$2], [$3]])
+endsnippet
+
+snippet Rand "Generate rand value on Synth creation (not def)" w
+Rand(${1:0.0}, ${2:1.0})
+endsnippet
+
+snippet ExpRand "Generate exp rand value on Synth creation (not def)" w
+ExpRand(${1:0.01}, ${2:1.0})
+endsnippet
+
+snippet LinExp "Map a linear range to an exponential range" w
+LinExp(${1:sig}, ${2:-1}, ${3:1}, ${4:0.01}, ${5:1})
+endsnippet
+
+snippet "Line(k)?" "Just generates a line" wr
+Line`!p snip.rv = rate(match)`(${1:0}, ${2:1}, dur: ${3:1}, doneAction:${4:0})
+endsnippet
+
+snippet "Dust(k)?" "Short bursts of but randomly dispersed in time. Outputs 0/1" wr
+Dust`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "Dust2(k)?" "Like Dust, but outputs -1/1" wr
+Dust2`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a gate some specific duration or reusing Dust random values" wr
+Trig`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
+endsnippet
+
+snippet "TRand(k)?" "Generate random float each time the trigger signal changes from nonpositive to positive values. Sounds bad when trig is not at same rate" wr
+TRand`!p snip.rv = rate(match)`(${1:0.0}, ${2:1.0}, trig: ${3:0})
+endsnippet
+
+snippet "TIRand(k)?" "Triggered integer random number generator" wr
+TIRand`!p snip.rv = rate(match)`(${1:lo}, ${2:hi}, ${3:trig})
+endsnippet
+
+snippet "Blip(k)?" "Create harmonics from fundamental freq. Easy way to create harmonics" wr
+Blip`!p snip.rv = rate(match)`(${1:440}, numharm: ${2:20})
+endsnippet
+
+snippet "Stepper(k)?" "Each trigger increments a counter. After last value goes to the first one" wr
+Stepper`!p snip.rv = rate(match)`(${1:trig}, 0, ${2:min}, ${3:max}, ${4:step})
+endsnippet
+
+snippet "Select(k)?" "Select output from an array of inputs" wr
+Select`!p snip.rv = rate(match)`(${1:0}, [$2])
+endsnippet
+
+snippet Pulse "Square like wave with bzzzzz sound. Width values 0/1. 0.5 sounds most rich" w
+Pulse.ar(${1:freq}, width: ${2:0.5})
+endsnippet
+
+snippet Pulsek "Square like wave with bzzzzz sound. Width values 0/1. 0.5 sounds most rich" w
+Pulse.kr(${1:freq}, width: ${2:0.5})
+endsnippet
+
+snippet "LFPulse(k)?" "Non-band limited. Output between 0/1, while Pulse are -1/1" wr
+LFPulse`!p snip.rv = rate(match)`(${1:freq}, iphase: ${2:0}, width: ${3:0.5})
+endsnippet
+
+snippet "LFNoise0(k)?" "Random values from -1 to 1 in square forms" wr
+LFNoise0`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "LFNoise1(k)?" "Random values from -1 to 1 connected with lines" wr
+LFNoise1`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "LFNoise2(k)?" "Random values from -1 to 1 in parabolic form" wr
+LFNoise2`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+# Filters
+snippet HPF "Substract low-freq content from an input source" w
+HPF.ar(${1:${VISUAL:sig}}, ${2:freq})
+endsnippet
+
+snippet LPF "Substract high-freq content from an input source" w
+LPF.ar(${1:${VISUAL:sig}}, ${2:freq})
+endsnippet
+
+snippet RLPF "Like LPF but with resonance. Lower rq bigger spike at cutoff freq" w
+RLPF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet BPF "Band pass filter. rq should be betweer 0/1. Lower rq means sharper excusion band" w
+BPF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet BLowPass "Similar to RLPF" w
+BLowPass.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet BHiPass "Similar to HPF with resonance" w
+BHiPass.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet BHiPass4 "Similar to HPF with resonance (4th order)" w
+BHiPass4.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet BBandPass "Band Pass Filter. Similar to BPF" w
+BBandPass.ar(${1:${VISUAL:sig}}, ${2:freq}, bw:${3:1.0})
+endsnippet
+
+snippet BPeakEQ "Similar to RLPF. db - boost/cut the center frequency (in dBs)" w
+BPeakEQ.ar(${1:${VISUAL:sig}}, ${2:1200}, rq:${3:1}, db:${4:0})
+endsnippet
+
+# https://www.youtube.com/watch?v=D5UClgX8gPc
+snippet MidEQ "Attenuates or boosts a frequency band." w
+MidEQ.ar(${1:${VISUAL:sig}}, ${2:440}, rq:${3:1}, db:${4:0})
+endsnippet
+
+snippet BRF "Band pass filter: reject. Higher rq means sharper exclusion band" w
+BRF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
+snippet MoogFF "Magical filter. Works like RLPF, but easier to use and sounds better. Gain between 0 and 4" w
+MoogFF.ar(${1:${VISUAL:sig}}, ${2:freq}, gain:${3:2})
+endsnippet
+
+snippet FreeVerb "Basic reverb. Mix - dry/wet balance, damp - how strongly high freqs should be removed" w
+FreeVerb.ar(${1:${VISUAL:sig}}, mix:${2:0.33}, room:${3:0.5}, damp:${3:0.5})
+endsnippet
+
+snippet GVerb "Cooler reverb, but harded to use" w
+GVerb.ar(${1:${VISUAL:sig}}, roomsize:${1:10}, revtime:${2:3}, damping:${3:0.5}, inputbw:${4:0.5}, spread:${5:15}, drylevel:${6:1}, earlyreflevel:${7:0.7})
+endsnippet
+
+snippet DelayN "Most basic delay with cubic interpolation" w
+DelayN.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[1])*2`, ${1:0.2})
+endsnippet
+
+snippet DelayL "Most basic delay with cubic interpolation" w
+DelayL.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[1])*2`, ${1:0.2})
+endsnippet
+
+snippet DelayC "Most basic delay with cubic interpolation" w
+DelayC.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[1])*2`, ${1:0.2})
+endsnippet
+
+snippet CombN "Feedback delay with no interpolation. Feedback = 0.001 ** (delay / decay.abs). HAS INITIAL DELAY" w
+CombN.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1}, add:${4:sig})
+endsnippet
+
+snippet CombL "Feedback delay with linear interpolation. Feedback = 0.001 ** (delay / decay.abs). HAS INITIAL DELAY" w
+CombL.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1}, add:${4:sig})
+endsnippet
+
+snippet CombC "Feedback delay with cubic interpolation. Feedback = 0.001 ** (delay / decay.abs). HAS INITIAL DELAY" w
+CombC.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1}, add:${4:sig})
+endsnippet
+
+snippet AllpassN "Feedback delay with no interpolation. DOES NOT HAVE INITIAL DELAY" w
+AllpassN.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1})
+endsnippet
+
+snippet AllpassL "Feedback delay with linear interpolation. DOES NOT HAVE INITIAL DELAY" w
+AllpassL.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1})
+endsnippet
+
+snippet AllpassC "Feedback delay with cubic interpolation. HAS INITIAL DELAY" w
+AllpassC.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[2])*2`, delaytime: ${2:0.2}, decaytime: ${3:1})
+endsnippet
+
+snippet Disintegrator "Adds grit to the sound. Second argument lower values distorts sound" w
+Disintegrator.ar(sig, ${1:0.5}, ${2:0.7})
+endsnippet
+
+snippet BHiShelf "Similar to resonating low pass filter. Large db value with high freq can make parabolic shape" w
+BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, 1, db:${3:3})
+endsnippet
+
+snippet "Decay(k)?" "Exponentialy lower amplitude of burst signal. Similar to lag. Good on short burst signals like Impulse" wr
+Decay2`!p snip.rv = rate(match)`(${1:${VISUAL:sig}}, ${2:0.01}, ${3:1}, mul:${4:1})
+endsnippet
+
+snippet Pan "Sound panning" w
+Pan2.ar(${1:${VISUAL:sig}}, ${2:pan})
+endsnippet
+
+snippet Balance "Sound panning" w
+Balance2.ar(${1:sig[0]}, ${2:sig[1]}, ${2:pan})
+endsnippet
+
+snippet SinOsc "Basic sine oscillator" w
+SinOsc.ar(${1:${VISUAL:freq}})
+endsnippet
+
+snippet SinOsck "Basic sine oscillator with control rate" w
+SinOsc.kr(${1:${VISUAL:freq}})
+endsnippet
+
+snippet "FSinOsc(k)?" "Very fast. Useful for granular synthesis, however amp can blow up if the freq is modulated by certain alternating signals" wr
+FSinOsc`!p snip.rv = rate(match)`(${1:${VISUAL:freq}})
+endsnippet
+
+snippet "LFPar(k)?" "Sine wave a litte bit more Saw sounding. It has smoother shape near 0 and starts at 1 in Y axis" wr
+LFPar`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "LFGauss(k)?" "A non-band-limited gaussian function oscillator. Output ranges from minval to 1. Similar to sine envelope" wr
+LFGauss`!p snip.rv = rate(match)`(${1:1}, ${2:0.1}, loop:${3:1}, doneAction:${4:0})
+endsnippet
+
+snippet "AmpComp(k)?" "Higher freqs are normally perceived as louder, which AmpComp compensates. Root is usually lowest freq" wr
+AmpCompA`!p snip.rv = rate(match)`(${1:freq}, root:${2:12}, exp:${3:0.33})
+endsnippet
+
+snippet Pluck "Makes plucked string sound. Coef should be between -1 and 1. Only Noises sound good for some reason. Long decaytimes makes it sound best." w
+Pluck.ar(${1:sig}, ${2:Impulse.kr(1)}, `!p snip.rv = float(t[3])*2`, ${3:0.2}, ${4:1}, coef:${4:0.5})
+endsnippet
+
+snippet XFade "(UGen * 0.5) + (UGen * 0.5) wrapper" w
+XFade2.ar(${1:sig}, $2, pan: ${3:mix})
+endsnippet
+
+snippet WhiteNoise "WhiteNoise" w
+WhiteNoise.ar(${1:1})
+endsnippet
+
+snippet BrownNoise "BrownNoise. More energy at lower frequencies" w
+BrownNoise.ar(${1:1})
+endsnippet
+
+snippet PinkNoise "PinkNoise" w
+PinkNoise.ar(${1:1})
+endsnippet
+
+snippet Crackle "Chaos function. Outputs low values. chaosParam should be between 1.0 and 2.0. Towards 2 sound crackles" w
+Crackle.ar(${1:1})
+endsnippet
+
+snippet Logistic "y = chaosParam * y * (1.0 - y). Use 0/4 values. Chaos occurs from 3.57" w
+Logistic.ar(${1:3.0}, init: ${3: 0.5})
+endsnippet
+
+snippet "Gendy1(k)?" "Dynamic stochastic synthesis generator. Black box :)" wr
+Gendy1`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
+endsnippet
+
+snippet "Gendy2(k)?" "Noisy version" wr
+Gendy2`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
+endsnippet
+
+snippet "Gendy3(k)?" "Cracking version" wr
+Gendy3`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
+endsnippet
+
+snippet "Gendy5(k)?" "High pitched version" wr
+Gendy5`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
+endsnippet
+
+snippet Splay "Distribute UGens across stereo field. 1 is maximum spread, 0 is similar to Mix" w
+Splay.ar(${1:${VISUAL:sig}}, ${2:1}, center:${3:pan})
+endsnippet
+
+snippet Saw "Saw" w
+Saw.ar(${1:freq})
+endsnippet
+
+snippet Sawk "Saw with control rate" w
+Saw.kr(${1:freq})
+endsnippet
+
+snippet "SawDPW(k)?" "Super efficient Saw. Has iphase argument" wr
+SawDPW`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "LFSaw(k)?" "A non-band-limited Saw which louder for some reason than other 2" wr
+LFSaw`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "VarSaw(k)?" "More smooth sound compared to Saw. Triangle form. Starts at -1" wr
+VarSaw`!p snip.rv = rate(match)`(${1:freq}, width:${3:0.5})
+endsnippet
+
+snippet "LFTri(k)?" "Literally the same as VarSaw with mildly shifted iphase. Start at 0" wr
+LFTri`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet "Out(k)?" "Write a signal to a bus" wr
+Out`!p snip.rv = rate(match)`(${1:out}, ${2:${VISUAL:sig}})
+endsnippet
+
+snippet XOut "Send signal to a bus, crossfading with previous contents, bus_signal = (input_signal * xfade) + (bus_signal * (1 - xfade))" w
+XOut.ar(${1:out}, ${2:1}, ${3:${VISUAL:sig}})
+endsnippet
+
+snippet OffsetOut "More accurate than Out. Useful for granular synthesis. It removes phase clicks. Should not be used for effects" w
+OffsetOut.ar(out, ${2:${VISUAL:sig}})
+endsnippet
+
+snippet DetectSilence "Detect when input falls below an amplitude threshold. This UGen outputs 1 if silence detected, otherwise 1" w
+DetectSilence.ar(${1:${VISUAL:sig}}, doneAction:${2:2})
+endsnippet
+
+snippet DetectSilence2 "Safe DetectSilence for multichannel" w
+FreeSelf.kr(DetectSilence.ar(${1:${VISUAL:sig}} + Impulse.ar(0)).product);
+endsnippet
+
+snippet Linen "Simple linear envelope generator" w
+Linen.kr(${1:gate}, ${2:atk}, ${3:1}, ${4:rel}, doneAction: ${5:0})
+endsnippet
+
+snippet OteyPiano "Piano physical model" w
+OteyPianoStrings.ar(
+	${1:freq}, vel:1, t_gate:0, rmin:0.35, rmax:2, rampl:4, rampr:8, rcore:1, 
+	lmin:0.07, lmax:1.4, lampl:-4, lampr:4, rho:1, e:1, zb:1, zh:0, mh:1, 
+	k:0.2, alpha:1, p:1, hpos:0.142, loss:1, detune:0.0003, hammer_type:1
+)
+endsnippet
+
+snippet "Impulse(k)?" "Short bursts of amplitude. Output 0/1" wr
+Impulse`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet InRange "Works similar to neurons. Ouput 1 if in range, 0 otherwise" w
+InRange.ar(${1:sig}, lo:${2:0.0}, hi:${3:1.0})
+endsnippet
+
+snippet Formant "Think of human voice formants and how it can be imitated. Bigger formfreq == more complexity. bwfreq must be larger than fundamental freq" w
+Formant.ar(${1:440}, formfreq: ${2:3760}, bwfreq: ${3:880})
+endsnippet
+
+snippet Formants "Pseudo UGen from Vowel quark meant to be used with Vowel class" w
+Formants.ar(${1:100}, ${2:Vowel})
+endsnippet
+
+snippet Vowel "Creates a new instance of Vowel. \a,\e,\i,\o,\u. \bass,\tenor,\counterTenor,\alto,\soprano." w
+Vowel(\\${1:a}, \\${2:bass})
+endsnippet
+
+snippet basicNew "Explicity set the formants" w
+Vowel.basicNew([${1:freqs}], [${2:dBs}], [${3:widths}])
+endsnippet
+
+snippet MouseX "Mouse x axis control" w
+MouseX.kr(${1:0}, ${2:1})
+endsnippet
+
+snippet MouseY "Mouse y axis control" w
+MouseY.kr(${1:0}, ${2:1})
+endsnippet
+
+snippet Mix "Mix (same as addition)" w
+Mix(${VISUAL}$1)
+endsnippet
+
+snippet Mix.fill "Iterate and mix" w
+Mix.fill($1, {|i| ${VISUAL}$2})
+endsnippet
+
+snippet XLine "Just like Line but exponential" w
+XLine.ar(${1:1}, ${2:2}, dur:${3:1}, doneAction:${4:0})
+endsnippet
+
+snippet "LeakDC(k)?" "Remove DC bias. Makes y-axis mean over time equal to 0" wr
+LeakDC`!p snip.rv = rate(match)`(${1:${VISUAL:sig}})
+endsnippet
+
+snippet "In(k)?" "Read sound from audio bus. With .kr from control bus" wr
+In`!p snip.rv = rate(match)`(${1:in}, ${2:2})
+endsnippet
+
+snippet "InBus(k)?" "Has offset and clip argument which can be used with \wrap" wr
+InBus`!p snip.rv = rate(match)`(${1:in}, ${2:2})
+endsnippet
+
+snippet SoundIn "Read input sound from microphone" w
+SoundIn.ar($1)
+endsnippet
+
+priority 10
+
+snippet "SendTrig(k)?" "Send a trigger message from the server back to the client. Usually OSC should be parsed with /tr prefix on s.addr" wr
+SendTrig`!p snip.rv = rate(match)`(${1:${VISUAL:sig}}, id:${2:0}, value:${3:0})
+endsnippet
+
+snippet "LocalIn(k)?" "Define and read from buses local to a synth" wr
+LocalIn`!p snip.rv = rate(match)`(${1:2}, ${2:0})
+endsnippet
+
+snippet "LocalOut(k)?" "Write to buses local to a synth" wr
+LocalOut`!p snip.rv = rate(match)`(${1:sig})
+endsnippet
+
+snippet K2A "Control to audio rate converter. To be able to play a control rate UGen into an audio rate UGen, sometimes the rate must be converted" w
+K2A.ar(${1:sig})
+endsnippet
+
+snippet SOS "Biquad filter. Complicated. Just try values and magic happens" w
+SOS.ar(${1:sig}, a0:${2:0.0}, a1:${3:0.0}, a2:${4:0.0}, b1:${5:0.0}, b2:${6:0.0})
+endsnippet
+
+snippet Limiter "Compressor. Simply cuts values > level" w
+Limiter.ar(${1:sig}, ${2:1})
+endsnippet
+
+snippet Decimator "Samplerate and bitrate reduction. Bits between 0 and 31" w
+Decimetor.ar(${1:sig}, ${2:SampleRate.ir}, ${3:24})
+endsnippet
+
+snippet SmoothDecimator "Smooth samplerate and bitrate reduction. Smoothing between 0 and 1" w
+SmoothDecimator.ar(${1:sig}, ${2:SampleRate.ir}, ${3:0.5})
+endsnippet
+
+snippet "SinOscFB(k)?" "Sine with phase feedback. Out plugs back into the phase in. Enables mod between sine and sawtooth. Larger feedback sounds more like saw till chaos" wr
+SinOscFB`!p snip.rv = rate(match)`(${1:${VISUAL:sig}}, feedback: ${2:0.0})
+endsnippet
+
+snippet "Slope(k)?" "Slope of signal. Differentiate UGen. Like differtiating parabole to line, etc" wr
+Slope`!p snip.rv = rate(match)`(${1:sig})
+endsnippet
+
+snippet Compander "Compressor. Thresh between 0 and 1. SlopeAbove says compress by half at 0.5 threshold" w
+Compander.ar(${1:sig}, $1, thresh:${3:0.5}, slopeAbove:${4:0.5})
+endsnippet
+
+snippet OnePole "Feedback: out(i) = ((1 - abs(coef)) * in(i)) + (coef * out(i-1)). Larger coef smoother the wave" w
+OnePole.ar(${1:${VISUAL:sig}}, coef:${2:0.5})
+endsnippet
+
+snippet Ringz "Produce Sine waves at amplitude changes locations. Kinda like resonating variation of Decay" w
+Ringz.ar(${1:${VISUAL:sig}}, ${2:freq}, decaytime:${3:1})
+endsnippet
+
+snippet Resonz "Resonant filter similar to Ringz. bwr arguments is like a bandwidth" w
+Ringz.ar(${1:${VISUAL:sig}}, ${2:freq}, bwr:${3:1})
+endsnippet
+
+snippet Lag "Exponential lag. Smoothens out curves/signals. Actually kinda similar to Decay, but safe for continous signals" w
+Lag.ar(${1:${VISUAL:sig}}, lagTime:${2:0.1})
+endsnippet
+
+snippet Ramp "Linear Lag. Break a continuous signal into linearly interpolated segments with specific durations" w
+Ramp.ar(${1:${VISUAL:sig}}, lagTime:${2:0.1})
+endsnippet
+
+# size: Medium values produce a slow build-up of echoes, giving the sound a reversed-like quality. Values of 0.707 or greater than produce smooth exponentially decaying echoes.
+snippet Greyhole "A complex echo-like effect. Bigger size makes some crazy sounds." w
+Greyhole.ar(${1:${VISUAL:sig}}, delayTime:${2:2.0}, damp:${3:0.0}, size:${4:1.0}, diff:${5:0.707}, feedback:${6:0.9}, modDepth:${7:0.1}, modFreq:${8:2.0})
+endsnippet
+
+snippet Warp "A granular time stretcher and pitchshifter" w
+Warp1.ar(${1:2}, ${2:buf}, ${3:pointer}, ${4:rate}, windowSize:${5:0.2})
+endsnippet
+
+snippet PitchShift "Time domainpitch shifter. Raises/lowers pitch of audio without chaning it's duration. Pitch ratio must be between 0 and 4" w
+PitchShift.ar(${1:${VISUAL:sig}}, windowSize:${2:0.2}, pitchRatio:${2:1}, pitchDispersion:${3:0}, timeDispersion:${4:0})
+endsnippet
+
+snippet FreqShift "Frequency shifter" w
+FreqShift.ar(${1:${VISUAL:sig}}, ${2:freqshift}, ${3:phase})
+endsnippet
+
+snippet PlayBuf "Plays buffer. Triger can be Ugen" w
+PlayBuf.ar(${1:2}, ${2:buf}, BufRateScale.kr($2) * ${3:1}, ${3:trig}, ${4:start} * $2.numFrames, loop:${5:0}, doneAction:${6:0})
+endsnippet
+
+snippet BufRateScale "Buffer rate scaling in respect to server samplerate" w
+BufRateScale.kr(${1:${VISUAL:buf}})
+endsnippet
+
+snippet TGrains "Buffer granulator. Each grain has a Hanning envelope. Parameters can be controllied with demand UGens" w
+TGrains.ar(${1:2}, ${2:trig}, ${3:buf}, ${4:rate}, centerPos:${5:0}, dur:${6:0.1})
+endsnippet
+
+snippet GrainBuf "Granular synthesis with sound stored in a buffer. Trig usually Impulse or Dust" w
+GrainBuf.ar(${1:1}, ${2:trig}, ${3:dur}, ${4:buf}, rate:${5:1}, pos:${6:0}, interp:2, pan:0, envbufnum:-1)
+endsnippet
+
+snippet GrainSin "Granular synthesis with sine tones" w
+GrainSin.ar(${1:2}, ${2:trig}, ${3:dur}, ${4:freq}, pan:0, envbufnum:-1)
+endsnippet
+
+snippet GrainFM "Granular synthesis with frequency modulated sine tones" w
+GrainFM.ar(${1:2}, ${2:trig}, ${3:dur}, ${4:carfreq}, ${5:modfreq}, index:${6:1}, pan:0, envbufnum:-1)
+endsnippet
+
+snippet PMOsc "Basically FM synthesizer" w
+PMOsc.ar(${1:${VISUAL:cf}}, ${2:mf}, ${4:ind})
+endsnippet
+
+snippet "Vibrato(k)?" "A slow frequency modulation" wr
+Vibrato`!p snip.rv = rate(match)`(DC.ar(${1:440}), ${2:6}, ${3:0.02}, ${4:0}, rateVariation:${5:0.04}, depthVariation:${6:0.1})
+endsnippet
+
+snippet readChannel "Read only one channel" w
+Buffer.readChannel(s, "./Dirt-Samples/$1", channels:[0])
+endsnippet
+
+snippet BufDur "Get the current duration of soundfile" w
+BufDur.kr(${VISUAL}d.$1[$2])
+endsnippet
+
+snippet SampleRate "Returns the current sample rate of the server" w
+SampleRate.ir
+endsnippet
+
+snippet BufSamples "Current number of samples in buffer" w
+BufSamples.kr(${1:${VISUAL:buf}})
+endsnippet
+
+snippet "Sweep(k)?" "Triggered linear ramp" wr
+Sweep`!p snip.rv = rate(match)`(${1:trig}, rate:${2:1})
+endsnippet
+
+snippet Phasor "A resettable linear ramp between two levels" w
+Phasor.ar(0, rate:${1:1}, start:${2:0}, end:${3:1})
+endsnippet
+
+snippet "Duty(k)?" "Demand results from demand rate UGens" wr
+Duty`!p snip.rv = rate(match)`(${1:Ndef(\g_tempo).reciprocal}, 0, ${2:demandUGen}, doneAction:${3:0})
+endsnippet
+
+snippet "Demand(k)?" "Retrieve new result on trig from demandUGens. Can be list of UGens wrapped in DRand for example" wr
+Demand`!p snip.rv = rate(match)`(${1:trig}, 0, demandUGens:[${VISUAL}$2])
+endsnippet
+
+snippet ds "Pseq equivalent for UGens. List can contain array or other UGens" w
+Dseq([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet dr "Demand rate random sequence generator" w
+Drand([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet drx "Select random values from a list, but never the same" w
+Dxrand([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet dw "Return numbers in continous range between lo and hi" w
+Dwhite(${1:0.0}, ${2:1.0}, ${3:inf})
+endsnippet
+
+## Server functions
+
+snippet rec "Write audio to a hardisk" b
+s.record("./songs/temp.wav");
+${VISUAL}$0
+sp.wait(0.5);
+s.stopRecording;
+endsnippet
+
+snippet waitForBoot "Routine which evaluates as soon as the server has booted." b
+s.waitForBoot({ 
+	${1:${VISUAL}}
+});
+endsnippet
+
+snippet s.b "All OSC messages generated by function are bundled and sent to the server, using the server default latency" w
+s.bind { ${VISUAL}$1 };
+endsnippet
+
+snippet s.s "Wait till all pending server asynchronous commands completes. Works only in routines." b
+s.sync;
+endsnippet
+
+snippet s.a "Server Net addr" b
+s.addr
+endsnippet
+
+snippet curd "Get current .scd file directory" w
+PathName(thisProcess.nowExecutingPath).parentPath
+endsnippet
+
+snippet ServerTree.add "Persistent function on a server. Reevaluates after killing everything" b
+~$1 = {$2};
+ServerTree.add(~$1); // ServerTree.removeAll;
+endsnippet
+
+snippet Group.tail "Add group at the tail of all groups or defined one" b
+~$1 = Group.tail($2);
+endsnippet
+
+snippet ba ".ar bus" w
+Bus.audio(s, ${1:1});
+endsnippet
+
+snippet bk ".kr bus" w
+Bus.control(s, ${1:1})
+endsnippet
+
+snippet .b "Get value from bus" w
+~${VISUAL}$1.get({|v| $2})
+endsnippet
+
+snippet Group "Creates empty group" b
+$1 = Group.new;
+endsnippet
+
+snippet Group.after "Creates with target" b
+$1 = Group.after($2);
+endsnippet
+
+snippet Group.head "At group at the head of all groups" b
+$1 = Group.head($2);
+endsnippet
+
+snippet sp "Play synth" b
+Synth(\\$1, [$2]);
+endsnippet
+
+snippet Synth.head "Similar abstraction to Group.head" b
+$1 = Synth.head(${2:group}, ${3:synth}, [${4:args}]);
+endsnippet
+
+snippet Synth.tail "Similar abstraction to Group.tail" b
+$1 = Synth.tail(${2:group}, ${3:synth}, [${4:args}]);
+endsnippet
+
+snippet sampleRate "Sample rate method (works for server and buffers)" b
+$1.sampleRate;
+endsnippet
+
+snippet numFrames "Number of frames" b
+$1.numFrames;
+endsnippet
+
+snippet numChannels "Number of channels, e.g. buffer, bus" b
+$1.numChannels;
+endsnippet
+
+snippet duration "Buffer duration" b
+$1.duration;
+endsnippet
+
+snippet bufnum "Buffer index" b
+$1.bufnum;
+endsnippet
+
+snippet index "Index of object e.g. bus" b
+$1.index
+endsnippet
+
+snippet free "Basically set to nil, e.g. bus, synth" b
+$1.free;
+endsnippet
+
+snippet freeAll "Free everything in a server, group or buffer" b
+$1.freeAll;
+endsnippet
+
+snippet Buffer.read "Read sample from Dirt-samples" b 
+$1 = Buffer.read(s, "./Dirt-Samples/$2");
+endsnippet
+
+snippet Quarks "GUI for exploring Quarks (SC packages)" b
+Quarks.gui;
+endsnippet
+
+snippet Quarks.install "Install Quark" b
+Quarks.install("$1");
+endsnippet
+
+snippet f2 "Simple play function for quick testing" b
+{ ${VISUAL}$1!2 }.play;
+endsnippet
+
+snippet fp "Simple play function for quick ploting" b
+{ ${VISUAL}$1 }.plot;
+endsnippet
+
+# Misc
+
+priority 2
+
+snippet , "key/value pair" i
+, \\$1, $0
+endsnippet
+
+snippet ,l "" i
+, \legato, $0
+endsnippet
+
+snippet ,d "" i
+, \dur, $0
+endsnippet
+
+snippet ,n "" i
+, \note, $0
+endsnippet
+
+snippet ,f "" i
+, \freq, $0
+endsnippet
+
+snippet ,a "" i
+, \amp, $0
+endsnippet
+
+snippet ,i "" i
+, \instrument, $0
+endsnippet
+
+snippet ,j "" i
+, \j, 1
+endsnippet
+
+snippet ,de "" i
+, \degree, $0
+endsnippet
+
+snippet ,o "" i
+, \octave, $0
+endsnippet
+
+snippet ,to "" i
+, \timingOffset, ${1:0.00001}
+endsnippet
+
+priority 3
+
+snippet , "key/value pair" b
+\\$1, $0
+endsnippet
+
+snippet ,l "" b
+\legato, $0
+endsnippet
+
+snippet ,d "" b
+\dur, $0
+endsnippet
+
+snippet ,n "" b
+\note, $0
+endsnippet
+
+snippet ,f "" b
+\freq, $0
+endsnippet
+
+snippet ,a "" b
+\a, $0
+endsnippet
+
+snippet ,i "" b
+\instrument, $0
+endsnippet
+
+snippet ,de "" b
+\degree, $0
+endsnippet
+
+snippet ,o "" b
+\octave, $0
+endsnippet
+
+snippet ,to "" b
+\timingOffset, ${1:0.00001}
+endsnippet
+
+# JIT
+
+snippet jmain "Proxy main entry" b 
+// {{{ **** main ****
+(
+~ndef_settings.value(nil, fadeTime:1, quant:nil);
+// {{{ instruments --
+// }}} --------------
+// {{{ mods ---------
+// }}} --------------
+// {{{ patterns -----
+Ndef(\main, Pspawner({|sp| var a, c;$0
+	// {{{ fx synths ----------------------
+	g.free; g = Group.tail;
+	// }}} --------------------------------
+	// {{{ pdefs --------------------------
+	// }}} --------------------------------
+	// {{{ roles --------------------------
+	// }}} --------------------------------
+	sp.wait(t.timeToNextBeat); ~post_beat.();
+	// {{{ player -------------------------
+	// }}} --------------------------------
+}));
+Ndef(\main).play;
+);
+// {{{ forks --------
+// }}} --------------
+// }}} **** main ****
+endsnippet
+
+snippet jd "Proxy function for experimenting/prototyping" b
+(
+Spec.add(\atk, [0,4]);
+Spec.add(\rel, [0,4]);
+Spec.add(\curve, [-10,10]);
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}).fadeTime = 0;
+// Ndef(\\$1).unset;
+Ndef(\\$1).gui;
+);
+(
+
+Ndef(\\$1)[0] = {|freq=440, atk=0.01, rel=1, curve=(-4)|
+	var sig, env;
+	// env = EnvGen.kr(Env.perc(atk, rel, curve:curve))
+	sig = $0;
+	// sig = sig * env;
+	sig!2;
+};
+Ndef(\\$1).play;
+
+Ndef(\\$1)[1] = \pset -> Pbind(
+	\freq, Pseq([300, 200], inf), 
+	\dur, 1,
+	);
+Ndef(\\$1).play;
+
+);
+endsnippet
+
+snippet sd "Synth def skeleton" b
+SynthDef(\\${1:key}, {|out=0, o=0, j=0, f=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
+	var sig, env = EnvGen.kr(Env.line(atk, sustain, rel, curve:curve), doneAction:2);
+	sig = $0;
+	sig = sig * env;
+	Out.ar(out, Pan2.ar(sig, pan) * a);
+}).add;
+endsnippet
+
+snippet jf2 "2 channel proxy function/synth" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, {${VISUAL}$2!2});
+endsnippet
+
+snippet jf "Proxy function/synth controller" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, {${VISUAL}$2})
+endsnippet
+
+snippet je "Arguments for proxy envelope" w
+fadeTime=1, gate=1
+endsnippet
+
+snippet jb "Get values from Ndef Bus (works only if rate is control) and apply function" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).bus.get({|v| $2 });
+endsnippet
+
+snippet jfp "Define proxy function and play it" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, {${VISUAL}$2!2}).play;
+endsnippet
+
+snippet j+ "Add 2 Ndefs" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Ndef(\\$2) + Ndef(\\$3)$4)
+endsnippet
+
+snippet ji0 "Define proxy as role an play it" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}).play(0, 2);
+Ndef(\\$1)[0] = {${VISUAL}$2};
+endsnippet
+
+snippet j "Ndef reference" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`})
+endsnippet
+
+snippet jp "Play Ndef. 1st argument - bus, 2nd - num of channels" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).play;
+endsnippet
+
+snippet jpb "Define and play Ndef" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, ${VISUAL}$2).play;
+endsnippet
+
+snippet jqb "Define with quant and play Ndef" w
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, ${VISUAL}$3).quant_(${2:1}).play;
+endsnippet
+
+snippet ja "Ndef audio rate reference" w
+Ndef.ar(\\$1)
+endsnippet
+
+snippet .ft "Ndef fadeTime method" i
+.fadeTime_(${1:2})
+endsnippet
+
+snippet .l "Set the lag values of proxy object. To remove setting set them to nil with .lag" i
+.lag(\\${1:freq}, ${2:0.1})
+endsnippet
+
+snippet jt "Jit tempo synchronized with default tempo applied globally" w
+Ndef(\g_tempo)
+endsnippet
+
+snippet jif "Filter the audio on the proxy's own bus" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`})[${2:`!p if not snip.c: snip.rv = role_index()`}] = \filter -> {|sig| $3 };
+endsnippet
+
+snippet jiw "Role wetness" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).set(\wet${2:`!p if not snip.c: snip.rv = role_index()-1`}, ${3:0});
+endsnippet
+
+snippet jl "Ndef arg lag times. Args must be defined with classical style" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).lag(\\${1:freq}, ${2:0.1});
+endsnippet
+
+snippet jim "Mix" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`})[${2:`!p if not snip.c: snip.rv = role_index()`}] = \mix -> { $3 };
+endsnippet
+
+snippet jimw "Mix wetness" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).set(\mix${2:`!p if not snip.c: snip.rv = role_index()-1`}, ${3:0.5});
+endsnippet
+
+snippet jis "Set the proxy source at the next index with any object, controlled by a pattern" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`})[0] = \setsrc -> Pbind(
+	\dur, ${3:1},
+	\source, $4
+);
+endsnippet
+
+snippet jip "Basically multiline set audio controls, and does not create new synth every duration. Also overwrites everything on revaluation (even undefined ones)" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`})[${2:`!p if not snip.c: snip.rv = role_index()`}] = \pset -> Pbind(\\$3, $4);
+endsnippet
+
+snippet jix "Basically pipe to Pbind functionality and create new synth every duration" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`})[${2:`!p if not snip.c: snip.rv = role_index()`}] = \xset -> Pbind(\\$3, $4);
+endsnippet
+
+snippet jm "Map Ndef argument to use other Ndef" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).map(\\$2, $3);
+endsnippet
+
+# map is same as xmap
+# snippet jmx "Map Ndef argument to use other Ndef with crossfade" b
+# Ndef(\\$1).xmap(\\$2, $3);
+# endsnippet
+
+snippet jcc "Clear all Ndefs. This frees all busses" b
+Ndef.clear;
+endsnippet
+
+snippet jc "Clear Ndef. This frees all busses. Argument can be proveided for specific fadeTime" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).clear;
+endsnippet
+
+snippet ju "Reset Ndef arguments to default ones. Empty unsets all. However initial Ndef needs revaluation or sending double unset" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).unset;
+endsnippet
+
+snippet jg "Gui for specific Ndef" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).gui;
+endsnippet
+
+snippet jft "Fade time for proxy instance" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).fadeTime = ${2:1};
+endsnippet
+
+snippet j* "Multiply two Ndefs" w
+Ndef(\\$1, {Ndef(\\$2) * Ndef(\\$3)});
+endsnippet
+
+snippet js "Set Ndef arguments" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).set(\\$2, $3);
+endsnippet
+
+snippet jx "Set Ndef arguments with crossfading" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).xset(\\$2, $3);
+endsnippet
+
+snippet jcp "Copy Ndef to the key" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).copy(\\$2);
+endsnippet
+
+snippet jss "Stop monitoring proxy. Play in private. In other words: free the playback" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).stop;
+endsnippet
+
+snippet jmo "Adjust number of channels on running proxy to stereo" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).mold(2);
+endsnippet
+
+snippet sd "Synth def skeleton" b
+SynthDef(\\${1:key}, {|out=0, o=0, j=0, f=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
+	var sig, env = EnvGen.kr(Env.line(atk, sustain, rel, curve:curve), doneAction:2);
+	sig = $0;
+	sig = sig * env;
+	Out.ar(out, Pan2.ar(sig, pan) * a);
+}).add;
+endsnippet
+
+snippet sdp "Synth def skeleton for testing" b
+(
+	a.free;
+	// SynthDef(\\${1:key}, 
+	a = {|out=0, o=0, j=0, f=140, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
+		var sig, env = EnvGen.kr(Env.linen(atk, sustain, rel, curve:curve), doneAction:2);
+		sig = $0;
+		sig = sig * env;
+		// Out.ar(out, 
+		Pan2.ar(sig, pan) * a
+		// );
+	}.play;
+	// ).add; 
+)
+endsnippet
+
+snippet sdef0 "Synth def skeleton for mass producing synths with different envelopes" b
+(
+$1: {|$2| $3}
+$1$4: {|$2| $3},
+).keysValuesDo { |key, $5_func|
+SynthDef(key, {|out=0, f=440, atk=0.01, sustain=1, curve=(-4), gate=1, pan=0, amp=1|
+	var sig, env = EnvGen.kr(Env.perc(0.01, sustain, curve:curve)}, gate:gate, doneAction:2);
+	sig = sig * SynthDef.wrap($5_func);
+	Out.ar(out, Pan2.ar(sig, pan) * env * pan);
+}).add;
+endsnippet
+
+# GUI
+
+snippet ca "Add a spec to the global spec dict. 4 arg - step, 5 - default" b
+Spec.add(\\$1, [${2:0}, ${3:1}, ${4:\lin}]);
+endsnippet
+
+snippet cc "Copy control spec" b
+Spec.add(\\$1, \\$2);
+endsnippet
+
+snippet cu "Unset control spec" b
+Spec.specs[\\$1] = nil;
+endsnippet
+
+# OSC
+
+snippet od "OSCdef. /tr should be longest form. s.addr is sender address" w
+OSCdef(\\${1:test}, {|msg, time, addr, recvPort| $4}, '/${2:tr}', ${3:s.addr});
+endsnippet
+
+snippet ot "Trace OSC messages" w
+OSCFunc.trace(true);
+endsnippet
+
+snippet on "Address object" w
+NetAddr("127.0.0.1", ${1:5510})
+endsnippet
+
+snippet oe "Epsgrid address" w
+NetAddr("127.0.0.1", 5510)
+endsnippet
+
+snippet ov "Visualiser (Improviz) address" b
+~vosc = NetAddr("127.0.0.1", 5520);
+endsnippet
+
+snippet os "Visualiser (Improviz) address" w
+~vosc.sendMsg("/vars/$1", $2)
+endsnippet
+
+snippet osb "Send bus to visualiser (Improviz)" b
+(
+~vosc = NetAddr.new("127.0.0.1", 5520);
+~v${1:1}.stop;
+~v$1 = { loop { ~vb$1.get({|v| ~vosc.sendMsg("/vars/$3", v$4}); 0.1.wait} }.fork;
+)
+endsnippet
+
+# Tidal
+
+snippet "d([0-9]+)" "Send bus to visualiser (Improviz)" br
+~b`!p snip.rv = match.group(1)` = Bus.audio(s, 2); ~d`!p snip.rv = match.group(1)`.outBus = ~b`!p snip.rv = match.group(1)`;
+Ndef(\d`!p snip.rv = match.group(1)`).play;$1
+(
+Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
+	var sig = InBus.ar(~b`!p snip.rv = match.group(1)`, 2);
+	${2:sig}
+};
+)
+// ~d`!p snip.rv = match.group(1)`.outBus = 0; ~b`!p snip.rv = match.group(1)`.free;
+endsnippet
+
+snippet "db([0-9]+)" "Does not silence original signal" r
+db`!p snip.rv = match.group(1)` = InBus.ar(~d`!p snip.rv = match.group(1)`)
+endsnippet
