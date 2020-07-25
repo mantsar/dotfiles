@@ -665,6 +665,7 @@ call minpac#add('mantsar/vim-haskell-indent')
 augroup hs_au
 	autocmd!
 	autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+	autocmd BufNewFile,BufRead *.ghci setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 augroup END
 
 call minpac#add('tidalcycles/vim-tidal')

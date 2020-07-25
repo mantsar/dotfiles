@@ -6,12 +6,12 @@
 -- reed
 :{
 let diss_mul = pF "dis_mul"
-let diss_prob = pF "dis_prob"
-let lo = pF "lo"
-let hi = pF "hi"
-let trem = pF "trem"
-let ftrem = pF "ftrem"
-let rq = pF "rq"
-let fshelf = pF "fshelf"
-let shelf_gain = pF "shelf_gain"
+    diss_prob = pF "dis_prob"
+    lo = pF "lo"
+    hi = pF "hi"
+    trem = pF "trem"
+    ftrem = pF "ftrem"
+    rq = pF "rq"
+    fshelf = pF "fshelf"
+    shelf_gain = pF "shelf_gain"
 :}
