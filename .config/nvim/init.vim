@@ -52,6 +52,7 @@ set foldcolumn=3
 set history=5000 "Store lots of :cmdline history
 set hidden "Hide buffers in background
 set scrolloff=5
+" set shellcmdflag=-ic "Load shell config
 " }}}2
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~ variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
@@ -464,12 +465,14 @@ call minpac#add('Julian/vim-textobj-variable-segment')
 "
 " IDE like {{{2
 call minpac#add('tpope/vim-fugitive') "Git integration
-let g:fugitive_git_executable = expand('GIT_DIR=$HOME/.dotfiles.git/ GIT_WORK_TREE=$HOME /usr/bin/git -c status.showUntrackedFiles=no')
+let g:fugitive_git_executable = expand('GIT_DIR=$HOME/.dotfiles.git/ GIT_WORK_TREE=$HOME' . 
+			\ ' /usr/bin/git --git-dir=$HOME/.dotfiles.git/')
 nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>g5 :Git add %<cr>
 nnoremap <leader>ga :Git add<space>
 nnoremap <leader>gc :Git commit<cr>
-nnoremap <leader>gp :Git push<cr>
+" nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gp :!d push<cr>
 nnoremap <leader>gP :Git pull<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gl :Git log<cr>
