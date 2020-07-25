@@ -20,7 +20,7 @@
 		(
 		// Sustained
 		"":{|atk=0.01, sustain=1, curve=(-4), gate=1, da=2|
-			EnvGen.kr(Env.asr(atk, 1, sustain-atk, curve:curve), gate:gate, doneAction:da)},
+			EnvGen.kr(Env.asr(atk, 1, sustain-atk-0.01, curve:curve), gate:gate, doneAction:da)},
 		// Standard
 		"ep":{|atk=0.01, sustain=1, sus=1, curve=(-4)|
 			EnvGen.kr(Env.perc(atk, sustain-atk, curve:curve), doneAction:2)},
@@ -44,7 +44,7 @@
 			SynthDef(key.asSymbol, {|freq=440, bus=0, begin=0, offset|
 				var sig, env = SynthDef.wrap(env_func);
 				freq = SynthDef.wrap(fx, prependArgs:[bus, freq]);
-				sig = SynthDef.wrap(wrap, prependArgs:[sig, freq, begin]);
+				sig = SynthDef.wrap(wrap, prependArgs:[sig, freq, begin, env]);
 				SynthDef.wrap(out_func, prependArgs:[sig, env, bus]);
 			}).add;
 		}
@@ -73,25 +73,22 @@ SynthDef(\pad, {
 	Out.ar(Select.kr(j > 0, [o, out]), Splay.ar(sig, 1, center:pan) * a);
 }).add; 
 
-~synthdef_factor.value(\chicago, {|sig, freq, begin|
+~synthdef_factor.value(\chicago, {|sig, freq, begin, env|
 	var freq_a;
 	freq_a = [freq, freq+1, freq-1, freq*3/2, freq*1/2];
-	sig = Mix(SawDPW.ar(freq_a, begin) + VarSaw.ar(freq_a, begin));
+	sig = SawDPW.ar(freq_a, begin) + VarSaw.ar(freq_a, begin);
 	sig;
 });
 
-SynthDef(\reed, {
-	|out=0, o=0, j=0, freq=440, disintegration=0.99, ftremolo=1, tremolo=0.05, atk=0.1, 
-	sustain=15, curve=(-4), lo=2000, hi=2442, rq=0.1, fdb=1200, db=3, gate=1, pan=0, a=1|
-	var sig, env;
+~synthdef_factor.value(\reed, {|sig, freq, begin, env, disintegration=0.99,
+	ftremolo=1, tremolo=0.05, lo=2000, hi=2442, rq=0.1, fdb=1200, db=3|
 	sig = Pulse.ar((Rand(-0.03, 0.05) + freq.cpsmidi).midicps, 0.48 + LFNoise1.kr(0.06, 0.1));
 	sig = Disintegrator.ar(sig, 0.5, disintegration);
 	sig = sig * LFNoise2.kr(ftremolo, mul:tremolo, add:1);
-	env = EnvGen.ar(Env.asr(atk, 1, sustain, curve:curve), gate:gate, doneAction: 2);
 	sig = sig + BPF.ar(sig, env.linexp(0, 1, lo, hi), rq);
 	sig = BHiShelf.ar(sig, fdb, 1, db);
-	Out.ar(Select.kr(j > 0, [o, out]), Pan2.ar(sig, pan, a) * env);
-}).add;
+	sig;
+});
 
 SynthDef(\acid, {
 	|out=0, o=0, j=0, freq=1000, width=0.05, cut=4000, rq=0.8, atk=0.02, 
