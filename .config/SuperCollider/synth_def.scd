@@ -80,13 +80,13 @@ SynthDef(\pad, {
 	sig;
 });
 
-~synthdef_factor.value(\reed, {|sig, freq, begin, env, disintegration=0.99,
-	ftremolo=1, tremolo=0.05, lo=2000, hi=2442, rq=0.1, fdb=1200, db=3|
+~synthdef_factor.value(\reed, {|sig, freq, begin, env, diss_prob=0.5, diss_mul=0.99, 
+	ftrem=1, trem=0.05, lo=2000, hi=2442, rq=0.1, fshelf=1200, shelf_gain=1.4|
 	sig = Pulse.ar((Rand(-0.03, 0.05) + freq.cpsmidi).midicps, 0.48 + LFNoise1.kr(0.06, 0.1));
-	sig = Disintegrator.ar(sig, 0.5, disintegration);
-	sig = sig * LFNoise2.kr(ftremolo, mul:tremolo, add:1);
+	sig = Disintegrator.ar(sig, diss_prob, diss_mul);
+	sig = sig * LFNoise2.kr(ftrem, mul:trem, add:1);
 	sig = sig + BPF.ar(sig, env.linexp(0, 1, lo, hi), rq);
-	sig = BHiShelf.ar(sig, fdb, 1, db);
+	sig = BHiShelf.ar(sig, fshelf, 1, shelf_gain);
 	sig;
 });
 

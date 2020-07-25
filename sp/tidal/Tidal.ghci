@@ -1,0 +1,17 @@
+-- Bootstrap Tidal
+-- Replace this path if you have vim-tidal installed elsewhere
+:script ~/.config/nvim/pack/minpac/start/vim-tidal/Tidal.ghci
+
+-- Custom synths controls
+-- reed
+:{
+let diss_mul = pF "dis_mul"
+let diss_prob = pF "dis_prob"
+let lo = pF "lo"
+let hi = pF "hi"
+let trem = pF "trem"
+let ftrem = pF "ftrem"
+let rq = pF "rq"
+let fshelf = pF "fshelf"
+let shelf_gain = pF "shelf_gain"
+:}
