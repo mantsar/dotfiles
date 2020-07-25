@@ -1,0 +1,13 @@
+up
+down
+updown
+downup
+up&down
+down&up
+converge
+diverge
+disconverge
+pinkyup
+pinkyupdown
+thumbup
+thumbupdown

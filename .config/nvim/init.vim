@@ -691,9 +691,11 @@ augroup tidal_au
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType tidal setlocal commentstring=--\ %s
 	autocmd FileType tidal setlocal dictionary+=./fzf/samples.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/all_functions.txt
+	autocmd FileType tidal setlocal dictionary+=./tidal/functions.txt
+	autocmd FileType tidal setlocal dictionary+=./tidal/controls.txt
 	autocmd FileType tidal setlocal dictionary+=./tidal/chords.txt
 	autocmd FileType tidal setlocal dictionary+=./tidal/arpeggiators.txt
+	autocmd FileType tidal setlocal dictionary+=./tidal/synths.txt
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nmap <silent> <buffer> cx4 cxi$
 	autocmd FileType tidal nmap <silent> <buffer> d4 da$

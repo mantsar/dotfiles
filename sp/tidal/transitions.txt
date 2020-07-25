@@ -1,0 +1,16 @@
+xfade
+xfadeIn
+histpan
+wait
+waitT
+jump
+jumpIn
+jumpIn'
+jumpMod
+mortal
+interpolate
+interpolateIn
+clutch
+clutchIn
+anticipate
+anticipateIn
