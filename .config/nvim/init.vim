@@ -515,6 +515,7 @@ let g:fzf_action = {
 " Make commands with preview window
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 " Using floating windows of Neovim to start fzf
 " https://github.com/junegunn/fzf/blob/master/README-VIM.md#fzfrun
 if has('nvim')
@@ -546,7 +547,12 @@ inoremap <C-s> <esc>:BLines<cr>
 xnoremap <C-s> <esc>:BLines<cr>
 " Vim help tags
 nnoremap <leader>hh :Helptags<cr>
-
+nnoremap <leader>sg :Rg<space>
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+nnoremap <leader>gg :GGrep<space>
 " Misc {{{2
 call minpac#add('junegunn/goyo.vim')
 let g:goyo_width = 140
