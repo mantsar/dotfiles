@@ -32,7 +32,6 @@ set splitright "Open vsplit windows to the right by default
 set list listchars=tab:\|\ ,trail:· "Convert hidden chars to visible symbols
 set wrap "Wrap display when textwidth is reached
 " set textwidth=0 wrapmargin=0 "turn off auto-wrapping (plugins overwrites it)
-set formatoptions-=r formatoptions-=o "Turn off annoying auto commenting
 " search/substition/completion/case
 set inccommand=split "Show substitute changes immediately in separate split
 set ignorecase "Case insensitive search
@@ -112,11 +111,13 @@ inoremap <f12> <nop>
 
 " ~~~~~~~~~~~~~~~~~~~~~~~ autocommands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 augroup general
-	autocmd!
+	au!
 	"Mapping for exiting help window with just q
-	autocmd BufEnter *.txt if &buftype == 'help' | noremap <buffer> q :q<cr> | endif
+	au BufEnter *.txt if &buftype == 'help' | noremap <buffer> q :q<cr> | endif
 	"Open help window vertically
-	autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+	au BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+	"Turn off annoying auto commenting
+	au BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup END
 
 augroup vimrc
@@ -317,7 +318,7 @@ nnoremap <leader>wj <C-w>j
 nnoremap <leader>wk <C-w>k
 nnoremap <leader>wh <C-w>h
 nnoremap <leader>wl <C-w>l
-nnoremap <leader>ww :call wincmd w<cr>
+nnoremap <leader>ww :wincmd w<cr>
 " Opening windows
 nnoremap <leader>ws <C-w>s
 nnoremap <leader>wv <C-w>v
@@ -462,9 +463,24 @@ call minpac#add('Julian/vim-textobj-variable-segment')
 " }}}2
 "
 " IDE like {{{2
-call minpac#add('Shougo/deoplete.nvim') "Dark powered asynchronous completion framework
+call minpac#add('tpope/vim-fugitive') "Git integration
+let g:fugitive_git_executable = expand('GIT_DIR=$HOME/.dotfiles.git/ GIT_WORK_TREE=$HOME /usr/bin/git -c status.showUntrackedFiles=no')
+nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>g5 :Git add %<cr>
+nnoremap <leader>ga :Git add<space>
+nnoremap <leader>gc :Git commit<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gP :Git pull<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gl :Git log<cr>
+augroup fugitive_au
+	au!
+	" Stop warning
+	au FileType git nnoremap <buffer> q <c-w>q
+augroup END
+call minpac#add('Shougo/deoplete.nvim') "Asynchronous completion
 let g:deoplete#enable_at_startup = 1
-call minpac#add('deoplete-plugins/deoplete-tag') "Deoplete source for ctags
+call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
 call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
 call minpac#add("SirVer/ultisnips")
