@@ -478,7 +478,7 @@ var nice_ratios = [1/3, 1/4, 1/2, 1, 2, 1/5, 9/10, 4/5, 7/10, 3/5, 2/5, 1/10, 3/
 // INIT -----------------------------------------------------------------------
 s.waitForBoot({ 
 	// d = ~read_dirt_samples.value(); // Samples
-	"synth_def.scd".loadRelative; // Synths
+	"./synthdef/synth_def.scd".loadRelative; // Synths
 	s.sync;
 	Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
 	~ndef_settings.value(nil, fadeTime:1, quant:0, clock:TempoClock.default);
