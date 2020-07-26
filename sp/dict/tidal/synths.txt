@@ -40,5 +40,10 @@ superstatic
 
 schicago
 schicagoep
+schicagoes
 sreed
 sreedep
+sreedes
+spad
+spadep
+spades

@@ -22,8 +22,10 @@
 		"":{|atk=0.01, sustain=1, curve=(-4), gate=1, da=2|
 			EnvGen.kr(Env.asr(atk, 1, sustain-atk-0.01, curve:curve), gate:gate, doneAction:da)},
 		// Standard
-		"ep":{|atk=0.01, sustain=1, sus=1, curve=(-4)|
+		"ep":{|atk=0.01, sustain=1, curve=(-4)|
 			EnvGen.kr(Env.perc(atk, sustain-atk, curve:curve), doneAction:2)},
+		"es":{|sustain=1|
+			EnvGen.kr(Env.sine(sustain*0.99), doneAction:2)},
 		"0ep":{|atk=0, sus=1, curve=(-4)|
 			EnvGen.kr(Env.perc(atk, sus-atk, curve:curve), doneAction:0)}
 		).keysValuesDo {|key_env, env_func|
@@ -61,29 +63,27 @@ SynthDef(\kalimba, {|out=0, o=0, j=0, freq=440, atk=0.01, sustain=15, curve=(-4)
 	Out.ar(Select.kr(j > 0, [o, out]), Pan2.ar(sig, pan, a) * env);
 }).add;
 
-SynthDef(\pad, {
-	|out=0, o=0, j=0, freq=440, diss=0.01, atk=0.01, sustain=15, curve=(-4), gate=1, pan=0, a=1|
-  var env, sig, fmod, rqmod;
-  env = EnvGen.ar(Env.asr(atk, 1, sustain, curve:curve), gate:gate, doneAction:2);
-  freq = {freq * LFNoise2.ar(1, mul:diss, add:1)}!12;
+~synthdef_factor.value(\pad, {|sig, freq, begin, env, detune=0.01|
+  var fmod, rqmod;
+  freq = {freq * LFNoise2.ar(1, mul:detune, add:1)}!12;
   sig = LFSaw.ar(freq);
   fmod = SinOsc.kr(1/12).range(1, 2);
   rqmod = LFNoise2.kr(1/8).range(0.1, 1.0);
-  sig = RLPF.ar(sig, freq * fmod, rqmod) * env;
-	Out.ar(Select.kr(j > 0, [o, out]), Splay.ar(sig, 1, center:pan) * a);
-}).add; 
+  sig = Mix(RLPF.ar(sig, freq * fmod, rqmod));
+	sig;
+});
 
 ~synthdef_factor.value(\chicago, {|sig, freq, begin, env|
 	var freq_a;
 	freq_a = [freq, freq+1, freq-1, freq*3/2, freq*1/2];
-	sig = SawDPW.ar(freq_a, begin) + VarSaw.ar(freq_a, begin);
+	sig = Mix(SawDPW.ar(freq_a, begin) + VarSaw.ar(freq_a, begin));
 	sig;
 });
 
-~synthdef_factor.value(\reed, {|sig, freq, begin, env, diss_prob=0.5, diss_mul=0.99, 
+~synthdef_factor.value(\reed, {|sig, freq, begin, env, detune_prob=0.5, detune=0.99, 
 	ftrem=1, trem=0.05, lo=2000, hi=2442, rq=0.1, fshelf=1200, shelf_gain=1.4|
 	sig = Pulse.ar((Rand(-0.03, 0.05) + freq.cpsmidi).midicps, 0.48 + LFNoise1.kr(0.06, 0.1));
-	sig = Disintegrator.ar(sig, diss_prob, diss_mul);
+	sig = Disintegrator.ar(sig, detune_prob, detune);
 	sig = sig * LFNoise2.kr(ftrem, mul:trem, add:1);
 	sig = sig + BPF.ar(sig, env.linexp(0, 1, lo, hi), rq);
 	sig = BHiShelf.ar(sig, fshelf, 1, shelf_gain);

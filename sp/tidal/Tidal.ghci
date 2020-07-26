@@ -2,8 +2,11 @@
 -- Replace this path if you have vim-tidal installed elsewhere
 :script ~/.config/nvim/pack/minpac/start/vim-tidal/Tidal.ghci
 
+-- functions
+numberNoteMap = putStr ("0 - c\n1 - c#\n2 - d\n3 - d#\n4 - e\n5 - f\n" ++ "6 - f#\n7 - g\n8 - g#\n9 - a\n10 - a#\n11 - b\n")
+
 -- Custom synths controls
--- reed
+-- reed, chicago, pad
 :{
 let detune_prob = pF "detune_prob"
     lo = pF "lo"

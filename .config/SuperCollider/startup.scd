@@ -9,7 +9,7 @@ s.options.numAudioBusChannels = 1024 * 10;
 s.volume.volume = -10; // default volume
 // from SuperDirt
 s.options.numBuffers = 1024 * 256; // 1024 default
-s.options.numWireBufs = 64;
+s.options.numWireBufs = 128;
 s.options.maxNodes = 1024 * 32;
 s.options.numOutputBusChannels = 2;
 s.options.numInputBusChannels = 2;

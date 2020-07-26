@@ -1,4 +1,4 @@
-sound
+
 begin
 end
 accelerate
@@ -48,9 +48,11 @@ lsize
 waveloss
 squiz
 
-diss_mul
-diss_prob
+detune
+detune_prob
 trem
 ftrem
 fshelf
 shelf_gain
+curve
+atk

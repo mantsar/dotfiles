@@ -698,7 +698,9 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/chords.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
+	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
+	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
 	autocmd FileType tidal nmap <silent> <buffer> cx4 cxi$
 	autocmd FileType tidal nmap <silent> <buffer> d4 da$
 	autocmd FileType tidal nmap <silent> <buffer> c4 ci$<space><space><left>
