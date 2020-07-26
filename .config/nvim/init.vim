@@ -610,7 +610,8 @@ endfunction
 augroup sc_au
 	autocmd!
 	" init
-	autocmd FileType supercollider setlocal dictionary+=./fzf/samples.txt
+	autocmd FileType supercollider setlocal dictionary+=./dict/samples.txt
+	autocmd FileType supercollider setlocal dictionary+=./dict/sc/synths.txt
 	autocmd VimEnter *.scd normal G
 	autocmd VimEnter *.scd SCNvimStart
 	autocmd VimEnter *.scd SCNvimStatusLine
@@ -643,8 +644,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <M-t> :call scnvim#sclang#send("~global_tempo.value()")<left><left><left>
 	autocmd VimEnter *.scd xnoremap <leader><leader>n :call Pattern_summary()<cr>
 	autocmd VimEnter *.scd nmap <leader><leader>n mm?P<cr>v%:call Pattern_summary()<cr><C-l>`m
-	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ./fzf/scales.txt', 'sink': function('Scale_summary') })<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ./fzf/samples.txt', 'sink': function('Sample_fetch') })<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ./dict/sc/scales.txt', 'sink': function('Scale_summary') })<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ./dict/samples.txt', 'sink': function('Sample_fetch') })<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>h :call Toggle_scnvim_scdoc()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>s :call scnvim#sclang#send("s.scope")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>f :call scnvim#sclang#send("FreqScope.new(1200)")<cr>
@@ -691,12 +692,12 @@ augroup tidal_au
 	autocmd!
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType tidal setlocal commentstring=--\ %s
-	autocmd FileType tidal setlocal dictionary+=./fzf/samples.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/functions.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/controls.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/chords.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/arpeggiators.txt
-	autocmd FileType tidal setlocal dictionary+=./tidal/synths.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/samples.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/tidal/functions.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/tidal/controls.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/tidal/chords.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
+	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nmap <silent> <buffer> cx4 cxi$
 	autocmd FileType tidal nmap <silent> <buffer> d4 da$

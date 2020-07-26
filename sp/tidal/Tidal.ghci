@@ -5,8 +5,7 @@
 -- Custom synths controls
 -- reed
 :{
-let diss_mul = pF "dis_mul"
-    diss_prob = pF "dis_prob"
+let detune_prob = pF "detune_prob"
     lo = pF "lo"
     hi = pF "hi"
     trem = pF "trem"
@@ -14,4 +13,6 @@ let diss_mul = pF "dis_mul"
     rq = pF "rq"
     fshelf = pF "fshelf"
     shelf_gain = pF "shelf_gain"
+    curve = pF "curve"
+    atk = pF "atk"
 :}
