@@ -465,8 +465,12 @@ call minpac#add('Julian/vim-textobj-variable-segment')
 "
 " IDE like {{{2
 call minpac#add('tpope/vim-fugitive') "Git integration
-let g:fugitive_git_executable = expand('GIT_DIR=$HOME/.dotfiles.git/ GIT_WORK_TREE=$HOME' . 
-			\ ' /usr/bin/git --git-dir=$HOME/.dotfiles.git/')
+augroup fugitive_au
+	au!
+	" Stop warning
+	au FileType git nnoremap <buffer> q <c-w>q
+	au BufEnter * let g:fugitive_git_executable = 'git_fugitive ' . expand('%:p:h') . '/.git'
+augroup END
 nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>g5 :Git add %<cr>
 nnoremap <leader>ga :Git add<space>
@@ -476,11 +480,6 @@ nnoremap <leader>gp :!d push<cr>
 nnoremap <leader>gP :Git pull<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gl :Git log<cr>
-augroup fugitive_au
-	au!
-	" Stop warning
-	au FileType git nnoremap <buffer> q <c-w>q
-augroup END
 call minpac#add('Shougo/deoplete.nvim') "Asynchronous completion
 let g:deoplete#enable_at_startup = 1
 call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
