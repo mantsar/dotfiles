@@ -475,8 +475,7 @@ nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>g5 :Git add %<cr>
 nnoremap <leader>ga :Git add<space>
 nnoremap <leader>gc :Git commit<cr>
-" nnoremap <leader>gp :Git push<cr>
-nnoremap <leader>gp :!d push<cr>
+nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gP :Git pull<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gl :Git log<cr>
