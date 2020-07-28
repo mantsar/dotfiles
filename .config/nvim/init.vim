@@ -551,6 +551,9 @@ nnoremap <leader>; :History:<cr>
 nnoremap <leader>/ :History:<cr>
 " Search lines in loaded buffers
 nnoremap <leader>sl :Lines<cr>
+nnoremap <M-s> :execute "Lines '" . expand("<cword>")<cr>
+inoremap <M-s> <esc>:execute "Lines '" . expand("<cword>")<cr>
+xnoremap <M-s> <esc>:execute "Lines '" . expand("<cword>")<cr>
 " Search lines in the current buffer
 nnoremap <C-s> :BLines<cr>
 inoremap <C-s> <esc>:BLines<cr>
@@ -558,11 +561,13 @@ xnoremap <C-s> <esc>:BLines<cr>
 " Vim help tags
 nnoremap <leader>hh :Helptags<cr>
 nnoremap <leader>sg :Rg<space>
+nnoremap <M-]> :execute 'Rg ' . expand('<cword>')<cr>
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 nnoremap <leader>gg :GGrep<space>
+nnoremap <M-`> :Marks<cr>
 " Misc {{{2
 call minpac#add('junegunn/goyo.vim')
 let g:goyo_width = 140
@@ -703,6 +708,7 @@ augroup tidal_au
 	autocmd!
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType tidal setlocal commentstring=--\ %s
+	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
 	autocmd FileType tidal setlocal dictionary+=./dict/samples.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/functions.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/controls.txt
@@ -724,8 +730,8 @@ augroup tidal_au
 	autocmd FileType tidal imap <buffer> <M-o> <C-o><Plug>TidalParagraphSend
 	autocmd FileType tidal nmap <buffer> <M-k> :TidalHush<cr>
 	autocmd FileType tidal imap <buffer> <M-k> <C-o>:TidalHush<cr>
-	autocmd FileType tidal nmap <buffer> <M-s> :TidalSilence<space>
-	autocmd FileType tidal imap <buffer> <M-s> <C-o>:TidalSilence<space>
+	autocmd FileType tidal nmap <buffer> <M-x> :TidalSilence<space>
+	autocmd FileType tidal imap <buffer> <M-x> <C-o>:TidalSilence<space>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
 augroup END
 
@@ -744,8 +750,8 @@ augroup foxdot_au
 	autocmd!
 	autocmd FileType python nmap <buffer> <M-k>  :T Clock.clear()<cr>
 	autocmd FileType python imap <buffer> <M-k>  <C-o>:T Clock.clear()<cr>
-	autocmd FileType python nmap <buffer> <M-s>  :T d.stop<left><left><left><left><left>
-	autocmd FileType python imap <buffer> <M-s>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
+	autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
+	autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
 	autocmd FileType python nnoremap <buffer> <M-j> :TREPLSendLine<cr>
 	autocmd FileType python inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
 	autocmd FileType python xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
