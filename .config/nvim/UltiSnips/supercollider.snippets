@@ -1622,7 +1622,9 @@ endsnippet
 
 snippet j0 "Define proxy as role an play it" b
 Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}).play(0, 2);
+(
 Ndef(\\$1)[0] = {${VISUAL}$2};
+)
 endsnippet
 
 snippet j "Ndef reference" w

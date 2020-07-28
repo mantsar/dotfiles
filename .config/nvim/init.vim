@@ -610,6 +610,7 @@ augroup sc_au
 	" init
 	autocmd FileType supercollider setlocal dictionary+=./dict/samples.txt
 	autocmd FileType supercollider setlocal dictionary+=./dict/sc/synths.txt
+	autocmd FileType supercollider nnoremap <silent> <buffer> <M-f> :e ./snips.scd<cr>
 	autocmd VimEnter *.scd normal G
 	autocmd VimEnter *.scd SCNvimStart
 	autocmd VimEnter *.scd SCNvimStatusLine
