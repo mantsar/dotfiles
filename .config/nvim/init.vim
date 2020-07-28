@@ -454,15 +454,27 @@ map T <Plug>Sneak_T
 call minpac#add('unblevable/quick-scope') "Lightning fast left-right movement in Vim
 let g:qs_second_highlight = 0
 call minpac#add('mantsar/vim-closer') "Added compatibility with SuperCollider
-call minpac#add('wellle/targets.vim') "Vim plugin that provides additional text objects.
 call minpac#add('kana/vim-textobj-user') "Required by plugins below
 call minpac#add('kana/vim-textobj-line') "Text objects for the current line
-call minpac#add('kana/vim-textobj-indent') "Text objects for indented blocks of lines
+call minpac#add('kana/vim-textobj-indent') "ai/ii / aI/iI
 call minpac#add('somini/vim-textobj-fold')
+" call minpac#add('glts/vim-textobj-comment') "ic / ac
+call minpac#add('Julian/vim-textobj-brace') "aj / ij
+call minpac#add('beloglazov/vim-textobj-quotes') "aq / iq
+call minpac#add('thinca/vim-textobj-between')
+nmap cx4 cxif$
+nmap d4 dif$x
+nmap c4 cif$<space><space><left>
+nmap cx3 cxif#
+nmap d3 dif#x
+nmap c3 cif#<space><space><left>
+omap i, if,
+omap a, af,
+xmap i, if,
+xmap a, af,
  "Provides a text object Snake and underscore cases
 call minpac#add('Julian/vim-textobj-variable-segment')
 " }}}2
-"
 " IDE like {{{2
 call minpac#add('tpope/vim-fugitive') "Git integration
 augroup fugitive_au
@@ -631,7 +643,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nmap <M-h> :SCNvimHelp<space>
 	autocmd VimEnter *.scd nmap <M-o> vip<Plug>(scnvim-send-selection)
 	autocmd VimEnter *.scd imap <M-o> <C-o>vip<Plug>(scnvim-send-selection)
-	autocmd VimEnter *.scd nmap <M-p> vip<Plug>(scnvim-send-selection)
+	autocmd VimEnter *.scd nmap <M-p> mmvip<Plug>(scnvim-send-selection)`m
 	autocmd VimEnter *.scd nmap <M-i> viz<Plug>(scnvim-send-selection)
 	autocmd VimEnter *.scd imap <M-i> <C-o>viz<Plug>(scnvim-send-selection)
 	autocmd VimEnter *.scd nmap <M-i> <C-o>viz<Plug>(scnvim-send-selection)
@@ -700,12 +712,6 @@ augroup tidal_au
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
-	autocmd FileType tidal nmap <silent> <buffer> cx4 cxi$
-	autocmd FileType tidal nmap <silent> <buffer> d4 da$
-	autocmd FileType tidal nmap <silent> <buffer> c4 ci$<space><space><left>
-	autocmd FileType tidal nmap <silent> <buffer> cx3 cxi#
-	autocmd FileType tidal nmap <silent> <buffer> d3 da#
-	autocmd FileType tidal nmap <silent> <buffer> c3 ci#<space><space><left>
 	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-o> <Plug>TidalRegionSend

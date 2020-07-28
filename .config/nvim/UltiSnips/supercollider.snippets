@@ -801,6 +801,10 @@ snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a 
 Trig`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
 endsnippet
 
+snippet "Latch(k)?" "Holds input signal value when triggered. Latch will output 0 until it receives its first trigger." wr
+Latch`!p snip.rv = rate(match)`(${1:sig}, ${2:trig})
+endsnippet
+
 snippet "TRand(k)?" "Generate random float each time the trigger signal changes from nonpositive to positive values. Sounds bad when trig is not at same rate" wr
 TRand`!p snip.rv = rate(match)`(${1:0.0}, ${2:1.0}, trig: ${3:0})
 endsnippet
@@ -819,6 +823,10 @@ endsnippet
 
 snippet "Select(k)?" "Select output from an array of inputs" wr
 Select`!p snip.rv = rate(match)`(${1:0}, [$2])
+endsnippet
+
+snippet "SelectX(k)?" "With equal power crossfade between two adjacent channels" wr
+SelectX`!p snip.rv = rate(match)`(${1:0}, [$2])
 endsnippet
 
 snippet Pulse "Square like wave with bzzzzz sound. Width values 0/1. 0.5 sounds most rich" w
@@ -1029,6 +1037,10 @@ endsnippet
 
 snippet Splay "Distribute UGens across stereo field. 1 is maximum spread, 0 is similar to Mix" w
 Splay.ar(${1:${VISUAL:sig}}, ${2:1}, center:${3:pan})
+endsnippet
+
+snippet SplayAz "Spreads an array of channels across a ring of channels" w
+SplayAz.ar(${1:4}, ${2:${VISUAL:sig}}, center:${3:0})
 endsnippet
 
 snippet Saw "Saw" w
