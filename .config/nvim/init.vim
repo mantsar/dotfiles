@@ -546,7 +546,7 @@ endif
 "Files (similar to :FZF)
 nnoremap <leader>ff :Files<cr> 
 nnoremap <leader>bb :Buffers<cr>
-nnoremap <M-space> :Buffers<cr>
+nnoremap <M-b> :Buffers<cr>
 nnoremap <leader>; :History:<cr>
 nnoremap <leader>/ :History:<cr>
 " Search lines in loaded buffers
