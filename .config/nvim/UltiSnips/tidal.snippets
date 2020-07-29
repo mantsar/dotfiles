@@ -3,12 +3,12 @@ global !p
 def cycle_index():
 	i = vim.current.window.cursor[0] - 1
 	regex = f'^\s*d([0-9]+)\s*\$.*'
-	while i > 0:
+	while i >= 0:
 		m = re.match(regex, snip.buffer[i])
 		if m:
 			return int(m.group(1))
 		i -= 1
-	return 1
+	return 0
 
 endglobal
 
@@ -38,6 +38,16 @@ endsnippet
 
 snippet fs "" w
 struct "$1" $ 
+endsnippet
+
+# Controls
+
+snippet n "" w
+n "$1" $0
+endsnippet
+
+snippet s "" w
+s "$1" $0
 endsnippet
 
 # Patterns
@@ -98,13 +108,13 @@ endsnippet
 # Samples/buffers
 
 snippet dck "" w
-clubkick:{$1:0}
+clubkick:${1:0}
 endsnippet
 
 snippet ddk "" w
-drumtraks:{$1:6}
+drumtraks:${1:6}
 endsnippet
 
 snippet dkl "" w
-kicklinn:{$1:3}
+kicklinn:${1:3}
 endsnippet
