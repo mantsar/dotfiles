@@ -429,7 +429,7 @@ nmap <leader>k mm[<space>`m
 nmap <leader>j mm]<space>`m
 " Bubble single lines
 nmap <C-k> [e
-nmap <C-m> ]e
+nmap <C-j> ]e
 " Bubble multiple lines
 xmap <C-k> [egv
 xmap <C-j> ]egv
@@ -439,7 +439,7 @@ call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
 "Replace text with the contents of a register
 call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
-nnoremap <silent> <M-a> :ArgWrap<cr>
+nnoremap <silent> <C-a> :ArgWrap<cr>
 call minpac#add('justinmk/vim-sneak') "Jump to any location specified by two characters
 let g:sneak#label = 1
 let g:sneak#s_next = 1 "Move to next match by hitting `s` (or `S`) again
@@ -716,7 +716,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
-	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
+	autocmd FileType tidal nnoremap <silent> <buffer> <C-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
 	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
