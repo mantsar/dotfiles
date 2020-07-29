@@ -41,9 +41,16 @@ superstatic
 schicago
 schicagoep
 schicagoes
+schicagoel
 sreed
 sreedep
 sreedes
+sreedel
 spad
 spadep
 spades
+spadel
+selecount
+selecountep
+selecountes
+selecountel

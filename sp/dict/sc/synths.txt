@@ -1,9 +1,16 @@
 chicago
 chicagoep
 chicagoes
+chicagoel
 reed
 reedep
 reedes
+reedel
 pad
 padep
 pades
+padel
+elecount
+elecountep
+elecountes
+elecountel

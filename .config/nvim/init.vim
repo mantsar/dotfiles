@@ -429,7 +429,7 @@ nmap <leader>k mm[<space>`m
 nmap <leader>j mm]<space>`m
 " Bubble single lines
 nmap <C-k> [e
-nmap <C-j> ]e
+nmap <C-m> ]e
 " Bubble multiple lines
 xmap <C-k> [egv
 xmap <C-j> ]egv

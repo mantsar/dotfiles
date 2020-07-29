@@ -849,6 +849,10 @@ snippet "LFNoise1(k)?" "Random values from -1 to 1 connected with lines" wr
 LFNoise1`!p snip.rv = rate(match)`(${1:freq})
 endsnippet
 
+snippet "LFDNoise1(k)?" "More accurate, but less cpu efficient" wr
+LFDNoise1`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
 snippet "LFNoise2(k)?" "Random values from -1 to 1 in parabolic form" wr
 LFNoise2`!p snip.rv = rate(match)`(${1:freq})
 endsnippet
@@ -1599,15 +1603,6 @@ Ndef(\\$1).play;
 );
 endsnippet
 
-snippet sd "Synth def skeleton" b
-SynthDef(\\${1:key}, {|out=0, o=0, j=0, f=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
-	var sig, env = EnvGen.kr(Env.line(atk, sustain, rel, curve:curve), doneAction:2);
-	sig = $0;
-	sig = sig * env;
-	Out.ar(out, Pan2.ar(sig, pan) * a);
-}).add;
-endsnippet
-
 snippet jf2 "2 channel proxy function/synth" w
 Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, {${VISUAL}$2!2});
 endsnippet
@@ -1760,28 +1755,12 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).mold(2);
 endsnippet
 
 snippet sd "Synth def skeleton" b
-SynthDef(\\${1:key}, {|out=0, o=0, j=0, f=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
-	var sig, env = EnvGen.kr(Env.line(atk, sustain, rel, curve:curve), doneAction:2);
+SynthDef(\\${1:key}, {|out=0, o=0, j=0, freq=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
+	var sig, env = EnvGen.kr(Env.linen(atk, sustain, rel, curve:curve), doneAction:2);
 	sig = $0;
 	sig = sig * env;
 	Out.ar(out, Pan2.ar(sig, pan) * a);
 }).add;
-endsnippet
-
-snippet sdp "Synth def skeleton for testing" b
-(
-	a.free;
-	// SynthDef(\\${1:key}, 
-	a = {|out=0, o=0, j=0, f=140, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
-		var sig, env = EnvGen.kr(Env.linen(atk, sustain, rel, curve:curve), doneAction:2);
-		sig = $0;
-		sig = sig * env;
-		// Out.ar(out, 
-		Pan2.ar(sig, pan) * a
-		// );
-	}.play;
-	// ).add; 
-)
 endsnippet
 
 snippet sdef0 "Synth def skeleton for mass producing synths with different envelopes" b

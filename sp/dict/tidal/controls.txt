@@ -56,3 +56,5 @@ fshelf
 shelf_gain
 curve
 atk
+lag
+rate

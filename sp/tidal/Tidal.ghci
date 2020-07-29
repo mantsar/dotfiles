@@ -18,4 +18,5 @@ let detune_prob = pF "detune_prob"
     shelf_gain = pF "shelf_gain"
     curve = pF "curve"
     atk = pF "atk"
+    lag = pF "lag"
 :}
