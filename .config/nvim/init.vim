@@ -31,6 +31,7 @@ set splitbelow "Open split windows below by default
 set splitright "Open vsplit windows to the right by default
 set list listchars=tab:\|\ ,trail:· "Convert hidden chars to visible symbols
 set wrap "Wrap display when textwidth is reached
+set formatoptions-=cro " Turn off autcommenting
 " set textwidth=0 wrapmargin=0 "turn off auto-wrapping (plugins overwrites it)
 " search/substition/completion/case
 set inccommand=split "Show substitute changes immediately in separate split
@@ -117,8 +118,8 @@ augroup general
 	au BufEnter *.txt if &buftype == 'help' | noremap <buffer> q :q<cr> | endif
 	"Open help window vertically
 	au BufEnter *.txt if &buftype == 'help' | wincmd L | endif
-	"Turn off annoying auto commenting
-	au BufNewFile,BufRead * setlocal formatoptions-=cro
+	"Turn off annoying auto commenting on autocmd, because it keeps reseting
+	" autocmd FileType vim,conf set formatoptions-=cro " Does not work...
 augroup END
 
 augroup vimrc
@@ -227,8 +228,11 @@ else
 	au VimEnter * highlight QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7
 				\ ctermfg=NONE cterm=underline 
 endif
-call Toggle_colorcheme()
 nnoremap <leader>oc :call Toggle_colorcheme()<cr>
+call Toggle_colorcheme()
+
+" call minpac#add('dylanaraps/wal.vim')
+" colorscheme wal
 
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('itchyny/lightline.vim')
@@ -515,6 +519,13 @@ nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
 nnoremap <M-cr> :Tnew<cr>
+call minpac#add('kevinhwang91/rnvimr') " Ranger integration
+nnoremap <silent> <leader>r :RnvimrToggle<cr>
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+let g:rnvimr_presets = [ {'width': 0.800, 'height': 0.800},
+			\ {'width': 0.950, 'height': 0.950},
+			\ {'width': 0.700, 'height': 0.700} ]
 call minpac#add('junegunn/fzf', { 'do': './install --bin'}) "Intall fzf only for vim
 call minpac#add('junegunn/fzf.vim') "Bundle of fzf-based commands and mappings
 " Define way to open fzf line
@@ -579,6 +590,7 @@ nmap gl <Plug>(Limelight)
 xmap gl <Plug>(Limelight)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+" }}}2
 
 " Music {{{2
 
@@ -811,3 +823,11 @@ endfunction
 function! Hydra_init()
 	execute "StartAsync atom " . expand("%:r") . ".js"
 endfunction
+" }}}2
+
+" Misc {{{2
+
+" Navi integration
+au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
+
+" }}}2
