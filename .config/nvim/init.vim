@@ -13,9 +13,9 @@ if exists('g:neovide')
 			let g:neovide_fullscreen = v:true
 		endif
 	endfunction
-	nnoremap <f9> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
-	nnoremap <f10> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
-	nnoremap <f11> :call Toggle_neovide_fullscreen()<cr>
+	nnoremap <up> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
+	nnoremap <down> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
+	" nnoremap <f11> :call Toggle_neovide_fullscreen()<cr>
 	set termguicolors
 else
 	set notermguicolors
@@ -230,10 +230,8 @@ else
 endif
 nnoremap <leader>oc :call Toggle_colorcheme()<cr>
 call Toggle_colorcheme()
-
 " call minpac#add('dylanaraps/wal.vim')
 " colorscheme wal
-
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('itchyny/lightline.vim')
 " remove -- INSERT --
@@ -443,7 +441,7 @@ call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
 "Replace text with the contents of a register
 call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
-nnoremap <silent> <C-a> :ArgWrap<cr>
+nnoremap <silent> <M-a> :ArgWrap<cr>
 call minpac#add('justinmk/vim-sneak') "Jump to any location specified by two characters
 let g:sneak#label = 1
 let g:sneak#s_next = 1 "Move to next match by hitting `s` (or `S`) again
@@ -562,9 +560,9 @@ nnoremap <leader>; :History:<cr>
 nnoremap <leader>/ :History:<cr>
 " Search lines in loaded buffers
 nnoremap <leader>sl :Lines<cr>
-nnoremap <M-s> :execute "Lines '" . expand("<cword>")<cr>
-inoremap <M-s> <esc>:execute "Lines '" . expand("<cword>")<cr>
-xnoremap <M-s> <esc>:execute "Lines '" . expand("<cword>")<cr>
+nnoremap <M-8> :execute "Lines '" . expand("<cword>")<cr>
+inoremap <M-8> <esc>:execute "Lines '" . expand("<cword>")<cr>
+xnoremap <M-8> <esc>:execute "Lines '" . expand("<cword>")<cr>
 " Search lines in the current buffer
 nnoremap <C-s> :BLines<cr>
 inoremap <C-s> <esc>:BLines<cr>
@@ -572,7 +570,7 @@ xnoremap <C-s> <esc>:BLines<cr>
 " Vim help tags
 nnoremap <leader>hh :Helptags<cr>
 nnoremap <leader>sg :Rg<space>
-nnoremap <M-]> :execute 'Rg ' . expand('<cword>')<cr>
+nnoremap <leader>s8 :execute 'Rg ' . expand('<cword>')<cr>
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,
@@ -686,7 +684,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
-	autocmd VimEnter *.scd nmap <f1> :call All_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
 augroup END
 
 " Tidal
@@ -728,7 +726,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
-	autocmd FileType tidal nnoremap <silent> <buffer> <C-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
+	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
 	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
@@ -740,11 +738,46 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-e> <C-o><Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-o> <C-o><Plug>TidalParagraphSend
-	autocmd FileType tidal nmap <buffer> <M-k> :TidalHush<cr>
-	autocmd FileType tidal imap <buffer> <M-k> <C-o>:TidalHush<cr>
-	autocmd FileType tidal nmap <buffer> <M-x> :TidalSilence<space>
-	autocmd FileType tidal imap <buffer> <M-x> <C-o>:TidalSilence<space>
+	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
+	" autocmd FileType tidal 
+	nnoremap  <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
+	autocmd FileType tidal nnoremap <buffer> <f1> {:TidalPlay 1<cr>
+	autocmd FileType tidal nnoremap <buffer> <f2> {:TidalPlay 2<cr>
+	autocmd FileType tidal nnoremap <buffer> <f3> {:TidalPlay 3<cr>
+	autocmd FileType tidal nnoremap <buffer> <f4> {:TidalPlay 4<cr>
+	autocmd FileType tidal nnoremap <buffer> <f5> {:TidalPlay 5<cr>
+	autocmd FileType tidal nnoremap <buffer> <f6> {:TidalPlay 6<cr>
+	autocmd FileType tidal nnoremap <buffer> <f7> {:TidalPlay 7<cr>
+	autocmd FileType tidal nnoremap <buffer> <f8> {:TidalPlay 8<cr>
+	autocmd FileType tidal nnoremap <buffer> <f9> {:TidalPlay 9<cr>
+	autocmd FileType tidal nnoremap <buffer> <f10> {:TidalPlay 10<cr>
+	autocmd FileType tidal nnoremap <buffer> <f11> {:TidalPlay 11<cr>
+	autocmd FileType tidal nnoremap <buffer> <f12> {:TidalPlay 12<cr>
+	autocmd FileType tidal nnoremap <leader><f1> :TidalSilence 1<cr>
+	autocmd FileType tidal nnoremap <leader><f2> :TidalSilence 2<cr>
+	autocmd FileType tidal nnoremap <leader><f3> :TidalSilence 3<cr>
+	autocmd FileType tidal nnoremap <leader><f4> :TidalSilence 4<cr>
+	autocmd FileType tidal nnoremap <leader><f5> :TidalSilence 5<cr>
+	autocmd FileType tidal nnoremap <leader><f6> :TidalSilence 6<cr>
+	autocmd FileType tidal nnoremap <leader><f7> :TidalSilence 7<cr>
+	autocmd FileType tidal nnoremap <leader><f8> :TidalSilence 8<cr>
+	autocmd FileType tidal nnoremap <leader><f9> :TidalSilence 9<cr>
+	autocmd FileType tidal nnoremap <leader><f10>:TidalSilence 10<cr>
+	autocmd FileType tidal nnoremap <leader><f11> :TidalSilence 11<cr>
+	autocmd FileType tidal nnoremap <leader><f12> :TidalSilence 12<cr>
+	autocmd VimEnter *.scd nnoremap <leader>1 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d1, ~b1)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>2 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d2, ~b2)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>3 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d3, ~b3)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>4 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d4, ~b4)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>5 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d5, ~b5)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>6 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d6, ~b6)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>7 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d7, ~b7)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>8 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d8, ~b8)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>9 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d9, ~b9)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>10 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d10, ~b10)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>11 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d11, ~b11)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>12 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d12, ~b12)")<cr>
 augroup END
 
 " FoxDot

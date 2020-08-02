@@ -67,9 +67,9 @@ ${VISUAL}$0
 )
 endsnippet
 
-snippet d "" w
-d.$1[${2:0}]
-endsnippet
+# snippet db "" w
+# d.$1[${2:0}]
+# endsnippet
 
 snippet v "Global variable" b
 ~$1 = $2;
@@ -1826,17 +1826,10 @@ endsnippet
 # Tidal
 
 snippet "d([0-9]+)" "Send bus to visualiser (Improviz)" br
-~b`!p snip.rv = match.group(1)` = Bus.audio(s, 2); ~d`!p snip.rv = match.group(1)`.outBus = ~b`!p snip.rv = match.group(1)`;
-Ndef(\d`!p snip.rv = match.group(1)`).play;$1
 (
 Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
 	var sig = InBus.ar(~b`!p snip.rv = match.group(1)`, 2);
-	${0:sig}
+	sig $0
 };
 )
-// ~d`!p snip.rv = match.group(1)`.outBus = 0; ~b`!p snip.rv = match.group(1)`.free;
-endsnippet
-
-snippet "db([0-9]+)" "Does not silence original signal" r
-db`!p snip.rv = match.group(1)` = InBus.ar(~d`!p snip.rv = match.group(1)`)
 endsnippet
