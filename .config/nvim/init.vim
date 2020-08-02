@@ -442,7 +442,9 @@ call minpac#add('cohama/lexima.vim') "Auto close
 packadd! lexima.vim
 inoremap <M-[> [
 inoremap <M-9> (
-inoremap <M-'> "
+inoremap <M-'> '
+inoremap <M-;> "
+inoremap <M-]> {
 "Replace text with the contents of a register
 call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
@@ -588,19 +590,18 @@ let g:goyo_width = 140
 let g:goyo_height = 120
 nnoremap <leader>og :Goyo<cr>
 call minpac#add('junegunn/limelight.vim')
-nnoremap <leader>ol :Limelight!!<cr>
 nmap gl <Plug>(Limelight)
+nnoremap <leader>ol :Limelight!!<cr>
 xmap gl <Plug>(Limelight)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " }}}2
 
 " Music {{{2
-
 call minpac#add('davidgranstrom/scnvim')
 let g:scnvim_no_mappings = 1
 " default is half the terminal size for vertical and a third for horizontal
-let g:scnvim_postwin_size = 70
+let g:scnvim_postwin_size = 60
 " automatically open post window on a SuperCollider error
 let g:scnvim_postwin_auto_toggle = 0
 " set this variable if you don't want the "echo args" feature
@@ -709,20 +710,26 @@ function! Tidal_init()
 	execute "tabe " . expand("%:r") . ".tidal"
 	call scnvim#sclang#send("~superdirt_start.value()")
 	:TidalHush
-	:wincmd j
-	:wincmd L
-	:vertical resize 70
-	:wincmd h
+	" :wincmd j
+	" :wincmd L
+	:resize 23
+	" :wincmd h
 	:normal G
 endfunction
 
 let g:tidal_no_mappings = 1
 let g:tidal_target = "terminal"
 
+function Is_comment()
+    let hg = join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'))
+    return hg =~? 'comment' ? 1 : 0
+endfunction
+
 augroup tidal_au
 	autocmd!
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-	autocmd FileType tidal setlocal commentstring=--\ %s
+	autocmd FileType tidal setlocal commentstring=--\%s
+	autocmd FileType tidal setlocal formatoptions-=j "Do not concatenate # on J
 	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
 	autocmd FileType tidal setlocal dictionary+=./dict/samples.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/functions.txt
@@ -731,8 +738,11 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
-	autocmd FileType tidal nnoremap <silent> <buffer> <M-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
+	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
+	" Always autoscroll
+	autocmd FileType tidal nmap <M-u> <Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
+	autocmd FileType tidal imap <M-u> <C-o><Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
 	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-o> <Plug>TidalRegionSend

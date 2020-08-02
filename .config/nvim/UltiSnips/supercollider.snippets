@@ -289,7 +289,7 @@ snippet ps "Sequentially embed values in a list. Repeats determines whole cycles
 Pseq(${VISUAL}$1, ${2:1})
 endsnippet
 
-snippet ps[ "" w
+snippet psa "" w
 Pseq([${VISUAL}$1], ${2:1})
 endsnippet
 
@@ -327,7 +327,7 @@ snippet pse "Similar to Pseq but repeats items instead of cycles" w
 Pser(${VISUAL}$1, ${2:1})
 endsnippet
 
-snippet pse[ "" w
+snippet psea "" w
 Pser([${VISUAL}$1], ${2:1})
 endsnippet
 
@@ -799,6 +799,10 @@ endsnippet
 
 snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a gate some specific duration or reusing Dust random values" wr
 Trig`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
+endsnippet
+
+snippet "Tdelay(k)?" "Delays a trigger by a given time. Any triggers which arrive in the time between an input trigger and its delayed output, are ignored." wr
+Tdelay`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
 endsnippet
 
 snippet "Latch(k)?" "Holds input signal value when triggered. Latch will output 0 until it receives its first trigger." wr
