@@ -890,13 +890,21 @@ snippet BBandPass "Band Pass Filter. Similar to BPF" w
 BBandPass.ar(${1:${VISUAL:sig}}, ${2:freq}, bw:${3:1.0})
 endsnippet
 
-snippet BPeakEQ "Similar to RLPF. db - boost/cut the center frequency (in dBs)" w
-BPeakEQ.ar(${1:${VISUAL:sig}}, ${2:1200}, rq:${3:1}, db:${4:0})
+snippet BPeakEQ "Resonaate and boost provided freq. db - boost/cut the center frequency (in dBs)" w
+BPeakEQ.ar(${1:${VISUAL:sig}}, ${2:1200}, rq:${3:1}, db:${4:1}.ampdb)
+endsnippet
+
+snippet BHiShelf "Similar to resonating low pass filter. Large db value with high freq can make parabolic shape" w
+BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:1}, db:${4:1}.ampdb)
+endsnippet
+
+snippet BLowShelf "Same as BHiShelf just impacts low freqs" w
+BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:1}, db:${4:1}.ampdb)
 endsnippet
 
 # https://www.youtube.com/watch?v=D5UClgX8gPc
 snippet MidEQ "Attenuates or boosts a frequency band." w
-MidEQ.ar(${1:${VISUAL:sig}}, ${2:440}, rq:${3:1}, db:${4:0})
+MidEQ.ar(${1:${VISUAL:sig}}, ${2:440}, rq:${3:1}, db:${4:1}.ampdb)
 endsnippet
 
 snippet BRF "Band pass filter: reject. Higher rq means sharper exclusion band" w
@@ -909,6 +917,10 @@ endsnippet
 
 snippet FreeVerb "Basic reverb. Mix - dry/wet balance, damp - how strongly high freqs should be removed" w
 FreeVerb.ar(${1:${VISUAL:sig}}, mix:${2:0.33}, room:${3:0.5}, damp:${3:0.5})
+endsnippet
+
+snippet FreeVerb2 "Same as FreeVerb, but for 2 channels" w
+FreeVerb2.ar(${1:${VISUAL:sig}}[0], $1[1], mix:${2:0.33}, room:${3:0.5}, damp:${3:0.5})
 endsnippet
 
 snippet GVerb "Cooler reverb, but harded to use" w
@@ -953,10 +965,6 @@ endsnippet
 
 snippet Disintegrator "Adds grit to the sound. Second argument lower values distorts sound" w
 Disintegrator.ar(sig, ${1:0.5}, ${2:0.7})
-endsnippet
-
-snippet BHiShelf "Similar to resonating low pass filter. Large db value with high freq can make parabolic shape" w
-BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, 1, db:${3:3})
 endsnippet
 
 snippet "Decay(k)?" "Exponentialy lower amplitude of burst signal. Similar to lag. Good on short burst signals like Impulse" wr
@@ -1311,7 +1319,19 @@ Demand`!p snip.rv = rate(match)`(${1:trig}, 0, demandUGens:[${VISUAL}$2])
 endsnippet
 
 snippet ds "Pseq equivalent for UGens. List can contain array or other UGens" w
+Dseq(${VISUAL}$1, ${2:1})
+endsnippet
+
+snippet ds[ "Pseq equivalent for UGens. List can contain array or other UGens" w
 Dseq([${VISUAL}$1], ${2:1})
+endsnippet
+
+snippet dsf "Shuffle" w
+Dshuf(${VISUAL}$1, ${2:1})
+endsnippet
+
+snippet dsf[ "Shuffle" w
+Dshuf([${VISUAL}$1], ${2:1})
 endsnippet
 
 snippet dr "Demand rate random sequence generator" w
@@ -1451,7 +1471,7 @@ snippet f2 "Simple play function for quick testing" b
 endsnippet
 
 snippet fp "Simple play function for quick ploting" b
-{ ${VISUAL}$1 }.plot;
+{ ${VISUAL}$1 }.plot(1);
 endsnippet
 
 # Misc

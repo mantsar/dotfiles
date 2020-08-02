@@ -436,10 +436,15 @@ xmap <C-j> ]egv
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tommcdo/vim-exchange') "Easy text exchange operator for Vim
 call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
+call minpac#add('cohama/lexima.vim') "Auto close
+packadd! lexima.vim
+inoremap <M-[> [
+inoremap <M-9> (
+inoremap <M-'> "
 "Replace text with the contents of a register
-call minpac#add('vim-scripts/ReplaceWithRegister') 
-call minpac#add('FooSoft/vim-argwrap')
-nnoremap <silent> <C-a> :ArgWrap<cr>
+call minpac#add('vim-scripts/ReplaceWithRegister')
+call minpac#add('FooSoft/vim-argwrap') 
+nnoremap <silent> <M-v> :ArgWrap<cr>
 call minpac#add('justinmk/vim-sneak') "Jump to any location specified by two characters
 let g:sneak#label = 1
 let g:sneak#s_next = 1 "Move to next match by hitting `s` (or `S`) again
@@ -453,7 +458,7 @@ map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 call minpac#add('unblevable/quick-scope') "Lightning fast left-right movement in Vim
 let g:qs_second_highlight = 0
-call minpac#add('mantsar/vim-closer') "Added compatibility with SuperCollider
+" call minpac#add('mantsar/vim-closer') "Added compatibility with SuperCollider
 call minpac#add('kana/vim-textobj-user') "Required by plugins below
 call minpac#add('kana/vim-textobj-line') "Text objects for the current line
 call minpac#add('kana/vim-textobj-indent') "ai/ii / aI/iI
@@ -716,7 +721,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
 	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
-	autocmd FileType tidal nnoremap <silent> <buffer> <C-a> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
+	autocmd FileType tidal nnoremap <silent> <buffer> <M-v> v$:s/\%V\(\$\\|#\)/\r\1<cr>l
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
 	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
 	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
@@ -733,6 +738,12 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-x> :TidalSilence<space>
 	autocmd FileType tidal imap <buffer> <M-x> <C-o>:TidalSilence<space>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
+	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>'})
+	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>'})
+	au FileType tidal call lexima#add_rule({'char': '>', 'at': '\%#>', 'leave': 1})
+	au FileType tidal call lexima#add_rule({'char': '<BS>', 'at': '<\%#>', 'delete': 1})
+	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '<\%#>', 'input_after': '<CR>'})
+	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '\<\%#$', 'input_after': '<CR>]', 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1\]'})
 augroup END
 
 " FoxDot
