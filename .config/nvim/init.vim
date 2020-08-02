@@ -710,10 +710,10 @@ function! Tidal_init()
 	execute "tabe " . expand("%:r") . ".tidal"
 	call scnvim#sclang#send("~superdirt_start.value()")
 	:TidalHush
-	" :wincmd j
+	:wincmd j
 	" :wincmd L
-	:resize 23
-	" :wincmd h
+	:resize 8
+	:wincmd k
 	:normal G
 endfunction
 
