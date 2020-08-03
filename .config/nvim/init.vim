@@ -230,6 +230,7 @@ else
 endif
 nnoremap <leader>oc :call Toggle_colorcheme()<cr>
 call Toggle_colorcheme()
+nnoremap <leader>ob :set background=light
 " call minpac#add('dylanaraps/wal.vim')
 " colorscheme wal
 call minpac#add('machakann/vim-highlightedyank')
@@ -439,7 +440,6 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tommcdo/vim-exchange') "Easy text exchange operator for Vim
 call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
 call minpac#add('cohama/lexima.vim') "Auto close
-packadd! lexima.vim
 inoremap <M-[> [
 inoremap <M-9> (
 inoremap <M-'> '
@@ -749,20 +749,19 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-j> <Plug>TidalLineSend
 	autocmd FileType tidal imap <buffer> <M-j> <C-o><Plug>TidalLineSend
 	autocmd FileType tidal nmap <buffer> <M-e> <Plug>TidalParagraphSend
+	autocmd FileType tidal imap <buffer> <M-e> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nmap <buffer> <M-p> <Plug>TidalParagraphSend
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
-	autocmd FileType tidal imap <buffer> <M-e> <C-o><Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-o> <C-o><Plug>TidalParagraphSend
 	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
-	" autocmd FileType tidal 
 	nnoremap  <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
-	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>'})
-	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>'})
-	au FileType tidal call lexima#add_rule({'char': '>', 'at': '\%#>', 'leave': 1})
-	au FileType tidal call lexima#add_rule({'char': '<BS>', 'at': '<\%#>', 'delete': 1})
-	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '<\%#>', 'input_after': '<CR>'})
-	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '\<\%#$', 'input_after': '<CR>]', 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1\]'})
+	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>', 'filetype': 'tidal'})
+	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>', 'filetype': 'tidal'})
+	au FileType tidal call lexima#add_rule({'char': '>', 'at': '\%#>', 'leave': 1, 'filetype': 'tidal'})
+	au FileType tidal call lexima#add_rule({'char': '<BS>', 'at': '<\%#>', 'delete': 1, 'filetype': 'tidal'})
+	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '<\%#>', 'input_after': '<CR>', 'filetype': 'tidal'})
+	au FileType tidal call lexima#add_rule({'char': '<CR>', 'at': '\<\%#$', 'input_after': '<CR>]', 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1\]', 'filetype': 'tidal'})
 	autocmd FileType tidal nnoremap <buffer> <f1> {:TidalPlay 1<cr>
 	autocmd FileType tidal nnoremap <buffer> <f2> {:TidalPlay 2<cr>
 	autocmd FileType tidal nnoremap <buffer> <f3> {:TidalPlay 3<cr>

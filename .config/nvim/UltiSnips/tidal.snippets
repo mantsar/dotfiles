@@ -2,7 +2,7 @@ global !p
 
 def cycle_index():
 	i = vim.current.window.cursor[0] - 1
-	regex = f'^\s*d([0-9]+)\s*\$.*'
+	regex = f'^\s*d([0-9]+)'
 	while i >= 0:
 		m = re.match(regex, snip.buffer[i])
 		if m:
