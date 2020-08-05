@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+ladish Studio configuration.
+-->
+<!-- Wed Aug  5 19:29:14 2020 -->
+<studio>
+  <jack>
+    <conf>
+      <parameter path="/engine/driver">alsa</parameter>
+      <parameter path="/driver/device">hw:Generic,0</parameter>
+      <parameter path="/driver/rate">48000</parameter>
+    </conf>
+    <clients>
+      <client name="system" uuid="2125aab5-bd63-455e-bb1e-a2dbfff0afc5">
+        <ports>
+          <port name="capture_1" uuid="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" />
+          <port name="capture_2" uuid="268740f6-f3ac-4e4f-b6ae-16a75e09b518" />
+          <port name="playback_1" uuid="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+          <port name="playback_2" uuid="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+        </ports>
+      </client>
+      <client name="PulseAudio JACK Sink" uuid="41fecacd-c384-4092-b045-75bc0eb6269a">
+        <ports>
+          <port name="front-left" uuid="59e053c9-138b-4dbb-b9b4-34df06fac2c0" />
+          <port name="front-right" uuid="588c72eb-0575-4ec5-b783-c8d44c1177eb" />
+        </ports>
+      </client>
+      <client name="a2j" uuid="be23a242-e2b2-11de-b795-002618af5e42">
+        <ports>
+          <port name="Midi Through (capture): Midi Through Port-0" uuid="17a8702d-b1e1-4edf-ad34-2da5d03029ce" />
+          <port name="Midi Through (playback): Midi Through Port-0" uuid="6bd85110-5512-494a-88ac-b53c5e0680be" />
+        </ports>
+      </client>
+      <client name="PulseAudio JACK Source" uuid="b21cc419-97cd-450d-bdf4-af6d6650ae28">
+        <ports>
+          <port name="front-left" uuid="c3530f68-0695-4663-8739-84ac42c20c27" />
+          <port name="front-right" uuid="07bb032a-8387-463c-befe-f19483cbaa63" />
+        </ports>
+      </client>
+      <client name="claudia" uuid="f3e5abf5-4763-472c-bdd5-e115380d71f5">
+        <ports>
+        </ports>
+      </client>
+    </clients>
+  </jack>
+  <clients>
+    <client name="Hardware Capture" uuid="47c1cd18-7b21-4389-bec4-6e0658e1d6b1" naming="app">
+      <ports>
+        <port name="capture_1" uuid="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" type="audio" direction="output" />
+        <port name="capture_2" uuid="268740f6-f3ac-4e4f-b6ae-16a75e09b518" type="audio" direction="output" />
+      </ports>
+    </client>
+    <client name="Hardware Playback" uuid="b2a0bb06-28d8-4bfe-956e-eb24378f9629" naming="app">
+      <ports>
+        <port name="playback_1" uuid="6fbaa934-ffaf-4b33-a007-bf39af794e98" type="audio" direction="input" />
+        <port name="playback_2" uuid="f484aeeb-7fa1-4080-a263-8e35db9e599b" type="audio" direction="input" />
+      </ports>
+    </client>
+    <client name="PulseAudio JACK Sink" uuid="fc95141f-9576-425b-bfd6-676dd49e5446" naming="app">
+      <ports>
+        <port name="front-left" uuid="59e053c9-138b-4dbb-b9b4-34df06fac2c0" type="audio" direction="output" />
+        <port name="front-right" uuid="588c72eb-0575-4ec5-b783-c8d44c1177eb" type="audio" direction="output" />
+      </ports>
+    </client>
+    <client name="Midi Through" uuid="cd1ce356-07f3-4389-9295-e06dc3495ef2" naming="app">
+      <ports>
+        <port name="Midi Through Port-0" uuid="17a8702d-b1e1-4edf-ad34-2da5d03029ce" type="midi" direction="output" />
+        <port name="Midi Through Port-0" uuid="6bd85110-5512-494a-88ac-b53c5e0680be" type="midi" direction="input" />
+      </ports>
+      <dict>
+        <key name="http://ladish.org/ns/canvas/x">1812.0</key>
+        <key name="http://ladish.org/ns/canvas/y">1414.0</key>
+      </dict>
+    </client>
+    <client name="PulseAudio JACK Source" uuid="73cf7233-7746-42fb-bc9e-909bfbf98b0a" naming="app">
+      <ports>
+        <port name="front-left" uuid="c3530f68-0695-4663-8739-84ac42c20c27" type="audio" direction="input" />
+        <port name="front-right" uuid="07bb032a-8387-463c-befe-f19483cbaa63" type="audio" direction="input" />
+      </ports>
+      <dict>
+        <key name="http://ladish.org/ns/canvas/x">1547.0</key>
+        <key name="http://ladish.org/ns/canvas/y">1433.0</key>
+      </dict>
+    </client>
+  </clients>
+  <connections>
+    <connection port1="59e053c9-138b-4dbb-b9b4-34df06fac2c0" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+    <connection port1="588c72eb-0575-4ec5-b783-c8d44c1177eb" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+    <connection port1="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" port2="c3530f68-0695-4663-8739-84ac42c20c27" />
+    <connection port1="268740f6-f3ac-4e4f-b6ae-16a75e09b518" port2="07bb032a-8387-463c-befe-f19483cbaa63" />
+  </connections>
+  <applications>
+  </applications>
+</studio>
