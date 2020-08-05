@@ -13,8 +13,8 @@ if exists('g:neovide')
 			let g:neovide_fullscreen = v:true
 		endif
 	endfunction
-	nnoremap <up> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
-	nnoremap <down> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
+	nnoremap <up> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
+	nnoremap <down> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
 	" nnoremap <f11> :call Toggle_neovide_fullscreen()<cr>
 	set termguicolors
 else
@@ -689,8 +689,14 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
+	" autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
+	" autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
+	" Ardour
+	autocmd VimEnter *.scd nnoremap <leader>ae :call scnvim#sclang#send("a.play")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>ak :call scnvim#sclang#send("a.stop")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>aa :call scnvim#sclang#send("a.start")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>ae :call scnvim#sclang#send("a.end")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>ar :call scnvim#sclang#send("a.rec_enable_toggle")<cr>
 augroup END
 
 " Tidal

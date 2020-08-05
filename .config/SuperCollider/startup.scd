@@ -4,14 +4,15 @@
 // Using my own setup functions instead of SuperDirt.start/FoxDot.start
 
 s.options.memSize = 8192 * 128; // increase memory to 512 Mb
-s.options.sampleRate = 44100;
+s.options.sampleRate = 48000;
 s.options.numAudioBusChannels = 1024 * 10;
 s.volume.volume = -10; // default volume
 // from SuperDirt
 s.options.numBuffers = 1024 * 256; // 1024 default
 s.options.numWireBufs = 256;
 s.options.maxNodes = 1024 * 32;
-s.options.numOutputBusChannels = 2;
+// s.options.numOutputBusChannels = 2;
+s.options.numOutputBusChannels = 24;
 s.options.numInputBusChannels = 2;
 s.latency = 0.3;
 
@@ -22,39 +23,42 @@ s.latency = 0.3;
 		// ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 		~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
 		// s.sync; // optionally: wait for samples to be read
-		~dirt.start(57120, 0 ! 12);
+		~dirt.start(57120, [0, 2, 4, 6, 8, 10, 12]);
+		// [0, 2, 4, 6, 8, 10]
 		(
 			~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
 			~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
 			~d7 = ~dirt.orbits[6]; ~d8 = ~dirt.orbits[7]; ~d9 = ~dirt.orbits[8];
 			~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 		);
-		~dirt_orbit_filter = {|key, orbit, bus| 
-			orbit.outBus = bus;
-			Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
-		};
-		~b1 = Bus.audio(s, 2); ~b2 = Bus.audio(s, 2); ~b3 = Bus.audio(s, 2);
-		~b4 = Bus.audio(s, 2); ~b5 = Bus.audio(s, 2); ~b6 = Bus.audio(s, 2);
-		~b7 = Bus.audio(s, 2); ~b8 = Bus.audio(s, 2); ~b9 = Bus.audio(s, 2);
-		~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
-		~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12];
-		~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12];
-		[
-			~d,
-			~b,
-		].flop.do {|v, i|
-			~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1]);
-		};
-		ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
-		~dirt_orbit_buses = {~d.do {|v, i|
-			if (v.outBus == 0) { 
-				"--- ~d% inactive \n".postf(i+1);
-			} {
-				"+++ ~d% active \n".postf(i+1);
-			}
-		};
-		nil
-	};
+		// ------
+		// ~dirt_orbit_filter = {|key, orbit, bus| 
+		// 	orbit.outBus = bus;
+		// 	Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
+		// };
+		// ~b1 = Bus.audio(s, 2); ~b2 = Bus.audio(s, 2); ~b3 = Bus.audio(s, 2);
+		// ~b4 = Bus.audio(s, 2); ~b5 = Bus.audio(s, 2); ~b6 = Bus.audio(s, 2);
+		// ~b7 = Bus.audio(s, 2); ~b8 = Bus.audio(s, 2); ~b9 = Bus.audio(s, 2);
+		// ~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
+		// ~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12];
+		// ~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12];
+		// [
+		// 	~d,
+		// 	~b,
+		// ].flop.do {|v, i|
+		// 	~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1]);
+		// };
+		// ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
+		// ~dirt_orbit_buses = {~d.do {|v, i|
+		// 	if (v.outBus == 0) { 
+		// 		"--- ~d% inactive \n".postf(i+1);
+		// 	} {
+		// 		"+++ ~d% active \n".postf(i+1);
+		// 	}
+		// };
+		// nil
+	// };
+	// ----
 	~toggle_dirt_orbit_bus = {|orbit, bus| 
 			if (orbit.outBus == 0) { 
 					orbit.outBus = bus;
@@ -514,6 +518,7 @@ var nice_ratios = [1/3, 1/4, 1/2, 1, 2, 1/5, 9/10, 4/5, 7/10, 3/5, 2/5, 1/10, 3/
 
 // INIT -----------------------------------------------------------------------
 s.waitForBoot({ 
+	a = Ardour(); // Enable Ardour by default
 	// d = ~read_dirt_samples.value(); // Samples
 	"./synthdef/synth_def.scd".loadRelative; // Synths
 	s.sync;
@@ -528,16 +533,17 @@ s.waitForBoot({
 	"Setup done".postln;
 });
 
+// Platform.userExtensionDir
 // Quarks.gui
-// Quarks.install("Vowel")
+// Quarks.install("ArdourOSC")
+// Quarks.install("BatLib")
 // Quarks.install("Bjorklund")
+// Quarks.install("Dirt-Samples")
+// Quarks.install("Esp")
+// Quarks.install("FoxDotQuark")
+// Quarks.install("MathLib")
 // Quarks.install("Spectrogram")
+// Quarks.install("SuperDirt")
+// Quarks.install("Vowel")
 // Quarks.install("XML")
 // Quarks.install("wslib")
-// Quarks.install("MathLib")
-// Quarks.install("Dirt-Samples")
-// Quarks.install("SuperDirt")
-// Quarks.install("FoxDotQuark")
-// Quarks.install("BatLib")
-// Quarks.install("Esp")
-// Platform.userExtensionDir
