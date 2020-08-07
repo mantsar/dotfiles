@@ -23,8 +23,8 @@ s.latency = 0.3;
 		// ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 		~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
 		// s.sync; // optionally: wait for samples to be read
-		// ~dirt.start(57120, [0, 2, 4, 6, 8, 10, 12]);
 		~dirt.start(57120, 0!12);
+		// ~dirt.start(57120, [0, 2, 4, 6, 8, 10, 12]);
 		(
 			~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
 			~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
@@ -32,16 +32,16 @@ s.latency = 0.3;
 			~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
 		);
 		// ------
-		~dirt_orbit_filter = {|key, orbit, bus| 
-			orbit.outBus = bus;
-			Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
-		};
 		~b1 = Bus.audio(s, 2); ~b2 = Bus.audio(s, 2); ~b3 = Bus.audio(s, 2);
 		~b4 = Bus.audio(s, 2); ~b5 = Bus.audio(s, 2); ~b6 = Bus.audio(s, 2);
 		~b7 = Bus.audio(s, 2); ~b8 = Bus.audio(s, 2); ~b9 = Bus.audio(s, 2);
 		~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
 		~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12];
 		~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12];
+		~dirt_orbit_filter = {|key, orbit, bus| 
+			orbit.outBus = bus;
+			Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
+		};
 		~dirt_orbit_buses = {~d.do {|v, i|
 			if (v.outBus == 0) { 
 				"--- ~d% inactive \n".postf(i+1);
@@ -51,7 +51,6 @@ s.latency = 0.3;
 		};
 		nil
 	};
-	// ----
 	~toggle_dirt_orbit_bus = {|orbit, bus| 
 		if (orbit.outBus == 0) { 
 			orbit.outBus = bus;
@@ -64,6 +63,7 @@ s.latency = 0.3;
 	};
 	~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
 };
+// ----
 ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
 [
 	~d,

@@ -515,7 +515,8 @@ nnoremap <silent> <M-9> :UltiSnipsEdit<cr>
 au TabLeave * call UltiSnips#LeavingBuffer() "Fixes freezing when changing tabs
 call minpac#add('kassio/neoterm')
 let g:neoterm_autoscroll = 1 "scroll to the end of its buffer after running any
-" let neoterm_default_mod = "vertical"
+let neoterm_default_mod = "below"
+let g:neoterm_size = "10"
 let g:neoterm_repl_enable_ipython_paste_magic = 1
 " Send the commands to the neoterm buffer linked to the current tab instead of the last active neoterm.
 let g:neoterm_term_per_tab=1
@@ -811,9 +812,11 @@ let g:foxdot_activated = 0
 
 function! Foxdot_init()
 	let g:foxdot_activated = 1
-	call scnvim#sclang#send("~foxdot_start.value()")
 	execute "tabe " . expand("%:r") . ".py"
+	call scnvim#sclang#send("~foxdot_start.value()")
 	:T ipython --no-autoindent -i foxdot/foxdot_cli.py
+	:exe "tabn ".g:lasttab
+	:wincmd k
 	:normal G
 endfunction
 
@@ -835,7 +838,7 @@ augroup foxdot_au
 	autocmd FileType python nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
 	autocmd FileType python nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
 	autocmd FileType python nnoremap <buffer> <M-l> :Tclear<cr>
-	autocmd FileType python nnoremap <buffer> <M-u> :Ttoggle<cr>
+	" autocmd FileType python nnoremap <buffer> <M-u> :Ttoggle<cr>
 augroup END
 
 " Improviz
@@ -882,6 +885,9 @@ endfunction
 function! Hydra_init()
 	execute "StartAsync atom " . expand("%:r") . ".js"
 endfunction
+
+" Faust
+call minpac#add('gmoe/vim-faust')
 " }}}2
 
 " Misc {{{2
