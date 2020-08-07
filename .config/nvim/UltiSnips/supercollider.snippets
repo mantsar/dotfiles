@@ -1852,7 +1852,7 @@ endsnippet
 snippet "d([0-9]+)" "Send bus to visualiser (Improviz)" br
 (
 Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
-	var sig = InBus.ar(~b`!p snip.rv = match.group(1)`, 2);
+	var a, b, cf, o, c, sig = InBus.ar(~b`!p snip.rv = match.group(1)`, 2);
 	sig $0
 };
 )
