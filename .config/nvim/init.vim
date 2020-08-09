@@ -685,7 +685,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>t :call scnvim#sclang#send("s.plotTree")<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
-	" tidal/foxdot/imroviz
+	" midi/tidal/foxdot/imroviz
+	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
@@ -759,7 +760,7 @@ augroup tidal_au
 	autocmd FileType tidal imap <buffer> <M-e> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nmap <buffer> <M-p> <Plug>TidalParagraphSend
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
-	autocmd FileType tidal imap <buffer> <M-o> <C-o><Plug>TidalParagraphSend
+	autocmd FileType tidal imap <buffer> <M-o> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
 	nnoremap  <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>

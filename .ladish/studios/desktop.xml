@@ -2,7 +2,7 @@
 <!--
 ladish Studio configuration.
 -->
-<!-- Wed Aug  5 19:38:43 2020 -->
+<!-- Sun Aug  9 00:31:47 2020 -->
 <studio>
   <jack>
     <conf>
@@ -29,6 +29,13 @@ ladish Studio configuration.
         <ports>
           <port name="Midi Through (capture): Midi Through Port-0" uuid="17a8702d-b1e1-4edf-ad34-2da5d03029ce" />
           <port name="Midi Through (playback): Midi Through Port-0" uuid="6bd85110-5512-494a-88ac-b53c5e0680be" />
+          <port name="SuperCollider (playback): in0" uuid="488b2419-c8a6-4999-b954-e4e0c10e15bc" />
+          <port name="SuperCollider (playback): in1" uuid="e2e49612-a055-4d19-96b7-584a6eaace1c" />
+          <port name="SuperCollider (playback): in2" uuid="f187db14-0e7f-4d0e-b730-bbc236374e2e" />
+          <port name="SuperCollider (capture): out0" uuid="9de2d75b-3cf9-4df7-b3c0-cd38e06988d1" />
+          <port name="SuperCollider (capture): out1" uuid="4e8f6890-9be4-450f-a310-9f58396a7d7e" />
+          <port name="SuperCollider (capture): out2" uuid="bf341c6d-033c-4b71-a208-96c6d08e8682" />
+          <port name="SuperCollider (capture): out3" uuid="07e2be7f-1a23-40f6-8450-b7dcb9f74c72" />
         </ports>
       </client>
       <client name="PulseAudio JACK Source" uuid="b21cc419-97cd-450d-bdf4-af6d6650ae28">
@@ -41,56 +48,74 @@ ladish Studio configuration.
         <ports>
         </ports>
       </client>
-      <client name="PulseAudio JACK Sink-01" uuid="e3c63016-89f9-4f0d-8357-58dbc8014ae5">
-        <ports>
-          <port name="front-left" uuid="dcf829be-a07b-4eff-b963-a3ac5e07ef8c" />
-          <port name="front-right" uuid="987fef1c-8e63-4127-b2c9-156da3898ce1" />
-        </ports>
-      </client>
-      <client name="PulseAudio JACK Source-01" uuid="4cefd470-0c3f-4da5-8d2a-8042a797d58b">
-        <ports>
-          <port name="front-left" uuid="c722a60b-73c7-47f9-965a-5cb08570f1a5" />
-          <port name="front-right" uuid="cb395fd1-c4eb-43eb-802c-564f7f663a04" />
-        </ports>
-      </client>
       <client name="SuperCollider" uuid="0934c25c-747c-4faa-b1da-436b7dd362c5">
         <ports>
           <port name="in_1" uuid="b6a772c1-bdc3-4605-9a23-56fd04c21633" />
           <port name="in_2" uuid="c25f35b2-665f-45b6-99e0-84134a15767e" />
           <port name="out_1" uuid="d74d73bb-9099-4a23-811d-9af8eddab7b4" />
           <port name="out_2" uuid="7c691e01-93b4-4a4a-90ce-e00e185e89d6" />
-          <port name="out_3" uuid="ead0a1d4-39f0-43ff-9583-9e5291bede90" />
-          <port name="out_4" uuid="6c6edeaa-9928-4a1e-ac7c-d955cb713dfe" />
-          <port name="out_5" uuid="15d20ad4-e45e-4b19-bda1-aa374692b08b" />
-          <port name="out_6" uuid="ae903bc7-4fcc-4590-9dd9-cdde0f9a5164" />
-          <port name="out_7" uuid="760c4cb6-e715-4108-9de6-55f06cc5902f" />
-          <port name="out_8" uuid="5411fff8-cd0d-45f2-a18b-d80aae33b586" />
-          <port name="out_9" uuid="8cc1d3a3-dc6c-4df0-bb22-acd1f1c01b45" />
-          <port name="out_10" uuid="6377110c-870a-4f94-ba88-12ec866a7305" />
-          <port name="out_11" uuid="7311b296-de3b-4559-8dc8-2848838c5fed" />
-          <port name="out_12" uuid="5cb85d85-3ea9-4ae5-8d9a-8af17b4a1630" />
-          <port name="out_13" uuid="19f458d6-2ad2-42ce-abbb-d14d7785a5ad" />
-          <port name="out_14" uuid="8e3f7692-f300-47dd-a687-e7a63b0ba846" />
-          <port name="out_15" uuid="0c82ea4f-758f-4b90-bf57-8959bea15c85" />
-          <port name="out_16" uuid="e46fdc48-0a80-43f3-b404-410b75325a3f" />
-          <port name="out_17" uuid="b3864b79-2b9a-4b93-986f-cda701722408" />
-          <port name="out_18" uuid="7e75ff37-a5b8-45b7-bc55-054720a3b68d" />
-          <port name="out_19" uuid="3acea956-65ff-45a3-82b0-1ab0008e7f2a" />
-          <port name="out_20" uuid="175df254-00b1-45ec-b0cf-ef9eb1e15836" />
-          <port name="out_21" uuid="8d6a49b8-122c-475a-a733-36e89dc19bdc" />
-          <port name="out_22" uuid="fe8b7974-2f5b-4e9e-b119-7f4cf0b18a77" />
-          <port name="out_23" uuid="61b74856-0a03-45b8-b268-641e14ae41a9" />
-          <port name="out_24" uuid="0336fa92-9abc-4f04-858e-c9745f424bb9" />
         </ports>
       </client>
-      <client name="japa" uuid="72d3a6ce-9aa2-422b-895f-fddada8e6216">
+      <client name="ardour" uuid="dc55e530-8377-4d4e-a51a-21f80235c4be">
         <ports>
-          <port name="in_1" uuid="1916c21f-4653-403c-bd9a-453908c0a653" />
-          <port name="in_2" uuid="fe77e4be-549c-4c74-ab02-f9b7bbeb3f62" />
-          <port name="in_3" uuid="4a3805ba-5c95-4699-9629-495087de4cf6" />
-          <port name="in_4" uuid="9faf2bfb-cab4-4c15-a3c3-f3a525d58697" />
-          <port name="white" uuid="abdbe5dc-ca3a-4d16-9157-6ccb120ba4c3" />
-          <port name="pink" uuid="c57a04b0-52f9-40c1-9f75-81c3100212c1" />
+          <port name="MTC in" uuid="079487b8-b50c-4026-a45a-17fecfcd0ca7" />
+          <port name="LTC in" uuid="80c6459c-6b8e-4d26-91ba-5475e8c21694" />
+          <port name="MIDI Clock in" uuid="da70a82c-7bab-46af-a3f2-a4f9d475597d" />
+          <port name="LTC-Out" uuid="df624b61-b8ee-4c4c-bc87-2396b9cdc77d" />
+          <port name="Click/audio_out 1" uuid="8bc48cfe-5ad8-4bfd-b0b6-42c00e248952" />
+          <port name="Click/audio_out 2" uuid="96b6777c-da4c-4efd-afa4-efa371931557" />
+          <port name="Master/audio_in 1" uuid="fb32e21e-f732-4af3-92c9-65f1f0a9dea0" />
+          <port name="Master/audio_in 2" uuid="a57e3d98-c359-4633-8e10-172d3532f677" />
+          <port name="Master/audio_out 1" uuid="eb56d12e-a31b-4487-9d96-81cf96f5623f" />
+          <port name="Master/audio_out 2" uuid="eff0ce1b-2207-4123-b45a-c288e6cdde9a" />
+          <port name="MMC in" uuid="bf7b4c82-5080-4b92-8e01-958b998b553d" />
+          <port name="MMC out" uuid="cce0a539-7188-4bc6-a544-3fe6ed4fdc05" />
+          <port name="Scene in" uuid="9c96187e-207f-4507-9b3a-35c7b4a151de" />
+          <port name="Scene out" uuid="3b5cc880-e588-4885-b2dd-43aa798906a1" />
+          <port name="Virtual Keyboard" uuid="b0cfab97-4cca-495c-9ab3-681b243cfc69" />
+          <port name="MTC out" uuid="7da36479-3288-4c67-8243-3715e04e5d4d" />
+          <port name="MIDI Clock out" uuid="41c5fa7f-45b8-4681-a4e1-4546dbf1e4de" />
+          <port name="auditioner/audio_out 1" uuid="2aaa5b2a-fca7-47b9-9577-418a21b226e3" />
+          <port name="auditioner/audio_out 2" uuid="38ea5859-7d96-4d01-b9a3-7acc294b4b6e" />
+          <port name="auditioner/midi_out 1" uuid="0e128d33-7118-48d3-9580-ee8e26fd8c74" />
+          <port name="m1/midi_in 1" uuid="b94ee87f-2498-4cb3-a54a-82f749ae3b09" />
+          <port name="m1/midi_out 1" uuid="384b5244-ee8f-4145-bdff-33adb0c75dc9" />
+          <port name="m1/audio_out 1" uuid="f6ef5c78-b86e-442b-b2ef-dfa7ea728b33" />
+          <port name="m1/audio_out 2" uuid="5504f5d0-38cd-411a-945d-8eb3c8956c8f" />
+          <port name="m2/midi_in 1" uuid="d3529fdf-cdae-4062-b096-08da89da52e0" />
+          <port name="m2/midi_out 1" uuid="25e44266-d9c1-4712-b39c-9aef948644e2" />
+          <port name="m2/audio_out 1" uuid="d20438c6-29cc-4a05-a74a-3e7acda954ab" />
+          <port name="m2/audio_out 2" uuid="44253766-d223-4886-8248-5080fb275682" />
+          <port name="m3/midi_in 1" uuid="cd013a80-d8d5-4754-91e0-ba48a08217ae" />
+          <port name="m3/audio_out 1" uuid="1ff557e7-6b0a-4502-930b-c1e32a403131" />
+          <port name="m3/audio_out 2" uuid="9a7fa3e1-1a1e-4f78-a4a9-dfa3cbd0f974" />
+          <port name="m3/midi_out 1" uuid="6cff0a80-c44f-4ef1-9397-e9f06e3c4b32" />
+          <port name="m4/midi_in 1" uuid="d674bcd2-1a32-4307-b447-d692e2edc5c0" />
+          <port name="m4/audio_out 1" uuid="4e1884d7-e035-4f43-84e9-c7b1eca21761" />
+          <port name="m4/audio_out 2" uuid="53e1b3a3-6132-4b03-9402-49c2490b6ac0" />
+          <port name="m4/midi_out 1" uuid="82308a29-4145-4a86-aaed-9eca65c96ed6" />
+        </ports>
+      </client>
+      <client name="PulseAudio JACK Sink-01" uuid="6f955f31-ca7b-4d14-b2b8-07d351dfd285">
+        <ports>
+          <port name="front-left" uuid="0c0364eb-e2b1-44d1-b259-02a4cfc09fdb" />
+          <port name="front-right" uuid="c1799de7-f1e6-44e7-a53c-65080c1af9c4" />
+        </ports>
+      </client>
+      <client name="PulseAudio JACK Source-01" uuid="8a8ffae3-1960-4a19-942e-4f4bcd9bb3f7">
+        <ports>
+          <port name="front-left" uuid="9cf8393a-1044-400b-a51d-e0922674fb47" />
+          <port name="front-right" uuid="82732da1-e49d-478f-aec7-80188b9e4cbf" />
+        </ports>
+      </client>
+      <client name="japa" uuid="e0fd93b6-80b9-44ff-8ab0-e1fbaff39d5a">
+        <ports>
+          <port name="in_1" uuid="0b29dcbd-82c1-4f8c-8a96-45c011f81151" />
+          <port name="in_2" uuid="633243ee-d343-494e-878a-c56045149f6b" />
+          <port name="in_3" uuid="34834ecf-67be-4849-857a-f87428983fb2" />
+          <port name="in_4" uuid="dd3f7e6d-0717-4d19-b69d-0ee2a3985a2e" />
+          <port name="white" uuid="16089f54-52e8-412e-9971-eae975ba3c0b" />
+          <port name="pink" uuid="b4d965b5-9a41-4fe6-bc95-d57e8b4a2263" />
         </ports>
       </client>
     </clients>
@@ -134,56 +159,85 @@ ladish Studio configuration.
         <key name="http://ladish.org/ns/canvas/y">1433.0</key>
       </dict>
     </client>
-    <client name="PulseAudio JACK Sink-01" uuid="5c14dd4b-a86f-41e9-9f9d-40fc9593383b" naming="app">
-      <ports>
-        <port name="front-left" uuid="dcf829be-a07b-4eff-b963-a3ac5e07ef8c" type="audio" direction="output" />
-        <port name="front-right" uuid="987fef1c-8e63-4127-b2c9-156da3898ce1" type="audio" direction="output" />
-      </ports>
-    </client>
-    <client name="PulseAudio JACK Source-01" uuid="7b9944e1-47d5-4146-98d8-1ea106021fa8" naming="app">
-      <ports>
-        <port name="front-left" uuid="c722a60b-73c7-47f9-965a-5cb08570f1a5" type="audio" direction="input" />
-        <port name="front-right" uuid="cb395fd1-c4eb-43eb-802c-564f7f663a04" type="audio" direction="input" />
-      </ports>
-    </client>
     <client name="SuperCollider" uuid="f81a21fd-31b4-4f30-8c90-906c18ad68b5" naming="app">
       <ports>
         <port name="in_1" uuid="b6a772c1-bdc3-4605-9a23-56fd04c21633" type="audio" direction="input" />
         <port name="in_2" uuid="c25f35b2-665f-45b6-99e0-84134a15767e" type="audio" direction="input" />
         <port name="out_1" uuid="d74d73bb-9099-4a23-811d-9af8eddab7b4" type="audio" direction="output" />
         <port name="out_2" uuid="7c691e01-93b4-4a4a-90ce-e00e185e89d6" type="audio" direction="output" />
-        <port name="out_3" uuid="ead0a1d4-39f0-43ff-9583-9e5291bede90" type="audio" direction="output" />
-        <port name="out_4" uuid="6c6edeaa-9928-4a1e-ac7c-d955cb713dfe" type="audio" direction="output" />
-        <port name="out_5" uuid="15d20ad4-e45e-4b19-bda1-aa374692b08b" type="audio" direction="output" />
-        <port name="out_6" uuid="ae903bc7-4fcc-4590-9dd9-cdde0f9a5164" type="audio" direction="output" />
-        <port name="out_7" uuid="760c4cb6-e715-4108-9de6-55f06cc5902f" type="audio" direction="output" />
-        <port name="out_8" uuid="5411fff8-cd0d-45f2-a18b-d80aae33b586" type="audio" direction="output" />
-        <port name="out_9" uuid="8cc1d3a3-dc6c-4df0-bb22-acd1f1c01b45" type="audio" direction="output" />
-        <port name="out_10" uuid="6377110c-870a-4f94-ba88-12ec866a7305" type="audio" direction="output" />
-        <port name="out_11" uuid="7311b296-de3b-4559-8dc8-2848838c5fed" type="audio" direction="output" />
-        <port name="out_12" uuid="5cb85d85-3ea9-4ae5-8d9a-8af17b4a1630" type="audio" direction="output" />
-        <port name="out_13" uuid="19f458d6-2ad2-42ce-abbb-d14d7785a5ad" type="audio" direction="output" />
-        <port name="out_14" uuid="8e3f7692-f300-47dd-a687-e7a63b0ba846" type="audio" direction="output" />
-        <port name="out_15" uuid="0c82ea4f-758f-4b90-bf57-8959bea15c85" type="audio" direction="output" />
-        <port name="out_16" uuid="e46fdc48-0a80-43f3-b404-410b75325a3f" type="audio" direction="output" />
-        <port name="out_17" uuid="b3864b79-2b9a-4b93-986f-cda701722408" type="audio" direction="output" />
-        <port name="out_18" uuid="7e75ff37-a5b8-45b7-bc55-054720a3b68d" type="audio" direction="output" />
-        <port name="out_19" uuid="3acea956-65ff-45a3-82b0-1ab0008e7f2a" type="audio" direction="output" />
-        <port name="out_20" uuid="175df254-00b1-45ec-b0cf-ef9eb1e15836" type="audio" direction="output" />
-        <port name="out_21" uuid="8d6a49b8-122c-475a-a733-36e89dc19bdc" type="audio" direction="output" />
-        <port name="out_22" uuid="fe8b7974-2f5b-4e9e-b119-7f4cf0b18a77" type="audio" direction="output" />
-        <port name="out_23" uuid="61b74856-0a03-45b8-b268-641e14ae41a9" type="audio" direction="output" />
-        <port name="out_24" uuid="0336fa92-9abc-4f04-858e-c9745f424bb9" type="audio" direction="output" />
+        <port name="in0" uuid="488b2419-c8a6-4999-b954-e4e0c10e15bc" type="midi" direction="input" />
+        <port name="in1" uuid="e2e49612-a055-4d19-96b7-584a6eaace1c" type="midi" direction="input" />
+        <port name="in2" uuid="f187db14-0e7f-4d0e-b730-bbc236374e2e" type="midi" direction="input" />
+        <port name="out0" uuid="9de2d75b-3cf9-4df7-b3c0-cd38e06988d1" type="midi" direction="output" />
+        <port name="out1" uuid="4e8f6890-9be4-450f-a310-9f58396a7d7e" type="midi" direction="output" />
+        <port name="out2" uuid="bf341c6d-033c-4b71-a208-96c6d08e8682" type="midi" direction="output" />
+        <port name="out3" uuid="07e2be7f-1a23-40f6-8450-b7dcb9f74c72" type="midi" direction="output" />
+      </ports>
+      <dict>
+        <key name="http://ladish.org/ns/canvas/x">1352.0</key>
+        <key name="http://ladish.org/ns/canvas/y">1437.0</key>
+      </dict>
+    </client>
+    <client name="ardour" uuid="4e8841c1-be20-445f-af75-145ec3413556" naming="app">
+      <ports>
+        <port name="MTC in" uuid="079487b8-b50c-4026-a45a-17fecfcd0ca7" type="midi" direction="input" />
+        <port name="LTC in" uuid="80c6459c-6b8e-4d26-91ba-5475e8c21694" type="audio" direction="input" />
+        <port name="MIDI Clock in" uuid="da70a82c-7bab-46af-a3f2-a4f9d475597d" type="midi" direction="input" />
+        <port name="LTC-Out" uuid="df624b61-b8ee-4c4c-bc87-2396b9cdc77d" type="audio" direction="output" />
+        <port name="Click/audio_out 1" uuid="8bc48cfe-5ad8-4bfd-b0b6-42c00e248952" type="audio" direction="output" />
+        <port name="Click/audio_out 2" uuid="96b6777c-da4c-4efd-afa4-efa371931557" type="audio" direction="output" />
+        <port name="Master/audio_in 1" uuid="fb32e21e-f732-4af3-92c9-65f1f0a9dea0" type="audio" direction="input" />
+        <port name="Master/audio_in 2" uuid="a57e3d98-c359-4633-8e10-172d3532f677" type="audio" direction="input" />
+        <port name="Master/audio_out 1" uuid="eb56d12e-a31b-4487-9d96-81cf96f5623f" type="audio" direction="output" />
+        <port name="Master/audio_out 2" uuid="eff0ce1b-2207-4123-b45a-c288e6cdde9a" type="audio" direction="output" />
+        <port name="MMC in" uuid="bf7b4c82-5080-4b92-8e01-958b998b553d" type="midi" direction="input" />
+        <port name="MMC out" uuid="cce0a539-7188-4bc6-a544-3fe6ed4fdc05" type="midi" direction="output" />
+        <port name="Scene in" uuid="9c96187e-207f-4507-9b3a-35c7b4a151de" type="midi" direction="input" />
+        <port name="Scene out" uuid="3b5cc880-e588-4885-b2dd-43aa798906a1" type="midi" direction="output" />
+        <port name="Virtual Keyboard" uuid="b0cfab97-4cca-495c-9ab3-681b243cfc69" type="midi" direction="output" />
+        <port name="MTC out" uuid="7da36479-3288-4c67-8243-3715e04e5d4d" type="midi" direction="output" />
+        <port name="MIDI Clock out" uuid="41c5fa7f-45b8-4681-a4e1-4546dbf1e4de" type="midi" direction="output" />
+        <port name="auditioner/audio_out 1" uuid="2aaa5b2a-fca7-47b9-9577-418a21b226e3" type="audio" direction="output" />
+        <port name="auditioner/audio_out 2" uuid="38ea5859-7d96-4d01-b9a3-7acc294b4b6e" type="audio" direction="output" />
+        <port name="auditioner/midi_out 1" uuid="0e128d33-7118-48d3-9580-ee8e26fd8c74" type="midi" direction="output" />
+        <port name="m1/midi_in 1" uuid="b94ee87f-2498-4cb3-a54a-82f749ae3b09" type="midi" direction="input" />
+        <port name="m1/midi_out 1" uuid="384b5244-ee8f-4145-bdff-33adb0c75dc9" type="midi" direction="output" />
+        <port name="m1/audio_out 1" uuid="f6ef5c78-b86e-442b-b2ef-dfa7ea728b33" type="audio" direction="output" />
+        <port name="m1/audio_out 2" uuid="5504f5d0-38cd-411a-945d-8eb3c8956c8f" type="audio" direction="output" />
+        <port name="m2/midi_in 1" uuid="d3529fdf-cdae-4062-b096-08da89da52e0" type="midi" direction="input" />
+        <port name="m2/midi_out 1" uuid="25e44266-d9c1-4712-b39c-9aef948644e2" type="midi" direction="output" />
+        <port name="m2/audio_out 1" uuid="d20438c6-29cc-4a05-a74a-3e7acda954ab" type="audio" direction="output" />
+        <port name="m2/audio_out 2" uuid="44253766-d223-4886-8248-5080fb275682" type="audio" direction="output" />
+        <port name="m3/midi_in 1" uuid="cd013a80-d8d5-4754-91e0-ba48a08217ae" type="midi" direction="input" />
+        <port name="m3/audio_out 1" uuid="1ff557e7-6b0a-4502-930b-c1e32a403131" type="audio" direction="output" />
+        <port name="m3/audio_out 2" uuid="9a7fa3e1-1a1e-4f78-a4a9-dfa3cbd0f974" type="audio" direction="output" />
+        <port name="m3/midi_out 1" uuid="6cff0a80-c44f-4ef1-9397-e9f06e3c4b32" type="midi" direction="output" />
+        <port name="m4/midi_in 1" uuid="d674bcd2-1a32-4307-b447-d692e2edc5c0" type="midi" direction="input" />
+        <port name="m4/audio_out 1" uuid="4e1884d7-e035-4f43-84e9-c7b1eca21761" type="audio" direction="output" />
+        <port name="m4/audio_out 2" uuid="53e1b3a3-6132-4b03-9402-49c2490b6ac0" type="audio" direction="output" />
+        <port name="m4/midi_out 1" uuid="82308a29-4145-4a86-aaed-9eca65c96ed6" type="midi" direction="output" />
       </ports>
     </client>
-    <client name="japa" uuid="0a898a74-e63f-40bf-b0f1-4c8ff3e03f58" naming="app">
+    <client name="PulseAudio JACK Sink-01" uuid="e3751dcb-e7bb-48c0-9d38-84ce9a3bf46a" naming="app">
       <ports>
-        <port name="in_1" uuid="1916c21f-4653-403c-bd9a-453908c0a653" type="audio" direction="input" />
-        <port name="in_2" uuid="fe77e4be-549c-4c74-ab02-f9b7bbeb3f62" type="audio" direction="input" />
-        <port name="in_3" uuid="4a3805ba-5c95-4699-9629-495087de4cf6" type="audio" direction="input" />
-        <port name="in_4" uuid="9faf2bfb-cab4-4c15-a3c3-f3a525d58697" type="audio" direction="input" />
-        <port name="white" uuid="abdbe5dc-ca3a-4d16-9157-6ccb120ba4c3" type="audio" direction="output" />
-        <port name="pink" uuid="c57a04b0-52f9-40c1-9f75-81c3100212c1" type="audio" direction="output" />
+        <port name="front-left" uuid="0c0364eb-e2b1-44d1-b259-02a4cfc09fdb" type="audio" direction="output" />
+        <port name="front-right" uuid="c1799de7-f1e6-44e7-a53c-65080c1af9c4" type="audio" direction="output" />
+      </ports>
+    </client>
+    <client name="PulseAudio JACK Source-01" uuid="d3a06e2c-8aea-41ff-b7e0-18dec3482cc2" naming="app">
+      <ports>
+        <port name="front-left" uuid="9cf8393a-1044-400b-a51d-e0922674fb47" type="audio" direction="input" />
+        <port name="front-right" uuid="82732da1-e49d-478f-aec7-80188b9e4cbf" type="audio" direction="input" />
+      </ports>
+    </client>
+    <client name="japa" uuid="01d65b36-8d3c-418a-9974-b3f4e9a9aee4" naming="app">
+      <ports>
+        <port name="in_1" uuid="0b29dcbd-82c1-4f8c-8a96-45c011f81151" type="audio" direction="input" />
+        <port name="in_2" uuid="633243ee-d343-494e-878a-c56045149f6b" type="audio" direction="input" />
+        <port name="in_3" uuid="34834ecf-67be-4849-857a-f87428983fb2" type="audio" direction="input" />
+        <port name="in_4" uuid="dd3f7e6d-0717-4d19-b69d-0ee2a3985a2e" type="audio" direction="input" />
+        <port name="white" uuid="16089f54-52e8-412e-9971-eae975ba3c0b" type="audio" direction="output" />
+        <port name="pink" uuid="b4d965b5-9a41-4fe6-bc95-d57e8b4a2263" type="audio" direction="output" />
       </ports>
     </client>
   </clients>
@@ -192,18 +246,32 @@ ladish Studio configuration.
     <connection port1="588c72eb-0575-4ec5-b783-c8d44c1177eb" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
     <connection port1="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" port2="c3530f68-0695-4663-8739-84ac42c20c27" />
     <connection port1="268740f6-f3ac-4e4f-b6ae-16a75e09b518" port2="07bb032a-8387-463c-befe-f19483cbaa63" />
-    <connection port1="dcf829be-a07b-4eff-b963-a3ac5e07ef8c" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
-    <connection port1="987fef1c-8e63-4127-b2c9-156da3898ce1" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
-    <connection port1="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" port2="c722a60b-73c7-47f9-965a-5cb08570f1a5" />
-    <connection port1="268740f6-f3ac-4e4f-b6ae-16a75e09b518" port2="cb395fd1-c4eb-43eb-802c-564f7f663a04" />
     <connection port1="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" port2="b6a772c1-bdc3-4605-9a23-56fd04c21633" />
     <connection port1="268740f6-f3ac-4e4f-b6ae-16a75e09b518" port2="c25f35b2-665f-45b6-99e0-84134a15767e" />
     <connection port1="d74d73bb-9099-4a23-811d-9af8eddab7b4" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
     <connection port1="7c691e01-93b4-4a4a-90ce-e00e185e89d6" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
-    <connection port1="d74d73bb-9099-4a23-811d-9af8eddab7b4" port2="1916c21f-4653-403c-bd9a-453908c0a653" />
-    <connection port1="7c691e01-93b4-4a4a-90ce-e00e185e89d6" port2="fe77e4be-549c-4c74-ab02-f9b7bbeb3f62" />
-    <connection port1="19f458d6-2ad2-42ce-abbb-d14d7785a5ad" port2="4a3805ba-5c95-4699-9629-495087de4cf6" />
-    <connection port1="8e3f7692-f300-47dd-a687-e7a63b0ba846" port2="9faf2bfb-cab4-4c15-a3c3-f3a525d58697" />
+    <connection port1="8bc48cfe-5ad8-4bfd-b0b6-42c00e248952" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+    <connection port1="96b6777c-da4c-4efd-afa4-efa371931557" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+    <connection port1="2aaa5b2a-fca7-47b9-9577-418a21b226e3" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+    <connection port1="38ea5859-7d96-4d01-b9a3-7acc294b4b6e" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+    <connection port1="eb56d12e-a31b-4487-9d96-81cf96f5623f" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+    <connection port1="eff0ce1b-2207-4123-b45a-c288e6cdde9a" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+    <connection port1="b0cfab97-4cca-495c-9ab3-681b243cfc69" port2="b94ee87f-2498-4cb3-a54a-82f749ae3b09" />
+    <connection port1="f6ef5c78-b86e-442b-b2ef-dfa7ea728b33" port2="fb32e21e-f732-4af3-92c9-65f1f0a9dea0" />
+    <connection port1="5504f5d0-38cd-411a-945d-8eb3c8956c8f" port2="a57e3d98-c359-4633-8e10-172d3532f677" />
+    <connection port1="b0cfab97-4cca-495c-9ab3-681b243cfc69" port2="d3529fdf-cdae-4062-b096-08da89da52e0" />
+    <connection port1="b0cfab97-4cca-495c-9ab3-681b243cfc69" port2="cd013a80-d8d5-4754-91e0-ba48a08217ae" />
+    <connection port1="b0cfab97-4cca-495c-9ab3-681b243cfc69" port2="d674bcd2-1a32-4307-b447-d692e2edc5c0" />
+    <connection port1="9de2d75b-3cf9-4df7-b3c0-cd38e06988d1" port2="b94ee87f-2498-4cb3-a54a-82f749ae3b09" />
+    <connection port1="4e8f6890-9be4-450f-a310-9f58396a7d7e" port2="d3529fdf-cdae-4062-b096-08da89da52e0" />
+    <connection port1="bf341c6d-033c-4b71-a208-96c6d08e8682" port2="cd013a80-d8d5-4754-91e0-ba48a08217ae" />
+    <connection port1="07e2be7f-1a23-40f6-8450-b7dcb9f74c72" port2="d674bcd2-1a32-4307-b447-d692e2edc5c0" />
+    <connection port1="0c0364eb-e2b1-44d1-b259-02a4cfc09fdb" port2="6fbaa934-ffaf-4b33-a007-bf39af794e98" />
+    <connection port1="c1799de7-f1e6-44e7-a53c-65080c1af9c4" port2="f484aeeb-7fa1-4080-a263-8e35db9e599b" />
+    <connection port1="f0ebb288-bfd7-495c-b15e-69cb6d5fac46" port2="9cf8393a-1044-400b-a51d-e0922674fb47" />
+    <connection port1="268740f6-f3ac-4e4f-b6ae-16a75e09b518" port2="82732da1-e49d-478f-aec7-80188b9e4cbf" />
+    <connection port1="d74d73bb-9099-4a23-811d-9af8eddab7b4" port2="0b29dcbd-82c1-4f8c-8a96-45c011f81151" />
+    <connection port1="7c691e01-93b4-4a4a-90ce-e00e185e89d6" port2="633243ee-d343-494e-878a-c56045149f6b" />
   </connections>
   <applications>
   </applications>

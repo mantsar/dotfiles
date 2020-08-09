@@ -63,6 +63,7 @@ s.latency = 0.3;
 	};
 	~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
 };
+~superdirt_midi_start = { ~dirt.soundLibrary.addMIDI(\m1, ~m1) };
 // ----
 ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
 [
@@ -92,6 +93,21 @@ ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } });
 		);
 		"Listening for messages from FoxDot".postln;
 	};
+};
+
+~midi_start = {|outports=4|
+	// MIDIClient.disposeClient;
+	if (MIDIClient.initialized.not) {
+		MIDIClient.init(outports:outports);
+		~m1 = MIDIOut(0);
+		~m1.latency = 0;
+		~m2 = MIDIOut(1);
+		~m2.latency = 0;
+		~m3 = MIDIOut(2);
+		~m3.latency = 0;
+		~m4 = MIDIOut(3);
+		~m4.latency = 0;
+	}
 };
 
 // Server functions ----------

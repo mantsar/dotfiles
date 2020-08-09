@@ -801,8 +801,8 @@ snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a 
 Trig`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
 endsnippet
 
-snippet "Tdelay(k)?" "Delays a trigger by a given time. Any triggers which arrive in the time between an input trigger and its delayed output, are ignored." wr
-Tdelay`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
+snippet "TDelay(k)?" "Delays a trigger by a given time. Any triggers which arrive in the time between an input trigger and its delayed output, are ignored." wr
+TDelay`!p snip.rv = rate(match)`(${1:sig}, dur:${2:0.1})
 endsnippet
 
 snippet "Latch(k)?" "Holds input signal value when triggered. Latch will output 0 until it receives its first trigger." wr
@@ -894,7 +894,7 @@ snippet BBandPass "Band Pass Filter. Similar to BPF" w
 BBandPass.ar(${1:${VISUAL:sig}}, ${2:freq}, bw:${3:1.0})
 endsnippet
 
-snippet BPeakEQ "Resonaate and boost provided freq. db - boost/cut the center frequency (in dBs)" w
+snippet BPeakEQ "Resonate and boost provided freq. db - boost/cut the center frequency (in dBs)" w
 BPeakEQ.ar(${1:${VISUAL:sig}}, ${2:1200}, rq:${3:1}, db:${4:1}.ampdb)
 endsnippet
 
@@ -903,7 +903,7 @@ BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:1}, db:${4:1}.ampdb)
 endsnippet
 
 snippet BLowShelf "Same as BHiShelf just impacts low freqs" w
-BHiShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:1}, db:${4:1}.ampdb)
+BLowShelf.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:1}, db:${4:1}.ampdb)
 endsnippet
 
 # https://www.youtube.com/watch?v=D5UClgX8gPc
@@ -1051,6 +1051,10 @@ snippet "Gendy5(k)?" "High pitched version" wr
 Gendy5`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
 endsnippet
 
+snippet "Convolution" "Real-time convolver. 3rd argument must be mutiple of 2." wr
+Convolution.ar(${1:in}, ${2:kernel}, ${3:512})
+endsnippet
+
 snippet Splay "Distribute UGens across stereo field. 1 is maximum spread, 0 is similar to Mix" w
 Splay.ar(${1:${VISUAL:sig}}, ${2:1}, center:${3:pan})
 endsnippet
@@ -1171,11 +1175,11 @@ snippet "InBus(k)?" "Has offset and clip argument which can be used with \wrap" 
 InBus`!p snip.rv = rate(match)`(${1:in}, ${2:2})
 endsnippet
 
-snippet SoundIn "Read input sound from microphone" w
-SoundIn.ar($1)
-endsnippet
-
 priority 10
+
+snippet SoundIn "Read audio from hardware inputs (microphone) or a JACK bus" w
+SoundIn.ar(${1:[0, 1]})
+endsnippet
 
 snippet "SendTrig(k)?" "Send a trigger message from the server back to the client. Usually OSC should be parsed with /tr prefix on s.addr" wr
 SendTrig`!p snip.rv = rate(match)`(${1:${VISUAL:sig}}, id:${2:0}, value:${3:0})
@@ -1779,12 +1783,9 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).mold(2);
 endsnippet
 
 snippet sd "Synth def skeleton" b
-SynthDef(\\${1:key}, {|out=0, o=0, j=0, freq=440, atk=0.01, sustain=15, rel=0.1, curve=\lin, pan=0, a=1|
-	var sig, env = EnvGen.kr(Env.linen(atk, sustain, rel, curve:curve), doneAction:2);
-	sig = $0;
-	sig = sig * env;
-	Out.ar(out, Pan2.ar(sig, pan) * a);
-}).add;
+~synthdef_factor.value(\\${1:key}, {|sig, freq, begin, env, atk, sustain$2|
+	$0
+});
 endsnippet
 
 snippet sdef0 "Synth def skeleton for mass producing synths with different envelopes" b
@@ -1859,6 +1860,7 @@ Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
 endsnippet
 
 # Ardour
+
 snippet ae "Puts transport in play mode" b
 a.play;
 endsnippet
@@ -1873,4 +1875,10 @@ endsnippet
 
 snippet ar "Toggles master record enable" b
 a.rec_enable_toggle;
+endsnippet
+
+# MIDI
+
+snippet mpb "MIDI Pbind" w
+Pbind(\type, \midi, \midiout, ~m${1:1}, \\$2, $3, ${VISUAL})
 endsnippet

@@ -58,3 +58,5 @@ curve
 atk
 lag
 rate
+mix
+damp
