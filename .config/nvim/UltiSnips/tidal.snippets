@@ -32,16 +32,28 @@ endsnippet
 
 # Functions
 
+snippet fa "Spread chords of note numbers over time" w
+arpg "$1" $ 
+endsnippet
+
 snippet fj "" w
-jux ($1) $
+jux ($1) $ 
+endsnippet
+
+snippet fr "Generates numbers from 0 to n-1 inclusive" w
+(run $1)
+endsnippet
+
+snippet fo "Superimpose and shift in time" w
+off $1 ($2) $ 
 endsnippet
 
 snippet fs "" w
-struct "$1" $
+struct "$1" $ 
 endsnippet
 
 snippet fm "" w
-mask "$1" $
+mask "$1" $ 
 endsnippet
 
 snippet ffsp "" w
@@ -52,7 +64,17 @@ snippet fsp "" w
 spread ($) [$1] $ 
 endsnippet
 
-snippet fspc "" w
+# Random functions
+
+snippet rs "" w
+sometimes ($1) $ 
+endsnippet
+
+snippet rsc "" w
+someCyclesBy $1 ($2) $ 
+endsnippet
+
+snippet rsp "" w
 spreadChoose ($) [$1] $ 
 endsnippet
 
@@ -64,6 +86,10 @@ endsnippet
 
 snippet s "" w
 s "$1" $0
+endsnippet
+
+snippet cc "1 - 16. 1 results in a drastic bit of reduction" w
+crush "$1"
 endsnippet
 
 # Patterns

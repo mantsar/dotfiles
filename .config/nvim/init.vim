@@ -889,11 +889,15 @@ endfunction
 
 " Faust
 call minpac#add('gmoe/vim-faust')
+augroup faust_au
+	autocmd!
+	" autocmd FileType faust :execute "StartAsync FaustLive " . expand("%:p")
+	autocmd FileType faust nnoremap <silent> <buffer> <M-f> :execute "StartAsync FaustLive " . expand("%:p")<cr>
+	autocmd FileType faust nnoremap <silent> <leader><leader>] :execute "! ./f2s " . expand("%:t") . "; faust2lv2 " . expand("%:p")<cr>
+augroup END
 " }}}2
 
 " Misc {{{2
-
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
-
 " }}}2
