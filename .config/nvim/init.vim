@@ -899,7 +899,7 @@ endfunction
 augroup faust_au
 	autocmd!
 	" autocmd FileType faust :execute "StartAsync FaustLive " . expand("%:p")
-	autocmd FileType faust nnoremap <silent> <buffer> <M-e> :execute "StartAsync FaustLive " . expand("%:p")<cr>
+	autocmd FileType faust nnoremap <silent> <buffer> <M-e> :execute "StartAsync pgrep FaustLive \|\| FaustLive " . expand("%:p")<cr>
 	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ./f2s " . expand("%:t") . "; faust2lv2 " . expand("%:p")<cr>
 augroup END
 " }}}2

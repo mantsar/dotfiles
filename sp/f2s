@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pgrep FaustLive && exit 0
+# pgrep FaustLive && exit 0
 
 faust2supercollider $1
 
