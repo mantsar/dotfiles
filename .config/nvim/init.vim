@@ -691,6 +691,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
 	" autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
 	" autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
 	" Ardour
@@ -889,11 +890,17 @@ endfunction
 
 " Faust
 call minpac#add('gmoe/vim-faust')
+
+function! Faust_init()
+	execute "tabe " . expand("%:r") . ".dsp"
+	:normal G
+endfunction
+
 augroup faust_au
 	autocmd!
 	" autocmd FileType faust :execute "StartAsync FaustLive " . expand("%:p")
-	autocmd FileType faust nnoremap <silent> <buffer> <M-f> :execute "StartAsync FaustLive " . expand("%:p")<cr>
-	autocmd FileType faust nnoremap <silent> <leader><leader>] :execute "! ./f2s " . expand("%:t") . "; faust2lv2 " . expand("%:p")<cr>
+	autocmd FileType faust nnoremap <silent> <buffer> <M-e> :execute "StartAsync FaustLive " . expand("%:p")<cr>
+	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ./f2s " . expand("%:t") . "; faust2lv2 " . expand("%:p")<cr>
 augroup END
 " }}}2
 
