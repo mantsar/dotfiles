@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pgrep FaustLive && exit 0
+
+faust2supercollider $1
+
+mv "$(basename $1 .dsp).so" ~/.config/SuperCollider/Extensions/Faust/
+mv "$(basename $1 .dsp).sc" ~/.config/SuperCollider/Extensions/Faust/
