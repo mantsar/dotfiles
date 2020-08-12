@@ -1,8 +1,20 @@
 #!/bin/bash
 
-# pgrep FaustLive && exit 0
+base="$(basename $1 .dsp)"
 
 faust2supercollider $1
+mv "${base}.so" ~/.config/SuperCollider/Extensions/Faust/
+mv "${base}.sc" ~/.config/SuperCollider/Extensions/Faust/
 
-mv "$(basename $1 .dsp).so" ~/.config/SuperCollider/Extensions/Faust/
-mv "$(basename $1 .dsp).sc" ~/.config/SuperCollider/Extensions/Faust/
+faust2lv2 $1
+
+lv2dir="$HOME/.config/SuperCollider/synthdef/${base}.lv2"
+
+if [ -d $lv2dir ]; then
+	rsync -a "${base}.lv2/" "${lv2dir}/"
+	rm -r "a.lv2"
+else
+	mv "${base}.lv2" $lv2dir
+fi
+
+cp $1 ~/.config/SuperCollider/synthdef/
