@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+# case $BLOCK_BUTTON in
+# 	1) myredshift
+# esac
+
+if pgrep -x redshift >/dev/null 2>/dev/null
+then
+	echo 1
+else
+	echo 0
+fi

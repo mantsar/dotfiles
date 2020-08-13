@@ -1,0 +1,3 @@
+#!/bin/sh
+
+scrot -q 100 ~/Pictures/scrot/%b%d::%H%M%S.png

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if pgrep -x redshift
+then
+	pkill -x redshift
+else
+	redshift -l 55:25
+fi

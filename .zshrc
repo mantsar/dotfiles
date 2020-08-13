@@ -137,7 +137,6 @@ alias \
 	lst="ls -laht | grep '^-' | head" \
 	lsa='ls -lah' \
 	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \
-	rs="redshift -l 55:23" \
 	ta="tmux attach -t " \
 	tk="tmux kill-session -t " \
 	tl="tmux ls" \
