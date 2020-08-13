@@ -62,11 +62,11 @@
       <Binding key="Tertiary-f" action="Editor/toggle-stationary-playhead"/>
       <Binding key="Tertiary-l" action="Editor/show-editor-list"/>
       <Binding key="Tertiary-s" action="Editor/ToggleSummary"/>
-      <Binding key="Tertiary-v" action="Editor/select-all-objects"/>
       <Binding key="Tertiary-z" action="Editor/toggle-zoom"/>
       <Binding key="Primary-slash" action="Region/set-fade-in-length"/>
       <Binding key="Primary-2" action="Editor/cycle-edit-point-with-marker"/>
       <Binding key="Primary-backslash" action="Region/set-fade-out-length"/>
+      <Binding key="Primary-a" action="Editor/select-all-objects"/>
       <Binding key="Primary-c" action="Editor/editor-copy"/>
       <Binding key="Primary-d" action="Editor/select-all-in-punch-range"/>
       <Binding key="Primary-f" action="Editor/toggle-follow-playhead"/>
@@ -138,6 +138,7 @@
       <Binding key="space" action="Transport/ToggleRoll"/>
       <Binding key="comma" action="Common/start-range"/>
       <Binding key="period" action="Common/finish-range"/>
+      <Binding key="0" action="Transport/alternate-GotoStart"/>
       <Binding key="7" action="Transport/ToggleAutoReturn"/>
       <Binding key="8" action="Transport/TogglePunch"/>
       <Binding key="grave" action="Transport/ToggleClick"/>
@@ -173,7 +174,6 @@
       <Binding key="Primary-3" action="Transport/ToggleFollowEdits"/>
       <Binding key="Primary-7" action="Transport/ToggleAutoPlay"/>
       <Binding key="Primary-grave" action="MIDI/panic"/>
-      <Binding key="Primary-a" action="Transport/alternate-GotoStart"/>
       <Binding key="Primary-e" action="Transport/GotoEnd"/>
       <Binding key="Primary-i" action="Common/addExistingAudioFiles"/>
       <Binding key="Primary-m" action="Monitor Section/monitor-cut-all"/>
@@ -365,6 +365,10 @@
       <Binding key="BackSpace" action="ProcessorMenu/backspace"/>
       <Binding key="Delete" action="ProcessorMenu/delete"/>
     </Press>
+    <Release/>
+  </Bindings>
+  <Bindings name="editor-mouse">
+    <Press/>
     <Release/>
   </Bindings>
   <Bindings name="editor-mouse">
