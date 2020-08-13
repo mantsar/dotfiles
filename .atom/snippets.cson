@@ -1,0 +1,36 @@
+'.source.js':
+	'console.log':
+		'prefix': 'log'
+		'body': 'console.log(${1:"crash"});$2'
+
+	'out':
+		'prefix': 'o'
+		'body': 'out()$0'
+
+	'osc':
+		'prefix': 'uo'
+		'body': 'osc(${1:100}).$0'
+
+	'perlin noise':
+		'prefix': 'un'
+		'body': 'noise(${1:10}).$0'
+
+	'voronai':
+		'prefix': 'uv'
+		'body': 'voronoi(${1:10}).$0'
+
+	'shape':
+		'prefix': 'us'
+		'body': 'shape(${2:10}).$0'
+
+	'thresh':
+		'prefix': 'jt'
+		'body': 'thresh().$0'
+		
+	'kaleid':
+		'prefix': 'jk'
+		'body': 'kaleid(${1:3}).$0'
+
+	'scale':
+		'prefix': 'js'
+		'body': 'scale(${1:0.01}).$0'

@@ -1,0 +1,14 @@
+"atom-text-editor":
+  "ctrl-;": "command-palette:toggle"
+  "alt-a": "atom-hydra:toggle"
+  "alt-j": "atom-hydra:evalLine"
+  "alt-i": "atom-hydra:evalCode"
+  'ctrl-w': 'editor:delete-to-beginning-of-word'
+  'ctrl-a': 'editor:move-to-beginning-of-line'
+  'ctrl-e': 'editor:move-to-end-of-line'
+  'ctrl-h': 'core:backspace'
+  'ctrl-f': 'core:move-right'
+
+'body atom-text-editor.autocomplete-active':
+  'ctrl-p': 'autocomplete-plus:move-up'
+  'ctrl-n': 'autocomplete-plus:move-down'

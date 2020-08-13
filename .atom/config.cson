@@ -1,0 +1,14 @@
+"*":
+  "autocomplete-plus":
+    useCoreMovementCommands: false
+  core:
+    autoHideMenuBar: true
+    telemetryConsent: "no"
+  editor:
+    fontSize: 15
+  "exception-reporting":
+    userId: "0757d43a-dfad-49c4-94bf-4a20fd6d5403"
+  "vim-mode-plus":
+    useClipboardAsDefaultRegister: true
+  welcome:
+    showOnStartup: false
