@@ -6,8 +6,8 @@ c.scrolling.smooth = True
 c.editor.command = ['termite', '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
 
 # Bindings
-config.bind('<Ctrl-s>', 'open-editor', mode='insert')
-config.bind('<Ctrl-s>', 'open-editor', mode='normal')
+config.bind('<Alt-e>', 'open-editor', mode='insert')
+config.bind('<Alt-e>', 'open-editor', mode='normal')
 config.bind('f', 'hint all current')
 config.bind('pp', 'open --tab {clipboard}')
 config.bind('pP', 'open {clipboard}')

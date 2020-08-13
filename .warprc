@@ -1,0 +1,5 @@
+slog:/var/log/shiny-server
+c:~/.config
+s:~/.scripts
+sp:~/.config/SuperCollider
+l:~/projects/ShinyApps/lsmu
