@@ -1,0 +1,12 @@
+[options]
+font = Ubuntu Mono 11
+scrollback_lines = 10000
+
+[colors]
+
+# 20% background transparency (requires a compositor)
+background = rgba(63, 63, 63, 0.9)
+
+[hints]
+
+# vim: ft=dosini cms=#%s
