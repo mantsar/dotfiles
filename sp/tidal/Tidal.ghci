@@ -30,4 +30,5 @@ let detune_prob = pF "detune_prob"
     ftrig_ratio = pF "ftrig_ratio"
     datk = pF "datk"
     drel = pF "drel"
+    pregain = pF "pregain"
 :}

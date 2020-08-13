@@ -658,6 +658,10 @@ snippet do "Similar to python for loop" w
 $1.do {|v, i| $2 }
 endsnippet
 
+snippet di "Similar to python for loop" w
+$1.do { $2 }
+endsnippet
+
 snippet cl "Like do but alose return resulting array" w
 $1.collect {|v, i| $2 }
 endsnippet
@@ -702,9 +706,11 @@ $1 = case
 endsnippet
 
 snippet ro "Routine. Same as generator in python" w
-Routine { 
-	${VISUAL}$1 
-}.play;
+Routine { ${VISUAL}$1 };
+endsnippet
+
+snippet rop "Routine and play" w
+Routine { ${VISUAL}$1 }.play;
 endsnippet
 
 snippet rs "For synth testing" w
@@ -795,6 +801,14 @@ endsnippet
 
 snippet "Dust2(k)?" "Like Dust, but outputs -1/1" wr
 Dust2`!p snip.rv = rate(match)`(${1:freq})
+endsnippet
+
+snippet RandID "Set the synth's random generator ID" w
+RandID.kr(${1:0})
+endsnippet
+
+snippet "RandSeed(k)?" "Sets the synth random generator seed" w
+RandSeed`!p snip.rv = rate(match)`(${1:0}, ${2:56789})
 endsnippet
 
 snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a gate some specific duration or reusing Dust random values" wr
@@ -931,11 +945,11 @@ snippet GVerb "Cooler reverb, but harded to use" w
 GVerb.ar(${1:${VISUAL:sig}}, roomsize:${1:10}, revtime:${2:3}, damping:${3:0.5}, inputbw:${4:0.5}, spread:${5:15}, drylevel:${6:1}, earlyreflevel:${7:0.7})
 endsnippet
 
-snippet DelayN "Most basic delay with cubic interpolation" w
+snippet DelayN "Most basic delay (literal) with no interpolation" w
 DelayN.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[1])*2`, ${1:0.2})
 endsnippet
 
-snippet DelayL "Most basic delay with cubic interpolation" w
+snippet DelayL "Most basic delay with linear interpolation" w
 DelayL.ar(${1:${VISUAL:sig}}, `!p snip.rv = float(t[1])*2`, ${1:0.2})
 endsnippet
 
@@ -1234,7 +1248,7 @@ Ringz.ar(${1:${VISUAL:sig}}, ${2:freq}, decaytime:${3:1})
 endsnippet
 
 snippet Resonz "Resonant filter similar to Ringz. bwr arguments is like a bandwidth" w
-Ringz.ar(${1:${VISUAL:sig}}, ${2:freq}, bwr:${3:1})
+Resonz.ar(${1:${VISUAL:sig}}, ${2:freq}, bwr:${3:1})
 endsnippet
 
 snippet Lag "Exponential lag. Smoothens out curves/signals. Actually kinda similar to Decay, but safe for continous signals" w

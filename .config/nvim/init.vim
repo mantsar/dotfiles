@@ -64,6 +64,7 @@ let g:mapleader = "\<Space>" "Map leader key to space
 nnoremap <M-w> :wa<cr>
 nnoremap <M-q> :qa<cr>
 nnoremap <M-d> mmyyp`mj
+inoremap <M-cr> <cr><cr><up><tab>
 " Additional bindings to leave insert mode
 inoremap jw <esc>
 inoremap wj <esc>
@@ -524,7 +525,7 @@ nmap gx <Plug>(neoterm-repl-send)
 " Send selected contents in visual mode.
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
-nnoremap <M-cr> :Tnew<cr>
+" nnoremap <M-cr> :Tnew<cr>
 call minpac#add('kevinhwang91/rnvimr') " Ranger integration
 nnoremap <silent> <leader>r :RnvimrToggle<cr>
 " Make Ranger to be hidden after picking a file
