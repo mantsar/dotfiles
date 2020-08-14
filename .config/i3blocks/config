@@ -41,6 +41,10 @@ label=📅
 command=clock
 interval=30
 
+[redshift]
+command=redshift_statusbar
+interval=10
+
 [iface]
 label=🌐
 #instance=wlan0

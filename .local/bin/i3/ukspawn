@@ -1,0 +1,14 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit
+
+script=$1
+shift
+if xwininfo -tree -root | grep "(\"unkillable_$script\" ";
+then
+	echo "Window detected."
+	i3-msg "[instance=\"unkillable_$script\"] focus" 
+else
+	echo "Window not detected... spawning."
+	i3 "exec --no-startup-id $TERMINAL --name unkillable_$script $@ -e $script"
+fi

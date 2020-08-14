@@ -2,6 +2,7 @@
 setopt autocd # Automatically cd into typed directory.
 setopt extended_glob
 stty stop undef # Disable ctrl-s to freeze terminal.
+setxkbmap -option ctrl:nocaps
 
 # Prompt
 autoload -U promptinit;
