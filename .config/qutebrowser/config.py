@@ -1,6 +1,7 @@
 config.load_autoconfig()
 
 # General options
+c.downloads.location.directory = "~/Downloads"
 c.tabs.close_mouse_button = 'right'
 c.scrolling.smooth = True
 c.editor.command = ['termite', '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
@@ -59,6 +60,9 @@ config.bind('B', 'set-cmd-text -s :quickmark-load')
 config.bind(',m', 'spawn umpv {url}')
 config.bind(',M', 'hint links spawn umpv {hint-url}')
 config.bind(';M', 'hint --rapid links spawn umpv {hint-url}')
+
+config.bind(",a", "spawn --userscript youtubedl_mp3")
+config.bind(",A", "hint links userscript youtubedl_mp3")
 
 # UI
 c.tabs.padding = {'top': 2, 'bottom': 2, 'left': 5, 'right': 5}

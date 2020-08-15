@@ -119,7 +119,7 @@ augroup general
 	au BufEnter *.txt if &buftype == 'help' | noremap <buffer> q :q<cr> | endif
 	"Open help window vertically
 	au BufEnter *.txt if &buftype == 'help' | wincmd L | endif
-	"Turn off annoying auto commenting on autocmd, because it keeps reseting
+	" Turn off annoying auto commenting on autocmd, because it keeps reseting
 	" autocmd FileType vim,conf set formatoptions-=cro " Does not work...
 augroup END
 
@@ -137,8 +137,8 @@ augroup END
 augroup rmode
 	autocmd!
 	autocmd FileType r setlocal expandtab "Use spaces for tabs
-	autocmd FileType r setlocal inoremap <M-=> <-
-	autocmd FileType r setlocal inoremap <M--> %>%
+	autocmd FileType r inoremap <buffer> <M--> <-
+	autocmd FileType r inoremap <buffer> <M-=> %>%
 augroup END
 
 augroup pymode
@@ -909,3 +909,21 @@ augroup END
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
 " }}}2
+
+" lsp
+" call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
+" packadd nvim-lsp
+
+" nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+" install.packages("languageserver")
+" lua << EOF
+" require'nvim_lsp'.r_language_server.setup{}
+" EOF
