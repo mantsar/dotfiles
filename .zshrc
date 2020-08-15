@@ -143,6 +143,24 @@ alias \
 	tl="tmux ls" \
 	tn="tmux new -s "
 
+# Directories
+alias \
+	c="$HOME/.config" \
+	dw="$HOME/Downloads" \
+	h="$HOME" \
+	m="$HOME/Music" \
+	pp="$HOME/Pictures" \
+	s="$HOME/.local/bin" \
+	vv="$HOME/Videos"
+
+# Files
+alias \
+	cfz="$EDITOR $HOME/.zshrc" \
+	cfv="$EDITOR $HOME/.config/nvim/init.vim" \
+	cft="$EDITOR $HOME/.tmux.conf" \
+	cfi="$EDITOR $HOME/.config/i3/config" \
+	cfb="$EDITOR $HOME/.config/i3blocks/config"
+
 # Load plugins. Should be last.
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # bindkey '^f' autosuggest-accept
