@@ -411,6 +411,10 @@ endsnippet
 
 # Randomness
 
+snippet randSeed "Set seed for any sc random acton which will be taken" 
+thisThread.randSeed = $0
+endsnippet
+
 snippet pw "Random values with uniform distribution" w
 Pwhite(${1:0.0}, ${2:1.0}, ${3:inf})
 endsnippet
@@ -666,6 +670,10 @@ snippet cl "Like do but alose return resulting array" w
 $1.collect {|v, i| $2 }
 endsnippet
 
+snippet ci "" w
+$1.collect { $2 }
+endsnippet
+
 snippet ls "New empty List" w
 List[${VISUAL}$1]
 endsnippet
@@ -808,7 +816,7 @@ RandID.kr(${1:0})
 endsnippet
 
 snippet "RandSeed(k)?" "Sets the synth random generator seed" w
-RandSeed`!p snip.rv = rate(match)`(${1:0}, ${2:56789})
+RandSeed`!p snip.rv = rate(match)`(${1:0}, ${2:2})
 endsnippet
 
 snippet "Trig(k)?" "Timed trigger. Can be used for various trick like holding a gate some specific duration or reusing Dust random values" wr
@@ -1239,7 +1247,7 @@ snippet Compander "Compressor. Thresh between 0 and 1. SlopeAbove says compress 
 Compander.ar(${1:sig}, $1, thresh:${3:0.5}, slopeAbove:${4:0.5})
 endsnippet
 
-snippet OnePole "Feedback: out(i) = ((1 - abs(coef)) * in(i)) + (coef * out(i-1)). Larger coef smoother the wave" w
+snippet OnePole "Feedback: out(i) = ((1 - abs(coef)) * in(i)) + (coef * out(i-1)). Larger coef smoother the wave -/+1" w
 OnePole.ar(${1:${VISUAL:sig}}, coef:${2:0.5})
 endsnippet
 
@@ -1892,7 +1900,11 @@ a.rec_enable_toggle;
 endsnippet
 
 # MIDI
-
 snippet mpb "MIDI Pbind" w
 Pbind(\type, \midi, \midiout, ~m${1:1}, \\$2, $3, ${VISUAL})
+endsnippet
+
+# FAUST
+snippet Faust "UGen compiled with Faust" w
+Faust$1.ar($2)
 endsnippet

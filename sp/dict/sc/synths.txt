@@ -34,3 +34,7 @@ codrum
 codrumep
 codrumes
 codrumel
+hypnogabber
+hypnogabberep
+hypnogabberes
+hypnogabberel

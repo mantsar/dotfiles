@@ -151,7 +151,8 @@ alias \
 	m="$HOME/Music" \
 	pp="$HOME/Pictures" \
 	s="$HOME/.local/bin" \
-	vv="$HOME/Videos"
+	vv="$HOME/Videos" \
+	scf="$HOME/.config/SuperCollider/Extensions/Faust"
 
 # Files
 alias \
