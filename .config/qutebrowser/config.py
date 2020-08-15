@@ -6,6 +6,23 @@ c.tabs.close_mouse_button = 'right'
 c.scrolling.smooth = True
 c.editor.command = ['termite', '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
 
+
+# UI
+# Colorscheme
+import dracula.draw
+
+# Load existing settings made via :set
+config.load_autoconfig()
+
+dracula.draw.blood(c, {
+    'spacing': {
+        'vertical': 6,
+        'horizontal': 8
+    }
+})
+c.qt.args = ["blink-settings=darkMode=4,darkModeImagePolicy=0"]
+c.colors.webpage.prefers_color_scheme_dark = True
+
 # Bindings
 config.bind('<Alt-e>', 'open-editor', mode='insert')
 config.bind('<Alt-e>', 'open-editor', mode='normal')
