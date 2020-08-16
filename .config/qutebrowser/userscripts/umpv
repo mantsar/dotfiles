@@ -75,9 +75,8 @@ if sock:
         sock.send(("raw loadfile " + f + " append\n").encode("utf-8"))
 else:
     # Let mpv recreate socket if it doesn't already exist.
-
     opts = (os.getenv("MPV") or "mpv").split()
-    opts.extend(["--no-terminal", "--force-window", "--input-ipc-server=" + SOCK,
+    opts.extend(["--no-terminal", "--force-window=immediate", "--input-ipc-server=" + SOCK,
                  "--"])
     opts.extend(files)
 
