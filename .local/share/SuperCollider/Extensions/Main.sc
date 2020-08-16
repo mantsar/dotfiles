@@ -1,1 +1,1 @@
-../synthdefs/Main.sc
+/home/mantas/.config/SuperCollider/synthdef/Main.sc
