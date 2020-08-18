@@ -75,7 +75,7 @@ snippet v "Global variable" b
 ~$1 = $2;
 endsnippet
 
-snippet k "Named control style argument" w
+snippet c "Named control style argument" w
 \\$1.kr($2)
 endsnippet
 
@@ -83,7 +83,7 @@ snippet a "Named control style argument" w
 \\$1.ar($2)
 endsnippet
 
-snippet kk "Named control style argument" w
+snippet cc "Named control style argument" w
 \\$1.kr
 endsnippet
 
@@ -451,9 +451,9 @@ snippet .s "Preserve values from the output stream that pass the Boolean test; d
 ${VISUAL}.select {|e| $1}
 endsnippet
 
-snippet .r "Discard values from the output stream that pass the test; return the rest to the user" i
-${VISUAL}.reject {|e| $1}
-endsnippet
+# snippet .r "Discard values from the output stream that pass the test; return the rest to the user" i
+# ${VISUAL}.reject {|e| $1}
+# endsnippet
 
 snippet psel "Filters values returned by a source pattern. Same as .select method" w
 Pselect({|v| $1}, ${VISUAL}$2)
@@ -640,7 +640,7 @@ snippet eadsr "Attack decay sustain (level) release. 3rd argument sustainLevel i
 Env.adsr(${1:atk}, ${2:decay}, ${3:1}, ${4:rel}, ${5:peak}, curve:${6:curve})
 endsnippet
 
-### SCLANG FLOW STRUCTURES AND FUNCTIONS
+# SCLANG FLOW STRUCTURES AND FUNCTIONS
 
 snippet lc "Routine comprehension skeleton" w
 {: $1, x <- $2 }
@@ -991,6 +991,24 @@ endsnippet
 
 snippet Disintegrator "Adds grit to the sound. Second argument lower values distorts sound" w
 Disintegrator.ar(sig, ${1:0.5}, ${2:0.7})
+endsnippet
+
+# Fourier FFT
+
+snippet FFT "Fast Fourier Transform" w
+FFT(LocalBuf(${1:2048}!2, 2), ${2:${VISUAL:sig}})
+endsnippet
+
+snippet IFFT "Inverse FFT" w
+IFFT(${1:${VISUAL:sig}})
+endsnippet
+
+snippet PV_MagAbove "Passes only bins whose magnitude is above a threshold" w
+PV_MagAbove(${1:${VISUAL:sig}}, ${2:0})
+endsnippet
+
+snippet PV_RectComb "Makes a series of gaps in a spectrum" w
+PV_RectComb(${1:${VISUAL:sig}}, ${2:8}, ${3:phase}, ${4:width})
 endsnippet
 
 snippet "Decay(k)?" "Exponentialy lower amplitude of burst signal. Similar to lag. Good on short burst signals like Impulse" wr
@@ -1376,7 +1394,13 @@ snippet dw "Return numbers in continous range between lo and hi" w
 Dwhite(${1:0.0}, ${2:1.0}, ${3:inf})
 endsnippet
 
-## Server functions
+# Pseudo UGens
+
+snippet Pad "Smooth pad" w
+Pad.ar(${1:440})
+endsnippet
+
+# Server functions
 
 snippet rec "Write audio to a hardisk" b
 s.record("./songs/temp.wav");
@@ -1907,4 +1931,35 @@ endsnippet
 # FAUST
 snippet Faust "UGen compiled with Faust" w
 Faust$1.ar($2)
+endsnippet
+
+priority 50 
+
+snippet .r "range" i
+${VISUAL}.range(${1:0}, ${2:1})
+endsnippet
+
+# Steno
+snippet kf "Description" w
+k.quelle(\\${1:a}, { $2!2 });
+endsnippet
+
+snippet kif "Description" w
+k.filter(\\${1:b}, {|sig| $2 });
+endsnippet
+
+snippet kk "Description" w
+k.("$1");
+endsnippet
+
+snippet k "Description" w
+--$1
+endsnippet
+
+snippet kv "Description" w
+k.value;
+endsnippet
+
+snippet kc "Description" w
+k.clear.pop;
 endsnippet

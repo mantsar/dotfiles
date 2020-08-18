@@ -651,6 +651,7 @@ augroup sc_au
 	autocmd VimEnter *.scd SCNvimStatusLine
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/startup.scd
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/synthdef/synth_def.scd
+	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/synthdef/Main.sc
 	"mappings
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd imap <M-e> <C-o><Plug>(scnvim-send-block)

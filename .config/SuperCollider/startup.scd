@@ -39,40 +39,37 @@ s.latency = 0.3;
 		~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
 		~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12];
 		~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12];
-		~dirt_orbit_filter = {|key, orbit, bus| 
-			orbit.outBus = bus;
+		~dirt_orbit_buses = {
+			~d.do { |v, i|
+				if (v.outBus == 0) { 
+					"--- ~d% inactive \n".postf(i+1);
+				} {
+					"+++ ~d% active \n".postf(i+1);
+				}
+			};
+			nil
+		};
+		~toggle_dirt_orbit_bus = {|orbit, bus| 
+			if (orbit.outBus == 0) { 
+				orbit.outBus = bus;
+				"activated\n\n".postln;
+			} { 
+				orbit.outBus = 0;
+				"inactivated\n\n".postln;
+			};
+			~dirt_orbit_buses.();
+		};
+		~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
+		~superdirt_midi_start = { ~dirt.soundLibrary.addMIDI(\m1, ~m1) };
+		~dirt_orbit_filter = { |key, orbit, bus| 
+			// orbit.outBus = bus;
 			Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
 		};
-		~dirt_orbit_buses = {~d.do {|v, i|
-			if (v.outBus == 0) { 
-				"--- ~d% inactive \n".postf(i+1);
-			} {
-				"+++ ~d% active \n".postf(i+1);
-			}
+		[~d, ~b].flop.do {|v, i|
+			~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1])
 		};
-		nil
+		// ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
 	};
-	~toggle_dirt_orbit_bus = {|orbit, bus| 
-		if (orbit.outBus == 0) { 
-			orbit.outBus = bus;
-			"activated\n\n".postln;
-		} { 
-			orbit.outBus = 0;
-			"inactivated\n\n".postln;
-		};
-		~dirt_orbit_buses.();
-	};
-	~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
-};
-~superdirt_midi_start = { ~dirt.soundLibrary.addMIDI(\m1, ~m1) };
-// ----
-ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
-[
-	~d,
-	~b,
-].flop.do {|v, i|
-	~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1]);
-};
 };
 
 ~foxdot_start = {
@@ -546,6 +543,9 @@ s.waitForBoot({
 	e = (); // dict for holding effects
 	b = (); // dict for holding buses
 	t = TempoClock.default;
+	// Steno
+	k = Steno.push;
+	DiffString.tempFilePath = "~/temp";
 	StageLimiter.activate(2);
 	"Setup done".postln;
 });
@@ -564,3 +564,4 @@ s.waitForBoot({
 // Quarks.install("Vowel")
 // Quarks.install("XML")
 // Quarks.install("wslib")
+// Quarks.install("Steno");
