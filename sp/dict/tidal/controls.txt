@@ -60,3 +60,6 @@ lag
 rate
 mix
 damp
+ftrig
+trig
+trigd

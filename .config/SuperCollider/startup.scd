@@ -61,13 +61,13 @@ s.latency = 0.3;
 		};
 		~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
 		~superdirt_midi_start = { ~dirt.soundLibrary.addMIDI(\m1, ~m1) };
-		~dirt_orbit_filter = { |key, orbit, bus| 
+		// ~dirt_orbit_filter = { |key, orbit, bus| 
 			// orbit.outBus = bus;
-			Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
-		};
-		[~d, ~b].flop.do {|v, i|
-			~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1])
-		};
+			// Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
+		// };
+		// [~d, ~b].flop.do {|v, i|
+			// ~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1])
+		// };
 		// ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
 	};
 };
@@ -544,8 +544,8 @@ s.waitForBoot({
 	b = (); // dict for holding buses
 	t = TempoClock.default;
 	// Steno
-	k = Steno.push;
-	DiffString.tempFilePath = "~/temp";
+	k = Steno.new;
+	DiffString.tempFilePath = "~/sp/temp";
 	StageLimiter.activate(2);
 	"Setup done".postln;
 });
