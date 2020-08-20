@@ -107,3 +107,13 @@ cat file.vcf | awk '$1 ~ /^#/ {print $0;next} {print $0 | "sort -k1,1 -k2,2n"}' 
 % network, ip
 # local IP address
 hostname -i
+
+% slurm
+# Create interactive slurm session
+srun -J "my_job" -n 1 --pty bash -i
+
+% hard drive, storage 
+# List all storage devices in a tree-like format
+lsblk
+# parition and mount disk
+mkfs.ext4 /dev/sdz100; sudo mount /dev/sdbz100 /mnt/dir
