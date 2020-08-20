@@ -45,6 +45,8 @@ pacman -Qs
 pacman -Qe | less
 # List package files
 pacman -Ql 
+# Synchronize databases and update packages
+sudo pacman -Syyu
 
 % music, mpd, mpc
 # Show info about the currently playing song
@@ -78,4 +80,30 @@ passmenu
 
 % audio, music
 # Check duration of an audio file
-ffmpeg -i <file> 2>%1 | grep Duration
+ffmpeg -i file 2>%1 | grep Duration
+
+% unix, operators
+# separate commands on same line
+;
+# group commands on same line
+( )
+# Wildcard match of exactly one character in a filename
+?
+# Wildcard match of any one character enclosed in these brackets in a filename
+[ ]
+
+% docker
+# run docker commands without sudo
+sudo groupadd docker; sudo usermod -aG docker $USER
+# Attach to container
+docker exec -it container_name bash
+
+% bioinformatics
+# Compress vcf file
+bgzip -c file.vcf > file.vcf.gz; tabix -p vcf file.vcf.gz
+# Sort vcf file
+cat file.vcf | awk '$1 ~ /^#/ {print $0;next} {print $0 | "sort -k1,1 -k2,2n"}' > file_sorted.vcf
+
+% network, ip
+# local IP address
+hostname -i
