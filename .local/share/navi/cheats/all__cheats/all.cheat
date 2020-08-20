@@ -1,0 +1,81 @@
+% ls, list
+# Dirs then files in reverse order by modified date
+ls -lrt
+# Directories last (tac works like cat just reversed)
+ls -l | tac
+
+% symbolic links
+# Create a symbolic link. <file> <symlink>
+ln -s 
+
+% tr, translate
+# Delete characters, do not translate
+tr -d '\n' 
+
+% gzip, tar, extract
+# Extract things without a hassle
+atool -x 
+# Create tar gzipped archive. <archived file> <files>
+tar -cvzf 
+
+% tail
+# Output appended data as the file grows
+tail -f 
+
+% pgrep
+# match processes whose names exactly match the pattern
+pgrep -x 
+
+% shell
+# List installed shells
+chsh -l
+
+% fonts
+# List available fonts on the system
+fc-list | fzf
+
+% pacman, arch package manager
+# List installed packages and versions
+pacman -Q | fzf
+# List only installed packages from sync dbs (without aur (and others) packages):
+pacman -Qn | fzf
+# Search locally-installed packages for matching strings
+pacman -Qs 
+# Only explicitly installed packages
+pacman -Qe | less
+# List package files
+pacman -Ql 
+
+% music, mpd, mpc
+# Show info about the currently playing song
+mpc status
+# Play next song
+mpc next
+# Play previous song
+mpc prev
+# Toggle play/pause
+mpc toggle
+
+% youtube
+# Download video ignoring errors and resuming
+youtube-dl -ic
+# Download audio only ignoring errors and resuming
+youtube-dl -icx
+
+% sort
+# Specify different temp dir
+sort -T 
+
+% pass, password
+# Show password tree
+pass insert archlinux.org/wiki/username
+# New password
+pass insert archlinux.org/wiki/username
+# Generate new random passwork for provided website, where n is desire length
+pass generate archlinux.org/wiki/username n
+# Select password using dmenu and copy it to clipboard for 45 sec
+passmenu
+
+% audio, music
+# Check duration of an audio file
+ffmpeg -i <file> 2>%1 | grep Duration

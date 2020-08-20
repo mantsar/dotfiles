@@ -613,12 +613,12 @@ let g:scnvim_scdoc = 0
 let g:scnvim_statusline_interval = 10
 
 function! Toggle_scnvim_scdoc()
-    if g:scnvim_scdoc
-			let g:scnvim_scdoc = 0
-    else
-			let g:scnvim_scdoc = 1
-    endif
-		echo g:scnvim_scdoc
+	if g:scnvim_scdoc
+		let g:scnvim_scdoc = 0
+	else
+		let g:scnvim_scdoc = 1
+	endif
+	echo g:scnvim_scdoc
 endfunction
 
 function! Pattern_summary()

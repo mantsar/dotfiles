@@ -1,3 +1,3 @@
 #!/bin/sh
 
-nvim ~/repos/cheats/all.cheat
+nvim ~/.local/share/navi/cheats/all__cheats/all.cheat
