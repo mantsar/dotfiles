@@ -97,6 +97,8 @@ ffmpeg -i file 2>%1 | grep Duration
 ?
 # Wildcard match of any one character enclosed in these brackets in a filename
 [ ]
+# add user to the group
+gpasswd -a user group
 
 % docker
 # run docker commands without sudo
