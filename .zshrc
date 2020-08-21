@@ -134,6 +134,7 @@ alias \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	vim="nvim" \
+	nv="neovide --geometry=210x50" \
 	p="sudo pacman" \
 	lst="ls -laht | grep '^-' | head" \
 	lsa='ls -lah' \
