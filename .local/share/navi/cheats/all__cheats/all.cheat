@@ -26,6 +26,10 @@ tail -f
 # match processes whose names exactly match the pattern
 pgrep -x 
 
+% tabular, tab, csv
+# Select first column of tabular data
+cut -f1
+
 % shell
 # List installed shells
 chsh -l
@@ -103,6 +107,12 @@ docker exec -it container_name bash
 bgzip -c file.vcf > file.vcf.gz; tabix -p vcf file.vcf.gz
 # Sort vcf file
 cat file.vcf | awk '$1 ~ /^#/ {print $0;next} {print $0 | "sort -k1,1 -k2,2n"}' > file_sorted.vcf
+# remove 'chr' chromosome names in vcf
+awk '{gsub(/^chr/,""); print}' file.vcf > file_nochr.vcf
+# add 'chr' chromosome names in vcf
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' file_nochr.vcf > file.vcf
+# Using vcfanno example
+./vcfanno_linux64 -p 10 -lua custom.lua gnomad.conf file_nochr.vcf > annotated_file_nochr.vcf
 
 % network, ip
 # local IP address
@@ -117,3 +127,11 @@ srun -J "my_job" -n 1 --pty bash -i
 lsblk
 # parition and mount disk
 mkfs.ext4 /dev/sdz100; sudo mount /dev/sdbz100 /mnt/dir
+
+% operating system
+# arch installation into usb
+dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
+
+% find
+# Get directories basenames
+find . -maxdepth 1 -type d | cut -c 3-
