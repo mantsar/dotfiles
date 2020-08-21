@@ -33,6 +33,8 @@ cut -f1
 % shell
 # List installed shells
 chsh -l
+# Change default shell for a user
+chsh -s full-path-to-shell
 
 % fonts
 # List available fonts on the system
