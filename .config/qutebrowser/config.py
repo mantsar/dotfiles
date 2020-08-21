@@ -37,6 +37,7 @@ config.bind('O', 'set-cmd-text -s :open')
 config.bind(',F', 'follow-selected')
 config.bind(',f', 'follow-selected -t')
 config.bind(',p', 'spawn --userscript qute-pass')
+config.bind(',P', 'spawn --userscript qute-pass --password-only')
 # tabs
 config.bind('gp', 'tab-pin')
 config.bind('tm', 'tab-only')

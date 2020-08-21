@@ -4,10 +4,6 @@ git clone https://github.com/tidalcycles/Dirt-Samples
 
 mkdir ardour
 
-git clone https://github.com/k-takata/minpac.git \
-    ~/.config/nvim/pack/minpac/opt/minpac
-# :updateRemotePlugins
-
 gpasswd -a $USER realtime
 gpasswd -a $USER audio
 
