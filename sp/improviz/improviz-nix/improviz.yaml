@@ -1,0 +1,35 @@
+screenwidth: 640
+screenheight: 480
+# fullscreen: 0
+font:
+  size: 14
+  foregroundColour: [0, 0, 0, 255]
+  backgroundColour: [255, 200, 0, 255]
+assetsDirectory: "./assets"
+textureDirectories:
+  - "./textures"
+#  - "./hellocatfood/gifs"
+geometryDirectories:
+  - "./geometries"
+materialDirectories:
+  - "./materials"
+#  - "./hellocatfood/geometries"
+codeFiles:
+  - "./stdlib/variables.pz"
+  - "./stdlib/transformations.pz"
+  - "./stdlib/shapes.pz"
+  - "./stdlib/style.pz"
+  - "./stdlib/textures.pz"
+  - "./stdlib/screen.pz"
+  - "./usercode/grid.pz"
+  - "./usercode/seq.pz"
+debug: false
+decorated: false
+apptitle: "Improviz"
+serverPort: 3000
+osc:
+  enabled: true
+  port: 5510
+screen:
+  front: 0.1
+  back: 100

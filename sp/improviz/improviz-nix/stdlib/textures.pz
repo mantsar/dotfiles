@@ -1,0 +1,26 @@
+
+func texture(name, frame, &blk)
+	frame := 0
+	s = :texture
+	if (isNull(blk))
+		style(s, name, frame)
+		intMaterial(:material, :texture)
+	else
+		pushScope()
+		style(s, name, frame)
+		intMaterial(:material, :texture)
+		blk(frame)
+		popScope()
+
+func animate(name, speed, &blk)
+	speed := 1
+	frame = ((bpm/60) * ((time) + nudge) * speed) % frames(name)
+	if (isNull(blk))
+		texture(name, frame)
+		intMaterial(:material, :texture)
+	else
+		pushScope()
+		texture(name, frame)
+		intMaterial(:material, :texture)
+		blk(frame)
+		popScope()

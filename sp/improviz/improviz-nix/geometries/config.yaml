@@ -1,0 +1,12 @@
+geometries:
+  - name: triangle
+    file: triangle.obj
+    removeCrossbar: false
+  - name: rectangle
+    file: rectangle.obj
+  - name: cube
+    file: cube.obj
+  - name: cylinder
+    file: cylinder.obj
+  - name: sphere
+    file: sphere.obj

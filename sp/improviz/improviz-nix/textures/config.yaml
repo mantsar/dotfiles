@@ -1,0 +1,7 @@
+textures:
+  - name: crystal
+    file: crystal.bmp
+  - name: algorave
+    file: algorave.png
+  - name: diagsquares
+    file: diagsquares.gif

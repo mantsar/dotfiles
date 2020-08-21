@@ -10,6 +10,4 @@ yay -S zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git shiny
 # arduino
 # arduino-docs
 
-# atom packages
-
 apm install atom-hydra vim-mode-plus vim-mode-clipboard-plus ex-mode 

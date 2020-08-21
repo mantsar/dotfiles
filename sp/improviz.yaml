@@ -1,0 +1,35 @@
+screenwidth: 640
+screenheight: 480
+# fullscreen: 0
+font:
+  size: 14
+  foregroundColour: [0, 0, 0, 255]
+  backgroundColour: [255, 200, 0, 255]
+assetsDirectory: "./improviz/improviz-nix/assets"
+textureDirectories:
+  - "./improviz/improviz-nix/textures"
+  # - "./hellocatfood/gifs"
+geometryDirectories:
+  - "./improviz/improviz-nix/geometries"
+materialDirectories:
+  - "./improviz/improviz-nix/materials"
+  # - "./improviz/improviz-nix/hellocatfood/geometries"
+codeFiles:
+  - "./improviz/improviz-nix/stdlib/variables.pz"
+  - "./improviz/improviz-nix/stdlib/transformations.pz"
+  - "./improviz/improviz-nix/stdlib/shapes.pz"
+  - "./improviz/improviz-nix/stdlib/style.pz"
+  - "./improviz/improviz-nix/stdlib/textures.pz"
+  - "./improviz/improviz-nix/stdlib/screen.pz"
+  - "./improviz/improviz-nix/usercode/grid.pz"
+  - "./improviz/improviz-nix/usercode/seq.pz"
+debug: false
+decorated: false
+apptitle: "Improviz"
+serverPort: 3000
+osc:
+  enabled: true
+  port: 5520
+screen:
+  front: 0.1
+  back: 100
