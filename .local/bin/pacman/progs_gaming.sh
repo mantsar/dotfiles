@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # enable multilib repo
 sudo pacman -S lutris steam
 # add lutris games to steam
