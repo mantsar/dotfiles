@@ -194,6 +194,8 @@ bindsym $mod+F2	exec --no-startup-id passmenu
 bindsym $mod+F4	exec --no-startup-id myredshift
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6	exec $term -e myscrot 
+bindsym $mod+F9	exec --no-startup-id dmenumount
+bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F12	exec $term -e nmtui
 
 # #---Media Keys---# #
