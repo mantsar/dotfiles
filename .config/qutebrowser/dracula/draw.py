@@ -16,8 +16,9 @@ def blood(c, options = {}):
         'pink': '#ff79c6',
         'purple': '#bd93f9',
         'red': '#ff5555',
-        'yellow': '#f1fa8c'
-    }   
+        'yellow': '#f1fa8c',
+        'black': '#000000',
+    }
 
     spacing = options.get('spacing', {
         'vertical': 5,
@@ -274,7 +275,7 @@ def blood(c, options = {}):
 
     # ## Foreground color of selected even tabs.
     # ## Type: QtColor
-    c.colors.tabs.selected.even.fg = palette['foreground']
+    c.colors.tabs.selected.even.fg = palette['purple']
 
     # ## Background color of selected odd tabs.
     # ## Type: QtColor
@@ -282,7 +283,7 @@ def blood(c, options = {}):
 
     # ## Foreground color of selected odd tabs.
     # ## Type: QtColor
-    c.colors.tabs.selected.odd.fg = palette['foreground']
+    c.colors.tabs.selected.odd.fg = palette['purple']
 
     ## Tab padding
     c.tabs.padding = padding

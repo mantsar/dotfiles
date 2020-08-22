@@ -45,6 +45,11 @@ interval=30
 command=redshift_statusbar
 interval=10
 
+[layout]
+label=⌨
+command=layout
+interval=10
+
 [iface]
 label=🌐
 #instance=wlan0

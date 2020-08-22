@@ -2,7 +2,7 @@
 
 if pgrep -x redshift
 then
-	pkill -x redshift
+	pkill -x redshift && notify-send "Redshift deactivated"
 else
-	redshift -l 55:25
+	redshift -l 55:25 && notify-send "Redshift activated"
 fi

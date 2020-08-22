@@ -1,3 +1,4 @@
 #!/bin/sh
 
+(cat ~/.cache/wal/sequences &)
 nvim ~/.local/share/navi/cheats/all__cheats/all.cheat

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "us" == $(setxkbmap -query | grep layout | awk '{print $2}') ]
+then
+	setxkbmap lt && notify-send "lt"
+else
+	setxkbmap us && notify-send "us"
+fi
