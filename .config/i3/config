@@ -146,7 +146,7 @@ bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		exec --no-startup-id prompt "Exit i3?" "i3 exit"
 bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
 
 # #---Workspace Bindings---# #
 bindsym $mod+semicolon		workspace next

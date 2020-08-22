@@ -101,6 +101,10 @@ ffmpeg -i file 2>%1 | grep Duration
 [ ]
 # add user to the group
 gpasswd -a user group
+# check which users belong to group
+groups user
+# Change group
+sudo chown -R user:group dir
 
 % docker
 # run docker commands without sudo
