@@ -143,4 +143,11 @@ dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
 find . -maxdepth 1 -type d | cut -c 3-
 
 % ssh vpn
+# Connect to computer with ssh through vpn
 sudo openfortivpn vpn.url:443 --username name -p password
+
+% usb
+# completely wipe out usb drive
+sudo shred /dev/sdc1
+# completely wipe out usb drive
+sudo dd if=/dev/zero of=/dev/sdc1 status=progress
