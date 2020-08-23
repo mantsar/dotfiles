@@ -6,13 +6,9 @@ c.tabs.close_mouse_button = 'right'
 c.scrolling.smooth = True
 c.editor.command = ['termite', '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
 
-
 # UI
 # Colorscheme
 import dracula.draw
-
-# Load existing settings made via :set
-config.load_autoconfig()
 
 dracula.draw.blood(c, {
     'spacing': {
@@ -36,8 +32,10 @@ config.bind('O', 'set-cmd-text -s :open')
 # links
 config.bind(',F', 'follow-selected')
 config.bind(',f', 'follow-selected -t')
+config.bind('<Alt-p>', 'spawn --userscript qute-pass')
 config.bind(',p', 'spawn --userscript qute-pass')
 config.bind(',P', 'spawn --userscript qute-pass --password-only')
+
 # tabs
 config.bind('gp', 'tab-pin')
 config.bind('tm', 'tab-only')
@@ -74,13 +72,27 @@ config.bind('sb', 'quickmark-save')
 # Bookmarks/quickmarks
 config.bind('b', 'set-cmd-text -s :quickmark-load -t')
 config.bind('B', 'set-cmd-text -s :quickmark-load')
+config.bind('am', 'open --tab https://mail.google.com/mail/u/0')
+config.bind("<Alt-c>", "hint code userscript code_select.py")
 # mpv (requires umpv script) https://github.com/mpv-player/mpv/blob/master/TOOLS/umpv
 config.bind(',m', 'spawn umpv {url}')
 config.bind(',M', 'hint links spawn umpv {hint-url}')
+config.bind('<Alt-v>', 'hint links spawn umpv {hint-url}')
 config.bind(';M', 'hint --rapid links spawn umpv {hint-url}')
 
 config.bind(",a", "spawn --userscript youtubedl_mp3")
 config.bind(",A", "hint links userscript youtubedl_mp3")
+
+config.bind('<Alt-q>', 'quit --save')
+
+# https://github.com/LaurenceWarne/qute-code-hint
+c.hints.selectors["code"] = [
+    # Selects all code tags whose direct parent is not a pre tag
+    ":not(pre) > code",
+    "pre"
+]
+config.bind(",c", "hint code userscript code_select.py")
+config.bind("<Alt-c>", "hint code userscript code_select.py")
 
 # UI
 c.tabs.padding = {'top': 2, 'bottom': 2, 'left': 5, 'right': 5}

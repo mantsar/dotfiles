@@ -130,7 +130,7 @@ s.latency = 0.3;
 	var buf_n, dirs, res;
 	Buffer.freeAll;
 	res = Event.new(n:2030);
-	dirs = PathName("Dirt-Samples").entries;
+	dirs = PathName("~/sp/Dirt-Samples").entries;
 	dirs.do {|v, i| 
 		v.entries.do {|path_name| 
 			var buf, dir=path_name.folderName.asSymbol, file=path_name.fullPath;
@@ -144,7 +144,7 @@ s.latency = 0.3;
 };
 
 ~read_dirt_samples1 = {|dir|
-	var entries = (PathName("Dirt-Samples") +/+ dir).entries;
+	var entries = (PathName("~/sp/Dirt-Samples") +/+ dir).entries;
 	Routine { 
 		if (d.isNil) { d = ~read_dirt_samples.value() };
 		s.sync;
@@ -552,16 +552,16 @@ s.waitForBoot({
 
 // Platform.userExtensionDir
 // Quarks.gui
-// Quarks.install("ArdourOSC")
-// Quarks.install("BatLib")
-// Quarks.install("Bjorklund")
-// Quarks.install("Dirt-Samples")
-// Quarks.install("Esp")
-// Quarks.install("FoxDotQuark")
-// Quarks.install("MathLib")
-// Quarks.install("Spectrogram")
-// Quarks.install("SuperDirt")
-// Quarks.install("Vowel")
-// Quarks.install("XML")
-// Quarks.install("wslib")
+// Quarks.install("ArdourOSC");
+// Quarks.install("BatLib");
+// Quarks.install("Bjorklund");
+// Quarks.install("Dirt-Samples");
+// Quarks.install("Esp");
+// Quarks.install("FoxDot");
+// Quarks.install("MathLib");
+// Quarks.install("Spectrogram");
+// Quarks.install("SuperDirt");
+// Quarks.install("Vowel");
+// Quarks.install("XML");
+// Quarks.install("wslib");
 // Quarks.install("Steno");

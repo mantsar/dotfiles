@@ -5,7 +5,7 @@ if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.9
 	let g:neovide_cursor_vfx_mode = "ripple"
-	set guifont=FiraCode-Bold:h18
+	set guifont=FiraCode-Bold:h15
 	function! Toggle_neovide_fullscreen()
 		if g:neovide_fullscreen
 			let g:neovide_fullscreen = v:false
@@ -643,9 +643,10 @@ endfunction
 augroup sc_au
 	autocmd!
 	" init
-	autocmd FileType supercollider setlocal dictionary+=./dict/samples.txt
-	autocmd FileType supercollider setlocal dictionary+=./dict/sc/synths.txt
+	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
+	autocmd FileType supercollider setlocal dictionary+=~sp/dict/sc/synths.txt
 	autocmd FileType supercollider nnoremap <silent> <buffer> <M-f> :e ./snips.scd<cr>
+	autocmd FileType supercollider nnoremap <silent> <buffer> <M-n> :e ./notes.txt<cr>
 	autocmd VimEnter *.scd normal G
 	autocmd VimEnter *.scd SCNvimStart
 	autocmd VimEnter *.scd SCNvimStatusLine
@@ -679,8 +680,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <M-t> :call scnvim#sclang#send("~global_tempo.value()")<left><left><left>
 	autocmd VimEnter *.scd xnoremap <leader><leader>n :call Pattern_summary()<cr>
 	autocmd VimEnter *.scd nmap <leader><leader>n mm?P<cr>v%:call Pattern_summary()<cr><C-l>`m
-	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ./dict/sc/scales.txt', 'sink': function('Scale_summary') })<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ./dict/samples.txt', 'sink': function('Sample_fetch') })<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ~/sp/dict/sc/scales.txt', 'sink': function('Scale_summary') })<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ~/sp/dict/samples.txt', 'sink': function('Sample_fetch') })<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>h :call Toggle_scnvim_scdoc()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>s :call scnvim#sclang#send("s.scope")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>f :call scnvim#sclang#send("FreqScope.new(1200)")<cr>
@@ -694,6 +695,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ~/sp/ardour/a<cr>
 	" autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
 	" autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
 	" Ardour
@@ -742,12 +744,12 @@ augroup tidal_au
 	autocmd FileType tidal setlocal commentstring=--\%s
 	autocmd FileType tidal setlocal formatoptions-=j "Do not concatenate # on J
 	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
-	autocmd FileType tidal setlocal dictionary+=./dict/samples.txt
-	autocmd FileType tidal setlocal dictionary+=./dict/tidal/functions.txt
-	autocmd FileType tidal setlocal dictionary+=./dict/tidal/controls.txt
-	autocmd FileType tidal setlocal dictionary+=./dict/tidal/chords.txt
-	autocmd FileType tidal setlocal dictionary+=./dict/tidal/arpeggiators.txt
-	autocmd FileType tidal setlocal dictionary+=./dict/tidal/synths.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/samples.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/functions.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/controls.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/chords.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/arpeggiators.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/synths.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
@@ -818,7 +820,7 @@ function! Foxdot_init()
 	let g:foxdot_activated = 1
 	execute "tabe " . expand("%:r") . ".py"
 	call scnvim#sclang#send("~foxdot_start.value()")
-	:T ipython --no-autoindent -i foxdot/foxdot_cli.py
+	:T ipython --no-autoindent -i ~/sp/foxdot/foxdot_cli.py
 	:exe "tabn ".g:lasttab
 	:wincmd k
 	:normal G

@@ -13,11 +13,6 @@ interval=once
 command=volume
 signal=10
 
-[torrent]
-command=torrent
-interval=20
-signal=7
-
 [cpu]
 command=cpu
 interval=15

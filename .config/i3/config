@@ -13,7 +13,7 @@ set $outer_gaps 5
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $shutdown sudo -A shutdown -h now
-set $reboot sudo -A reboot
+set $reboot reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
 
@@ -25,6 +25,10 @@ gaps outer $outer_gaps
 
 # #---Starting External Scripts---# #
 
+# Jack
+exec cadence-session-start -s
+# mpd startup
+exec --no-startup-id mpd
 # Setting the background and colorscheme:
 exec_always --no-startup-id wal -R
 # Composite manager:
@@ -35,14 +39,12 @@ exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-# Run the script to update the mpd i3block on change.
-exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
-# mpd startup
-exec --no-startup-id mpd
 # Torrent daemon:
 exec --no-startup-id transmission-daemon
 # Torrent daemon:
 exec --no-startup-id syncthing --no-browser
+# Run the script to update the mpd i3block on change.
+exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 
 # #---Bar---# #
 bar {
@@ -89,6 +91,7 @@ bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+s			exec --no-startup-id ukspawn scuk
+bindsym $mod+Shift+s			exec --no-startup-id neovide ~/sp/a.scd
 
 bindsym $mod+i 			exec $term -e myhtop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up

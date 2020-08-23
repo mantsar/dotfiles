@@ -142,18 +142,23 @@ alias \
 	ta="tmux attach -t " \
 	tk="tmux kill-session -t " \
 	tl="tmux ls" \
-	tn="tmux new -s "
+	tn="tmux new -s " \
+	sn="sp_new a" \
+	a="cd ~/sp/a" \
 
 # Directories
 alias \
 	c="$HOME/.config" \
+	cq="$HOME/.config/qutebrowser" \
 	dw="$HOME/Downloads" \
 	h="$HOME" \
 	m="$HOME/Music" \
 	pp="$HOME/Pictures" \
 	s="$HOME/.local/bin" \
 	vv="$HOME/Videos" \
-	scf="$HOME/.config/SuperCollider/Extensions/Faust"
+	cs="$HOME/.config/SuperCollider" \
+	css="$HOME/.config/SuperCollider/synthdef" \
+	csf="$HOME/.config/SuperCollider/Extensions/Faust"
 
 # Files
 alias \

@@ -1,1 +1,0 @@
-/home/mantas/.config/SuperCollider/synthdef/Main.sc

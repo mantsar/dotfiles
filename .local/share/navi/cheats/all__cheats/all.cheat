@@ -101,6 +101,8 @@ ffmpeg -i file 2>%1 | grep Duration
 [ ]
 # add user to the group
 gpasswd -a user group
+# create new group
+groupadd group
 # check which users belong to group
 groups user
 # Change group
