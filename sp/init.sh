@@ -16,6 +16,9 @@ ln -s $HOME/.config/SuperCollider/synthdef/Main.sc $HOME/.local/share/SuperColli
 
 mkdir $HOME/sp/projects
 mkdir $HOME/sp/ardour
+mkdir $HOME/sp/txt
+mkdir $HOME/sp/tmp
+mkdir $HOME/sp/songs
 # script to create new folder for a new project where everything will work the same. then shorctuts to open projects with dmenu
 
 # Uncheck box in Cadence gui PulseAdio bridge to not autostart
