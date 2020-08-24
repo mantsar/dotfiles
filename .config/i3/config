@@ -63,7 +63,7 @@ bar {
 		mode dock
 		modifier None
 # disable system tray
-		tray_output none
+tray_output none
 }
 
 # #---Basic Bindings---# #
@@ -76,7 +76,7 @@ bindsym $mod+Tab		workspace back_and_forth
 bindsym $mod+Insert		exec --no-startup-id showclip
 
 bindsym $mod+w			exec --no-startup-id $BROWSER
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec --no-startup-id firefox
 
 bindsym $mod+r 			exec $term -e myranger
 

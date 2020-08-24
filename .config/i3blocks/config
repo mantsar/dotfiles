@@ -2,6 +2,9 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=10
 markup=pango
 
+[browser]
+full_text=
+command=firefox
 [music]
 label=🎼
 command=music

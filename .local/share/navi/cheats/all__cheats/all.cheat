@@ -53,6 +53,8 @@ pacman -Qe | less
 pacman -Ql 
 # Synchronize databases and update packages
 sudo pacman -Syyu
+# Remove orphaned packages
+pacman -Rns $(pacman -Qtdq)
 
 % music, mpd, mpc
 # Show info about the currently playing song

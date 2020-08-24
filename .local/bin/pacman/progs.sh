@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-sudo pacman -S zsh zsh-autosuggestions openfortivpn mpv ranger neovim atool atom ardour alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags docker docker-compose dunst faust ffmpeg foxdot fzf git gnustep-base gnustep-make haskell-tidal i3-gaps i3blocks ipython jack2 japa libnotify libreoffice-still lsof luarocks lv2 mpv neofetch nginx pandoc pandoc-citeproc pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift termite sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd r xclip npm python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip
+sudo pacman -S zsh zsh-autosuggestions openfortivpn mpv ranger neovim atool atom ardour alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags docker docker-compose dunst faust ffmpeg foxdot fzf git gnustep-base gnustep-make haskell-tidal i3-gaps i3blocks ipython jack2 japa libnotify libreoffice-still lsof luarocks lv2 mpv neofetch nginx pandoc pandoc-citeproc pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift termite sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd r xclip npm python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl
 
 mkdir $HOME/Downloads $HOME/tmp $HOME/Videos $HOME/Pictures
 
@@ -41,4 +41,22 @@ d remote set-url origin ssh://git@github.com/mantsar/dotfiles.git
 d config --local status.showUntrackedFiles no
 
 # MPD
-mkdir $HOME/.config/mpd/playlists 
+mkdir $HOME/.config/mpd/playlists
+
+# Firefox
+# :colors dark
+# :set searchengine duckduckgo
+# set newtab about:blank
+# bind --mode=$mode $key $excmd
+# https://github.com/tridactyl/tridactyl/blob/master/src/lib/config.ts
+# bind --mode=normal x tabclose
+# unbind --mode=normal t
+# bind --mode=normal ty tabduplicate
+# bind --mode=normal u scrollpage -0.5
+# bind --mode=normal d scrollpage 0.5
+# bind --mode=normal o fillcmdline tabopen
+# bind --mode=normal O fillcmdline open
+# bind --mode=normal X undo
+# set searchurls.g https://www.google.com/search?q=
+# set searchurls.y https://www.youtube.com/results?search_query=
+# set searchurls.r https://old.reddit.com/search?q=
