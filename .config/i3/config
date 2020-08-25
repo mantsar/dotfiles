@@ -91,7 +91,7 @@ bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+s			exec --no-startup-id ukspawn scuk
-bindsym $mod+Shift+s			exec --no-startup-id neovide ~/sp/a.scd
+bindsym $mod+Shift+s			exec --no-startup-id neovide ~/sp/a/a.scd
 
 bindsym $mod+i 			exec $term -e myhtop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up

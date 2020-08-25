@@ -191,13 +191,13 @@ s.latency = 0.3;
 };
 
 // Proxy functions ----------
-~ndef_settings = { |key=nil, fadeTime=nil, quant=nil, clock=nil, reshaping=nil|
+~ndef_settings = {|key=nil, fadeTime=nil, quant=nil, clock=nil| // , reshaping=nil
 	var ndef;
 	if (key == nil) {ndef = Ndef(\default).proxyspace} {ndef = Ndef(key)};
 	if (ndef.fadeTime != fadeTime && fadeTime != nil) {ndef.fadeTime = fadeTime};
 	if (ndef.quant != quant && quant != nil) {ndef.quant = quant};
 	if (ndef.clock != clock && clock != nil) {ndef.clock = clock} {ndef.clock = TempoClock.default};
-	if (ndef.reshaping != reshaping) {ndef.reshaping = reshaping};
+	// if (ndef.reshaping != reshaping) {ndef.reshaping = reshaping};
 };
 
 ~activate_espgrid = {
@@ -537,15 +537,16 @@ s.waitForBoot({
 	"./synthdef/synth_def.scd".loadRelative; // Synths
 	s.sync;
 	Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
-	~ndef_settings.value(nil, fadeTime:1, quant:0, clock:TempoClock.default);
+	~ndef_settings.value(nil, fadeTime:0.5, quant:1, clock:TempoClock.default);
 	Ndef.defaultReshaping = \elastic;
+	// BusPlug.defaultReshaping = \elastic;
 	~toggle_mute = ~make_toggle_mute.value();
 	e = (); // dict for holding effects
 	b = (); // dict for holding buses
 	t = TempoClock.default;
 	// Steno
 	k = Steno.new;
-	DiffString.tempFilePath = "~/sp/temp";
+	DiffString.tempFilePath = "~/sp/tmp";
 	StageLimiter.activate(2);
 	"Setup done".postln;
 });

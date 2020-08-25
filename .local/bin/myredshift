@@ -3,6 +3,8 @@
 if pgrep -x redshift
 then
 	pkill -x redshift && notify-send "Redshift deactivated"
+	# exit 0
 else
-	redshift -l 55:25 && notify-send "Redshift activated"
+	redshift -l 55:25 
+	# && notify-send "Redshift activated"
 fi

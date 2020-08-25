@@ -34,6 +34,8 @@ mkdir $HOME/sp/songs
 # If scnvim does not start properly call from within nvim
 # :call scnvim#install()
 
+# Change Font and theme to dracula in SCIDE
+
 # Uncomment if needed
 # /etc/pulse/client.cont
 # autospawn = no
