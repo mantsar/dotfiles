@@ -2,4 +2,4 @@
 
 # https://github.com/kasramp/mydotfiles/blob/master/.local/share/qutebrowser/userscripts/youtube_mp3_downloader.sh
 
-(youtube-dl --output "$HOME/Music/youtube-dl/%(title)s.%(ext)s" -f bestaudio --no-playlist --extract-audio --audio-format mp3  --audio-quality 0 $QUTE_URL && notify-send "YouTube mp3 download completed!" "$QUTE_TITLE") || exit 0
+(youtube-dl --output "$HOME/Music/%(title)s.%(ext)s" -f bestaudio --no-playlist --extract-audio --audio-format mp3  --audio-quality 0 $QUTE_URL && notify-send "YouTube mp3 download completed!" "$QUTE_TITLE") || exit 0

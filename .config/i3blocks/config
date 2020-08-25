@@ -44,7 +44,7 @@ command=redshift_statusbar
 interval=10
 
 [layout]
-label=⌨
+label=⌨ 
 command=layout
 interval=10
 

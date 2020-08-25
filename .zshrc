@@ -88,12 +88,13 @@ function gitacp() {
 	git push
 }
 
-# For dotfiles
-function dacp() {
-	d add -u
-	d commit -m "$1"
-	d push
+# cdf - cd into the directory of the selected file
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
 }
+bindkey -s '^o' 'cdf\n'
 
 # FZF
 # history
@@ -136,6 +137,7 @@ alias \
 	vim="nvim" \
 	nv="neovide --geometry=210x50" \
 	p="sudo pacman" \
+	pu="sudo pacman -Syyu" \
 	lst="ls -laht | grep '^-' | head" \
 	lsa='ls -lah' \
 	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \

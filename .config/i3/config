@@ -28,7 +28,7 @@ gaps outer $outer_gaps
 # Jack
 exec cadence-session-start -s
 # mpd startup
-exec --no-startup-id mpd
+exec --no-startup-id mpd && mpc load all
 # Setting the background and colorscheme:
 exec_always --no-startup-id wal -R
 # Composite manager:
@@ -135,7 +135,9 @@ bindsym $mod+b			bar mode toggle
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
 
-bindsym $mod+m 			exec $term -e myncmpcpp
+bindsym $mod+Shift+n 			exec $term -e myncmpcpp
+
+bindsym $mod+m 			exec $term -e fzf_mpd
 bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
@@ -249,7 +251,7 @@ set_from_resource $darkcyan	color6  #000000
 set_from_resource $cyan		color14 #000000
 set_from_resource $darkwhite	color7  #000000
 set_from_resource $white	color15 #000000
-set $transparent		#00000000
+set $transparent		#000000
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.

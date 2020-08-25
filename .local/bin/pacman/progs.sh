@@ -42,7 +42,13 @@ d config --local status.showUntrackedFiles no
 # MPD
 mkdir $HOME/.config/mpd/playlists
 
+# MISC
+chsh -s /usr/bin/zsh
+
+# https://wiki.archlinux.org/index.php/Getty#Automatic_login_to_virtual_console
+
 # Firefox
+# Tridactyl
 # :colors dark
 # :set searchengine duckduckgo
 # set newtab about:blank
@@ -59,3 +65,4 @@ mkdir $HOME/.config/mpd/playlists
 # set searchurls.g https://www.google.com/search?q=
 # set searchurls.y https://www.youtube.com/results?search_query=
 # set searchurls.r https://old.reddit.com/search?q=
+# Alternate Player for Twitch.tv addon
