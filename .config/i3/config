@@ -81,6 +81,7 @@ bindsym $mod+Shift+w		exec --no-startup-id firefox
 bindsym $mod+r 			exec $term -e myranger
 
 bindsym $mod+d			exec --no-startup-id rofi -show run
+bindsym $mod+grave			exec --no-startup-id rofi -show window
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
@@ -142,8 +143,8 @@ bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle 
 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
 
-bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable|dropdown)_).*$"] kill
-bindsym --whole-window $mod+button2 [con_id="__focused__" instance="^(?!(unkillable|dropdown)_).*$"] kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|dropdown_|Steam)).*$"] kill
+bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable|dropdown)_).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
 bindsym $mod+Shift+space 	floating toggle
@@ -276,3 +277,16 @@ for_window [title="NdefMixer_currentEnvironment"] floating disable; sticky disab
 for_window [instance="Improviz"] floating enable
 for_window [instance="Improviz"] move scratchpad
 for_window [instance="Improviz"] scratchpad show 
+
+# Steam
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
