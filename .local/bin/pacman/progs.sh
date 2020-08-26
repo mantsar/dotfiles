@@ -12,13 +12,14 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git rstudio-desktop-bin faustlive-git htop-vim-git xcwd-git ladish python2-distutils-extra nerd-fonts-hack
+yay -S zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git rstudio-desktop-bin faustlive-git htop-vim-git xcwd-git nerd-fonts-hack
 
 # shiny-server-git
 # mongodb-bin
 # mongodb-tools-bin
 # arduino
 # arduino-docs
+# ladish python2-distutils-extra
 
 apm install atom-hydra vim-mode-plus vim-mode-clipboard-plus ex-mode 
 
@@ -31,7 +32,8 @@ git config --global user.name Mantas
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 # echo "default_linemode devicons" >> $HOME/.config/ranger/rc.conf
 
-source $HOME/.zshrc
+chsh -s /usr/bin/zsh
+# source $HOME/.zshrc
 
 mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
@@ -42,19 +44,15 @@ d config --local status.showUntrackedFiles no
 # MPD
 mkdir $HOME/.config/mpd/playlists
 
-# MISC
-chsh -s /usr/bin/zsh
-
-
 # MANUALLY -------------------------
+
+# reboot
 
 # Evince
 # Enable night mode
 
 # Nvim
 # :updateRemotePlugins
-
-# https://wiki.archlinux.org/index.php/Getty#Automatic_login_to_virtual_console
 
 # Firefox
 # Tridactyl
@@ -75,3 +73,7 @@ chsh -s /usr/bin/zsh
 # set searchurls.y https://www.youtube.com/results?search_query=
 # set searchurls.r https://old.reddit.com/search?q=
 # Alternate Player for Twitch.tv addon
+
+# Syncthing
+# Delete default dir, then create $HOME/Sync
+# Set simple file tracking and sync it with other computers
