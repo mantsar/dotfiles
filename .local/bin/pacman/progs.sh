@@ -37,9 +37,8 @@ chsh -s /usr/bin/zsh
 
 mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
-alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-d remote set-url origin ssh://git@github.com/mantsar/dotfiles.git
-d config --local status.showUntrackedFiles no
+/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME remote set-url origin ssh://git@github.com/mantsar/dotfiles.git
+/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 # MPD
 mkdir $HOME/.config/mpd/playlists
@@ -48,11 +47,16 @@ mkdir $HOME/.config/mpd/playlists
 
 # reboot
 
-# Evince
-# Enable night mode
+# Syncthing
+# http://127.0.0.1:8384
+# Delete default dir, then create $HOME/Sync
+# Set simple file tracking and sync it with other computers
+
+# Set wallpaper
 
 # Nvim
 # :updateRemotePlugins
+# :PackUpdate
 
 # Firefox
 # Tridactyl
@@ -74,6 +78,5 @@ mkdir $HOME/.config/mpd/playlists
 # set searchurls.r https://old.reddit.com/search?q=
 # Alternate Player for Twitch.tv addon
 
-# Syncthing
-# Delete default dir, then create $HOME/Sync
-# Set simple file tracking and sync it with other computers
+# Evince
+# Enable night mode

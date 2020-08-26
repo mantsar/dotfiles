@@ -11,7 +11,7 @@ cd $HOME/.config/SuperCollider/synthdef
 git remote set-url origin ssh://git@github.com/mantsar/synthdef.git
 # cd -
 # ln -s $HOME/.local/share/SuperCollider/Extensions $HOME/.config/SuperCollider/Extensions # SCNvim automatically creates this
-mkdir $HOME/.local/share/SuperCollider/Extensions/Faust
+mkdir -p $HOME/.local/share/SuperCollider/Extensions/Faust
 ln -s $HOME/.config/SuperCollider/synthdef/Main.sc $HOME/.local/share/SuperCollider/Extensions/Main.sc
 
 mkdir $HOME/sp/projects
