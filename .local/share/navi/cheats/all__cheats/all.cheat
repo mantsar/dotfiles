@@ -76,6 +76,10 @@ youtube-dl -icx
 # Specify different temp dir
 sort -T 
 
+% diff
+# Show line not present in other file
+comm -13 <(sort ../quickmarks) <(sort quickmarks\~20200826-013605)
+
 % pass, password
 # Show password tree
 pass

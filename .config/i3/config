@@ -63,7 +63,7 @@ bar {
 		mode dock
 		modifier None
 # disable system tray
-tray_output none
+# tray_output none
 }
 
 # #---Basic Bindings---# #

@@ -12,7 +12,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git rstudio-desktop-bin faustlive-git htop-vim-git xcwd-git ladish python2-distutils-extra nerd-fonts-hack mutt-wizard-git
+yay -S zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git rstudio-desktop-bin faustlive-git htop-vim-git xcwd-git ladish python2-distutils-extra nerd-fonts-hack
 
 # shiny-server-git
 # mongodb-bin
@@ -42,8 +42,13 @@ d config --local status.showUntrackedFiles no
 # MPD
 mkdir $HOME/.config/mpd/playlists
 
+
 # MISC
 chsh -s /usr/bin/zsh
+
+
+# Evince
+# Enable night mode
 
 # https://wiki.archlinux.org/index.php/Getty#Automatic_login_to_virtual_console
 

@@ -155,6 +155,7 @@ alias \
 	dw="$HOME/Downloads" \
 	h="$HOME" \
 	m="$HOME/Music" \
+	u="/mnt" \
 	pp="$HOME/Pictures" \
 	s="$HOME/.local/bin" \
 	vv="$HOME/Videos" \
