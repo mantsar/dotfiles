@@ -24,7 +24,6 @@ apm install atom-hydra vim-mode-plus vim-mode-clipboard-plus ex-mode
 
 git clone https://github.com/k-takata/minpac.git \
     ~/.config/nvim/pack/minpac/opt/minpac
-# :updateRemotePlugins
 
 git config --global user.email "sarauskas.mantas@gmail.com"
 git config --global user.name Mantas
@@ -36,19 +35,24 @@ source $HOME/.zshrc
 
 mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
+alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 d remote set-url origin ssh://git@github.com/mantsar/dotfiles.git
 d config --local status.showUntrackedFiles no
 
 # MPD
 mkdir $HOME/.config/mpd/playlists
 
-
 # MISC
 chsh -s /usr/bin/zsh
 
 
+# MANUALLY -------------------------
+
 # Evince
 # Enable night mode
+
+# Nvim
+# :updateRemotePlugins
 
 # https://wiki.archlinux.org/index.php/Getty#Automatic_login_to_virtual_console
 
