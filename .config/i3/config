@@ -225,7 +225,7 @@ bindsym $mod+F12	exec $term -e nmtui
 # #---Media Keys---# #
 # Volume keys
 # bindsym $mod+plus		exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +0 && pkill -RTMIN+10 i3blocks
+bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
 bindsym $mod+Shift+plus		exec --no-startup-id pulsemixer --change-volume +15 && pkill -RTMIN+10 i3blocks
 bindsym $mod+minus 		exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
 bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15 && pkill -RTMIN+10 i3blocks
@@ -244,8 +244,8 @@ bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +120
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume	exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume	exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume	exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume	exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
 
 # BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
 client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
