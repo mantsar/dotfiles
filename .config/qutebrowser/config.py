@@ -48,8 +48,8 @@ config.bind('gl', 'tab-move +')
 config.bind('X', 'undo')
 config.bind('<Alt-Tab>', 'tab-focus last')
 # Moving
-config.bind('j', 'scroll-page 0 0.055')
-config.bind('k', 'scroll-page 0 -0.055')
+# config.bind('j', 'scroll-page 0 0.055')
+# config.bind('k', 'scroll-page 0 -0.055')
 config.bind('d', 'scroll-page 0 0.5')
 config.bind('u', 'scroll-page 0 -0.5')
 # Readline bindings in insert mode

@@ -145,6 +145,7 @@ alias \
 	tk="tmux kill-session -t " \
 	tl="tmux ls" \
 	tn="tmux new -s " \
+	ov="sudo openfortivpn" \
 	sn="sp_new a" \
 	a="cd ~/sp/a" \
 

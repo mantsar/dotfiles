@@ -157,8 +157,8 @@ bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle 
 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
 
-bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|dropdown_|Steam)).*$"] kill
-bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable|dropdown)_).*$"] kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|dropdown_|Steam|quake)).*$"] kill
+bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable_|dropdown_)).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
 bindsym $mod+Shift+space 	floating toggle
