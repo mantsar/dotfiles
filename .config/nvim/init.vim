@@ -5,7 +5,7 @@ if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.9
 	let g:neovide_cursor_vfx_mode = "ripple"
-	set guifont=FiraCode-Bold:h17
+	set guifont=FiraCode-Bold:h15
 	function! Toggle_neovide_fullscreen()
 		if g:neovide_fullscreen
 			let g:neovide_fullscreen = v:false
@@ -25,7 +25,7 @@ endif
 " ui
 set number "Line numbers are good
 set relativenumber "Show numbers relative to current line
-set mouse=a "Enable mouse usage for all modes
+set mouse=a "Enable mouse usage for all modes (for primary selection to work: hold shift and drag)
 set clipboard+=unnamedplus "Yank command always copies to clipboard
 set splitbelow "Open split windows below by default
 set splitright "Open vsplit windows to the right by default

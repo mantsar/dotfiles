@@ -56,6 +56,10 @@ label=📅
 command=clock
 interval=30
 
+[weather]
+interval=once
+command=weather
+
 [redshift]
 command=redshift_statusbar
 interval=10

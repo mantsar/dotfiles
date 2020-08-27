@@ -3,6 +3,7 @@
     "discord": "discord",
     "qutebrowser": "chrome",
     "termite": "terminal",
+    "alacritty": "terminal",
     "neovide": "neos",
     "mpv": "play",
     "Ardour": "file-audio",

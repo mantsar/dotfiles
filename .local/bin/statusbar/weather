@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) $TERMINAL -e $SHELL -c 'cat ~/.cache/wal/sequences ; curl -sf "wttr.in/$LOCATION" | less -Srf ' ;;
+esac
+
+# echo 🌞
+# echo 🥶
+# echo ☔
+echo 摒

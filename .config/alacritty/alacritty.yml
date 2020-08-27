@@ -1,0 +1,19 @@
+#https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.9
+
+window:
+  padding:
+    x: 0
+    y: 0
+  # dynamic_padding: true
+
+font:
+  normal:
+    family: Ubuntu Mono
+  bold:
+    family: Ubuntu Mono
+  italic:
+    family: Ubuntu Mono
+  size: 11

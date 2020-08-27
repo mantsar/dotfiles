@@ -9,7 +9,8 @@ export PATH="$PATH:$HOME/.config/qutebrowser/userscripts"
 
 # Default programs:
 export EDITOR="nvim"
-export TERMINAL="termite"
+# export TERMINAL="termite"
+export TERMINAL="alacritty"
 export BROWSER="qutebrowser"
 export READER="zathura"
 export FILE="ranger"

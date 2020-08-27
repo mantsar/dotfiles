@@ -5,4 +5,4 @@ case $BLOCK_BUTTON in
 	3) pkill -x redshift && notify-send "Redshift deactivated" ;;
 esac
 
-( pgrep -x redshift >/dev/null 2>/dev/null && echo  ) || echo 
+( pgrep -x redshift >/dev/null 2>/dev/null && echo ﱧ ) || echo 
