@@ -2,6 +2,7 @@
 
 case $BLOCK_BUTTON in
 	1) pgrep -x dunst >/dev/null && notify-send "$(cal)" ;;
+	3) pgrep -x dunst >/dev/null && notify-send "$(cal)" ;;
 esac
 
 date '+%Y-%m-%d(%a)🕓%R'

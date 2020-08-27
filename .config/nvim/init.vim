@@ -5,7 +5,7 @@ if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.9
 	let g:neovide_cursor_vfx_mode = "ripple"
-	set guifont=FiraCode-Bold:h15
+	set guifont=FiraCode-Bold:h17
 	function! Toggle_neovide_fullscreen()
 		if g:neovide_fullscreen
 			let g:neovide_fullscreen = v:false
@@ -471,6 +471,8 @@ call minpac#add('somini/vim-textobj-fold')
 " call minpac#add('glts/vim-textobj-comment') "ic / ac
 call minpac#add('Julian/vim-textobj-brace') "aj / ij
 call minpac#add('beloglazov/vim-textobj-quotes') "aq / iq
+call minpac#add('sgur/vim-textobj-parameter') "aa / ia
+let g:vim_textobj_parameter_mapping = 'a'
 call minpac#add('thinca/vim-textobj-between')
 nmap cx4 cxif$
 nmap d4 dif$x

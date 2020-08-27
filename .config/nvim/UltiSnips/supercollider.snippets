@@ -277,6 +277,10 @@ snippet p "For referencing events" w
 Pdef(\\$1)
 endsnippet
 
+snippet pq "For referencing events" w
+Pdef(\\$1).quant = ${1:2};
+endsnippet
+
 snippet pd< "Composite pattern" w
 Pdef(\\$2, Pbind(\\$3, $0) <> Pdef(\\$1))
 endsnippet
@@ -586,9 +590,9 @@ snippet pcr "Custom. Imitate PCR/replication" w
 Pcr([${VISUAL}$1], ${2:1}, ${3:0.1}, ${3:inf})
 endsnippet
 
-snippet pq "Custom. Reverse quantization" w
-Pquant([${VISUAL}$1], ${2:1}, ${3:inf})
-endsnippet
+# snippet pq "Custom. Reverse quantization" w
+# Pquant([${VISUAL}$1], ${2:1}, ${3:inf})
+# endsnippet
 
 # Envelopes
 

@@ -1,3 +1,8 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+	1) setxkbmap us && notify-send "us" ;;
+	3) setxkbmap lt && notify-send "lt" ;;
+esac
+
 echo "$(setxkbmap -query | grep layout | awk '{print $2}' | awk  -F, '{print $1}')"

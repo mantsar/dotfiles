@@ -12,8 +12,8 @@ filter() {
 
 case $BLOCK_BUTTON in
     1) mpc toggle | filter ;;  # middle click, pause/unpause
-    2) mpc status | filter && i3-msg -q exec "$TERMINAL -e ncmpcpp" ;;  # left click, show music client
-    3) mpc status | filter && pgrep -x dunst >/dev/null && notify-send "🎵 Music module" "\- Shows mpd song playing.
+    3) mpc status | filter && i3-msg -q exec "$TERMINAL -e myncmpcpp" ;;  # left click, show music client
+    2) mpc status | filter && pgrep -x dunst >/dev/null && notify-send "🎵 Music module" "\- Shows mpd song playing.
 - Italic when paused.
 - Left click pauses.
 - Middle click opens ncmpcpp.

@@ -2,7 +2,7 @@
 
 case $BLOCK_BUTTON in
 	1) notify-send "🧠 Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
-	2) notify-send "🧠 Used/Total GB" "$(free -h | awk '/^Mem:/ {print $3 "/" $2}')" ;;
+	3) notify-send "🧠 Used/Total GB" "$(free -h | awk '/^Mem:/ {print $3 "/" $2}')" ;;
 esac
 
 printf "%s%%\n" $(free -m | awk '/^Mem:/ {print int($3 / $2 * 100)}')

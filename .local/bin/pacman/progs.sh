@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-sudo pacman -S zsh zsh-autosuggestions openfortivpn mpv ranger neovim atool atom ardour alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags docker docker-compose dunst faust ffmpeg foxdot fzf git gnustep-base gnustep-make haskell-tidal i3-gaps i3blocks ipython jack2 japa libnotify libreoffice-still lsof luarocks lv2 mpv neofetch nginx pandoc pandoc-citeproc pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift termite sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd r xclip npm python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl man-db evince
+sudo pacman -S zsh zsh-autosuggestions openfortivpn mpv ranger neovim atool atom ardour alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags docker docker-compose dunst faust ffmpeg foxdot fzf git gnustep-base gnustep-make haskell-tidal i3-gaps i3blocks ipython jack2 japa libnotify libreoffice-still lsof luarocks lv2 mpv neofetch nginx pandoc pandoc-citeproc pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift termite sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd r xclip npm python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl man-db evince a2jmidid glava ttf-font-awesome
 
 mkdir $HOME/Downloads $HOME/tmp $HOME/Videos $HOME/Pictures
 
@@ -42,6 +42,9 @@ mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
 # MPD
 mkdir $HOME/.config/mpd/playlists
+
+# i3
+pip3 install --user i3-workspace-names-daemon
 
 # MANUALLY -------------------------
 

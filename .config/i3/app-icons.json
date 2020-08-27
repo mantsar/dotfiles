@@ -1,0 +1,17 @@
+{
+    "firefox": "firefox",
+    "discord": "discord",
+    "qutebrowser": "chrome",
+    "termite": "terminal",
+    "neovide": "neos",
+    "mpv": "play",
+    "Ardour": "file-audio",
+    "steam": "steam",
+    "Atom": "atom",
+    "Lutris": "gamepad",
+    "Slack": "slack",
+    "libreoffice": "file-excel",
+    "Sxiv": "image",
+    "Zathura": "file-pdf",
+    "evince": "file-pdf"
+}

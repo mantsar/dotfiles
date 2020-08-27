@@ -2,6 +2,7 @@
 
 case $BLOCK_BUTTON in
 	1) notify-send "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
+	3) $TERMINAL -e myhtop ;;
 esac
 
 cpu=$(sensors | awk '/Core 0/ {print $3}' | cut -c2-3,6-8)

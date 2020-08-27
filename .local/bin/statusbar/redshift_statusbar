@@ -1,12 +1,8 @@
 #!/usr/bin/sh
 
-# case $BLOCK_BUTTON in
-# 	1) myredshift
-# esac
+case $BLOCK_BUTTON in
+	1) i3-msg -q exec "redshift -l 55:25" && notify-send "Redshift activated" ;;
+	3) pkill -x redshift && notify-send "Redshift deactivated" ;;
+esac
 
-if pgrep -x redshift >/dev/null 2>/dev/null
-then
-	echo 
-else
-	echo 
-fi
+( pgrep -x redshift >/dev/null 2>/dev/null && echo  ) || echo 

@@ -19,14 +19,18 @@ set $hibernate sudo -A systemctl suspend
 
 # #---Gaps---# #
 # You can also use any non-zero value if you'd like to have a border
-for_window [class="^.*"] border pixel 5
+for_window [class="^.*"] border pixel 6
 gaps inner $inner_gaps
 gaps outer $outer_gaps
+# Activate smart borders (always)
+smart_borders on
 
 # #---Starting External Scripts---# #
 
 # Jack
 exec cadence-session-start -s
+# Nicer workspace indexes
+exec_always --no-startup-id exec i3-workspace-names-daemon
 # mpd startup
 exec --no-startup-id mpd && mpc load all
 # Setting the background and colorscheme:
@@ -45,10 +49,13 @@ exec --no-startup-id transmission-daemon
 exec --no-startup-id syncthing --no-browser
 # Run the script to update the mpd i3block on change.
 exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
+# Remapping keys
+exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 
 # #---Bar---# #
 bar {
 	font pango:UbuntuMono 10
+	# font pango:FontAwesome 10
 		colors {
 			background $darkblack
 				statusline $darkwhite
@@ -65,6 +72,9 @@ bar {
 # disable system tray
 # tray_output none
 }
+
+# Show correct volume on startup
+exec --no-startup-id pulsemixer --set-volume $(pulsemixer --get-volume) && pkill -RTMIN+10 i3blocks
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
@@ -92,7 +102,7 @@ bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+s			exec --no-startup-id ukspawn scuk
-bindsym $mod+Shift+s			exec --no-startup-id neovide ~/sp/a/a.scd
+bindsym $mod+Shift+s			exec --no-startup-id  neovide ~/sp/a/a.scd
 
 bindsym $mod+i 			exec $term -e myhtop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
@@ -113,6 +123,7 @@ bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
 bindsym $mod+Shift+f exec --no-startup-id myjapa
+bindsym --whole-window $mod+button1 fullscreen toggle
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
@@ -137,6 +148,9 @@ bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
 
 bindsym $mod+Shift+n 			exec $term -e myncmpcpp
+bindsym $mod+Shift+g 			exec --no-startup-id glava -m radial
+for_window [instance="GLava"] floating enable
+for_window [instance="GLava"] border pixel 0
 
 bindsym $mod+m 			exec $term -e fzf_mpd
 bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
@@ -159,6 +173,9 @@ bindsym $mod+semicolon		workspace next
 bindsym $mod+apostrophe		split horizontal ;; exec $term
 bindsym $mod+slash		split vertical ;; exec $term
 
+# Need to rename it because of:
+# https://pypi.org/project/i3-workspace-names-daemon/
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -171,28 +188,28 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1		workspace $ws1
-bindsym $mod+2		workspace $ws2
-bindsym $mod+3		workspace $ws3
-bindsym $mod+4		workspace $ws4
-bindsym $mod+5		workspace $ws5
-bindsym $mod+6		workspace $ws6
-bindsym $mod+7		workspace $ws7
-bindsym $mod+8		workspace $ws8
-bindsym $mod+9		workspace $ws9
-bindsym $mod+0		workspace $ws10
+bindsym $mod+1		workspace number $ws1
+bindsym $mod+2		workspace number $ws2
+bindsym $mod+3		workspace number $ws3
+bindsym $mod+4		workspace number $ws4
+bindsym $mod+5		workspace number $ws5
+bindsym $mod+6		workspace number $ws6
+bindsym $mod+7		workspace number $ws7
+bindsym $mod+8		workspace number $ws8
+bindsym $mod+9		workspace number $ws9
+bindsym $mod+0		workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1	move container to workspace $ws1
-bindsym $mod+Shift+2	move container to workspace $ws2
-bindsym $mod+Shift+3	move container to workspace $ws3
-bindsym $mod+Shift+4	move container to workspace $ws4
-bindsym $mod+Shift+5	move container to workspace $ws5
-bindsym $mod+Shift+6	move container to workspace $ws6
-bindsym $mod+Shift+7	move container to workspace $ws7
-bindsym $mod+Shift+8	move container to workspace $ws8
-bindsym $mod+Shift+9	move container to workspace $ws9
-bindsym $mod+Shift+0	move container to workspace $ws10
+bindsym $mod+Shift+1	move container to workspace number $ws1
+bindsym $mod+Shift+2	move container to workspace number $ws2
+bindsym $mod+Shift+3	move container to workspace number $ws3
+bindsym $mod+Shift+4	move container to workspace number $ws4
+bindsym $mod+Shift+5	move container to workspace number $ws5
+bindsym $mod+Shift+6	move container to workspace number $ws6
+bindsym $mod+Shift+7	move container to workspace number $ws7
+bindsym $mod+Shift+8	move container to workspace number $ws8
+bindsym $mod+Shift+9	move container to workspace number $ws9
+bindsym $mod+Shift+0	move container to workspace number $ws10
 
 # #---Function Buttons---# #
 bindsym $mod+F1		restart
@@ -207,10 +224,11 @@ bindsym $mod+F12	exec $term -e nmtui
 
 # #---Media Keys---# #
 # Volume keys
-bindsym $mod+plus		exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+plus		exec --no-startup-id amixer -D pulse sset Master 15%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+minus 		exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+minus	exec --no-startup-id amixer -D pulse sset Master 15%- && pkill -RTMIN+10 i3blocks
+# bindsym $mod+plus		exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +0 && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+plus		exec --no-startup-id pulsemixer --change-volume +15 && pkill -RTMIN+10 i3blocks
+bindsym $mod+minus 		exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15 && pkill -RTMIN+10 i3blocks
 
 bindsym $mod+less 		exec --no-startup-id mpc prev
 bindsym $mod+Shift+less		exec --no-startup-id mpc seek 0%
@@ -226,8 +244,8 @@ bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +120
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume	exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume	exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume	exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
 
 # BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
 client.focused		$red		$red		$magenta	$darkmagenta		$darkblue

@@ -18,7 +18,5 @@ export MYVIMRC="$HOME/.config/nvim/init.vim"
 export TIDAL_BOOT_PATH="$HOME/sp/tidal/Tidal.ghci"
 export LV2_PATH="$HOME/.config/SuperCollider/synthdef"
 
-setxkbmap -option ctrl:nocaps
-
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
