@@ -646,7 +646,8 @@ augroup sc_au
 	autocmd!
 	" init
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
-	autocmd FileType supercollider setlocal dictionary+=~sp/dict/sc/synths.txt
+	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
+	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/controls.txt
 	autocmd FileType supercollider nnoremap <silent> <buffer> <M-f> :e ./snips.scd<cr>
 	autocmd FileType supercollider nnoremap <silent> <buffer> <M-n> :e ./notes.txt<cr>
 	autocmd VimEnter *.scd normal G
@@ -655,6 +656,8 @@ augroup sc_au
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/startup.scd
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/synthdef/synth_def.scd
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/synthdef/Main.sc
+	autocmd VimEnter *.scd :badd ~/sp/dict/sc/synths.txt
+	autocmd VimEnter *.scd :badd ~/sp/dict/sc/controls.txt
 	"mappings
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd imap <M-e> <C-o><Plug>(scnvim-send-block)
@@ -747,11 +750,13 @@ augroup tidal_au
 	autocmd FileType tidal setlocal formatoptions-=j "Do not concatenate # on J
 	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/samples.txt
-	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/functions.txt
-	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/controls.txt
-	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/chords.txt
-	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/arpeggiators.txt
-	autocmd FileType tidal setlocal dictionary+=~/sp/tidal/synths.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/functions.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/controls.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/chords.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/arpeggiators.txt
+	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/synths.txt
+	autocmd FileType tidal :badd ~/sp/dict/tidal/synths.txt
+	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>

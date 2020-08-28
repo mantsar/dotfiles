@@ -149,6 +149,7 @@ alias \
 	ov="sudo openfortivpn" \
 	sn="sp_new a" \
 	a="cd ~/sp/a" \
+	sp="cd ~/sp"
 
 # Directories
 alias \

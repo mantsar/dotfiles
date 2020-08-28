@@ -1,5 +1,3 @@
-
-.git
 notes
 hardkick
 arp

@@ -225,6 +225,13 @@ snippet pb "Combine several value patterns to one event stream by binding keys t
 Pbind(\\$1, $2,${VISUAL})
 endsnippet
 
+snippet pdb "" b
+Pdef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Pbind(\\instrument, $2,
+	\dur, $3,
+	$4
+)).quant_($5).play;
+endsnippet
+
 snippet pb< "Composite pattern" w
 Pbind(\\$2, $0) <> Pdef(\\$1)
 endsnippet
