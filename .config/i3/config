@@ -88,7 +88,8 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id firefox
 
-bindsym $mod+r 			exec $term -e ranger
+bindsym $mod+r 			exec $term exec --no-startup-id
+bindsym $mod+Shift+r exec --no-startup-id pcmanfm
 
 bindsym $mod+d			exec --no-startup-id rofi -show run
 bindsym $mod+grave			exec --no-startup-id rofi -show window

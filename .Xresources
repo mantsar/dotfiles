@@ -1,6 +1,0 @@
-rofi.kb-accept-entry: Control+m,Return,KP_Enter
-rofi.kb-row-down: Down,Control+j
-rofi.kb-remove-to-eol: 
-rofi.kb-row-up: Up,Control+p,Shift+Tab,Control+k
-rofi.kb-page-prev: Page_Up,Alt+p
-rofi.kb-page-next: Page_Down,Alt+n
