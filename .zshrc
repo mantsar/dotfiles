@@ -160,6 +160,7 @@ alias \
 	u="/mnt" \
 	pp="$HOME/Pictures" \
 	s="$HOME/.local/bin" \
+	S="$HOME/Sync" \
 	vv="$HOME/Videos" \
 	cs="$HOME/.config/SuperCollider" \
 	css="$HOME/.config/SuperCollider/synthdef" \
