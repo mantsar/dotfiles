@@ -10,5 +10,5 @@ then
 	i3-msg "[instance=\"unkillable_$script\"] focus" 
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL --name unkillable_$script $@ -e $script"
+	i3 "exec --no-startup-id $TERMINAL --class unkillable_$script $@ -e $script"
 fi
