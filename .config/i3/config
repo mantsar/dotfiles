@@ -88,7 +88,7 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id firefox
 
-bindsym $mod+r 			exec $term -e myranger
+bindsym $mod+r 			exec $term -e ranger
 
 bindsym $mod+d			exec --no-startup-id rofi -show run
 bindsym $mod+grave			exec --no-startup-id rofi -show window
@@ -104,7 +104,7 @@ bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 bindsym $mod+s			exec --no-startup-id ukspawn scuk
 bindsym $mod+Shift+s			exec --no-startup-id  neovide ~/sp/a/a.scd
 
-bindsym $mod+i 			exec $term -e myhtop
+bindsym $mod+i 			exec $term -e htop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 
 bindsym $mod+c exec --no-startup-id catia
@@ -147,7 +147,7 @@ bindsym $mod+b			bar mode toggle
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
 
-bindsym $mod+Shift+n 			exec $term -e myncmpcpp
+bindsym $mod+Shift+n 			exec $term -e ncmpcpp
 bindsym $mod+Shift+g 			exec --no-startup-id glava -m radial
 for_window [instance="GLava"] floating enable
 for_window [instance="GLava"] border pixel 0
@@ -164,9 +164,10 @@ bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec -
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
-bindsym $mod+Escape		exec --no-startup-id prompt "Exit i3?" "i3 exit"
-bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+bindsym $mod+Shift+Escape		exec --no-startup-id prompt "Exit i3?" "i3 exit"
+bindsym $mod+Escape 	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 bindsym $mod+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+Shift+BackSpace		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 
 # #---Workspace Bindings---# #
 bindsym $mod+semicolon		workspace next

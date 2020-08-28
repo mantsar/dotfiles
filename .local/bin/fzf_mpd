@@ -1,7 +1,5 @@
 #!/bin/sh
 
-(cat ~/.cache/wal/sequences &)
-
 find ~/Music/ -type f \( -iname \*.mp3 -o -iname \*.wav -o -iname \*.flac \) -printf '%f\n' | shuf > ~/.config/mpd/playlists/all.m3u
 song_position=$(mpc playlist all | cat -n | fzf-tmux --with-nth 2.. --query="$1" --reverse --select-1 --exit-0 | awk '{print $1}')
 mpc clear

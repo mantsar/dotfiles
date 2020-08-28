@@ -130,6 +130,7 @@ alias \
 alias \
 	g="git" \
 	d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME" \
+	da="d add -u && d reset -- $HOME/.config/alacritty/alacritty.yml" \
 	trem="transmission-remote" \
 	sdn="sudo shutdown -h now" \
 	e="$EDITOR" \
@@ -187,4 +188,4 @@ bindkey -M vicmd '^[q' sudo-command-line
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
