@@ -134,13 +134,6 @@ augroup spellmode
 	autocmd FileType gitcommit setlocal spell "Enable spelling by default
 augroup END
 
-augroup rmode
-	autocmd!
-	autocmd FileType r setlocal expandtab "Use spaces for tabs
-	autocmd FileType r inoremap <buffer> <M--> <-
-	autocmd FileType r inoremap <buffer> <M-=> %>%
-augroup END
-
 augroup pymode
 	autocmd!
 	autocmd FileType python setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
@@ -267,8 +260,8 @@ call minpac#add('mboughaba/i3config.vim')
 call minpac#add("liuchengxu/vim-which-key")
 packadd! vim-which-key "Add to runtimepath during init
 set timeoutlen=1000 "Delay to show which-key pop up
-call which_key#register('<Space>', "g:which_key_map") "Register prefix dict
 let g:which_key_map =  {} "Define prefix dictionary
+call which_key#register('<Space>', "g:which_key_map") "Register prefix dict
 nnoremap <silent> <leader> :<c-u>WhichKey '<space>'<cr>
 xnoremap <silent> <leader> :<c-u>WhichKeyVisual '<space>'<cr>
 " Don't use neovim's floating win, because it's ugly and not transparent
@@ -487,6 +480,7 @@ xmap a, af,
  "Provides a text object Snake and underscore cases
 call minpac#add('Julian/vim-textobj-variable-segment')
 " }}}2
+
 " IDE like {{{2
 call minpac#add('tpope/vim-fugitive') "Git integration
 augroup fugitive_au
@@ -508,6 +502,7 @@ let g:deoplete#enable_at_startup = 1
 call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
 call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
+call minpac#add('Shougo/deoplete-lsp')
 call minpac#add("SirVer/ultisnips")
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -518,8 +513,8 @@ nnoremap <silent> <M-9> :UltiSnipsEdit<cr>
 au TabLeave * call UltiSnips#LeavingBuffer() "Fixes freezing when changing tabs
 call minpac#add('kassio/neoterm')
 let g:neoterm_autoscroll = 1 "scroll to the end of its buffer after running any
-let neoterm_default_mod = "below"
-let g:neoterm_size = "10"
+let g:neoterm_default_mod = "below"
+" let g:neoterm_size = "10"
 let g:neoterm_repl_enable_ipython_paste_magic = 1
 " Send the commands to the neoterm buffer linked to the current tab instead of the last active neoterm.
 let g:neoterm_term_per_tab=1
@@ -527,7 +522,6 @@ nmap gx <Plug>(neoterm-repl-send)
 " Send selected contents in visual mode.
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
-" nnoremap <M-cr> :Tnew<cr>
 call minpac#add('kevinhwang91/rnvimr') " Ranger integration
 nnoremap <silent> <leader>r :RnvimrToggle<cr>
 " Make Ranger to be hidden after picking a file
@@ -588,7 +582,10 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 nnoremap <leader>gg :GGrep<space>
 nnoremap <M-`> :Marks<cr>
+" }}}2
+
 " Misc {{{2
+
 call minpac#add('junegunn/goyo.vim')
 let g:goyo_width = 140
 let g:goyo_height = 120
@@ -599,6 +596,59 @@ nnoremap <leader>ol :Limelight!!<cr>
 xmap gl <Plug>(Limelight)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+" Navi integration
+au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
+" }}}2
+
+" R language {{{2
+
+" LSP (langage server protocol)
+call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
+packadd! nvim-lsp
+nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.formatting()<cr>
+
+call minpac#add('nvim-lua/diagnostic-nvim', {'type': 'opt'})
+packadd! diagnostic-nvim
+" Don't want to show diagnostics while in insert mode
+let g:diagnostic_insert_delay = 1
+" call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+" call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+" call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+" call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
+nnoremap <silent> <C-p> :PrevDiagnosticCycle<cr>
+nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
+
+function! R_init()
+	:vertical Tnew
+	:T R --quiet
+	:Tclear
+endfunction
+
+augroup rmode
+	autocmd!
+	autocmd FileType r setlocal expandtab "Use spaces for tabs
+	autocmd FileType r inoremap <buffer> <M--> <-
+	autocmd FileType r inoremap <buffer> <M-=> %>%
+	autocmd FileType r nnoremap <buffer> <M-cr> :call R_init()<cr>
+	autocmd FileType r nnoremap <buffer> <M-j> :TREPLSendLine<cr>
+	autocmd FileType r inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
+	autocmd FileType r xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
+	autocmd FileType r xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
+	autocmd FileType r xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
+	autocmd FileType r nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
+	autocmd FileType r nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
+	autocmd FileType r nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
+	autocmd FileType r nnoremap <buffer> <M-l> :Tclear<cr>
+	autocmd FileType r nnoremap <buffer> <M-u> :Ttoggle<cr>
+augroup END
+
+lua << EOF
+require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
+-- Disable Diagnostcs globally
+-- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
+EOF
 " }}}2
 
 " Music {{{2
@@ -914,26 +964,3 @@ augroup faust_au
 	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ./f2s " . expand("%:t")<cr>
 augroup END
 " }}}2
-
-" Misc {{{2
-" Navi integration
-au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
-" }}}2
-
-" lsp
-" call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
-" packadd nvim-lsp
-
-" nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-
-" install.packages("languageserver")
-" lua << EOF
-" require'nvim_lsp'.r_language_server.setup{}
-" EOF
