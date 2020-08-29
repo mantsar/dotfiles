@@ -1,9 +1,12 @@
 #!/bin/bash
 
-yay -S neovide ttf-fira-code slack-desktop
+# Fixing libcurl-openssl-1.0 issue
+# https://aur.archlinux.org/packages/libcurl-openssl-1.0
+gpg --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 --recv 27EDEAF22F3ABCEB50DB9A125CC908FDB71E12C2
+sudo pacman -Syy
+
+yay -S neovide ttf-fira-code slack-desktop mongodb-bin mongodb-tools-bin
 
 # shiny-server-git
-# mongodb-bin
-# mongodb-tools-bin
 
 Rscript progs_r.R

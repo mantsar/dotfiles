@@ -147,6 +147,9 @@ alias \
 	tl="tmux ls" \
 	tn="tmux new -s " \
 	ov="sudo openfortivpn" \
+	ms="systemctl start mongodb" \
+	mS="systemctl stop mongodb" \
+	mss="systemctl status mongodb" \
 	sn="sp_new a" \
 	a="cd ~/sp/a" \
 	sp="cd ~/sp"
