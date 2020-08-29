@@ -12,7 +12,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git rstudio-desktop-bin faustlive-git htop-vim-git xcwd-git nerd-fonts-hack
+yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git htop-vim-git xcwd-git nerd-fonts-hack
 
 # arduino
 # arduino-docs

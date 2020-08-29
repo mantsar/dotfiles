@@ -1,0 +1,20 @@
+#!/usr/bin/env/R
+
+install.packages(c(
+  "tidyverse",
+  "devtools",
+  "shiny",
+  "shinyjs",
+  "shinydashboard",
+  "shinyWidgets",
+  "shinycssloaders",
+  "DT",
+  "glue",
+  "data.table",
+  "mongolite",
+  "curl",
+  "rmarkdown",
+  "plotly",
+  "rlist"
+))
+devtools::install_github("REditorSupport/languageserver")
