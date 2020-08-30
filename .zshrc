@@ -180,13 +180,13 @@ alias \
 # R
 alias \
 	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \
-	shiny='R -e "renv::init()"' \
-	shiny='R -e "renv::snapshot()"' \
-	shiny='R -e "renv::restore()"' \
-	shiny='R -e "renv::history()"' \
-	shiny='R -e "renv::revert()"'
-
-all renv::init() to initialize
+	ri='R -e "renv::init()"' \
+	rs='R -e "renv::snapshot()"' \
+	rr='R -e "renv::restore()"' \
+	ra='R -e "renv::activate()"' \
+	rd='R -e "renv::deactivate()"' \
+	rh='R -e "renv::history()"' \
+	rrev='R -e "renv::revert()"'
 
 # Load plugins. Should be last.
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

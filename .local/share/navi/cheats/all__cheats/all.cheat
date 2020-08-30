@@ -43,6 +43,8 @@ fc-list | fzf
 % pacman, arch package manager
 # List installed packages and versions
 pacman -Q | fzf
+# List packages with extensive info
+pacman -Qi | less
 # List only installed packages from sync dbs (without aur (and others) packages):
 pacman -Qn | fzf
 # Search locally-installed packages for matching strings
@@ -113,6 +115,8 @@ groupadd group
 groups user
 # Change group
 sudo chown -R user:group dir
+# Execute command as different user
+sudo -u user command
 
 % docker
 # run docker commands without sudo
@@ -157,9 +161,29 @@ find . -maxdepth 1 -type d | cut -c 3-
 % ssh vpn
 # Connect to computer with ssh through vpn
 sudo openfortivpn vpn.url:443 --username name -p password
+# Copy from remote to local
+scp user@ip:/remote/adress local/adress
 
 % usb
 # completely wipe out usb drive
 sudo shred /dev/sdc1
 # completely wipe out usb drive
 sudo dd if=/dev/zero of=/dev/sdc1 status=progress
+
+% R
+# Execute commands sequentially on one line
+command1; command 2; ...
+# Uninstall packages
+remove.packages(pkgs)
+
+% git
+# Clone specific branch
+git clone -b <branch> <remote_repo>
+# Reset all changes to HEAD
+git reset --hard
+
+% mongo
+# Export to file
+mongoexport --collection=col --db=db --out=file.json
+# Import files to database
+mongoimport --db test --collection inventory --file inventory.json

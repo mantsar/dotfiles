@@ -1,5 +1,5 @@
 slog:/var/log/shiny-server
 c:~/.config
-s:~/.scripts
+s:~/.local/bin
 sp:~/.config/SuperCollider
-l:~/projects/ShinyApps/lsmu
+l:~/projects/lsmu

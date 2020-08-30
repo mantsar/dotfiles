@@ -16,7 +16,13 @@ install.packages(c(
   "rmarkdown",
   "plotly",
   "rlist",
-  "remotes"
+  "remotes",
+  "shinyAce",
+  "pacman",
+  "kableExtra",
+  "Hmisc",
+  "uuid",
+  "rhandsontable"
 ))
 devtools::install_github("REditorSupport/languageserver")
 remotes::install_github("rstudio/renv")

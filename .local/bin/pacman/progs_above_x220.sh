@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Required by some R packages
-sudo pacman -S gcc-fortran
+sudo pacman -S gcc-fortran unixodbc
 
 # Fixing libcurl-openssl-1.0 issue
 # https://aur.archlinux.org/packages/libcurl-openssl-1.0
