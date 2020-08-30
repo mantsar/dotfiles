@@ -5,6 +5,8 @@ local({
   options(repos = r)
 })
 
+.libPaths('~/.R/library')
+
 options(prompt="R> ", digits=4)
 # browser_path <- system(paste("which", Sys.getenv("BROWSER")))
 browser_path <- "/usr/bin/firefox"

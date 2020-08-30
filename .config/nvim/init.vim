@@ -737,6 +737,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nmap <leader><leader>n mm?P<cr>v%:call Pattern_summary()<cr><C-l>`m
 	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ~/sp/dict/sc/scales.txt', 'sink': function('Scale_summary') })<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ~/sp/dict/samples.txt', 'sink': function('Sample_fetch') })<cr>
+	" Show samples dir tree
+	autocmd VimEnter *.scd nnoremap <leader><leader>3 :!tree ~/sp/Dirt-Samples/<cword>
 	autocmd VimEnter *.scd nnoremap <leader><leader>h :call Toggle_scnvim_scdoc()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>s :call scnvim#sclang#send("s.scope")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>f :call scnvim#sclang#send("FreqScope.new(1200)")<cr>
@@ -751,7 +753,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ~/sp/a/ardour<cr>
-	" autocmd VimEnter *.scd nnoremap <leader><leader>a :call Hydra_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>A :call Hydra_init()<cr>
 	" autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
 	" Ardour
 	autocmd VimEnter *.scd nnoremap <leader>ae :call scnvim#sclang#send("a.play")<cr>
@@ -788,6 +790,8 @@ endfunction
 let g:tidal_no_mappings = 1
 let g:tidal_target = "terminal"
 
+xnoremap <M-8> <esc>:execute "Lines '" . expand("<cword>")<cr>
+
 function Is_comment()
     let hg = join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'))
     return hg =~? 'comment' ? 1 : 0
@@ -807,6 +811,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
+	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>

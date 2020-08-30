@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sudo pacman -Syu
+# Perform system upgrade, but also check for development package updates and use PKGBUILD modification time (not version number) to determine update.
+yay -Syu --devel --timeupdate
+sudo Rscript -e "update.packages(ask=FALSE)"
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+apm upgrade
+nvim --headless +PackUpdate +qa

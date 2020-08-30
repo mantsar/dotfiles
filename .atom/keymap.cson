@@ -3,6 +3,8 @@
   "alt-a": "atom-hydra:toggle"
   "alt-j": "atom-hydra:evalLine"
   "alt-i": "atom-hydra:evalCode"
+  "alt-p": "atom-hydra:evalCode"
+  "alt-e": "atom-hydra:evalCode"
   'ctrl-w': 'editor:delete-to-beginning-of-word'
   'ctrl-a': 'editor:move-to-beginning-of-line'
   'ctrl-e': 'editor:move-to-end-of-line'

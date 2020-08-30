@@ -141,7 +141,6 @@ alias \
 	pu="sudo pacman -Syyu" \
 	lst="ls -laht | grep '^-' | head" \
 	lsa='ls -lah' \
-	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \
 	ta="tmux attach -t " \
 	tk="tmux kill-session -t " \
 	tl="tmux ls" \
@@ -177,6 +176,17 @@ alias \
 	cft="$EDITOR $HOME/.tmux.conf" \
 	cfi="$EDITOR $HOME/.config/i3/config" \
 	cfb="$EDITOR $HOME/.config/i3blocks/config"
+
+# R
+alias \
+	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \
+	shiny='R -e "renv::init()"' \
+	shiny='R -e "renv::snapshot()"' \
+	shiny='R -e "renv::restore()"' \
+	shiny='R -e "renv::history()"' \
+	shiny='R -e "renv::revert()"'
+
+all renv::init() to initialize
 
 # Load plugins. Should be last.
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
