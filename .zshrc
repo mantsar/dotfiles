@@ -179,7 +179,7 @@ alias \
 
 # R
 alias \
-	shiny='R -e "options(shiny.launch.browser = TRUE) ; shiny::runApp("port=7838")"' \
+	shiny='R -e "options(shiny.launch.browser = TRUE, shiny.autoreload = TRUE, browser = \"/usr/bin/firefox\") ; shiny::runApp("port=7838")"' \
 	ri='R -e "renv::init()"' \
 	rs='R -e "renv::snapshot()"' \
 	rr='R -e "renv::restore()"' \

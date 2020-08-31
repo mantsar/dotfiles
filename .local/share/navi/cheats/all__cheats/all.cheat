@@ -56,7 +56,7 @@ pacman -Ql
 # Synchronize databases and update packages
 sudo pacman -Syyu
 # Remove orphaned packages
-pacman -Rns $(pacman -Qtdq)
+sudo pacman -Rns $(pacman -Qtdq)
 
 % music, mpd, mpc
 # Show info about the currently playing song
@@ -187,3 +187,7 @@ git reset --hard
 mongoexport --collection=col --db=db --out=file.json
 # Import files to database
 mongoimport --db test --collection inventory --file inventory.json
+
+% nvim
+# Profiling startuptime
+nvim --startuptime log

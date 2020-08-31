@@ -64,7 +64,6 @@ let g:mapleader = "\<Space>" "Map leader key to space
 nnoremap <M-w> :wa<cr>
 nnoremap <M-q> :qa<cr>
 nnoremap <M-d> mmyyp`mj
-inoremap <M-cr> <cr><cr><up><tab>
 " Additional bindings to leave insert mode
 inoremap jw <esc>
 inoremap wj <esc>
@@ -585,7 +584,6 @@ nnoremap <M-`> :Marks<cr>
 " }}}2
 
 " Misc {{{2
-
 call minpac#add('junegunn/goyo.vim')
 let g:goyo_width = 140
 let g:goyo_height = 120
@@ -598,6 +596,26 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
+" }}}2
+
+" Markdown {{{2
+
+augroup mdmode
+	autocmd!
+	autocmd FileType markdown setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+call minpac#add('dkarter/bullets.vim')
+" Bullets.vim
+let g:bullets_enabled_file_types = ['markdown']
+let g:bullets_enable_in_empty_buffers = 0
+call minpac#add('iamcco/markdown-preview.nvim', {'do': 'packloadall! | call mkdp#util#install()'})
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = 'qutebrowser'
+nmap <M-e> <Plug>MarkdownPreview
+nmap <M-k> <Plug>MarkdownPreviewStop
+nmap <M-u> <Plug>MarkdownPreviewToggle
 " }}}2
 
 " R language {{{2
@@ -628,9 +646,10 @@ endfunction
 
 augroup rmode
 	autocmd!
-	autocmd FileType r setlocal expandtab "Use spaces for tabs
+	autocmd FileType r setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2 "Use spaces for tabs
 	autocmd FileType r inoremap <buffer> <M--> <-
 	autocmd FileType r inoremap <buffer> <M-=> %>%
+	autocmd FileType r inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd FileType r nnoremap <buffer> <M-cr> :call R_init()<cr>
 	autocmd FileType r nnoremap <buffer> <M-j> :TREPLSendLine<cr>
 	autocmd FileType r inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
@@ -709,6 +728,7 @@ augroup sc_au
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/synths.txt
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/controls.txt
 	"mappings
+	autocmd VimEnter *.scd inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd imap <M-e> <C-o><Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd xmap <M-e> <Plug>(scnvim-send-selection)
