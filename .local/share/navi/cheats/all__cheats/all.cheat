@@ -191,3 +191,5 @@ mongoimport --db test --collection inventory --file inventory.json
 % nvim
 # Profiling startuptime
 nvim --startuptime log
+# Load barebone vim without config
+nvim -u NONE file

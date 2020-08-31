@@ -1,3 +1,27 @@
-snippet o "Shows all defined options" 
+snippet o "Shows all defined options" b
 options()
+endsnippet
+
+snippet an "" w
+as.numeric($1)
+endsnippet
+
+snippet if "stringr::" w
+if ($1) {$2}
+endsnippet
+
+snippet ife "stringr::" w
+if ($1) {$2} else {$3}
+endsnippet
+
+snippet ifee "stringr::" w
+if ($1) {$2} else if ($3) {$4} else {$5}
+endsnippet
+
+snippet sd "stringr::" w
+str_detect(${1:string}, ${2:pattern})
+endsnippet
+
+snippet pc "purrr::" w
+map_chr(${1:vector}, ${2:function})
 endsnippet

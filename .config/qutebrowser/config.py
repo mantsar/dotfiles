@@ -19,6 +19,10 @@ dracula.draw.blood(c, {
 c.qt.args = ["blink-settings=darkMode=4,darkModeImagePolicy=0"]
 c.colors.webpage.prefers_color_scheme_dark = True
 
+# Completion
+config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
+config.bind('<Ctrl-k>', 'completion-item-focus prev', mode='command')
+
 # Bindings
 config.bind('<Alt-e>', 'open-editor', mode='insert')
 config.bind('<Alt-e>', 'open-editor', mode='normal')
@@ -47,6 +51,9 @@ config.bind('gh', 'tab-move -')
 config.bind('gl', 'tab-move +')
 config.bind('X', 'undo')
 config.bind('<Alt-Tab>', 'tab-focus last')
+config.bind('<Alt-b>', "config-cycle statusbar.show always in-mode;; config-cycle tabs.show always never", mode="normal")
+config.bind('<Alt-`>', 'set-cmd-text -s :buffer')
+
 # Moving
 # config.bind('j', 'scroll-page 0 0.055')
 # config.bind('k', 'scroll-page 0 -0.055')

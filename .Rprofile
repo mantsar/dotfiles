@@ -1,3 +1,4 @@
+library("magrittr")
 ## Set CRAN mirror:
 local({
   r <- getOption("repos")

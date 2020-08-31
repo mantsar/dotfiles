@@ -12,7 +12,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git htop-vim-git xcwd-git nerd-fonts-hack
+yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git htop-vim-git xcwd-git nerd-fonts-hack i3-layout-manager-git
 
 # arduino
 # arduino-docs
@@ -78,6 +78,7 @@ pip3 install --user i3-workspace-names-daemon
 # bind --mode=normal O fillcmdline open
 # bind --mode=normal X undo
 # bind --mode=normal <A-Tab> buffer #
+# bind --mode=normal <A-`> fillcmdline tab
 # set searchurls.g https://www.google.com/search?q=
 # set searchurls.y https://www.youtube.com/results?search_query=
 # set searchurls.r https://old.reddit.com/search?q=

@@ -15,10 +15,6 @@ if exists('g:neovide')
 	endfunction
 	nnoremap <up> :let g:neovide_transparency=g:neovide_transparency+0.1<cr>
 	nnoremap <down> :let g:neovide_transparency=g:neovide_transparency-0.1<cr>
-	" nnoremap <f11> :call Toggle_neovide_fullscreen()<cr>
-	set termguicolors
-else
-	set notermguicolors
 endif
 
 " ~~~~~~~~~~~~~~~~~~~~~~~ options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
@@ -174,11 +170,30 @@ command! PackStatus call minpac#status() "See plugins status
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~ ui ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 " Colorscheme
-call minpac#add('liuchengxu/space-vim-dark')
+set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
-
+call minpac#add('liuchengxu/space-vim-dark')
+call minpac#add('endel/vim-github-colorscheme')
 function! Toggle_colorcheme()
-		if g:colorscheme
+		if g:colorscheme == 1
+			set colorcolumn=999
+			set nocursorline
+			set nocursorcolumn
+			augroup ui
+				autocmd!
+			augroup END
+			colorscheme paramount
+			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
+			let g:colorscheme = 2
+		elseif g:colorscheme == 2
+			colorscheme github
+			hi Comment gui=italic
+			hi Comment guifg=#5c6370 ctermfg=59
+			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
+			set colorcolumn=80 "Nicer code -> better code
+			set cursorline "Highlight current line
+			let g:colorscheme = 0
+		else
 			set colorcolumn=80 "Nicer code -> better code
 			set cursorline "Highlight current line
 			set cursorcolumn "Highlight current column
@@ -190,42 +205,17 @@ function! Toggle_colorcheme()
 			augroup END
 			colorscheme space-vim-dark
 			hi Comment guifg=#5c6370 ctermfg=59
-			hi Comment cterm=italic gui=italic
-			hi Sneak guifg=black guibg=#afff5f ctermfg=black ctermbg=156
-			hi QuickScopePrimary guifg=NONE gui=underline guisp=#afff5f ctermfg=NONE cterm=underline 
-			let g:colorscheme = 0
-		else
-			set colorcolumn=999
-			set nocursorline
-			set nocursorcolumn
-			augroup ui
-				autocmd!
-			augroup END
-			colorscheme paramount
-			hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
 			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
 			let g:colorscheme = 1
 		endif
+		au VimEnter * hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
+		" au VimEnter * hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
+		" au VimEnter * hi SneakScope guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
 endfunction
-
-let g:colorscheme = 0
-if g:colorscheme
-	au VimEnter * hi Comment guifg=#5c6370 ctermfg=59
-	" https://github.com/liuchengxu/space-vim-dark/blob/master/colors/space-vim-dark.vim
-	au VimEnter * hi Sneak guifg=black guibg=#afff5f ctermfg=black ctermbg=156
-	au VimEnter * highlight QuickScopePrimary guifg=NONE gui=underline guisp=#afff5f
-				\ ctermfg=NONE cterm=underline 
-else
-	" https://github.com/owickstrom/vim-colors-paramount/blob/master/colors/paramount.vim
-	au VimEnter * hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
-	au VimEnter * highlight QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7
-				\ ctermfg=NONE cterm=underline 
-endif
-nnoremap <leader>oc :call Toggle_colorcheme()<cr>
+let g:colorscheme = 1
 call Toggle_colorcheme()
-nnoremap <leader>ob :set background=light
-" call minpac#add('dylanaraps/wal.vim')
-" colorscheme wal
+nnoremap <leader>oc :call Toggle_colorcheme()<cr>
+
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('itchyny/lightline.vim')
 " remove -- INSERT --
@@ -640,7 +630,7 @@ nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
 
 function! R_init()
 	:vertical Tnew
-	:T R --quiet
+	:T R
 	:Tclear
 endfunction
 

@@ -78,7 +78,7 @@ exec --no-startup-id pulsemixer --set-volume $(pulsemixer --get-volume) && pkill
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return exec $term -d $(xcwd)
+bindsym $mod+Shift+Return exec $term --working-directory $(xcwd)
 
 bindsym $mod+Tab		workspace back_and_forth
 
@@ -115,7 +115,8 @@ bindsym $mod+a		exec --no-startup-id ddspawn pulsemixerdd
 
 bindsym $mod+g			exec --no-startup-id ddspawn calcdd
 
-bindsym $mod+n			exec --no-startup-id ddspawn navidd
+bindsym $mod+x			exec --no-startup-id ddspawn navidd
+bindsym $mod+n exec --no-startup-id ddspawn notesdd
 
 bindsym $mod+e			gaps inner current plus 5
 bindsym $mod+Shift+e		gaps inner current minus 5
@@ -276,19 +277,21 @@ set $transparent		#000000
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
-for_window [instance="dropdown_*"] floating enable
-for_window [instance="dropdown_*"] move scratchpad
-for_window [instance="dropdown_*"] sticky enable
-for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_tmuxdd"] resize set 625 450
 for_window [instance="dropdown_pyradiodd"] resize set 625 450
 for_window [instance="dropdown_calcdd"] resize set 800 300
-for_window [instance="dropdown_navidd"] resize set 900 500
+# for_window [instance="dropdown_navidd"] resize set 1166 500
+# for_window [instance="dropdown_notesdd"] resize set 1866 700
 for_window [instance="dropdown_pulsemixerdd"] resize set 900 500
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_pyradiodd"] border pixel 2
 for_window [instance="dropdown_calcdd"] border pixel 2
-for_window [instance="dropdown_navidd"] border pixel 1
+for_window [instance="dropdown_navidd"] border pixel 2
+for_window [instance="dropdown_notesdd"] border pixel 2
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_*"] move position center
 
 # Set some windows traits
