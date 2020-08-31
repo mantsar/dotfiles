@@ -43,6 +43,9 @@ mkdir $HOME/.config/mpd/playlists
 # i3
 pip3 install --user i3-workspace-names-daemon
 
+# tmux
+git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/pkgbuilds/tmux-resurrect
+
 # MANUALLY -------------------------
 
 # /etc/default/grub

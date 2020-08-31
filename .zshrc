@@ -141,10 +141,11 @@ alias \
 	pu="sudo pacman -Syyu" \
 	lst="ls -laht | grep '^-' | head" \
 	lsa='ls -lah' \
-	ta="tmux attach -t " \
-	tk="tmux kill-session -t " \
+	t="tmux" \
+	ta="tmux attach -t" \
+	tk="tmux kill-session -t" \
 	tl="tmux ls" \
-	tn="tmux new -s " \
+	tn="tmux new -s" \
 	ov="sudo openfortivpn" \
 	ms="systemctl start mongodb" \
 	mS="systemctl stop mongodb" \
@@ -157,6 +158,7 @@ alias \
 alias \
 	c="$HOME/.config" \
 	cq="$HOME/.config/qutebrowser" \
+	cl="$HOME/.config/i3-layout-manager/layouts" \
 	dw="$HOME/Downloads" \
 	h="$HOME" \
 	m="$HOME/Music" \

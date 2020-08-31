@@ -88,6 +88,8 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id firefox
 
+bindsym $mod+y			exec --no-startup-id i3-layout-manager
+
 bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r exec --no-startup-id pcmanfm
 
@@ -118,8 +120,8 @@ bindsym $mod+g			exec --no-startup-id ddspawn calcdd
 bindsym $mod+x			exec --no-startup-id ddspawn navidd
 bindsym $mod+n exec --no-startup-id ddspawn notesdd
 
-bindsym $mod+e			gaps inner current plus 5
-bindsym $mod+Shift+e		gaps inner current minus 5
+bindsym $mod+e			gaps inner current plus 20
+bindsym $mod+Shift+e		gaps inner current minus 20
 
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
