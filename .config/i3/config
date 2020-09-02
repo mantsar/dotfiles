@@ -94,6 +94,7 @@ bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r exec --no-startup-id pcmanfm
 
 bindsym $mod+d			exec --no-startup-id rofi -show run
+bindsym $mod+Shift+d		gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
 bindsym $mod+grave			exec --no-startup-id rofi -show window
 
 bindsym $mod+t			split toggle
@@ -118,12 +119,11 @@ bindsym $mod+a		exec --no-startup-id ddspawn pulsemixerdd
 bindsym $mod+g			exec --no-startup-id ddspawn calcdd
 
 bindsym $mod+x			exec --no-startup-id ddspawn navidd
+
 bindsym $mod+n exec --no-startup-id ddspawn notesdd
 
 bindsym $mod+e			gaps inner current plus 20
 bindsym $mod+Shift+e		gaps inner current minus 20
-
-bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
 bindsym $mod+Shift+f exec --no-startup-id myjapa
@@ -143,8 +143,8 @@ bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l		move right 30
 
-bindsym $mod+z			gaps outer current plus 5
-bindsym $mod+Shift+z		gaps outer current minus 5
+bindsym $mod+z			gaps outer current plus 20
+bindsym $mod+Shift+z		gaps outer current minus 20
 
 bindsym $mod+b			bar mode toggle
 

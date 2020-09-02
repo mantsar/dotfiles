@@ -631,7 +631,7 @@ nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
 function! R_init()
 	:vertical Tnew
 	:T R
-	:Tclear
+	" :Tclear
 endfunction
 
 augroup rmode

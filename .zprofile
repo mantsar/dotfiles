@@ -6,6 +6,7 @@
 # export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$PATH:$HOME/.config/qutebrowser/userscripts"
+export PATH="$PATH:$HOME/bin"
 
 # Default programs:
 export EDITOR="nvim"

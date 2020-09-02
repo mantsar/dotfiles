@@ -117,6 +117,12 @@ groups user
 sudo chown -R user:group dir
 # Execute command as different user
 sudo -u user command
+# Make script/binary executable only for user
+chmod u+x bs
+# Chgange user password
+sudo passwd user
+# Hardcoding permissions (g -group, o-other, u-user, a- all) (+ = -)
+chmod go=rx Documents
 
 % docker
 # run docker commands without sudo
@@ -193,3 +199,41 @@ mongoimport --db test --collection inventory --file inventory.json
 nvim --startuptime log
 # Load barebone vim without config
 nvim -u NONE file
+
+% find xargs exec
+# Find through filename matching
+find . -name "aa*bb"
+# Find only files
+find . -name "aa*bb" -type f
+# Or because and is enabled by default
+find . -name "aa*bb" -or -type f
+# Negate
+find . -name "aa*bb" "!" -type f
+# Exec executes command on mathed file. ; is required at the end!
+find . -name "aa*bb" "!" -type f -exec rm -i {} \;
+# Same as exect but with xargs`
+find . -name "aa*bb" "!" -type f | xargs rm -i
+# Prevent xargs from breaking when spaces are found
+find . -name "aa*bb" "!" -type f -print0 | xargs -0 rm -i
+# Restrict to taking one argument at a time
+find . -name "aa*bb" "!" -type f | xargs -n 1 rm -i
+# Write xargs commands to a file for insepcting. After that launch bash/sh sctipt
+find . -name "aa*bb" "!" -type f | xargs -n 1 echo "rm -i" > delete-temp.sh
+# Allow to reference xargs inptut
+find . -name "*.fastq" | xargs basename -s ".fastq" | xargs -I@ fastq_stat --in @.fastq --out ../summaries/@.txt
+
+# Basespace cli
+# Authenticate in a browser
+bs auth
+# Authenticate
+bs list project/biosample/run
+# Download all runs data
+bs list run --terse | xargs -I@ bs download run -i @ -o @
+# Download all projects with Name as output. Single quotes prevents evaluation
+bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh ; bash tmp.sh
+# Download all runs with Name as output. Single quotes prevents evaluation
+bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh ; bash tmp.sh
+# Delete all runs determined by their id
+bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
+# Delete all projects determined by their id
+bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh

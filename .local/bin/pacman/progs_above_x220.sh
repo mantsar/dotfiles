@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Required by some R packages
-sudo pacman -S gcc-fortran unixodbc
+sudo pacman -S gcc-fortran unixodbc gnu-free-fonts
 
 # Fixing libcurl-openssl-1.0 issue
 # https://aur.archlinux.org/packages/libcurl-openssl-1.0
@@ -11,5 +11,4 @@ sudo pacman -Syy
 yay -S neovide ttf-fira-code slack-desktop mongodb-bin mongodb-tools-bin rstudio-desktop-bin
 
 # shiny-server-git
-
 Rscript progs_r.R

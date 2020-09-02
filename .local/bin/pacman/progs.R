@@ -22,7 +22,9 @@ install.packages(c(
   "kableExtra",
   "Hmisc",
   "uuid",
-  "rhandsontable"
+  "rhandsontable",
+  "tinytex"
 ))
 devtools::install_github("REditorSupport/languageserver")
 remotes::install_github("rstudio/renv")
+tinytex::install_tinytex()

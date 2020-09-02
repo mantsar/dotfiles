@@ -182,6 +182,7 @@ alias \
 # R
 # shiny.autoreload = TRUE,
 alias shiny='R -e "options(shiny.launch.browser = TRUE, browser = \"/usr/bin/firefox\") ; shiny::runApp("port=7838")"' \
+	rmarkdown='R -e "options(shiny.launch.browser = TRUE, browser = \"/usr/bin/firefox\") ; rmarkdown::run(\"patient_report.Rmd\", shiny_args = list(port = 7840))"' \
 	ri='R -e "renv::init()"' \
 	rs='R -e "renv::snapshot()"' \
 	rr='R -e "renv::restore()"' \
