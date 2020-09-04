@@ -76,7 +76,7 @@ snippet v "Global variable" b
 endsnippet
 
 snippet s "sig" b
-sig = $1;
+sig = $1
 endsnippet
 
 snippet c "Named control style argument" w
@@ -762,12 +762,6 @@ snippet fo "Embed function in Routine and play it" w
 }.fork;
 endsnippet
 
-snippet ta "Task. Can be paused and resumed inside routine" w
-Task { 
-	${VISUAL}$1 
-}
-endsnippet
-
 snippet sched "Relative scheduling" b
 t.sched(t.timeToNextBeat, { $1; ${2:1} });
 endsnippet
@@ -1387,7 +1381,7 @@ snippet ds "Pseq equivalent for UGens. List can contain array or other UGens" w
 Dseq(${VISUAL}$1, ${2:1})
 endsnippet
 
-snippet ds[ "Pseq equivalent for UGens. List can contain array or other UGens" w
+snippet dsa "Pseq equivalent for UGens. List can contain array or other UGens" w
 Dseq([${VISUAL}$1], ${2:1})
 endsnippet
 
@@ -1817,7 +1811,7 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`})[0] = \setsrc -> Pbind(
 endsnippet
 
 snippet jip "Basically multiline set audio controls, and does not create new synth every duration. Also overwrites everything on revaluation (even undefined ones)" b
-Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4);
+Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4));
 Ndef(\\$1)[${2:`!p if not snip.c: snip.rv = role_index()`}] = \pset -> Pdef(\\$1);
 endsnippet
 
@@ -1871,11 +1865,11 @@ snippet j* "Multiply two Ndefs" w
 Ndef(\\$1, {Ndef(\\$2) * Ndef(\\$3)});
 endsnippet
 
-snippet js "Set Ndef arguments" b
+snippet js "Set Ndef arguments" w
 Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).set(\\$2, $3);
 endsnippet
 
-snippet jx "Set Ndef arguments with crossfading" b
+snippet jx "Set Ndef arguments with crossfading" w
 Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).xset(\\$2, $3);
 endsnippet
 
@@ -1907,6 +1901,34 @@ SynthDef(key, {|out=0, f=440, atk=0.01, sustain=1, curve=(-4), gate=1, pan=0, am
 	sig = sig * SynthDef.wrap($5_func);
 	Out.ar(out, Pan2.ar(sig, pan) * env * pan);
 }).add;
+endsnippet
+
+# Tasks
+
+snippet ww "" w
+${1:1}.wait;
+endsnippet
+
+snippet ta "Task. Can be paused and resumed inside routine" w
+Task {
+	${VISUAL}$1
+}
+endsnippet
+
+snippet td "" b
+Tdef(\\$1, {${VISUAL}$2});
+endsnippet
+
+snippet tq "" w
+Tdef(\\$1).quant = ${1:1};
+endsnippet
+
+snippet jp "" b
+Tdef(\\$1}).play;
+endsnippet
+
+snippet tss "" b
+Tdef(\\$1}).stop;
 endsnippet
 
 # GUI

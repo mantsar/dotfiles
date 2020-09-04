@@ -203,4 +203,4 @@ source ~/.local/bin/zsh/sudo.plugin.zsh
 bindkey '^[q' sudo-command-line
 bindkey -M vicmd '^[q' sudo-command-line
 
-[ -e ~/.aliases ] && source .aliases
+[ -e ~/.aliases ] && source ~/.aliases

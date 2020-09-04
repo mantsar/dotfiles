@@ -124,6 +124,12 @@ augroup vimrc
 	autocmd bufwritepost init.vim source $MYVIMRC
 augroup END
 
+augroup shmode
+	autocmd!
+	autocmd FileType sh nnoremap <leader>lf :!shellcheck %<cr>
+	autocmd FileType sh nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
+augroup END
+
 augroup spellmode
 	autocmd!
 	autocmd FileType gitcommit setlocal spell "Enable spelling by default
@@ -132,6 +138,7 @@ augroup END
 augroup pymode
 	autocmd!
 	autocmd FileType python setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
+	autocmd FileType python nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
 augroup END
 
 augroup luamode
@@ -346,6 +353,14 @@ let g:which_key_map['w'] = {
 			\ '|' : 'maximize-vertically',
 			\ '0' : 'maximize-both-axis',
 			\ }
+" Quickfix
+nnoremap <leader>qn :cnext<cr>
+nnoremap <leader>qp :cprevious<cr>
+nnoremap <leader>qj :cnext<cr>
+nnoremap <leader>qk :cprevious<cr>
+nnoremap <leader>q0 :cfirst<cr>
+nnoremap <leader>q$ :clast<cr>
+nnoremap <silent> <leader>qq :cclose<cr>
 " Folding
 nnoremap <leader>z zMzv
 " Dictionary
@@ -411,8 +426,8 @@ nnoremap dsf  :call surroundfunc#DSurroundFunc()<cr>
 nnoremap csf  :call surroundfunc#CSurroundFunc()<cr>
 call minpac#add('tpope/vim-rsi') "Some Emacs bindings for insert and cmdline mode
 call minpac#add('tpope/vim-unimpaired')
-nmap <leader>k mm[<space>`m
 nmap <leader>j mm]<space>`m
+nmap <leader>k mm[<space>`m
 " Bubble single lines
 nmap <C-k> [e
 nmap <C-j> ]e
@@ -595,6 +610,8 @@ augroup mdmode
 	autocmd FileType markdown setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
+" }}}2
+
 call minpac#add('dkarter/bullets.vim')
 " Bullets.vim
 let g:bullets_enabled_file_types = ['markdown']
@@ -608,15 +625,14 @@ nmap <M-k> <Plug>MarkdownPreviewStop
 nmap <M-u> <Plug>MarkdownPreviewToggle
 " }}}2
 
-" R language {{{2
-
-" LSP (langage server protocol)
+" LSP (langage server protocol) {{{2
 call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
 packadd! nvim-lsp
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
-vnoremap <silent> <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
+vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
+nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
 
 call minpac#add('nvim-lua/diagnostic-nvim', {'type': 'opt'})
 packadd! diagnostic-nvim
@@ -629,6 +645,17 @@ let g:diagnostic_insert_delay = 1
 nnoremap <silent> <C-p> :PrevDiagnosticCycle<cr>
 nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
 
+lua << EOF
+require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
+require'nvim_lsp'.bashls.setup{}
+require'nvim_lsp'.pyls.setup{}
+-- Disable Diagnostcs globally
+-- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
+EOF
+
+" }}}2
+
+" R language {{{2
 function! R_init()
 	:vertical Tnew
 	:T R
@@ -640,6 +667,7 @@ let r_indent_align_args = 0
 augroup rmode
 	autocmd!
 	autocmd FileType r,rmd setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2 "Use spaces for tabs
+	autocmd FileType r,rmd nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
 	autocmd FileType r,rmd inoremap <buffer> <M--> <-
 	autocmd FileType r,rmd inoremap <buffer> <M-=> %>%
 	autocmd FileType r,rmd inoremap <buffer> <M-cr> <cr><cr><up><tab>
@@ -655,12 +683,6 @@ augroup rmode
 	autocmd FileType r,rmd nnoremap <buffer> <M-l> :Tclear<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-u> :Ttoggle<cr>
 augroup END
-
-lua << EOF
-require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
--- Disable Diagnostcs globally
--- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
-EOF
 " }}}2
 
 " Music {{{2
@@ -827,7 +849,7 @@ augroup tidal_au
 	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
-	autocmd FileType tidal nnoremap <silent> <buffer> <M-f> :e ./snips.tidal<cr>
+	autocmd FileType tidal nnoremap <silent> <buffer> <M-s> :e ./snips.tidal<cr>
 	" Always autoscroll
 	autocmd FileType tidal nmap <M-u> <Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
 	autocmd FileType tidal imap <M-u> <C-o><Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>

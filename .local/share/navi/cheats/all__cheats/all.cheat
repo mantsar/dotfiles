@@ -187,6 +187,8 @@ remove.packages(pkgs)
 git clone -b <branch> <remote_repo>
 # Reset all changes to HEAD
 git reset --hard
+# Diff for staged files
+git diff --staged file
 
 % mongo
 # Export to file

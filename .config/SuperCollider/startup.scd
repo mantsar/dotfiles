@@ -538,7 +538,7 @@ s.waitForBoot({
 	s.sync;
 	Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
 	~ndef_settings.value(nil, fadeTime:0.5, quant:1, clock:TempoClock.default);
-	Ndef.defaultReshaping = \elastic;
+	// Ndef.defaultReshaping = \elastic;
 	// BusPlug.defaultReshaping = \elastic;
 	~toggle_mute = ~make_toggle_mute.value();
 	e = (); // dict for holding effects
