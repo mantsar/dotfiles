@@ -52,11 +52,12 @@ git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/pkgbuilds/tmux-re
 # GRUB_THEME="/usr/share/grub/themes/breeze/theme.txt"
 # sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+# IF NOT EXTERNAL MONITOR
 # https://wiki.archlinux.org/index.php/Backlight
-sudo gpasswd -a $USER video
+# sudo gpasswd -a $USER video
 # /etc/udev/rules.d/backlight.rules
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
 
 # reboot
 

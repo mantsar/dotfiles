@@ -17,7 +17,7 @@ getmount() { \
 	}
 
 mountusb() { \
-	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?")" || exit 1
+	chosen="$(echo -e "$usbdrives" | dmenu -i -p "Mount which drive?")" || exit 1
 	chosen="$(echo "$chosen" | awk '{print $1}')"
 	sudo -A mount "$chosen" 2>/dev/null && notify-send "💻 USB mounting" "$chosen mounted." && exit 0
 	alreadymounted=$(lsblk -nrpo "name,type,mountpoint" | awk '$3!~/\/boot|\/home$|SWAP/&&length($3)>1{printf "-not ( -path *%s -prune ) ",$3}')
@@ -63,13 +63,14 @@ done
 
 usbdrives_partition="$(lsblk -rpo "name,type,size,mountpoint" | grep 'part\|rom' | awk '$4==""{printf "%s (%s)\n",$1,$3}')"
 usbdrives_disk="$(lsblk -rpo "name,type,size,mountpoint" | grep 'disk' | egrep $(echo $p | tr ' ' '|') | awk '$4==""{printf "%s (%s)\n",$1,$3}')"
-usbdrives="${usbdrives_partition} ${usbdrives_disk}"
+usbdrives="${usbdrives_partition}\n${usbdrives_disk}"
 
 if [ -z "$usbdrives" ]; then
 	[ -z "$anddrives" ] && echo "No USB drive or Android device detected" && exit
 	echo "Android device(s) detected."
 	mountandroid
 else
+
 	if [ -z "$anddrives" ]; then
 		echo "USB drive(s) detected."
 		mountusb
