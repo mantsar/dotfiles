@@ -90,6 +90,8 @@ config.bind(';M', 'hint --rapid links spawn umpv {hint-url}')
 config.bind(",a", "spawn --userscript youtubedl_mp3")
 config.bind(",A", "hint links userscript youtubedl_mp3")
 
+config.bind("sd", "spawn --userscript open_download")
+
 config.bind('<Alt-q>', 'quit --save')
 
 # https://github.com/LaurenceWarne/qute-code-hint
