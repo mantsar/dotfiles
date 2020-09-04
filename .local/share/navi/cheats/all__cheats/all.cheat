@@ -222,7 +222,7 @@ find . -name "aa*bb" "!" -type f | xargs -n 1 echo "rm -i" > delete-temp.sh
 # Allow to reference xargs inptut
 find . -name "*.fastq" | xargs basename -s ".fastq" | xargs -I@ fastq_stat --in @.fastq --out ../summaries/@.txt
 
-# Basespace cli
+% Basespace cli
 # Authenticate in a browser
 bs auth
 # Authenticate
@@ -240,7 +240,7 @@ bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete run 
 # Delete all projects determined by their id
 bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
 
-# qutebrowser
+% qutebrowser
 # Show history:
 Sh
 # Go back in history in new tab:
@@ -252,7 +252,7 @@ go
 # Use hints to copy(yank) url in page:
 ;y
 
-# Tmux
+% Tmux
 # tmux-resurect save
 prefix + Ctrl-s
 # tmux-resurect restore
