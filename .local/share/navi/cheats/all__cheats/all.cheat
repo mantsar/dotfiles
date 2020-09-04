@@ -239,3 +239,21 @@ bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download ru
 bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
 # Delete all projects determined by their id
 bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
+
+# qutebrowser
+# Show history:
+Sh
+# Go back in history in new tab:
+th
+# Focus next item(clickable?):
+<Tab>
+# Edit current url:
+go
+# Use hints to copy(yank) url in page:
+;y
+
+# Tmux
+# tmux-resurect save
+prefix + Ctrl-s
+# tmux-resurect restore
+tmux > prefix + Ctrl-r
