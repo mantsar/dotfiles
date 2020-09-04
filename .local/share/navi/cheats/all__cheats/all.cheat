@@ -48,7 +48,7 @@ pacman -Qi | less
 # List only installed packages from sync dbs (without aur (and others) packages):
 pacman -Qn | fzf
 # Search locally-installed packages for matching strings
-pacman -Qs 
+pacman -Qs acpi
 # Only explicitly installed packages
 pacman -Qe | less
 # List package files
@@ -232,6 +232,8 @@ bs list run --terse | xargs -I@ bs download run -i @ -o @
 # Download all projects with Name as output. Single quotes prevents evaluation
 bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh ; bash tmp.sh
 # Download all runs with Name as output. Single quotes prevents evaluation
+bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh ; bash tmp.sh
+# Download all fastqs with Name as output. Single quotes prevents evaluation
 bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh ; bash tmp.sh
 # Delete all runs determined by their id
 bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh

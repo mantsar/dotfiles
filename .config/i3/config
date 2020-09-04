@@ -222,7 +222,9 @@ bindsym $mod+F2	exec --no-startup-id passmenu
 bindsym $mod+F3	exec --no-startup-id toggle_layout
 bindsym $mod+F4	exec --no-startup-id myredshift
 bindsym $mod+F5		exec --no-startup-id $netrefresh
-bindsym $mod+F6	exec $term -e myscrot 
+bindsym $mod+F6	exec $term -e myscrot
+bindsym $mod+F7	exec --no-startup-id xbacklight -dec 15
+bindsym $mod+F8	exec --no-startup-id xbacklight -inc 15
 bindsym $mod+F9	exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F12	exec $term -e nmtui
@@ -315,3 +317,7 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
+
+# #---Extra XF86 Keys---# #
+bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
+bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15

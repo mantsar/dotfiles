@@ -203,7 +203,4 @@ source ~/.local/bin/zsh/sudo.plugin.zsh
 bindkey '^[q' sudo-command-line
 bindkey -M vicmd '^[q' sudo-command-line
 
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-# (cat ~/.cache/wal/sequences &)
+[ -e ~/Sync/aliases ] && source .aliases

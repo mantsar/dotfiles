@@ -615,7 +615,8 @@ call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
 packadd! nvim-lsp
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.formatting()<cr>
+nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
+vnoremap <silent> <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
 
 call minpac#add('nvim-lua/diagnostic-nvim', {'type': 'opt'})
 packadd! diagnostic-nvim
@@ -634,23 +635,25 @@ function! R_init()
 	" :Tclear
 endfunction
 
+let r_indent_align_args = 0
+
 augroup rmode
 	autocmd!
-	autocmd FileType r setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2 "Use spaces for tabs
-	autocmd FileType r inoremap <buffer> <M--> <-
-	autocmd FileType r inoremap <buffer> <M-=> %>%
-	autocmd FileType r inoremap <buffer> <M-cr> <cr><cr><up><tab>
-	autocmd FileType r nnoremap <buffer> <M-cr> :call R_init()<cr>
-	autocmd FileType r nnoremap <buffer> <M-j> :TREPLSendLine<cr>
-	autocmd FileType r inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
-	autocmd FileType r xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
-	autocmd FileType r xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
-	autocmd FileType r xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
-	autocmd FileType r nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
-	autocmd FileType r nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
-	autocmd FileType r nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
-	autocmd FileType r nnoremap <buffer> <M-l> :Tclear<cr>
-	autocmd FileType r nnoremap <buffer> <M-u> :Ttoggle<cr>
+	autocmd FileType r,rmd setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2 "Use spaces for tabs
+	autocmd FileType r,rmd inoremap <buffer> <M--> <-
+	autocmd FileType r,rmd inoremap <buffer> <M-=> %>%
+	autocmd FileType r,rmd inoremap <buffer> <M-cr> <cr><cr><up><tab>
+	autocmd FileType r,rmd nnoremap <buffer> <M-cr> :call R_init()<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-j> :TREPLSendLine<cr>
+	autocmd FileType r,rmd inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
+	autocmd FileType r,rmd xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-l> :Tclear<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-u> :Ttoggle<cr>
 augroup END
 
 lua << EOF

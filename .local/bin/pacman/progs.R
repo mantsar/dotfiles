@@ -28,3 +28,6 @@ install.packages(c(
 devtools::install_github("REditorSupport/languageserver")
 remotes::install_github("rstudio/renv")
 tinytex::install_tinytex()
+
+# Use persistent cache for formatting by styler
+R.cache::getCachePath()
