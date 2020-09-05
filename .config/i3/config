@@ -43,6 +43,8 @@ exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
+# Bluetooth manager applet
+# exec --no-startup-id blueman-applet
 # Torrent daemon:
 exec --no-startup-id transmission-daemon
 # Torrent daemon:
@@ -157,6 +159,7 @@ for_window [instance="GLava"] floating enable
 for_window [instance="GLava"] border pixel 0
 
 bindsym $mod+m 			exec $term -e fzf_mpd
+bindsym $mod+Shift+x 			exec $term -e fzf_mpd " "
 bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
@@ -227,6 +230,7 @@ bindsym $mod+F7	exec --no-startup-id xbacklight -dec 15
 bindsym $mod+F8	exec --no-startup-id xbacklight -inc 15
 bindsym $mod+F9	exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
+bindsym $mod+F11	exec --no-startup-id myblueman
 bindsym $mod+F12	exec $term -e nmtui
 
 # #---Media Keys---# #
