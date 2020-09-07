@@ -2,19 +2,34 @@ snippet o "Shows all defined options" b
 options()
 endsnippet
 
+snippet bs "System time benchmark" w
+system.time({$1})
+endsnippet
+
+snippet l "" b
+library($1)
+endsnippet
+
+snippet pl "load packages" w
+pacman::p_load(
+  "$1",
+  install = FALSE
+)
+endsnippet
+
 snippet an "" w
 as.numeric($1)
 endsnippet
 
-snippet if "stringr::" w
+snippet if "" w
 if ($1) {$2}
 endsnippet
 
-snippet ife "stringr::" w
+snippet ife "" w
 if ($1) {$2} else {$3}
 endsnippet
 
-snippet ifee "stringr::" w
+snippet ifee "" w
 if ($1) {$2} else if ($3) {$4} else {$5}
 endsnippet
 
@@ -22,6 +37,124 @@ snippet sd "stringr::" w
 str_detect(${1:string}, ${2:pattern})
 endsnippet
 
-snippet pc "purrr::" w
-map_chr(${1:vector}, ${2:function})
+snippet sl "stringr::" w
+str_length(${1:string})
+endsnippet
+
+snippet sc "stringr::" w
+str_collapse(${1:string}, collapse = ${2: ", "})
+endsnippet
+
+snippet ss "stringr::" w
+str_split(${1:string}, ${2: ","}, simplify = TRUE)
+endsnippet
+
+snippet sr "stringr::" w
+str_replace(${1:string}, ${2:pattern}, ${3:replacement})
+endsnippet
+
+snippet sra "stringr::" w
+str_replace_all(${1:string}, ${2:pattern}, ${3:replacement})
+endsnippet
+
+snippet se "stringr::" w
+regexplain::regexplain_gadget(${1:string}, ${2:pattern})
+endsnippet
+
+snippet g "glue" w
+glue("$1")
+endsnippet
+
+snippet gd "glue data. useful with %>%" w
+glue_data("$1")
+endsnippet
+
+snippet mc "purrr::" w
+map_chr(${1:vectors}, ${2:function})
+endsnippet
+
+snippet md "purrr::" w
+map_dbl(${1:vectors}, ${2:function})
+endsnippet
+
+snippet ml "purrr::" w
+map_lfl(${1:vectors}, ${2:function})
+endsnippet
+
+snippet mi "purrr::" w
+map_int(${1:vectors}, ${2:function})
+endsnippet
+
+snippet m "purrr::" w
+map(${1:vectors}, ${2:function})
+endsnippet
+
+snippet mw "purrr::" w
+walk(${1:vectors}, ${2:function})
+endsnippet
+
+snippet mpw "purrr::" w
+pwalk(list(${1:vectors}), ${2:function})
+endsnippet
+
+snippet tr "" w
+fread($1)
+endsnippet
+
+snippet ad "" w
+setDT(${VISUAL}$1)
+endsnippet
+
+snippet ai "" w
+ui <- fluidPage(
+  $1
+)
+
+server <- function(input, output, session) {
+  $2
+}
+
+shinyApp(ui, server)
+endsnippet
+
+snippet rt "" b
+output$${1:id} <- renderText({
+  $2
+})
+endsnippet
+
+snippet i "" w
+input$${1:id}
+endsnippet
+
+snippet uto "" w
+textOutput("${1:id}")
+endsnippet
+
+snippet uti "" w
+textInput("${1:id}", "${2:label}")
+endsnippet
+
+snippet usi "" w
+selectInput("${1:id}", "${2:label}", choices = c($3))
+endsnippet
+
+snippet dm "mutate" w
+mutate($1)
+endsnippet
+
+snippet df "mutate" w
+filter($1)
+endsnippet
+
+snippet .d "mutate" w
+.data[[${1:input$var}]]
+endsnippet
+
+snippet dbc "dbplyr::" w
+con <- DBI::dbConnect(RSQLite::SQLite(), "${1:path}")
+endsnippet
+
+snippet dbt "dbplyr::" w
+${1:dt} <- tbl(con, "${2:collection}")
 endsnippet

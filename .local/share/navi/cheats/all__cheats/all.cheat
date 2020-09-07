@@ -123,6 +123,8 @@ chmod u+x bs
 sudo passwd user
 # Hardcoding permissions (g -group, o-other, u-user, a- all) (+ = -)
 chmod go=rx Documents
+# Rename extension keeping basename
+"$(basename "$file" .html).txt"
 
 % docker
 # run docker commands without sudo

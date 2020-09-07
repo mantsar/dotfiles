@@ -441,8 +441,9 @@ call minpac#add('cohama/lexima.vim') "Auto close
 inoremap <M-[> [
 inoremap <M-9> (
 inoremap <M-'> '
-inoremap <M-;> "
-inoremap <M-]> {
+inoremap <M-"> "
+inoremap <M-{> {
+inoremap <M-,> <
 "Replace text with the contents of a register
 call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
@@ -517,7 +518,7 @@ nnoremap <silent> <M-9> :UltiSnipsEdit<cr>
 au TabLeave * call UltiSnips#LeavingBuffer() "Fixes freezing when changing tabs
 call minpac#add('kassio/neoterm')
 let g:neoterm_autoscroll = 1 "scroll to the end of its buffer after running any
-let g:neoterm_default_mod = "below"
+let g:neoterm_default_mod = "vertical"
 " let g:neoterm_size = "10"
 let g:neoterm_repl_enable_ipython_paste_magic = 1
 " Send the commands to the neoterm buffer linked to the current tab instead of the last active neoterm.
@@ -628,11 +629,11 @@ nmap <M-u> <Plug>MarkdownPreviewToggle
 " LSP (langage server protocol) {{{2
 call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
 packadd! nvim-lsp
-nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <silent> <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
 nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
 vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
-nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
 
 call minpac#add('nvim-lua/diagnostic-nvim', {'type': 'opt'})
 packadd! diagnostic-nvim
@@ -647,8 +648,8 @@ nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
 
 lua << EOF
 require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
-require'nvim_lsp'.bashls.setup{}
-require'nvim_lsp'.pyls.setup{}
+require'nvim_lsp'.bashls.setup{on_attach=require'diagnostic'.on_attach}
+require'nvim_lsp'.pyls.setup{on_attach=require'diagnostic'.on_attach}
 -- Disable Diagnostcs globally
 -- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 EOF
@@ -670,6 +671,7 @@ augroup rmode
 	autocmd FileType r,rmd nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
 	autocmd FileType r,rmd inoremap <buffer> <M--> <-
 	autocmd FileType r,rmd inoremap <buffer> <M-=> %>%
+	autocmd FileType r,rmd inoremap <buffer> <M-+> %T>%
 	autocmd FileType r,rmd inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd FileType r,rmd nnoremap <buffer> <M-cr> :call R_init()<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-j> :TREPLSendLine<cr>
@@ -682,6 +684,10 @@ augroup rmode
 	autocmd FileType r,rmd nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-l> :Tclear<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-u> :Ttoggle<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-k> :Tkill<cr>
+	autocmd FileType rmd nnoremap <buffer> <F1> :!source ~/.zshrc && knit %<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-y> :T shinytest::recordTest()<cr>
+	autocmd FileType r,rmd nnoremap <buffer> <M-t> :T shinytest::testApp()<cr>
 augroup END
 " }}}2
 

@@ -109,6 +109,11 @@ wd() {
   . /usr/share/wd/wd.sh
 }
 
+function knit() {
+    R -e "rmarkdown::render('$1')"
+    qutebrowser --target window "$(basename $1 .Rmd).html"
+}
+
 # ALIASES
 # Colorize commands when possible.
 alias \

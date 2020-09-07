@@ -23,10 +23,15 @@ install.packages(c(
   "Hmisc",
   "uuid",
   "rhandsontable",
-  "tinytex"
+  "tinytex",
+  "reticulate",
+  "shinytest",
+  "pool"
 ))
 devtools::install_github("REditorSupport/languageserver")
 remotes::install_github("rstudio/renv")
+remotes::install_github("rstudio/shinyvalidate")
+remotes::install_github("gadenbuie/regexplain")
 tinytex::install_tinytex()
 
 # Use persistent cache for formatting by styler

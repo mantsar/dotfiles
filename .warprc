@@ -1,5 +1,6 @@
-slog:/var/log/shiny-server
 c:~/.config
-s:~/.local/bin
-sp:~/.config/SuperCollider
+dt:~/projects/data.table
 l:~/projects/lsmu
+s:~/.local/bin
+slog:/var/log/shiny-server
+sp:~/.config/SuperCollider
