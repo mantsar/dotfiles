@@ -735,6 +735,7 @@ endfunction
 augroup sc_au
 	autocmd!
 	" init
+	autocmd FileType supercollider setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/controls.txt
