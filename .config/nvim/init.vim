@@ -49,6 +49,7 @@ set foldcolumn=3
 set history=5000 "Store lots of :cmdline history
 set hidden "Hide buffers in background
 set scrolloff=5
+set iskeyword+=- "Treat dash separated words as a word text object
 " set shellcmdflag=-ic "Load shell config
 " }}}2
 
@@ -105,6 +106,9 @@ inoremap <f9> <nop>
 inoremap <f10> <nop>
 inoremap <f11> <nop>
 inoremap <f12> <nop>
+" Better nav for omnicomplete
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
 " }}}2
 
 " ~~~~~~~~~~~~~~~~~~~~~~~ autocommands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
@@ -589,28 +593,11 @@ nnoremap <leader>gg :GGrep<space>
 nnoremap <M-`> :Marks<cr>
 " }}}2
 
-" Misc {{{2
-call minpac#add('junegunn/goyo.vim')
-let g:goyo_width = 140
-let g:goyo_height = 120
-nnoremap <leader>og :Goyo<cr>
-call minpac#add('junegunn/limelight.vim')
-nmap gl <Plug>(Limelight)
-nnoremap <leader>ol :Limelight!!<cr>
-xmap gl <Plug>(Limelight)
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-" Navi integration
-au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
-" }}}2
-
 " Markdown {{{2
-
 augroup mdmode
 	autocmd!
 	autocmd FileType markdown setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
-
 " }}}2
 
 call minpac#add('dkarter/bullets.vim')
@@ -1010,4 +997,26 @@ augroup faust_au
 	autocmd FileType faust nnoremap <silent> <buffer> <M-e> :execute "StartAsync pgrep FaustLive \|\| FaustLive " . expand("%:p")<cr>
 	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ./f2s " . expand("%:t")<cr>
 augroup END
+" }}}2
+
+" Misc {{{2
+call minpac#add('junegunn/goyo.vim')
+let g:goyo_width = 140
+let g:goyo_height = 120
+nnoremap <leader>og :Goyo<cr>
+call minpac#add('junegunn/limelight.vim')
+nmap gl <Plug>(Limelight)
+nnoremap <leader>ol :Limelight!!<cr>
+xmap gl <Plug>(Limelight)
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" Navi integration
+au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
+" Toggle
+call minpac#add('junegunn/rainbow_parentheses.vim')
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>'], ['"', '"']]
+nnoremap <leader>or :RainbowParentheses!!<cr>
+call minpac#add('norcalli/nvim-colorizer.lua')
+nnoremap <leader>ov :ColorizerToggle<cr>
 " }}}2

@@ -6,21 +6,9 @@ markup=pango
 full_text=
 command=firefox
 
-#[steam]
-#full_text=
-#command=steam
-
 #[lutris]
 #full_text=
 #command=lutris
-
-#[discord]
-#full_text=ﭮ
-#command=discord
-
-#[quake]
-#full_text=
-#command=quake
 
 [music]
 label=🎼
@@ -60,14 +48,24 @@ interval=30
 interval=once
 command=weather
 
-[redshift]
-command=redshift_statusbar
-interval=10
-
 [layout]
 label=⌨ 
 command=layout
 interval=10
+
+[redshift]
+full_text=
+command=pgrep -x redshift-gtk || redshift-gtk
+#command=redshift_statusbar
+#interval=10
+
+[slack]
+full_text=
+command=i3-msg -q "exec --no-startup-id slack"
+
+#[steam]
+#full_text=
+#command=i3-msg -q "exec --no-startup-id steam"
 
 [iface]
 label=🌐

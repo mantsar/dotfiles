@@ -10,6 +10,8 @@ sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib3
 # install proton from within steam
 # Remove Steam ads > setting > interface > uncheck "Notify me about additions or changes to my games..."
 # Shader Pre-Caching > check "Allow background processing of Vulkan shaders"
+# Launch steam in library by default:
+# Settings > interface > select which Steam window appears when program starts > library
 
 # Bluetooth support
 sudo pacman -S bluez bluez-utils bluemoon
