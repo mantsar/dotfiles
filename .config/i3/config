@@ -28,7 +28,7 @@ smart_borders on
 # #---Starting External Scripts---# #
 
 # Jack
-exec cadence-session-start -s
+exec --no-startup-id cadence-session-start -s
 # Nicer workspace indexes
 exec_always --no-startup-id exec i3-workspace-names-daemon
 # mpd startup
@@ -173,8 +173,8 @@ bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Shift+Escape		exec --no-startup-id prompt "Exit i3?" "i3 exit"
 bindsym $mod+Escape 	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
-bindsym $mod+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-bindsym $mod+Shift+BackSpace		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+BackSpace		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 
 # #---Workspace Bindings---# #
 bindsym $mod+semicolon		workspace next
