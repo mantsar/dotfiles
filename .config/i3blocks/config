@@ -48,6 +48,10 @@ interval=30
 interval=once
 command=weather
 
+[map]
+full_text=
+command=i3-msg -q 'exec --no-startup-id qutebrowser --target window https://www.openstreetmap.org/search?query=antakalnis'
+
 [layout]
 label=⌨ 
 command=layout
