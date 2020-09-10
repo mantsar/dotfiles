@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-sudo pacman -S zsh zsh-autosuggestions mpv ranger atool atom ardour alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags dunst faust ffmpeg foxdot fzf git gnustep-base gnustep-make haskell-tidal i3-gaps i3blocks ipython jack2 japa libnotify lsof luarocks lv2 neofetch pandoc pandoc-citeproc pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd xclip python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl man-db evince a2jmidid glava ttf-font-awesome alacritty pcmanfm-gtk3 acpilight bash-language-server shellcheck python-language-server python-gobject
+sudo pacman -S base-devel zsh zsh-autosuggestions mpv ranger atool alsa-utils acpi zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr supercollider sc3-plugins rsync r qutebrowser ctags dunst ffmpeg foxdot fzf git gnustep-base gnustep-make i3-gaps i3blocks ipython jack2 japa libnotify lsof luarocks lv2 neofetch pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing pd xclip python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl man-db evince a2jmidid glava ttf-font-awesome termite pcmanfm-gtk3 bash-language-server python-language-server python-gobject python-pip cantana
 
 mkdir $HOME/Downloads $HOME/tmp $HOME/Videos $HOME/Pictures $HOME/pkgbuilds
 
@@ -9,7 +9,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git htop-vim-git xcwd-git nerd-fonts-hack i3-layout-manager-git neovide ttf-fira-code
+yay -S neovim-git zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git xcwd-git nerd-fonts-hack i3-layout-manager-git
 
 git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
 
@@ -20,14 +20,11 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 # echo "default_linemode devicons" >> $HOME/.config/ranger/rc.conf
 
 chsh -s /usr/bin/zsh
+sudo chsh -s /bin/zsh
 # source $HOME/.zshrc
 
 mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
-alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-git clone --bare https://www.github.com/mantsar/dotfiles.git $HOME/.dotfiles.git
-d checkout
-/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME remote set-url origin ssh://git@github.com/mantsar/dotfiles.git
 /usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 mkdir $HOME/.config/mpd/playlists
@@ -47,8 +44,8 @@ git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/pkgbuilds/tmux-re
 # Set wallpaper
 
 # Nvim
-nvim --headless +updateRemotePlugins +qa
-nvim --headless +PackUpdate +qa
+# nvim --headless +updateRemotePlugins +qa
+# nvim --headless +PackUpdate +qa
 
 # Firefox
 # Tridactyl
