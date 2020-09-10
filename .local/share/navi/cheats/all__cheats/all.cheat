@@ -17,6 +17,8 @@ tr -d '\n'
 atool -x 
 # Create tar gzipped archive. <archived file> <files>
 tar -cvzf 
+# Uncompress .xz file
+unxz file.xz
 
 % tail
 # Output appended data as the file grows
@@ -155,6 +157,8 @@ srun -J "my_job" -n 1 --pty bash -i
 % hard drive, storage 
 # List all storage devices in a tree-like format
 lsblk
+# Similar to lsblk, but with more info
+sudo fdisk -l
 # parition and mount disk
 mkfs.ext4 /dev/sdz100; sudo mount /dev/sdbz100 /mnt/dir
 
