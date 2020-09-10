@@ -1,10 +1,3 @@
-# OUTSIDE
-
-# if flashing img use to balena-etcher flash https://manjaro.org/download/#ARM architect edition (need to launch with sudo...)
-
-# INSIDE
-# ----------------------------------------------------------------------------
-
 sudo pacman -Syyu
 
 sudo pacman -S zsh zsh-autosuggestions mpv ranger atool alsa-utils zsh-completions zathura zathura-djvu zathura-pdf-mupdf youtube-dl xorg-xprop xorg-server wget unzip unrar ueberzug tree tmux tldr rsync r qutebrowser ctags dunst ffmpeg fzf git i3-gaps i3blocks ipython jack2 libnotify lsof neofetch pulseaudio pulseaudio-alsa pulseaudio-jack pavucontrol python-i3ipc python-pynvim python-pywal ripgrep ttf-ubuntu-font-family unclutter scrot redshift sxiv feh picom networkmanager pulsemixer xdotool rofi mpc mpd ncmpcpp transmission-cli transmission-gtk pass syncthing xclip python-dbus xorg-xinit ttf-nerd-fonts-symbols-mono ttf-linux-libertine ttf-joypixels xorg-xwininfo dmenu python-tldextract python-pip cadence python-pyperclip ttf-dejavu firefox firefox-ublock-origin firefox-extension-https-everywhere firefox-dark-reader firefox-tridactyl man-db evince a2jmidid glava ttf-font-awesome alacritty pcmanfm-gtk3 bash-language-server shellcheck python-language-server python-gobject
