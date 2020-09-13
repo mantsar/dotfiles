@@ -1,6 +1,5 @@
 " ======================= GENERAL ======================================== {{{1
 
-" GUI settings
 if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.9
@@ -637,6 +636,7 @@ lua << EOF
 require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
 require'nvim_lsp'.bashls.setup{on_attach=require'diagnostic'.on_attach}
 require'nvim_lsp'.pyls.setup{on_attach=require'diagnostic'.on_attach}
+-- require'nvim_lsp'.hls.setup{}
 -- Disable Diagnostcs globally
 -- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 EOF
@@ -726,9 +726,11 @@ augroup sc_au
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/controls.txt
-	autocmd FileType supercollider nnoremap <silent> <buffer> <M-f> :e ./snips.scd<cr>
-	autocmd FileType supercollider nnoremap <silent> <buffer> <M-n> :e ./notes.txt<cr>
+	autocmd FileType supercollider nnoremap <silent> <buffer> <M-s> :e ./snips.scd<cr>
+	autocmd VimEnter *.scd nnoremap <silent> <M-n> :e ./notes.txt<cr>
 	autocmd VimEnter *.scd normal G
+	" autocmd VimEnter *.scd Limelight!!
+	" autocmd VimEnter *.scd RainbowParentheses!!
 	autocmd VimEnter *.scd SCNvimStart
 	autocmd VimEnter *.scd SCNvimStatusLine
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/startup.scd
@@ -1019,4 +1021,5 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>'], ['"', '"'
 nnoremap <leader>or :RainbowParentheses!!<cr>
 call minpac#add('norcalli/nvim-colorizer.lua')
 nnoremap <leader>ov :ColorizerToggle<cr>
+call minpac#add('dm1try/golden_size')
 " }}}2

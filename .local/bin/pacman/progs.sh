@@ -14,6 +14,7 @@ makepkg -si
 
 yay -S neovim-nightly zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git htop-vim-git xcwd-git nerd-fonts-hack i3-layout-manager-git
 
+# haskell-language-server-bin
 # arduino
 # arduino-docs
 # ladish python2-distutils-extra

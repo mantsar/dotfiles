@@ -18,6 +18,10 @@ snippet j "Sound pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $$2 s "${VISUAL}$3"
 endsnippet
 
+snippet jo "Play once independant of cycles" b
+once $$1 s "${VISUAL}$2"
+endsnippet
+
 snippet js "Silence a pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index()`} silence
 endsnippet
@@ -33,49 +37,61 @@ endsnippet
 # Functions
 
 snippet fa "Spread chords of note numbers over time" w
-arpg "$1" $ 
+arpg "$1"
 endsnippet
 
 snippet fj "" w
-jux ($1) $ 
+jux ($1)
 endsnippet
 
 snippet fr "Generates numbers from 0 to n-1 inclusive" w
 (run $1)
 endsnippet
 
+snippet fS "" w
+scale "${1:phrygian}" "$2"
+endsnippet
+
 snippet fo "Superimpose and shift in time" w
-off $1 ($2) $ 
+off $1 ($2)
+endsnippet
+
+snippet fsu "Superimpose" w
+superimpose ($1)
+endsnippet
+
+snippet fnu "nudge" w
+nudge "$1"
 endsnippet
 
 snippet fs "" w
-struct "$1" $ 
+struct "$1"
 endsnippet
 
 snippet fm "" w
-mask "$1" $ 
+mask "$1"
 endsnippet
 
 snippet ffsp "" w
-fastspread ($) [$1] $ 
+fastspread ($) [$1]
 endsnippet
 
 snippet fsp "" w
-spread ($) [$1] $ 
+spread ($) [$1]
 endsnippet
 
 # Random functions
 
 snippet rs "" w
-sometimes ($1) $ 
+sometimes ($1)
 endsnippet
 
 snippet rsc "" w
-someCyclesBy $1 ($2) $ 
+someCyclesBy $1 ($2)
 endsnippet
 
 snippet rsp "" w
-spreadChoose ($) [$1] $ 
+spreadChoose ($) [$1]
 endsnippet
 
 # Controls
@@ -88,14 +104,26 @@ snippet s "" w
 s "$1" $0
 endsnippet
 
-snippet cc "1 - 16. 1 results in a drastic bit of reduction" w
+snippet cw "" w
+vowel "$1" $0
+endsnippet
+
+snippet cr "1 - 16. 1 results in a drastic bit of reduction" w
 crush "$1"
+endsnippet
+
+snippet cc "1..n - group, -1 only cut same samples, 0 no cutting. [1 2 n] cut pattern" w
+cut "$1"
 endsnippet
 
 # Patterns
 
-snippet pstu "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
-stut ${1:2} ${2:0.5} ${3:0.1} $ ${VISUAL}$0
+snippet pst "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
+stut ${1:depth} ${2:fb} ${3:delay} ${VISUAL}$0
+endsnippet
+
+snippet psw "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
+stutWith ${1:2} ${2:0.5} (${3:fn}) ${VISUAL}$0
 endsnippet
 
 snippet ppar "" w
@@ -159,4 +187,12 @@ endsnippet
 
 snippet dkl "" w
 kicklinn:${1:3}
+endsnippet
+
+snippet dho "open hat" w
+ho:${1:0}
+endsnippet
+
+snippet dhc "closed hat" w
+hc:${1:0}
 endsnippet

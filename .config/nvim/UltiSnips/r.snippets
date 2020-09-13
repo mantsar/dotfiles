@@ -139,6 +139,14 @@ snippet usi "" w
 selectInput("${1:id}", "${2:label}", choices = c($3))
 endsnippet
 
+snippet ucgi "" w
+checkboxGroupInput("${1:id}", "${2:label}", choices = c($3))
+endsnippet
+
+snippet uab "" w
+actionButton("${1:id}", "${2:label}")
+endsnippet
+
 snippet dm "mutate" w
 mutate($1)
 endsnippet

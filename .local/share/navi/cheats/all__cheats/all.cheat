@@ -19,6 +19,8 @@ atool -x
 tar -cvzf 
 # Uncompress .xz file
 unxz file.xz
+# Uncompress .gz file
+gzip -d file.gz
 
 % tail
 # Output appended data as the file grows
@@ -175,6 +177,10 @@ find . -maxdepth 1 -type d | cut -c 3-
 sudo openfortivpn vpn.url:443 --username name -p password
 # Copy from remote to local
 scp user@ip:/remote/adress local/adress
+# ssh without pussword
+echo public_key >> ~/.ssh/authorized_keys 
+# solve problem "term not found"
+echo "TERM=xterm-256color" >> ~/.bashrc
 
 % usb
 # completely wipe out usb drive
