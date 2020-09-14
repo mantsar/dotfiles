@@ -447,6 +447,7 @@ inoremap <M-'> '
 inoremap <M-"> "
 inoremap <M-{> {
 inoremap <M-,> <
+inoremap <M-`> `
 "Replace text with the contents of a register
 call minpac#add('vim-scripts/ReplaceWithRegister') 
 call minpac#add('FooSoft/vim-argwrap')
@@ -530,6 +531,22 @@ nmap gx <Plug>(neoterm-repl-send)
 " Send selected contents in visual mode.
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
+augroup neoterm_au
+	autocmd!
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-j> :TREPLSendLine<cr>
+	autocmd FileType r,rmd,haskell,python inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python inoremap <buffer> <M-e> <C-o>vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-l> :Tclear<cr>
+	autocmd FileType r,rmd,haskell nnoremap <buffer> <M-u> :Ttoggle<cr>
+	autocmd FileType r,rmd,haskell nnoremap <buffer> <M-k> :Tkill<cr>
+augroup END
+
 call minpac#add('kevinhwang91/rnvimr') " Ranger integration
 nnoremap <silent> <leader>r :RnvimrToggle<cr>
 " Make Ranger to be hidden after picking a file
@@ -659,19 +676,8 @@ augroup rmode
 	autocmd FileType r,rmd inoremap <buffer> <M--> <-
 	autocmd FileType r,rmd inoremap <buffer> <M-=> %>%
 	autocmd FileType r,rmd inoremap <buffer> <M-+> %T>%
-	autocmd FileType r,rmd inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd FileType r,rmd nnoremap <buffer> <M-cr> :call R_init()<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-j> :TREPLSendLine<cr>
-	autocmd FileType r,rmd inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
-	autocmd FileType r,rmd xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
-	autocmd FileType r,rmd xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
-	autocmd FileType r,rmd xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-l> :Tclear<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-u> :Ttoggle<cr>
-	autocmd FileType r,rmd nnoremap <buffer> <M-k> :Tkill<cr>
+	autocmd FileType r,rmd inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd FileType rmd nnoremap <buffer> <F1> :!source ~/.zshrc && knit %<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-y> :T shinytest::recordTest()<cr>
 	autocmd FileType r,rmd nnoremap <buffer> <M-t> :T shinytest::testApp()<cr>
@@ -794,16 +800,24 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader>ar :call scnvim#sclang#send("a.rec_enable_toggle")<cr>
 augroup END
 
-" Tidal
+" Haskell
 call minpac#add('mantsar/vim-haskell-indent')
+
+function! Haskell_init()
+	:vertical Tnew
+	:T ghci
+	" :Tclear
+endfunction
+
 augroup hs_au
 	autocmd!
 	autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+	autocmd FileType haskell nnoremap <buffer> <M-cr> :call Haskell_init()<cr>
 	autocmd BufNewFile,BufRead *.ghci setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 augroup END
 
+" Tidal
 call minpac#add('tidalcycles/vim-tidal')
-
 let g:tidal_activated = 0
 
 function! Tidal_init()
@@ -925,18 +939,6 @@ augroup foxdot_au
 	autocmd FileType python imap <buffer> <M-k>  <C-o>:T Clock.clear()<cr>
 	autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
 	autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
-	autocmd FileType python nnoremap <buffer> <M-j> :TREPLSendLine<cr>
-	autocmd FileType python inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
-	autocmd FileType python xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
-	autocmd FileType python xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
-	autocmd FileType python xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
-	autocmd FileType python nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
-	autocmd FileType python inoremap <buffer> <M-o> <C-o>vip:TREPLSendSelection<cr>
-	autocmd FileType python inoremap <buffer> <M-i> <C-o>vip:TREPLSendSelection<cr>
-	autocmd FileType python inoremap <buffer> <M-e> <C-o>vip:TREPLSendSelection<cr>
-	autocmd FileType python nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
-	autocmd FileType python nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
-	autocmd FileType python nnoremap <buffer> <M-l> :Tclear<cr>
 	" autocmd FileType python nnoremap <buffer> <M-u> :Ttoggle<cr>
 augroup END
 
