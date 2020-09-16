@@ -1,6 +1,6 @@
 c:~/.config
 dt:~/projects/data.table
 l:~/projects/lsmu
-s:~/.local/bin
 slog:/var/log/shiny-server
 sp:~/.config/SuperCollider
+s:~/projects/skin

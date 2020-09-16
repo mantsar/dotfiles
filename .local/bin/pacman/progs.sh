@@ -89,6 +89,12 @@ git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/pkgbuilds/tmux-re
 # bind --mode=normal X undo
 # bind --mode=normal <A-Tab> buffer #
 # bind --mode=normal <A-`> fillcmdline tab
+# bind / fillcmdline find
+# bind ? fillcmdline find -?
+# bind ,<Space> nohlsearch
+# bind n findnext 1
+# bind N findnext -1
+
 # set searchurls.g https://www.google.com/search?q=
 # set searchurls.y https://www.youtube.com/results?search_query=
 # set searchurls.r https://old.reddit.com/search?q=

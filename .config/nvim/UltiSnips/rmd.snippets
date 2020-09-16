@@ -1,0 +1,63 @@
+extends r
+extends markdown
+
+snippet - "header, pdf_document, word_document, runtime: shiny" b
+---
+title: $1
+output: ${2:html_document}
+author: ${4:"Garrett"}
+date: ${5:"July 10, 2014"}
+---
+endsnippet
+
+snippet -s "interactive document" b
+---
+title: $1
+output: ${2:html_document}
+runtime: ${3:shiny}
+params:
+  n: NA
+---
+endsnippet
+
+snippet py "python chunk" b
+\`\`\`{python$1}
+$2
+\`\`\`
+endsnippet
+
+snippet rs "R chunk" b
+\`\`\`{r setup, echo=FALSE}
+$1
+\`\`\`
+endsnippet
+
+snippet r "R chunk" b
+\`\`\`{r$1}
+$2
+\`\`\`
+endsnippet
+
+snippet `r "inline R" w
+\`r $1\`
+endsnippet
+
+snippet br "" w
+\`r br()\`
+endsnippet
+
+snippet hr "" w
+\`r hr()\`
+endsnippet
+
+snippet oe "Prevent pinting of the R code" w
+echo=${1:FALSE}
+endsnippet
+
+snippet oE "Prevent printing of output" w
+eval=${1:FALSE}
+endsnippet
+
+snippet oa "provide arguments u would in UI function of rendered element" w
+outputArgs = list($1)
+endsnippet

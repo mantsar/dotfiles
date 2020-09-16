@@ -97,6 +97,10 @@ snippet mpw "purrr::" w
 pwalk(list(${1:vectors}), ${2:function})
 endsnippet
 
+snippet ts "tidyr separate" w
+separate(${1:sep})
+endsnippet
+
 snippet tr "" w
 fread($1)
 endsnippet
@@ -117,9 +121,33 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 endsnippet
 
-snippet rt "" b
+snippet rto "" b
 output$${1:id} <- renderText({
   $2
+})
+endsnippet
+
+snippet rt "" b
+renderText({
+  $1
+})
+endsnippet
+
+snippet rdt "" b
+renderTable({
+  $1
+})
+endsnippet
+
+snippet rui "" b
+renderUI({
+  $1
+})
+endsnippet
+
+snippet rp "" b
+renderPlot({
+  $1
 })
 endsnippet
 
@@ -145,6 +173,21 @@ endsnippet
 
 snippet uab "" w
 actionButton("${1:id}", "${2:label}")
+endsnippet
+
+snippet ud "" w
+downloadHandler(
+  filename = "report.pdf",
+  content = function(file) {
+    temp_report <- file.path(tempdir(), "report.Rmd")
+    file.copy("report.Rmd", temp_report, overwrite = TRUE)
+    params <- list(${1:n} = input$$2)
+    rmarkdown::render(temp_report, output_file = file,
+      params = params,
+      envir = new.env(parent = globalenv())
+    )
+  }
+  )
 endsnippet
 
 snippet dm "mutate" w

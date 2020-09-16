@@ -70,3 +70,9 @@ damp
 ftrig
 trig
 trigd
+vrate
+vdepth
+vdelay
+rateVariation
+depthVariation
+mul

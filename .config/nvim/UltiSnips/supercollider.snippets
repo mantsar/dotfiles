@@ -1342,7 +1342,7 @@ PMOsc.ar(${1:${VISUAL:cf}}, ${2:mf}, ${4:ind})
 endsnippet
 
 snippet "Vibrato(k)?" "A slow frequency modulation" wr
-Vibrato`!p snip.rv = rate(match)`(DC.ar(${1:440}), ${2:6}, ${3:0.02}, ${4:0}, rateVariation:${5:0.04}, depthVariation:${6:0.1})
+Vibrato`!p snip.rv = rate(match)`(DC.ar(${1:freq}), ${2:6}, ${3:0.02}, ${4:0}, rateVariation:${5:0.04}, depthVariation:${6:0.1})
 endsnippet
 
 snippet readChannel "Read only one channel" w
@@ -1923,7 +1923,7 @@ snippet tq "" w
 Tdef(\\$1).quant = ${1:1};
 endsnippet
 
-snippet jp "" b
+snippet tp "" b
 Tdef(\\$1}).play;
 endsnippet
 

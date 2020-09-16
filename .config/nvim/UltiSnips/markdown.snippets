@@ -2,6 +2,26 @@ snippet ~ "" w
 `echo $HOME`
 endsnippet
 
-snippet im "Include image" w
+snippet ![ "Include image" w
 ![image]($1 ${2:=400x200})
+endsnippet
+
+snippet # "header" w
+# $1
+endsnippet
+
+snippet * "italicized" w
+*$1*
+endsnippet
+
+snippet ** "bold" w
+**$1**
+endsnippet
+
+snippet *- "list" 2
+* $1
+endsnippet
+
+snippet [( "hyperlink" w
+[$1]($2)
 endsnippet

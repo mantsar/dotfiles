@@ -184,6 +184,7 @@ set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
 call minpac#add('liuchengxu/space-vim-dark')
 call minpac#add('endel/vim-github-colorscheme')
+" call minpac#add('adigitoleo/vim-mellow')
 function! Toggle_colorcheme()
 		if g:colorscheme == 1
 			set colorcolumn=999
@@ -848,6 +849,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal commentstring=--\%s
 	autocmd FileType tidal setlocal formatoptions-=j "Do not concatenate # on J
 	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
+	autocmd FileType tidal :badd ~/sp/tidal/Tidal.ghci
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/functions.txt
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/controls.txt

@@ -201,6 +201,8 @@ git clone -b <branch> <remote_repo>
 git reset --hard
 # Diff for staged files
 git diff --staged file
+# Start new repo
+git init
 
 % mongo
 # Export to file
@@ -253,6 +255,8 @@ bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download ru
 bs list run -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete run -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
 # Delete all projects determined by their id
 bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs delete project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)"' > tmp.sh # ; bash tmp.sh
+# Download all projects fastq files with Name as output. Single quotes prevents evaluation
+bs list project -F Name -F Id -f csv | awk 'NR > 1' | xargs -I@ echo 'bs download project -i "$(echo "@" | cut -d',' -f2)" -o "$(echo "@" | cut -d',' -f1)" --extension=fastq.gz' > tmp.sh ; bash tmp.sh
 
 % qutebrowser
 # Show history:
@@ -271,3 +275,27 @@ go
 prefix + Ctrl-s
 # tmux-resurect restore
 tmux > prefix + Ctrl-r
+# create new session
+tmux new -s name
+# list all sessions
+tmux ls
+# kill named session
+tmux kill-session -t name
+# attach to named session
+tmux attach -t name
+# detach
+prefix-d
+# rename window
+prefix-,
+
+% R, shiny
+# install R on ubuntu
+sudo apt install r-base
+# Install renv package
+Rscript -e "install.packages('remotes'); remotes::install_github('rstudio/renv')"
+# Launch interactive Rmd
+R -e 'rmarkdown::run("app.Rmd", shiny_args = list(port = 7840))'
+
+% ubuntu
+# regenerate locale
+sudo locale-gen

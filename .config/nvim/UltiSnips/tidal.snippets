@@ -64,6 +64,14 @@ snippet fnu "nudge" w
 nudge "$1"
 endsnippet
 
+snippet fi "" w
+iter "$1"
+endsnippet
+
+snippet fh "" w
+hurry "$1"
+endsnippet
+
 snippet fs "" w
 struct "$1"
 endsnippet
@@ -94,6 +102,10 @@ snippet rsp "" w
 spreadChoose ($) [$1]
 endsnippet
 
+snippet ri "" w
+irand $1 + 1
+endsnippet
+
 # Controls
 
 snippet n "" w
@@ -112,8 +124,16 @@ snippet cr "1 - 16. 1 results in a drastic bit of reduction" w
 crush "$1"
 endsnippet
 
-snippet cs "simplistic pitch raising. 1 .. n" w
+snippet cs "simple distortion. 0 to 1. 1 max distortion" w
+shape "$1"
+endsnippet
+
+snippet csq "simplistic pitch raising. 1 .. n" w
 squiz "$1"
+endsnippet
+
+snippet cl "low pass filter" w
+lpf "$1"
 endsnippet
 
 snippet cc "1..n - group, -1 only cut same samples, 0 no cutting. [1 2 n] cut pattern" w
