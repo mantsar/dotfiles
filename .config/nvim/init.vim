@@ -1006,16 +1006,12 @@ augroup END
 " }}}2
 
 " Misc {{{2
-call minpac#add('junegunn/goyo.vim')
-let g:goyo_width = 140
-let g:goyo_height = 120
-nnoremap <leader>og :Goyo<cr>
 call minpac#add('junegunn/limelight.vim')
-nmap gl <Plug>(Limelight)
 nnoremap <leader>ol :Limelight!!<cr>
+nmap gl <Plug>(Limelight)
 xmap gl <Plug>(Limelight)
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+call minpac#add('junegunn/goyo.vim')
+nnoremap <leader>og :Goyo<cr>
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
 " Toggle
@@ -1023,7 +1019,23 @@ call minpac#add('junegunn/rainbow_parentheses.vim')
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>'], ['"', '"']]
 nnoremap <leader>or :RainbowParentheses!!<cr>
+let g:rainbow#blacklist = ["#a790d5", "#F1F1F1", "#FFFFFF", "#A8A8A8", "#C6C6C6", "#EEEEEE"]
 call minpac#add('norcalli/nvim-colorizer.lua')
 nnoremap <leader>ov :ColorizerToggle<cr>
 call minpac#add('dm1try/golden_size')
+let g:rcl = 1
+function! Toggle_rcl()
+	if g:rcl == 1
+		RainbowParentheses
+		Limelight
+		ColorizerAttachToBuffer
+		let g:rcl = 0
+	else
+		RainbowParentheses!
+		Limelight!
+		ColorizerDetachFromBuffer
+		let g:rcl = 1
+	endif
+endfunction
+nnoremap <leader>o<leader> :call Toggle_rcl()<cr>
 " }}}2

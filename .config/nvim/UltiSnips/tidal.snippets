@@ -34,6 +34,10 @@ snippet ju "Undo solo action" b
 unsolo ${1:`!p if not snip.c: snip.rv = cycle_index()`}
 endsnippet
 
+snippet D "Deconstruct" b
+deconstruct ${1:n} ${2:str}
+endsnippet
+
 # Functions
 
 snippet fa "Spread chords of note numbers over time" w
@@ -74,6 +78,10 @@ endsnippet
 
 snippet fs "" w
 struct "$1"
+endsnippet
+
+snippet fg "" w
+ghost
 endsnippet
 
 snippet fm "" w
@@ -219,4 +227,65 @@ endsnippet
 
 snippet dhc "closed hat" w
 hc:${1:0}
+endsnippet
+
+# Colors
+snippet #b "" w
+-- Blue
+endsnippet
+
+snippet #r "" w
+-- Red
+endsnippet
+
+snippet #g "" w
+-- Green
+endsnippet
+
+snippet #l "" w
+-- Lime
+endsnippet
+
+snippet #o "" w
+-- Olive
+endsnippet
+
+snippet #a "" w
+-- Aqua
+endsnippet
+
+snippet #t "" w
+-- Teal
+endsnippet
+
+snippet #n "" w
+-- Navy
+endsnippet
+
+snippet #p "" w
+-- Plum
+endsnippet
+
+snippet #P "" w
+-- Purple
+endsnippet
+
+snippet #G "" w
+-- Gray
+endsnippet
+
+snippet #b "" w
+-- Brown
+endsnippet
+
+snippet #k "" w
+-- Khaki
+endsnippet
+
+snippet #c "" w
+-- Crimson
+endsnippet
+
+snippet #T "" w
+-- Tomato
 endsnippet
