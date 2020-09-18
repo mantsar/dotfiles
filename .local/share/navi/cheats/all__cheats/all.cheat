@@ -21,6 +21,8 @@ tar -cvzf
 unxz file.xz
 # Uncompress .gz file
 gzip -d file.gz
+# Compress a file specifying the output
+gzip -c -d file.gz > file
 
 % tail
 # Output appended data as the file grows
