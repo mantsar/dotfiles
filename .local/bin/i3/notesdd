@@ -1,3 +1,3 @@
 #!/bin/sh
 
-nvim ~/notes.md ~/projects/lsmu/lsmu.md
+nvim ~/notes.md
