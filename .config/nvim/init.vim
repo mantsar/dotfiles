@@ -184,7 +184,6 @@ set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
 call minpac#add('liuchengxu/space-vim-dark')
 call minpac#add('endel/vim-github-colorscheme')
-" call minpac#add('adigitoleo/vim-mellow')
 function! Toggle_colorcheme()
 		if g:colorscheme == 1
 			set colorcolumn=999
@@ -466,12 +465,10 @@ map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 call minpac#add('unblevable/quick-scope') "Lightning fast left-right movement in Vim
 let g:qs_second_highlight = 0
-" call minpac#add('mantsar/vim-closer') "Added compatibility with SuperCollider
 call minpac#add('kana/vim-textobj-user') "Required by plugins below
 call minpac#add('kana/vim-textobj-line') "Text objects for the current line
 call minpac#add('kana/vim-textobj-indent') "ai/ii / aI/iI
 call minpac#add('somini/vim-textobj-fold')
-" call minpac#add('glts/vim-textobj-comment') "ic / ac
 call minpac#add('Julian/vim-textobj-brace') "aj / ij
 call minpac#add('beloglazov/vim-textobj-quotes') "aq / iq
 call minpac#add('sgur/vim-textobj-parameter') "aa / ia
@@ -608,6 +605,12 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 nnoremap <leader>gg :GGrep<space>
 nnoremap <M-`> :Marks<cr>
+call minpac#add('liuchengxu/vista.vim')
+let g:vista_default_executive = 'nvim_lsp'
+let g:vista#renderer#enable_icon = 1
+let g:vista_echo_cursor_strategy = 'echo'
+autocmd FileType vista,vista_kind nnoremap <buffer> <silent> / :<c-u>call vista#finder#fzf#Run()<cr>
+nnoremap <silent> <M-space> :Vista!!<cr>
 " }}}2
 
 " Markdown {{{2
@@ -828,7 +831,7 @@ function! Tidal_init()
 	:TidalHush
 	:wincmd j
 	" :wincmd L
-	:resize 8
+	" :resize 8
 	:wincmd k
 	:normal G
 endfunction
@@ -1006,6 +1009,41 @@ augroup END
 " }}}2
 
 " Misc {{{2
+" call minpac#add('dm1try/golden_size', {'type': 'opt'})
+" packadd! golden_size
+" " Disable automatic resizing for specific windows
+" lua << EOF
+" local function ignore_by_buftype(types)
+"   local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+"   for _, type in pairs(types) do
+"     if type == buftype then
+"       return 1
+"     end
+"   end
+" end
+" local golden_size = require("golden_size")
+" -- set the callbacks, preserve the defaults
+" golden_size.set_ignore_callbacks({
+"   { ignore_by_buftype, {'quickfix', 'terminal', 'nofile'} },
+"   { golden_size.ignore_float_windows }, -- default one, ignore float windows
+"   { golden_size.ignore_by_window_flag }, -- default one, ignore windows with w:ignore_gold_size=1
+" })
+" EOF
+call minpac#add('Xuyuanp/scrollbar.nvim')
+let g:scrollbar_shape = {
+    \ 'head': '',
+    \ 'body': '█',
+    \ 'tail': '',
+    \ }
+augroup scrollbar_au
+    autocmd!
+    autocmd BufEnter    * silent! lua require('scrollbar').show()
+    autocmd BufLeave    * silent! lua require('scrollbar').clear()
+    autocmd CursorMoved * silent! lua require('scrollbar').show()
+    autocmd VimResized  * silent! lua require('scrollbar').show()
+    autocmd FocusGained * silent! lua require('scrollbar').show()
+    autocmd FocusLost   * silent! lua require('scrollbar').clear()
+augroup end
 call minpac#add('junegunn/limelight.vim')
 nnoremap <leader>ol :Limelight!!<cr>
 nmap gl <Plug>(Limelight)
@@ -1022,7 +1060,6 @@ nnoremap <leader>or :RainbowParentheses!!<cr>
 let g:rainbow#blacklist = ["#a790d5", "#F1F1F1", "#FFFFFF", "#A8A8A8", "#C6C6C6", "#EEEEEE"]
 call minpac#add('norcalli/nvim-colorizer.lua')
 nnoremap <leader>ov :ColorizerToggle<cr>
-call minpac#add('dm1try/golden_size')
 let g:rcl = 1
 function! Toggle_rcl()
 	if g:rcl == 1
