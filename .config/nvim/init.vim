@@ -108,6 +108,7 @@ inoremap <f12> <nop>
 " Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
+nnoremap <silent> <M-n> :e ./notes.txt<cr>
 " }}}2
 
 " ~~~~~~~~~~~~~~~~~~~~~~~ autocommands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
@@ -737,7 +738,6 @@ augroup sc_au
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/controls.txt
 	autocmd FileType supercollider nnoremap <silent> <buffer> <M-s> :e ./snips.scd<cr>
-	autocmd VimEnter *.scd nnoremap <silent> <M-n> :e ./notes.txt<cr>
 	autocmd VimEnter *.scd normal G
 	" autocmd VimEnter *.scd Limelight!!
 	" autocmd VimEnter *.scd RainbowParentheses!!

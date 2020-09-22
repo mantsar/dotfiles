@@ -33,6 +33,10 @@ snippet ifee "" w
 if ($1) {$2} else if ($3) {$4} else {$5}
 endsnippet
 
+snippet sw "base `starts with` without regex" w
+startsWith(${1:string}, ${2:pattern})
+endsnippet
+
 snippet sd "stringr::" w
 str_detect(${1:string}, ${2:pattern})
 endsnippet
@@ -145,7 +149,7 @@ renderUI({
 })
 endsnippet
 
-snippet rp "" b
+snippet rp "" w
 renderPlot({
   $1
 })
@@ -208,4 +212,13 @@ endsnippet
 
 snippet dbt "dbplyr::" w
 ${1:dt} <- tbl(con, "${2:collection}")
+endsnippet
+
+snippet p "" w
+ggplot($1, aes($2, $3)) +
+  $0
+endsnippet
+
+snippet pp "scatter" w
+geom_point($1)
 endsnippet

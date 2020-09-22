@@ -301,3 +301,5 @@ R -e 'rmarkdown::run("app.Rmd", shiny_args = list(port = 7840))'
 % ubuntu
 # regenerate locale
 update-locale LANG=en_US.UTF-8 ; sudo locale-gen
+# Update and upgrade all packages
+sudo apt-get install r-base r-base-dev

@@ -2,7 +2,7 @@ library("magrittr")
 ## Set CRAN mirror:
 local({
   r <- getOption("repos")
-  r["CRAN"] <- "https://cloud.r-project.org/"
+  r["CRAN"] <- c("https://cloud.r-project.org/")
   options(repos = r)
 })
 

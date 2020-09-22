@@ -3,4 +3,4 @@ dt:~/projects/data.table
 l:~/projects/lsmu
 slog:/var/log/shiny-server
 sp:~/.config/SuperCollider
-s:~/projects/skin
+s:~/projects/myskin

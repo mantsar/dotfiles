@@ -2,7 +2,11 @@
 
 sudo pacman -Syyu
 
-sudo pacman -S base-devel zsh zsh-autosuggestions zsh-completions fzf git neofetch pavucontrol redshift mpd syncthing python-pip firefox firefox-ublock-origin firefox-dark-reader firefox-tridactyl cantana
+# alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+# git clone --bare https://www.github.com/mantsar/dotfiles.git $HOME/.dotfiles.git
+# d checkout
+
+sudo pacman -S base-devel zsh zsh-autosuggestions zsh-completions fzf git ranger neofetch pavucontrol redshift mpd syncthing python-pip firefox firefox-ublock-origin firefox-dark-reader firefox-tridactyl cantana
 
 mkdir $HOME/Downloads $HOME/tmp $HOME/Videos $HOME/Pictures $HOME/pkgbuilds
 
@@ -28,6 +32,8 @@ mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 mkdir $HOME/.config/mpd/playlists
 
 # MANUALLY -------------------------
+
+# Edit profile files so it would not start i3
 
 # Syncthing
 # http://127.0.0.1:8384
