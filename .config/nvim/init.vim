@@ -879,7 +879,7 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-o> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
-	nnoremap  <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
+	autocmd FileType tidal nnoremap <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
 	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>', 'filetype': 'tidal'})
 	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>', 'filetype': 'tidal'})

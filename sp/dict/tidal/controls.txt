@@ -76,3 +76,4 @@ vdelay
 rateVariation
 depthVariation
 mul
+eq_amp

@@ -38,4 +38,5 @@ let detune_prob = pF "detune_prob"
     rateVariation = pF "rateVariation"
     depthVariation = pF "depthVariation"
     mul = pF "mul"
+    eq_amp = pF "eq_amp"
 :}
