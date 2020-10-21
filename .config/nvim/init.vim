@@ -863,7 +863,7 @@ augroup tidal_au
 	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
 	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
-	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>l'
+	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>lmmk$x`m'
 	autocmd FileType tidal nnoremap <silent> <buffer> <M-s> :e ./snips.tidal<cr>
 	" Always autoscroll
 	autocmd FileType tidal nmap <M-u> <Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
@@ -908,7 +908,7 @@ augroup tidal_au
 	autocmd FileType tidal nnoremap <leader><f7> :TidalSilence 7<cr>
 	autocmd FileType tidal nnoremap <leader><f8> :TidalSilence 8<cr>
 	autocmd FileType tidal nnoremap <leader><f9> :TidalSilence 9<cr>
-	autocmd FileType tidal nnoremap <leader><f10>:TidalSilence 10<cr>
+	autocmd FileType tidal nnoremap <leader><f10> :TidalSilence 10<cr>
 	autocmd FileType tidal nnoremap <leader><f11> :TidalSilence 11<cr>
 	autocmd FileType tidal nnoremap <leader><f12> :TidalSilence 12<cr>
 	autocmd VimEnter *.scd nnoremap <leader>1 :call scnvim#sclang#send("~toggle_dirt_orbit_bus.(~d1, ~b1)")<cr>

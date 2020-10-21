@@ -71,9 +71,15 @@ ftrig
 trig
 trigd
 vrate
+vphase
 vdepth
 vdelay
+vmin
+vmax
 rateVariation
 depthVariation
 mul
 eq_amp
+rqrate
+rqmin
+rqmax

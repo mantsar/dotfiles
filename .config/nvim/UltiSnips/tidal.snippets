@@ -38,18 +38,75 @@ snippet D "Deconstruct" b
 deconstruct ${1:n} ${2:str}
 endsnippet
 
+# Envelopes
+snippet et "triange" w
+smooth "$1"
+endsnippet
+
 # Functions
+
+snippet .. "" w
+${1:0} .. $2
+endsnippet
+
+snippet <~ "" w
+($1 <~)
+endsnippet
+
+snippet ~> "" w
+($1 ~>)
+endsnippet
 
 snippet fa "Spread chords of note numbers over time" w
 arpg "$1"
+endsnippet
+
+snippet fwi "" w
+within (0.${1:0}, 1.${2:0}) ($3)
+endsnippet
+
+snippet fpal "" w
+palindrome
+endsnippet
+
+snippet fin "" w
+inside "$1"
+endsnippet
+
+snippet fbr "" w
+brak
+endsnippet
+
+snippet fp "repeats each event the given number of times" w
+ply "$1"
+endsnippet
+
+snippet pif "" w
+fix ($1) (${2:n} "$3")
 endsnippet
 
 snippet fj "" w
 jux ($1)
 endsnippet
 
+snippet fre "" w
+rev
+endsnippet
+
+snippet fra "" w
+range ${1:lo} ${2:hi} ${3:sine}
+endsnippet
+
+snippet fw "" w
+whenmod ${1:9} ${2:7} ($3)
+endsnippet
+
+snippet frx "" w
+rangex ${1:lo} ${2:hi} ${3:sine}
+endsnippet
+
 snippet fr "Generates numbers from 0 to n-1 inclusive" w
-(run $1)
+run $1
 endsnippet
 
 snippet fS "" w
@@ -96,6 +153,10 @@ snippet fsp "" w
 spread ($) [$1]
 endsnippet
 
+snippet fsp "" w
+spread ($) [$1]
+endsnippet
+
 # Random functions
 
 snippet rs "" w
@@ -108,6 +169,10 @@ endsnippet
 
 snippet rsp "" w
 spreadChoose ($) [$1]
+endsnippet
+
+snippet rc "" w
+choose [$1]
 endsnippet
 
 snippet ri "" w
@@ -125,7 +190,7 @@ s "$1" $0
 endsnippet
 
 snippet cw "" w
-vowel "$1" $0
+vowel "$1"
 endsnippet
 
 snippet cr "1 - 16. 1 results in a drastic bit of reduction" w
@@ -148,6 +213,42 @@ snippet cc "1..n - group, -1 only cut same samples, 0 no cutting. [1 2 n] cut pa
 cut "$1"
 endsnippet
 
+snippet coa "lowers the sample rate of a sample. i.e. 1 for original 2 for half, 3 for a third and so on." w
+coarse "$1"
+endsnippet
+
+snippet cat "changes the fade in time of a sample" w
+attack "$1"
+endsnippet
+
+snippet ca "" w
+accelerate "$1"
+endsnippet
+
+snippet cg "" w
+gain $1
+endsnippet
+
+snippet cn "based on 60 beat temopo no matter cps" w
+nudge "$1"
+endsnippet
+
+snippet cb "changes the start position of a sample" w
+begin "$1"
+endsnippet
+
+snippet cwa "0-100(max)" w
+waveloss "$1"
+endsnippet
+
+snippet ctd "tremolo depth. 0 - 1" w
+tremdp "$1"
+endsnippet
+
+snippet ctr "tremolo rate" w
+tremr "$1"
+endsnippet
+
 # Patterns
 
 snippet pst "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
@@ -159,7 +260,9 @@ stutWith ${1:2} ${2:0.5} (${3:fn}) ${VISUAL}$0
 endsnippet
 
 snippet ppar "" w
-stack [${VISUAL}$1]
+stack [
+	${VISUAL}$1
+]
 endsnippet
 
 snippet psp "Similar to SC Pspawner" b

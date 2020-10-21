@@ -137,6 +137,7 @@ alias \
 	d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME" \
 	da="d add -u && d reset -- $HOME/.config/alacritty/alacritty.yml $HOME/.config/i3blocks/config" \
 	trem="transmission-remote" \
+	px="pwd | xclip -r" \
 	sdn="sudo shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
@@ -180,6 +181,7 @@ alias \
 alias \
 	cfz="$EDITOR $HOME/.zshrc" \
 	cfv="$EDITOR $HOME/.config/nvim/init.vim" \
+	cfr="$EDITOR $HOME/.config/ranger/rc.conf" \
 	cft="$EDITOR $HOME/.tmux.conf" \
 	cfi="$EDITOR $HOME/.config/i3/config" \
 	cfb="$EDITOR $HOME/.config/i3blocks/config"

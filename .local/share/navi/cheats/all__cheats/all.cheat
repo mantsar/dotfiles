@@ -169,17 +169,25 @@ mkfs.ext4 /dev/sdz100; sudo mount /dev/sdbz100 /mnt/dir
 % operating system
 # arch installation into usb
 dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
+# Show size of each file or folder in current directory
+du -sh *
 
 % find
 # Get directories basenames
 find . -maxdepth 1 -type d | cut -c 3-
 
-% ssh vpn
+% ssh, vpn
 # Connect to computer with ssh through vpn
 sudo openfortivpn vpn.url:443 --username name -p password
 # Copy from remote to local
 scp user@ip:/remote/adress local/adress
-# ssh without pussword
+# Copy multiple files from remote to local
+scp username@ip:path/\{file1,file2,file3\} /localpath
+# Copy multiple files from local to remote
+scp /localpath username@ip:'/path1/file1 /path2/file2 /path3/file3'
+# Save ssh password so that no need to re-enter every time
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@ip
+# ssh without password
 echo public_key >> ~/.ssh/authorized_keys 
 # solve problem "term not found"
 echo "TERM=xterm-256color" >> ~/.bashrc
@@ -205,6 +213,8 @@ git reset --hard
 git diff --staged file
 # Start new repo
 git init
+# show repo information
+git remote -v
 
 % mongo
 # Export to file
@@ -297,9 +307,13 @@ sudo apt install r-base
 Rscript -e "install.packages('remotes'); remotes::install_github('rstudio/renv')"
 # Launch interactive Rmd
 R -e 'rmarkdown::run("app.Rmd", shiny_args = list(port = 7840))'
+# Installing R on debian
+https://cran.r-project.org/bin/linux/debian/
 
-% ubuntu
+% ubuntu, debian
 # regenerate locale
 update-locale LANG=en_US.UTF-8 ; sudo locale-gen
 # Update and upgrade all packages
 sudo apt-get install r-base r-base-dev
+# Check verion of OS
+lsb_release -a
