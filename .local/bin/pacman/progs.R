@@ -6,6 +6,7 @@ install.packages(c(
   "shiny",
   "shinyjs",
   "shinydashboard",
+  "waiter",
   "shinyWidgets",
   "shinycssloaders",
   "DT",
