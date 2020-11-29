@@ -15,7 +15,7 @@ endglobal
 # JIT like
 
 snippet j "Sound pattern" b
-d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $$2 s "${VISUAL}$3"
+d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $ $0
 endsnippet
 
 snippet jo "Play once independant of cycles" b
@@ -38,6 +38,12 @@ snippet D "Deconstruct" b
 deconstruct ${1:n} ${2:str}
 endsnippet
 
+# https://github.com/tidalcycles/Tidal/issues/530
+snippet set "Interpolation. Only works for sound" w
+setS "foo" (iter 4 "bd sn [cp cp:4] bd*8")
+d1 $ s "bd*2 cp:3 bd ^foo"
+endsnippet
+
 # Envelopes
 snippet et "triange" w
 smooth "$1"
@@ -49,7 +55,7 @@ snippet .. "" w
 ${1:0} .. $2
 endsnippet
 
-snippet <~ "" w
+snippet <~ "Unpredictable when values change during cycle" w
 ($1 <~)
 endsnippet
 
@@ -57,12 +63,52 @@ snippet ~> "" w
 ($1 ~>)
 endsnippet
 
-snippet fa "Spread chords of note numbers over time" w
+snippet fap "Spread chords of note numbers over time" w
 arpg "$1"
 endsnippet
 
+snippet fa "With arpeggiate modes" w
+arp "$1"
+endsnippet
+
+snippet fd "Degrade by 50%. Similar to ?" w
+degrade
+endsnippet
+
+snippet fdb "Degrade by x amount" w
+degradeBy $0
+endsnippet
+
+snippet fro "Rotate to the left. Preserves the structure (~). _ and @n are attached to element" w
+rot "$1"
+endsnippet
+
+snippet fc "Concat for different cycles" w
+cat [$1]
+endsnippet
+
+snippet frc "Pick random every cycle" w
+randcat [$1]
+endsnippet
+
+snippet ffc "concat for same cycle" w
+fastcat [${VISUAL}$1]
+endsnippet
+
+snippet fA "same as cat family, but applies to diff cycles simlar to <> " w
+append (${VISUAL}$1) ($2)
+endsnippet
+
+snippet ffA "same as cat family, but applies to diff cycles simlar to <> " w
+fastAppend (${VISUAL}$1) ($2)
+endsnippet
+
 snippet fwi "" w
-within (0.${1:0}, 1.${2:0}) ($3)
+within (0.${1:0}, ${2:1}) ($3)
+endsnippet
+
+snippet fz "" w
+zoom (0.${1:0}, ${2:1})
 endsnippet
 
 snippet fpal "" w
@@ -70,14 +116,38 @@ palindrome
 endsnippet
 
 snippet fin "" w
-inside "$1"
+inside "$1" ($2)
 endsnippet
 
-snippet fbr "" w
+snippet fbr "Breakbeat feel. every 2 squash the pattern to fit half of cycle and offset by quarter" w
 brak
 endsnippet
 
-snippet fp "repeats each event the given number of times" w
+snippet fbi "" w
+bite ${1:n} "$2"
+endsnippet
+
+snippet fch "Same as bite but also speeds. Similar to hurry vs speed" w
+chew ${1:n} "$2"
+endsnippet
+
+snippet fsl "Same as bite but for samples" w
+slice ${1:8} "$2"
+endsnippet
+
+snippet fspl "Same as chew but for samples" w
+splice ${1:8} "$2"
+endsnippet
+
+snippet fcho "Cuts each sample into n parts. Granula synthesis effect" w
+chop ${1:8}
+endsnippet
+
+snippet flo "Squash sample rate into n cycles. Only works for samples." w
+loopAt ${1:8}
+endsnippet
+
+snippet fp "Repeats each event the given number of times. Excluding rests (~)" w
 ply "$1"
 endsnippet
 
@@ -97,8 +167,53 @@ snippet fra "" w
 range ${1:lo} ${2:hi} ${3:sine}
 endsnippet
 
+snippet fseg "Useful for turning a continuous pattern into a discrete one." w
+(segment ${1:16} $ range $2 $3 $ $4)
+endsnippet
+
+snippet fsn "iter, operator, fun. Usually embedded in other function (e.g. n or up). Does not work with control patterns?" w
+snowball ${1:4} (${2:+}) (${3:slow 1})
+endsnippet
+
 snippet fw "" w
 whenmod ${1:9} ${2:7} ($3)
+endsnippet
+
+snippet fs "" w
+struct ($1)
+endsnippet
+
+snippet fm "" w
+mask ($1)
+endsnippet
+
+snippet fse "1(t) for the first pattern. 0(f) for the second one. Structure comes from source patterns." w
+sew "$1" ($2) ($3)
+endsnippet
+
+snippet fst "1(t) for the first pattern. 0(f) for the second one. Structure comes from binary pattern." w
+stitch "$1" ($2) ($3)
+endsnippet
+
+snippet fint "16 cycles. Sine waves. Changes shape control." w
+interlace ($1) ($2)
+endsnippet
+
+snippet fint1 "Interlace manually" w
+d1 $ n $1 # s "$2" # ${3:legato} (slow ${4:16} $ ${5:sine} * ${6:1.2})
+d2 $ n $1 # s "$2" # $3 (${7:8} <~ (slow $4 $ $5 * $6))
+endsnippet
+
+snippet fwe "Similar to interlace. But can me customized more easily" w
+weave ${1:16} (${2:gain} ${3:sine}) [${4:pat1}, ${5:patn}]
+endsnippet
+
+snippet fe "" w
+every $1 ($2)
+endsnippet
+
+snippet ffe "Applying every multiple times" w
+foldEvery [${1:3}, ${2:4}] ($5)
 endsnippet
 
 snippet frx "" w
@@ -109,8 +224,16 @@ snippet fr "Generates numbers from 0 to n-1 inclusive" w
 run $1
 endsnippet
 
-snippet fS "" w
+snippet fsc "" w
 scale "${1:phrygian}" "$2"
+endsnippet
+
+snippet fgs "Build and name new scale" w
+let scale = getScale (scaleTable ++ [("$1", [$2])])
+endsnippet
+
+snippet fts "Apply scale without naming it" w
+toScale [$1] "$2"
 endsnippet
 
 snippet fo "Superimpose and shift in time" w
@@ -121,36 +244,48 @@ snippet fsu "Superimpose" w
 superimpose ($1)
 endsnippet
 
+snippet fl "" w
+layer [${1:id},  $2]
+endsnippet
+
+snippet <> "Use inside function like (n etc...)" w
+overlay ("$1" "$2")
+endsnippet
+
 snippet fnu "nudge" w
 nudge "$1"
 endsnippet
 
-snippet fi "" w
+snippet fi "Pushes divisions to left" w
 iter "$1"
+endsnippet
+
+snippet fC "Applies functions to divisions (similar to iter, but moves to right)" w
+chunk 1"
 endsnippet
 
 snippet fh "" w
 hurry "$1"
 endsnippet
 
-snippet fs "" w
-struct "$1"
+snippet fsw "1/3. Swing can push elemts out of existence if it is split between arcs" w
+swing $1
+endsnippet
+
+snippet fswb "1/2 for some reason just pushes element normally. If we use div by 2 sequences" w
+swingBy (${1:1/3}) ${2:4}
+endsnippet
+
+snippet in "" w
+inv $1
 endsnippet
 
 snippet fg "" w
 ghost
 endsnippet
 
-snippet fm "" w
-mask "$1"
-endsnippet
-
 snippet ffsp "" w
 fastspread ($) [$1]
-endsnippet
-
-snippet fsp "" w
-spread ($) [$1]
 endsnippet
 
 snippet fsp "" w
@@ -163,26 +298,42 @@ snippet rs "" w
 sometimes ($1)
 endsnippet
 
+snippet rsb "" w
+sometimesBy "$1" ($2)
+endsnippet
+
 snippet rsc "" w
-someCyclesBy $1 ($2)
+someCycles ($1)
+endsnippet
+
+snippet rscb "" w
+someCyclesBy "$1" ($2)
 endsnippet
 
 snippet rsp "" w
 spreadChoose ($) [$1]
 endsnippet
 
-snippet rc "" w
+snippet rc "Continous! So it cannot be used as structure pattern" w
 choose [$1]
 endsnippet
 
-snippet ri "" w
-irand $1 + 1
+snippet rwc "Continous! Always use numbers (more safe)" w
+wchoose [($1,$2),($3,$4)]
+endsnippet
+
+snippet rr "Divides the pattern and returns a new pattern by randomly selecting. Can repeat." w
+scramble ${1:3} ""
 endsnippet
 
 # Controls
 
 snippet n "" w
 n "$1" $0
+endsnippet
+
+snippet fco "Replace pattern (including its stucture)" w
+const ($1)
 endsnippet
 
 snippet s "" w
@@ -201,12 +352,24 @@ snippet cs "simple distortion. 0 to 1. 1 max distortion" w
 shape "$1"
 endsnippet
 
+snippet ct "Triode tanh distortion 0 to n" w
+triode $1
+endsnippet
+
+snippet cf "Absolute frequency shift" w
+fshift $1
+endsnippet
+
 snippet csq "simplistic pitch raising. 1 .. n" w
 squiz "$1"
 endsnippet
 
 snippet cl "low pass filter" w
 lpf "$1"
+endsnippet
+
+snippet csp "" w
+speed "$1"
 endsnippet
 
 snippet cc "1..n - group, -1 only cut same samples, 0 no cutting. [1 2 n] cut pattern" w
@@ -249,20 +412,100 @@ snippet ctr "tremolo rate" w
 tremr "$1"
 endsnippet
 
+snippet cd "" w
+delay "$1" # delayfb "$2" # delayt "$3"
+endsnippet
+
+# Oscillators
+
+snippet os "" w
+sine
+endsnippet
+
+snippet ot "A triangle wave, starting at 0, then linearly rising to 1 halfway through a cycle, then down again." w
+tri
+endsnippet
+
+snippet osa "" w
+saw
+endsnippet
+
+snippet oc "sine shifted in time by a quarter of a cycle" w
+cosine
+endsnippet
+
+snippet osq "A squarewave, starting at 0, then going up to 1 halfway through a cycle" w
+square
+endsnippet
+
+snippet ori "" w
+irand $1 + 1
+endsnippet
+
+snippet or "" w
+rand ($1)
+endsnippet
+
 # Patterns
 
 snippet pst "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
-stut ${1:depth} ${2:fb} ${3:delay} ${VISUAL}$0
+stut ${1:depth} ${2:fb} ${3:delay} ${VISUAL}
 endsnippet
 
 snippet psw "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
-stutWith ${1:2} ${2:0.5} (${3:fn}) ${VISUAL}$0
+stutWith ${1:2} ${2:0.5} (${3:fn}) ${VISUAL}
+endsnippet
+
+snippet pb "max 255 values" w
+binary $1
+endsnippet
+
+snippet pbn "inf values. It needs to be 2**n + 1 (like 251)" w
+binaryN $1 ${2:512}
+endsnippet
+
+snippet pa "8 bit like binary" w
+ascii $1
+endsnippet
+
+snippet prw "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
+(step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
 
 snippet ppar "" w
 stack [
-	${VISUAL}$1
+  ${VISUAL}$1,
+  $2
 ]
+endsnippet
+
+snippet p "$6 means how many repetitions for event divided by elements in cycle" w
+let ${1:pats} =
+      [
+        ("${2:a}", stack [$3
+                    ]
+        ),
+        ("${4:b}", stack [$5
+                    ]
+        )
+      ]
+in
+d1 $ ur $6 "$7" $1 []
+endsnippet
+
+snippet pfx "ur with effects" w
+let ${1:pats} =
+      [
+        ("${2:a}", stack [$3
+                    ]
+        ),
+        ("${4:b}", stack [$5
+                    ]
+        )
+      ]
+      fx = [("${6:a}", ($7))]
+in
+d1 $ ur $8 "$9" $1 fx
 endsnippet
 
 snippet psp "Similar to SC Pspawner" b
@@ -293,6 +536,24 @@ do
 		(${3:0}, ${4:12}, ${VISUAL}$5)$6
 	]
 }
+endsnippet
+
+# Transistions
+
+snippet tc "transistion by replacaing events" w
+clutch ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
+endsnippet
+
+snippet tci "transistion by replacaing events in n of cycles" w
+clutchIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
+endsnippet
+
+snippet tf "transistion by fading gain" w
+xfade ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
+endsnippet
+
+snippet tfi "transistion by fading gain in n of cycles" w
+xfadeIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
 endsnippet
 
 # Language
@@ -391,4 +652,209 @@ endsnippet
 
 snippet #T "" w
 -- Tomato
+endsnippet
+
+# Chords
+
+# https://en.wikipedia.org/wiki/List_of_chords
+
+# etc
+snippet five "Perfect fifth " w
+[0, 7]
+endsnippet
+
+snippet min6th "Emotion anguish. But its subjective. Maybe its pulling etc." w
+[0, 8]
+endsnippet
+
+snippet maj6th "" w
+[0, 8]
+endsnippet
+
+snippet 9s5 "Octave chord" w
+[0, 1, 13]
+endsnippet
+
+snippet m9s5 "Octave chord but dramatic" w
+[0, 1, 14]
+endsnippet
+
+snippet 7s5f9 "Serious" w
+[0, 4, 8, 10, 13]
+endsnippet
+
+# major
+snippet maj "" w
+[0, 4, 7]
+endsnippet
+
+snippet maj7 "" w
+[0, 4, 7, 11]
+endsnippet
+
+snippet maj9 "Almost double major tom" w
+[0, 4, 7, 11, 14]
+endsnippet
+
+snippet dom7 "More dissonant long major" w
+[0, 4, 7, 10]
+endsnippet
+
+snippet six "" w
+[0, 4, 7, 9]
+endsnippet
+
+snippet 6by9 "Super happy long" w
+[0, 4, 7, 9, 14]
+endsnippet
+
+snippet 7f9 "Dramatic and shocking" w
+[0, 4, 7, 10, 13]
+endsnippet
+
+snippet 7f10 "" w
+[0, 4, 7, 10, 15]
+endsnippet
+
+snippet eleven "Expansive" w
+[0, 4, 7, 10, 14, 17]
+endsnippet
+
+snippet 11s "Wonky expansive" w
+[0, 4, 7, 10, 14, 18]
+endsnippet
+
+snippet maj11 "Expansive, but happier?" w
+[0, 4, 7, 11, 14, 17]
+endsnippet
+
+# minor
+snippet min "" w
+[0, 3, 7]
+endsnippet
+
+snippet m6 "" w
+[0, 3, 7, 9]
+endsnippet
+
+snippet min7 "" w
+[0, 3, 7, 10]
+endsnippet
+
+snippet min9 "" w
+[0, 3, 7, 10, 14]
+endsnippet
+
+snippet m11 "" w
+[0, 3, 7, 10, 14, 17]
+endsnippet
+
+snippet m6by9 "" w
+[0, 3, 7, 9, 14]
+endsnippet
+
+snippet m7f9 "Dramatic" w
+[0, 3, 7, 10, 13]
+endsnippet
+
+# diminished
+snippet dim "Very serious, like asking a question" w
+[0, 4, 6]
+endsnippet
+
+snippet dim7 "More expansive than dim" w
+[0, 4, 6, 9]
+endsnippet
+
+snippet 7f5 "Ugly" w
+[0, 4, 6, 10]
+endsnippet
+
+snippet 7s5 "Ugly and bright" w
+[0, 4, 8, 10]
+endsnippet
+
+snippet m7f5 "Pathetic" w
+[0, 3, 6, 10]
+endsnippet
+
+# augmented
+snippet aug "Sadder major" w
+[0, 4, 8]
+endsnippet
+
+snippet msharp5 "More expansive sad minor" w
+[0, 3, 8]
+endsnippet
+
+# suspended
+snippet sus2 "Bright clean, beutiful. Sounds lower than major" w
+[0, 2, 7]
+endsnippet
+
+snippet sus4 "More bright than sus2." w
+[0, 5, 7]
+endsnippet
+
+snippet 7sus2 "" w
+[0, 2, 7, 10]
+endsnippet
+
+snippet 7sus4 "" w
+[0, 5, 7, 10]
+endsnippet
+
+snippet 9sus4 "" w
+[0, 5, 7, 10, 14]
+endsnippet
+
+# Chords
+
+# https://www.ableton.com/en/manual/live-midi-effect-reference/
+
+# [0,1,2,3]
+# using without chords is unpredictable
+
+snippet up "0 1 2 3" w
+up
+endsnippet
+
+snippet down "3 2 1 0" w
+down
+endsnippet
+
+snippet updown "0 1 2 3 2 1" w
+updown
+endsnippet
+
+snippet downup "3 2 1 0 1 2" w
+downup
+endsnippet
+
+snippet converge "0 3 1 2" w
+converge
+endsnippet
+
+snippet diverge "2 1 3 0" w
+diverge
+endsnippet
+
+snippet disconverge "0 3 1 2 1 3 0" w
+disconverge
+endsnippet
+
+snippet pinkyup "0 3 1 3 2 3" w
+pinkyup
+endsnippet
+
+snippet pinkyupdown "0 3 1 3 2 3 2 3 1 3" w
+pinkyupdown
+endsnippet
+
+snippet thumbup "0 1 0 2 0 3" w
+thumbup
+endsnippet
+
+snippet thumbupdown "0 1 0 2 0 3 0 2 0 1" w
+thumbupdown
 endsnippet

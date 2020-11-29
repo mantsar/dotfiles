@@ -29,5 +29,9 @@ damp
 ftrig
 trig
 trigd
+cr
+mr
+ind
+ind_mul
 
 instrument

@@ -103,6 +103,8 @@ pass edit /path/to/data
 % audio, music
 # Check duration of an audio file
 ffmpeg -i file 2>%1 | grep Duration
+# extract audio portion from start for dur x
+ffmpeg -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3
 
 % unix, operators
 # separate commands on same line

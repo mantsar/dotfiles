@@ -510,7 +510,7 @@ let g:deoplete#enable_at_startup = 1
 call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
 call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
-call minpac#add('Shougo/deoplete-lsp')
+" call minpac#add('Shougo/deoplete-lsp')
 call minpac#add("SirVer/ultisnips")
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -607,7 +607,7 @@ command! -bang -nargs=* GGrep
 nnoremap <leader>gg :GGrep<space>
 nnoremap <M-`> :Marks<cr>
 call minpac#add('liuchengxu/vista.vim')
-let g:vista_default_executive = 'nvim_lsp'
+let g:vista_default_executive = 'lspconfig'
 let g:vista#renderer#enable_icon = 1
 let g:vista_echo_cursor_strategy = 'echo'
 autocmd FileType vista,vista_kind nnoremap <buffer> <silent> / :<c-u>call vista#finder#fzf#Run()<cr>
@@ -635,33 +635,38 @@ nmap <M-u> <Plug>MarkdownPreviewToggle
 " }}}2
 
 " LSP (langage server protocol) {{{2
-call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
-packadd! nvim-lsp
-nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
-vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
-nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
+" call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
+" packadd! nvim-lsp
+" nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
+" nnoremap <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
+" nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
+" vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
+" nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
 
-call minpac#add('nvim-lua/diagnostic-nvim', {'type': 'opt'})
-packadd! diagnostic-nvim
-" Don't want to show diagnostics while in insert mode
-let g:diagnostic_insert_delay = 1
-" call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
-" call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
-" call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
-" call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
-nnoremap <silent> <C-p> :PrevDiagnosticCycle<cr>
-nnoremap <silent> <C-n> :NextDiagnosticCycle<cr>
+" diagnostic-nvim
+" nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev()<cr>
+" nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next()<cr>
 
-lua << EOF
-require'nvim_lsp'.r_language_server.setup{on_attach=require'diagnostic'.on_attach}
-require'nvim_lsp'.bashls.setup{on_attach=require'diagnostic'.on_attach}
-require'nvim_lsp'.pyls.setup{on_attach=require'diagnostic'.on_attach}
--- require'nvim_lsp'.hls.setup{}
--- Disable Diagnostcs globally
--- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
-EOF
+" lua << EOF
+" require("vim")
+" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+"   vim.lsp.diagnostic.on_publish_diagnostics, {
+"     -- This will disable virtual text, like doing:
+"     -- let g:diagnostic_enable_virtual_text = 0
+"     virtual_text = false,
+
+"     -- This is similar to:
+"     -- let g:diagnostic_show_sign = 1
+"     -- To configure sign display,
+"     --  see: ":help vim.lsp.diagnostic.set_signs()"
+"     signs = true,
+
+"     -- This is similar to:
+"     -- "let g:diagnostic_insert_delay = 1"
+"     update_in_insert = false,
+"   }
+" )
+" EOF
 
 " }}}2
 
@@ -724,9 +729,9 @@ function! Sample_fetch(item)
 endfunction
 
 function! All_init()
-	call Foxdot_init() 
+	call Foxdot_init()
 	sleep 1
-	call Tidal_init() 
+	call Tidal_init()
 	call Espgrid_init()
 endfunction
 
@@ -979,10 +984,10 @@ function! Espgrid_init()
 	:StartAsync espgridd
 	sleep 3
 	call scnvim#sclang#send("~activate_espgrid.value()")
-	if g:tidal_activated 
-		:TidalSend1 espgrid tidal 
+	if g:tidal_activated
+		:TidalSend1 espgrid tidal
 	endif
-	if g:foxdot_activated 
+	if g:foxdot_activated
 		:T Clock.sync_to_espgrid(host="localhost", port=5510)
 	endif
 endfunction
@@ -1004,7 +1009,7 @@ augroup faust_au
 	autocmd!
 	" autocmd FileType faust :execute "StartAsync FaustLive " . expand("%:p")
 	autocmd FileType faust nnoremap <silent> <buffer> <M-e> :execute "StartAsync pgrep FaustLive \|\| FaustLive " . expand("%:p")<cr>
-	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ./f2s " . expand("%:t")<cr>
+	autocmd FileType faust nnoremap <silent> <buffer> <M-j> :execute "! ../f2s " . expand("%:t")<cr>
 augroup END
 " }}}2
 
