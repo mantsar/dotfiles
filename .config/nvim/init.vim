@@ -957,7 +957,7 @@ call minpac#add('rumblesan/improviz-vim')
 
 function! Improviz_init()
 	execute "tabe " . expand("%:r") . ".pz"
-	:StartAsync improviz
+	:StartAsync sh -c 'cd .. && improviz'
 	sleep 4
 	:StartAsync i3-msg '[instance="Improviz"]' move position 710 150
 	:StartAsync i3-msg '[instance="Improviz"]' focus mode_toggle
@@ -966,7 +966,7 @@ function! Improviz_init()
 endfunction
 
 function! Improviz_toggle()
-	:StartAsync i3-msg '[instance="Improviz"]' scratchpad show 
+	:StartAsync i3-msg '[instance="Improviz"]' scratchpad show
 	sleep 1ms
 	:StartAsync i3-msg '[instance="Improviz"]' focus mode_toggle
 endfunction

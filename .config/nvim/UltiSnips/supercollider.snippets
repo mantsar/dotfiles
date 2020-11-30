@@ -738,7 +738,7 @@ endsnippet
 
 snippet rs "For synth testing" w
 (
-Routine { 
+Routine {
 	${VISUAL}$1
 	s.sync;
 	Synth(\\$2, [$3]);
@@ -747,8 +747,8 @@ Routine {
 endsnippet
 
 snippet lo "loop (ususally routine)" w
-loop { 
-	${VISUAL}$1 
+loop {
+	${VISUAL}$1
 }
 endsnippet
 
@@ -1378,7 +1378,7 @@ snippet BufSamples "Current number of samples in buffer" w
 BufSamples.kr(${1:${VISUAL:buf}})
 endsnippet
 
-snippet ControlDur "Duration of one block (default delay time for feedback)" w
+snippet ControlDur "Duration of one block (default delay time for feedback). In seconds" w
 ControlDur.ir
 endsnippet
 
