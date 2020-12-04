@@ -1104,7 +1104,7 @@ Henon2DL.ar(${1:minfreq}, ${2:22050}, ${3:1.4}, ${4:0.3})
 endsnippet
 
 snippet Logistic "y = chaosParam * y * (1.0 - y). Use 0/4 values. Chaos occurs from 3.57" w
-Logistic.ar(${1:3.0}, init: ${3: 0.5})
+Logistic.ar(${1:3.0}, ${2:1000}, init: ${3:0.5})
 endsnippet
 
 snippet "Gendy1(k)?" "Dynamic stochastic synthesis generator. Black box :)" wr
@@ -1305,7 +1305,7 @@ snippet Ringz "Produce Sine waves at amplitude changes locations. Kinda like res
 Ringz.ar(${1:${VISUAL:sig}}, ${2:freq}, decaytime:${3:1})
 endsnippet
 
-snippet Resonz "Resonant filter similar to Ringz. bwr arguments is like a bandwidth" w
+snippet Resonz "Resonant filter similar to Ringz. bwr arguments is like a bandwidth. Increases level at provided freq." w
 Resonz.ar(${1:${VISUAL:sig}}, ${2:freq}, bwr:${3:1})
 endsnippet
 
@@ -1324,6 +1324,14 @@ endsnippet
 
 snippet Warp "A granular time stretcher and pitchshifter" w
 Warp1.ar(${1:2}, ${2:buf}, ${3:pointer}, ${4:rate}, windowSize:${5:0.2})
+endsnippet
+
+snippet Concat2 "Concatenative Cross-Synthesis on Live Streams. Freeze (set to 1) to get samples." w
+Concat2.ar(${1:SoundIn.ar()}, ${2:buf}, 1,1,1, ${3:matchlength}, ${4:freeze}, 0,1,0,0)
+endsnippet
+
+snippet CrossoverDistortion "Distortion with more control. Both args should be between 0 and 1. 1st arg max is 1, 2nd arg max is 0. Think about it as smooth distortion." w
+CrossoverDistortion.ar(${1:sig}, ${2:0.5}, ${3:0.5})
 endsnippet
 
 snippet PitchShift "Time domainpitch shifter. Raises/lowers pitch of audio without chaning it's duration. Pitch ratio must be between 0 and 4" w
@@ -1447,9 +1455,9 @@ endsnippet
 # Server functions
 
 snippet rec "Write audio to a hardisk" b
-s.record("./songs/temp.wav");
+s.record("../songs/temp.wav");
 ${VISUAL}$0
-sp.wait(0.5);
+// sp.wait(0.5);
 s.stopRecording;
 endsnippet
 
