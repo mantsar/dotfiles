@@ -14,7 +14,14 @@ sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib3
 # Settings > interface > select which Steam window appears when program starts > library
 
 # Bluetooth support
-sudo pacman -S bluez bluez-utils bluemoon
+sudo pacman -S bluez bluez-utils bluemoon # pulseaudio-bluetooth
+
+# For headphones
+# https://wiki.archlinux.org/index.php/bluetooth_headset
+
+# For LDAC codec support
+# https://wiki.archlinux.org/index.php/bluetooth_headset#LDAC/aptX
+yay -S pulseaudio-modules-bt libldac
 
 # MANUALLY
 # Instructions to set up Bluetooth: https://wiki.archlinux.org/index.php/Bluetooth

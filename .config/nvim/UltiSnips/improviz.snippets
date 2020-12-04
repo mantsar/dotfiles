@@ -1,31 +1,59 @@
 # Actions
 
-snippet ar "Rotate. 3 axis args" b
+snippet fr "Rotate. 3 axis args" w
 rotate()
 endsnippet
 
-snippet ar "Move. 3 axis args" b
+snippet fm "Move. 3 axis args" w
 move()
 endsnippet
 
 # Objects
 
-snippet oc "Cube. 3 axis args" b
+snippet oc "Cube. 3 axis args" w
 cube($1)
 endsnippet
 
-# Style
+snippet or "2 axis args" w
+rectangle($1)
+endsnippet
 
-snippet sb "Global background. 3 args" b
+snippet oci "3 axis args" w
+cilinder($1)
+endsnippet
+
+snippet os "3 axis args" w
+sphere($1)
+endsnippet
+
+# Control
+
+snippet cb "Global background. 3 args" w
 background(255, 0, 0)
 endsnippet
 
-snippet sf "Fill. 4 args, last one alpha" b
+snippet cf "Fill. 4 args, last one alpha" w
 fill(${1:255}, ${2:100}, ${3:0}, ${4:20})
 endsnippet
 
-snippet ss "Edges. 4 args, last one alpha" b
+snippet cnf "Removes fill. 0 args" w
+nofill()
+endsnippet
+
+snippet cs "Edges. 4 args, last one alpha" w
 stroke(${1:255}, ${2:100}, ${3:0}, ${4:20})
+endsnippet
+
+snippet css "0.5 is max" w
+strokeSize(${1:0.45})
+endsnippet
+
+snippet cmb "If this is followed by other animation style function calls then this will be ignored." w
+motionBlur()
+endsnippet
+
+snippet cpo "If this is followed by other animation style function calls then this will be ignored." w
+paintOver()
 endsnippet
 
 # Language
@@ -36,6 +64,18 @@ ${1:10} times
 $0
 endsnippet
 
-snippet vo "OSC variable" b
+snippet lw "Loop variable" b
+${1:10} times with i
+	$2
+$0
+endsnippet
+
+# Utility
+
+snippet o "OSC variable" b
 $1 = ext(:$1, $2)
+endsnippet
+
+snippet rr "Random value between 0 and 1" w
+random()
 endsnippet

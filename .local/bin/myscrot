@@ -1,3 +1,3 @@
 #!/bin/sh
 
-scrot -q 100 ~/Pictures/scrot/%b%d::%H%M%S.png
+scrot -q 50 ~/Pictures/scrot/%b%d::%H%M%S.png

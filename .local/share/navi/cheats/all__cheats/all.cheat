@@ -213,6 +213,8 @@ git clone -b <branch> <remote_repo>
 git reset --hard
 # Diff for staged files
 git diff --staged file
+# Git diff between commits
+git diff old...new
 # Start new repo
 git init
 # show repo information

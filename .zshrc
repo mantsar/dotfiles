@@ -143,6 +143,8 @@ alias \
 	v="$EDITOR" \
 	vim="nvim" \
 	nv="neovide --geometry=210x50" \
+	# -y option to always overwrite output
+	ff="ffmpeg -f x11grab -video_size 1920x1080 -framerate 60 -i $DISPLAY" \
 	p="sudo pacman" \
 	pu="sudo pacman -Syyu" \
 	lst="ls -laht | grep '^-' | head" \

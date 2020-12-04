@@ -297,6 +297,8 @@ let g:which_key_map.f = {
 nnoremap <leader>td :tabclose<cr>
 nnoremap <leader>tn :tabnext<cr>
 nnoremap <leader>tp :tabprevious<cr>
+nnoremap <leader>tL :tabm +1<cr>
+nnoremap <leader>tH :tabm -1<cr>
 nnoremap <silent> <M-1> 1gt
 nnoremap <silent> <M-2> 2gt
 nnoremap <silent> <M-3> 3gt
@@ -729,15 +731,17 @@ function! Sample_fetch(item)
 endfunction
 
 function! All_init()
-	call Foxdot_init()
-	sleep 1
+	" call Foxdot_init()
+	" sleep 1
 	call Tidal_init()
-	call Espgrid_init()
+	call Improviz_init()
+	" call Espgrid_init()
 endfunction
 
 augroup sc_au
 	autocmd!
 	" init
+	autocmd FileType supercollider,tidal,tidal ColorizerAttachToBuffer
 	autocmd FileType supercollider setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
@@ -800,7 +804,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ~/sp/a/ardour<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>A :call Hydra_init()<cr>
-	" autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()
+	autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()<cr>
 	" Ardour
 	autocmd VimEnter *.scd nnoremap <leader>ae :call scnvim#sclang#send("a.play")<cr>
 	autocmd VimEnter *.scd nnoremap <leader>ak :call scnvim#sclang#send("a.stop")<cr>
@@ -957,9 +961,13 @@ call minpac#add('rumblesan/improviz-vim')
 
 function! Improviz_init()
 	execute "tabe " . expand("%:r") . ".pz"
-	:StartAsync sh -c 'cd .. && improviz'
-	sleep 4
-	:StartAsync i3-msg '[instance="Improviz"]' move position 710 150
+	:ColorizerAttachToBuffer
+	call scnvim#sclang#send("~improviz_start.value()")
+	:T cd /home/mantas/sp/tmp/improviz && stack exec improviz
+	" :StartAsync sh -c 'cd .. && improviz'
+	" :StartAsync sh -c 'cd /home/mantas/sp/tmp/improviz && stack exec improviz'
+	sleep 2
+	:StartAsync i3-msg '[instance="Improviz"]' move position 1100 100
 	:StartAsync i3-msg '[instance="Improviz"]' focus mode_toggle
 	:ImprovizToggleText
 	:normal G
@@ -975,8 +983,11 @@ augroup improviz_au
 	autocmd!
 	autocmd FileType improviz setlocal commentstring=//\ %s
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-e> :ImprovizSend<cr>
+	autocmd FileType improviz nnoremap <silent> <buffer> <M-j> :ImprovizSend<cr>
+	autocmd FileType improviz nnoremap <silent> <buffer> <M-p> :ImprovizSend<cr>
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-l> :ImprovizToggleText<cr>
 	autocmd FileType improviz nnoremap <buffer> <M-u> :call Improviz_toggle()<cr>
+	autocmd FileType improviz nnoremap <silent> <buffer> <M-s> :e ./snips.pz<cr>
 augroup END
 
 " Espgrid

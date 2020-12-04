@@ -83,7 +83,7 @@ snippet fro "Rotate to the left. Preserves the structure (~). _ and @n are attac
 rot "$1"
 endsnippet
 
-snippet fc "Concat for different cycles" w
+snippet fc "Concat for different cycles. Pattern maintains it's original duration." w
 cat [$1]
 endsnippet
 
@@ -108,10 +108,10 @@ within (0.${1:0}, ${2:1}) ($3)
 endsnippet
 
 snippet fz "" w
-zoom (0.${1:0}, ${2:1})
+zoom (0.${1:0}, ${2:1}) 
 endsnippet
 
-snippet fpal "" w
+snippet fpl "" w
 palindrome
 endsnippet
 
@@ -183,7 +183,7 @@ snippet fs "" w
 struct ($1)
 endsnippet
 
-snippet fm "" w
+snippet fm "Binary gain of 1s and 0s. It's like gain but with binary functions like inv" w
 mask ($1)
 endsnippet
 
@@ -268,7 +268,7 @@ snippet fh "" w
 hurry "$1"
 endsnippet
 
-snippet fsw "1/3. Swing can push elemts out of existence if it is split between arcs" w
+snippet fsw "1/3. Swing can push elements out of existence if it is split between arcs" w
 swing $1
 endsnippet
 
@@ -449,11 +449,11 @@ endsnippet
 # Patterns
 
 snippet pst "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
-stut ${1:depth} ${2:fb} ${3:delay} ${VISUAL}
+stut ${1:depth} ${2:fb} ${3:delay}${VISUAL}
 endsnippet
 
 snippet psw "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
-stutWith ${1:2} ${2:0.5} (${3:fn}) ${VISUAL}
+stutWith ${1:2} ${2:0.5} (${3:fn})${VISUAL}
 endsnippet
 
 snippet pb "max 255 values" w
@@ -508,33 +508,42 @@ in
 d1 $ ur $8 "$9" $1 fx
 endsnippet
 
-snippet psp "Similar to SC Pspawner" b
+snippet psp "Similar to SC Pspawner. Stack by default" b
 do
 {
-	resetCycles;
-	d${1:1} $ seqP [
-		(${2:0}, ${3:12}, ${VISUAL}$4)$5
-	]
+  resetCycles;
+  d${1:1} $ seqP [
+    (${2:0}, ${3:12}, ${VISUAL}$4)$5
+  ]
 }
 endsnippet
 
-snippet pspl "" b
+snippet ps "Similar to SC Pspawner. Stack by default" w
+seqP [(0, ${1:24},
+  ${VISUAL}$2)]
+endsnippet
+
+snippet psl "To loop specific amount wrap inside seqP. Similar as wrapping in Pn in SC" b
 do
 {
-	resetCycles;
-	d${1:1} $ seqPLoop [
-		(${2:0}, ${3:12}, ${VISUAL}$4)$5
-	]
+  resetCycles;
+  d${1:1} $ seqPLoop [
+    (${2:0}, ${3:12}, ${VISUAL}$4)$5
+  ]
 }
 endsnippet
 
-snippet pspw "" b
+snippet pl "Only offsets seqPLoop first cycle " b
+rotL ${1:3}
+endsnippet
+
+snippet pls "Start at specific cycle" b
 do
 {
-	resetCycles;
-	d${1:1} $ rotL ${2:4} $ seqP [
-		(${3:0}, ${4:12}, ${VISUAL}$5)$6
-	]
+  resetCycles;
+  d${1:1} $ rotL ${2:4} $ seqP [
+    (${3:0}, ${4:12}, ${VISUAL}$5)$6
+  ]
 }
 endsnippet
 
@@ -594,63 +603,63 @@ hc:${1:0}
 endsnippet
 
 # Colors
-snippet #b "" w
+snippet c1 "" w
 -- Blue
 endsnippet
 
-snippet #r "" w
+snippet c2 "" w
 -- Red
 endsnippet
 
-snippet #g "" w
+snippet c3 "" w
 -- Green
 endsnippet
 
-snippet #l "" w
+snippet c4 "" w
 -- Lime
 endsnippet
 
-snippet #o "" w
+snippet c5 "" w
 -- Olive
 endsnippet
 
-snippet #a "" w
+snippet c6 "" w
 -- Aqua
 endsnippet
 
-snippet #t "" w
+snippet c7 "" w
 -- Teal
 endsnippet
 
-snippet #n "" w
+snippet c8 "" w
 -- Navy
 endsnippet
 
-snippet #p "" w
+snippet c9 "" w
 -- Plum
 endsnippet
 
-snippet #P "" w
+snippet c10 "" w
 -- Purple
 endsnippet
 
-snippet #G "" w
+snippet c11 "" w
 -- Gray
 endsnippet
 
-snippet #b "" w
+snippet c12 "" w
 -- Brown
 endsnippet
 
-snippet #k "" w
+snippet c13 "" w
 -- Khaki
 endsnippet
 
-snippet #c "" w
+snippet c14 "" w
 -- Crimson
 endsnippet
 
-snippet #T "" w
+snippet c15 "" w
 -- Tomato
 endsnippet
 
@@ -857,4 +866,21 @@ endsnippet
 
 snippet thumbupdown "0 1 0 2 0 3 0 2 0 1" w
 thumbupdown
+endsnippet
+
+# OSC Control
+snippet cF "Float" w
+cF 1 "$1"
+endsnippet
+
+snippet cI "Integer" w
+cI 1 "$1"
+endsnippet
+
+snippet cS "String" w
+cS 1 "$1"
+endsnippet
+
+snippet cB "Boolean" w
+cB 1 "$1"
 endsnippet

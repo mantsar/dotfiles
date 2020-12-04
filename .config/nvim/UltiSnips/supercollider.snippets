@@ -225,11 +225,15 @@ snippet pb "Combine several value patterns to one event stream by binding keys t
 Pbind(\\$1, $2,${VISUAL})
 endsnippet
 
+snippet pbp "" w
+Pbindef(\\${1:k}, \instrument, $2,$0${VISUAL}).play;
+endsnippet
+
 snippet pdb "" b
 Pdef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Pbind(\\instrument, $2,
-	\dur, $3,
-	$4
-)).quant_($5).play;
+  \dur, $3,
+  $4
+)).quant_(1).play;
 endsnippet
 
 snippet pb< "Composite pattern" w
@@ -459,7 +463,7 @@ ${VISUAL}.linlin(${1:-1}, ${2:1}, ${3:1}, ${4:4})
 endsnippet
 
 snippet .c "Retrieve whole event on every step or apply the function to each return value from the pattern" i
-${VISUAL}.collect {|e| $1}
+${VISUAL}.collect {|e| $1; e}
 endsnippet
 
 snippet .s "Preserve values from the output stream that pass the Boolean test; discard the rest" i
@@ -681,7 +685,7 @@ snippet di "Similar to python for loop" w
 $1.do { $2 }
 endsnippet
 
-snippet cl "Like do but alose return resulting array" w
+snippet cl "Like do but return resulting array" w
 $1.collect {|v, i| $2 }
 endsnippet
 
@@ -1326,8 +1330,12 @@ snippet PitchShift "Time domainpitch shifter. Raises/lowers pitch of audio witho
 PitchShift.ar(${1:${VISUAL:sig}}, windowSize:${2:0.2}, pitchRatio:${2:1}, pitchDispersion:${3:0}, timeDispersion:${4:0})
 endsnippet
 
-snippet FreqShift "Frequency shifter. Does not preserve harmonic ratios" w
-FreqShift.ar(${1:${VISUAL:sig}}, ${2:freqshift}, ${3:phase})
+snippet Squiz "Pitch shifter. Same as in Tidal. Only > 1 are allowed. Distorts sound a lot" w
+Squiz.ar(${1:${VISUAL:sig}}, ${2:2})
+endsnippet
+
+snippet FreqShift "Frequency shifter. Does not preserve harmonic ratios. Phase between pi and 2 pi" w
+FreqShift.ar(${1:${VISUAL:sig}}, ${2:100}, ${3:0})
 endsnippet
 
 snippet PlayBuf "Plays buffer. Triger can be Ugen" w
@@ -1616,6 +1624,10 @@ snippet ,to "" i
 , \timingOffset, ${1:0.00001}
 endsnippet
 
+snippet ,or "tidal" i
+, \orbit, $0
+endsnippet
+
 priority 3
 
 snippet , "key/value pair" b
@@ -1656,6 +1668,10 @@ endsnippet
 
 snippet ,to "" b
 \timingOffset, ${1:0.00001}
+endsnippet
+
+snippet ,or "tidal" b
+\orbit, $0
 endsnippet
 
 # JIT
@@ -1738,23 +1754,23 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Ndef(\\$2) + Ndef(\\$3)$4)
 endsnippet
 
 snippet jf "Proxy function/synth controller" w
-Ndef(\\$1).play(0, 2);
 (
-Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, {|freq=440, sustain=1, pan=0|
+Ndef(\\$1, {|freq=440, sustain=1, pan=0|
 	var sig, env;
 	sig = ${VISUAL}$2
-});
+})
 );
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}).play(0, 2);
 endsnippet
 
 snippet j0 "Define proxy with index an play it" b
-Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}).play(0, 2);
 (
-Ndef(\\$1)[0] = {|freq=440, sustain=1, pan=0|
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`})[0] = {|freq=440, sustain=1, pan=0|
 	var sig, env;
 	sig = ${VISUAL}$2
-};
+}
 );
+Ndef(\\$1).play(0, 2);
 endsnippet
 
 snippet jpb0 "Define proxy pbind with index an play it" b
@@ -1781,7 +1797,19 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, ${VISUAL}$2);
 endsnippet
 
 snippet jpb "Define and play Pbind Ndef" b
-Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Pbind(\instrument, \\${2:default}, \dur, ${3:1})).play(vol:0.3);
+(
+Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`},
+  Pbind(\instrument, \\${2:default}, \dur, ${3:1}$0))
+);
+Ndef(\\$1).play(vol:0.3);
+endsnippet
+
+snippet jpm "Define and play Pmono Ndef" b
+(
+Pdef(\\${1:`!p if not snip.c: snip.rv = temp_key()`},
+  Pmono(\\${2:default}, \dur, ${3:1}$0))
+);
+Ndef(\\$1, Pdef(\\$1)).play(vol:0.3);
 endsnippet
 
 snippet jqb "Define with quant and play Ndef" w
@@ -1836,12 +1864,16 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`})[0] = \setsrc -> Pbind(
 endsnippet
 
 snippet jip "Basically multiline set audio controls, and does not create new synth every duration. Also overwrites everything on revaluation (even undefined ones)" b
-Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4));
+(
+Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4);
+)
 Ndef(\\$1)[${2:`!p if not snip.c: snip.rv = role_index()`}] = \pset -> Pdef(\\$1);
 endsnippet
 
 snippet jix "Basically pipe to Pbind functionality and create new synth every duration" b
+(
 Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4);
+)
 Ndef(\\$1)[${2:`!p if not snip.c: snip.rv = role_index()`}] = \xset -> Pdef(\\$1);
 endsnippet
 
@@ -1878,11 +1910,10 @@ snippet jq "Proxy quant" b
 Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).quant = ${2:1};
 endsnippet
 
-snippet jj "Proxy settings" b
+snippet jo "Proxy settings" b
 (
-Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).quant = ${2:1};
-Pdef(\\$1).quant = ${6:1};
-Ndef(\\$1).fadeTime = ${3:0.5};
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).quant = ${2:1}; Ndef(\\$1).fadeTime = ${3:0.5};
+Pdef(\\$1).quant = ${4:1};
 );
 endsnippet
 
@@ -1989,18 +2020,28 @@ NetAddr("127.0.0.1", 5510)
 endsnippet
 
 snippet ov "Visualiser (Improviz) address" b
-~vosc = NetAddr("127.0.0.1", 5520);
+h = NetAddr("127.0.0.1", 5520);
 endsnippet
 
 snippet os "Visualiser (Improviz) address" w
-~vosc.sendMsg("/vars/$1", $2)
+h.sendMsg("/vars/$1", $2)
+endsnippet
+
+snippet op "Global values from Tidal to Improvz" w
+p = (
+  0:['n'],
+);
+endsnippet
+
+snippet oc "Clear Tidal to Improviz listening" b
+~dirt.removeModule('post');
 endsnippet
 
 snippet osb "Send bus to visualiser (Improviz)" b
 (
-~vosc = NetAddr.new("127.0.0.1", 5520);
+h = NetAddr.new("127.0.0.1", 5520);
 ~v${1:1}.stop;
-~v$1 = { loop { ~vb$1.get({|v| ~vosc.sendMsg("/vars/$3", v$4}); 0.1.wait} }.fork;
+~v$1 = { loop { ~vb$1.get({|v| h.sendMsg("/vars/$3", v$4}); 0.1.wait} }.fork;
 )
 endsnippet
 
@@ -2021,6 +2062,20 @@ c = InBus.ar(~dirt.orbits[`!p snip.rv = match.group(1)`].dryBus, 2).sum;
 Compander.ar(sig, c, thresh:0.006, slopeBelow:1, slopeAbove: 0.1, clampTime:0.05, relaxTime:0.1)
 endsnippet
 
+snippet cs "Visualiser (Improviz) address" w
+c.sendMsg("/ctrl", "${1:n}", $2)
+endsnippet
+
+snippet dp "" b
+Pdef(\\${1:`!p if not snip.c: snip.rv = temp_key()`}, Pbind(\\type, \\dirt,
+  \dur, $2,
+  \n, $3,
+  \s, $4,
+  $5
+)).quant_(1).play;
+endsnippet
+
+# Steno
 snippet k0 "Filter with Steno" b
 (
 $1
@@ -2038,6 +2093,23 @@ k.quelle(\\`!p snip.rv = match.group(1)`, {
 endsnippet
 
 # Ardour
+
+snippet ai "Init mastering with ardour" b
+s.reboot({
+  // need to execute twice sometimes
+  // s.options.numOutputBusChannels = 2;
+  s.options.numOutputBusChannels = 24;
+  "~/.config/SuperCollider/startup.scd".load;
+  s.waitForBoot {
+    s.sync;
+    ~superdirt_start.();
+    s.sync;
+    // ~dirt.start(57120, 0!12);
+    ~dirt.start(57120, [0, 2, 4, 6, 8, 10]);
+    // 0-11 are tidal buses, 12-23 for sc
+  }
+});
+endsnippet
 
 snippet ae "Puts transport in play mode" b
 a.play;
@@ -2065,7 +2137,7 @@ snippet Faust "UGen compiled with Faust" w
 Faust$1.ar($2)
 endsnippet
 
-priority 50 
+priority 50
 
 snippet .r "range" i
 ${VISUAL}.range(${1:0}, ${2:1})
@@ -2114,4 +2186,65 @@ endsnippet
 
 snippet kg ""
 k.setGlobal(\fadeTime, ${1:1}, \attack, ${2:1});
+endsnippet
+
+# Colors
+snippet c1 "" w
+// Blue
+endsnippet
+
+snippet c2 "" w
+// Red
+endsnippet
+
+snippet c3 "" w
+// Green
+endsnippet
+
+snippet c4 "" w
+// Lime
+endsnippet
+
+snippet c5 "" w
+// Olive
+endsnippet
+
+snippet c6 "" w
+// Aqua
+endsnippet
+
+snippet c7 "" w
+// Teal
+endsnippet
+
+snippet c8 "" w
+// Navy
+endsnippet
+
+snippet c9 "" w
+// Plum
+endsnippet
+
+snippet c10 "" w
+// Purple
+endsnippet
+
+snippet c11 "" w
+// Gray
+endsnippet
+
+snippet c12 "" w
+// Brown
+endsnippet
+
+snippet c13 "" w
+// Khaki
+endsnippet
+
+snippet c14 "" w
+// Crimson
+endsnippet
+
+snippet c15 "" w
+// Tomato
 endsnippet
