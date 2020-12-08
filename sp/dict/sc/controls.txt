@@ -33,5 +33,6 @@ cr
 mr
 ind
 ind_mul
+width
 
 instrument

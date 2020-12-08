@@ -71,11 +71,13 @@ s.latency = 0.3;
     // ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
     c = NetAddr("127.0.0.1", 6010);
     SuperDirt.default = ~dirt;
+    // ADDITIONAL EFFECTS
+    (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   };
 };
 
 ~foxdot_start = {
-  s.waitForBoot { 
+  s.waitForBoot {
     OSCFunc(
       {
         arg msg, time, addr, port;
@@ -119,7 +121,8 @@ s.latency = 0.3;
       1.postln;
       if (p[o].notNil) {
         p[o].do {|v|
-          h.sendMsg("/vars/" ++ v ++ o, e[v])
+          e[v].postln;
+          // h.sendMsg("/vars/" ++ v ++ o, e[v])
         }
       }
     }
@@ -180,8 +183,8 @@ s.latency = 0.3;
   }.play;
 };
 
-~play_samples = {|key=nil| 
-  var f = {|key| 
+~play_samples = {|key=nil|
+  var f = {|key|
     var dur, nc;
     d[key.asSymbol].do({|v|
       try {
@@ -566,7 +569,7 @@ s.waitForBoot({
   StageLimiter.activate(2);
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "Setup done".postln;
-  // d = ~read_dirt_samples.value(); // Samples
+  d = ~read_dirt_samples.value(); // Samples
 });
 
 // Platform.userExtensionDir

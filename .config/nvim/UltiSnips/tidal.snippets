@@ -18,7 +18,12 @@ snippet j "Sound pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $ $0
 endsnippet
 
-snippet jo "Play once independant of cycles" b
+snippet jj "Sound pattern on new line" b
+d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`}
+$ $0
+endsnippet
+
+snippet jo "Play once independant of cycles. Slow ruins it." b
 once $$1 s "${VISUAL}$2"
 endsnippet
 
@@ -44,9 +49,18 @@ setS "foo" (iter 4 "bd sn [cp cp:4] bd*8")
 d1 $ s "bd*2 cp:3 bd ^foo"
 endsnippet
 
+snippet mm "Mappings to trigger short sounds" w
+nmap <M-z> :TidalSend1 asap $ s "glitch:3" <cr>
+nmap <M-x> :TidalSend1 asap $ s "glitch:6" <cr>
+endsnippet
+
 # Envelopes
 snippet et "triange" w
 smooth "$1"
+endsnippet
+
+snippet el "Linear envelope. Use for gain with trigger, etc. We can range it" w
+envL
 endsnippet
 
 # Functions
@@ -61,6 +75,10 @@ endsnippet
 
 snippet ~> "" w
 ($1 ~>)
+endsnippet
+
+snippet rr "Use to change randomness" w
+(0.000000${1:1} <~)
 endsnippet
 
 snippet fap "Spread chords of note numbers over time" w
@@ -79,7 +97,7 @@ snippet fdb "Degrade by x amount" w
 degradeBy $0
 endsnippet
 
-snippet fro "Rotate to the left. Preserves the structure (~). _ and @n are attached to element" w
+snippet rot "Rotate to the left. Preserves the structure (~). _ and @n are attached to element" w
 rot "$1"
 endsnippet
 
@@ -107,8 +125,12 @@ snippet fwi "" w
 within (0.${1:0}, ${2:1}) ($3)
 endsnippet
 
+snippet fZ "" w
+zoom (0.${1:0}, ${2:1})
+endsnippet
+
 snippet fz "" w
-zoom (0.${1:0}, ${2:1}) 
+compress (0.${1:0}, ${2:1})
 endsnippet
 
 snippet fpl "" w
@@ -152,15 +174,23 @@ ply "$1"
 endsnippet
 
 snippet pif "" w
-fix ($1) (${2:n} "$3")
+fix ($1) (${2:s} "$3")
 endsnippet
 
 snippet fj "" w
 jux ($1)
 endsnippet
 
-snippet fre "" w
+snippet re "" w
 rev
+endsnippet
+
+snippet ss "" w
+slow $0
+endsnippet
+
+snippet ff "" w
+fast $0
 endsnippet
 
 snippet fra "" w
@@ -224,15 +254,15 @@ snippet fr "Generates numbers from 0 to n-1 inclusive" w
 run $1
 endsnippet
 
-snippet fsc "" w
-scale "${1:phrygian}" "$2"
+snippet sc "" w
+scale "${1:indian}" "$2"
 endsnippet
 
-snippet fgs "Build and name new scale" w
+snippet gs "Build and name new scale" w
 let scale = getScale (scaleTable ++ [("$1", [$2])])
 endsnippet
 
-snippet fts "Apply scale without naming it" w
+snippet ts "Apply scale without naming it" w
 toScale [$1] "$2"
 endsnippet
 
@@ -261,7 +291,7 @@ iter "$1"
 endsnippet
 
 snippet fC "Applies functions to divisions (similar to iter, but moves to right)" w
-chunk 1"
+chunk ${1:4} ($2)
 endsnippet
 
 snippet fh "" w
@@ -307,7 +337,7 @@ someCycles ($1)
 endsnippet
 
 snippet rscb "" w
-someCyclesBy "$1" ($2)
+someCyclesBy $1 ($2)
 endsnippet
 
 snippet rsp "" w
@@ -322,74 +352,94 @@ snippet rwc "Continous! Always use numbers (more safe)" w
 wchoose [($1,$2),($3,$4)]
 endsnippet
 
-snippet rr "Divides the pattern and returns a new pattern by randomly selecting. Can repeat." w
+snippet rscr "Divides the pattern and returns a new pattern by randomly selecting. Can repeat." w
 scramble ${1:3} ""
 endsnippet
 
 # Controls
 
-snippet n "" w
-n "$1" $0
-endsnippet
-
 snippet fco "Replace pattern (including its stucture)" w
 const ($1)
 endsnippet
 
-snippet s "" w
-s "$1" $0
-endsnippet
-
 snippet cw "" w
-vowel "$1"
+vowel $0
 endsnippet
 
 snippet cr "1 - 16. 1 results in a drastic bit of reduction" w
-crush "$1"
+crush $0
 endsnippet
 
 snippet cs "simple distortion. 0 to 1. 1 max distortion" w
-shape "$1"
+shape $0
 endsnippet
 
 snippet ct "Triode tanh distortion 0 to n" w
-triode $1
+triode $0
 endsnippet
 
 snippet cf "Absolute frequency shift" w
-fshift $1
+fshift $0
+endsnippet
+
+snippet co "" w
+octave $0
+endsnippet
+
+snippet le "" w
+legato $0
 endsnippet
 
 snippet csq "simplistic pitch raising. 1 .. n" w
-squiz "$1"
+squiz $0
 endsnippet
 
 snippet cl "low pass filter" w
-lpf "$1"
+lpf $1
+endsnippet
+
+snippet clq "low pass filter" w
+lpf $1 # lpq $0
+endsnippet
+
+snippet ch "high pass filter" w
+hpf $1
+endsnippet
+
+snippet chq "high pass filter" w
+hpf $1 # hpq $0
+endsnippet
+
+snippet dj "0-0.49 lpf, 0.51-1 hpf" w
+djf $0
 endsnippet
 
 snippet csp "" w
-speed "$1"
+speed $0
 endsnippet
 
 snippet cc "1..n - group, -1 only cut same samples, 0 no cutting. [1 2 n] cut pattern" w
-cut "$1"
+cut $0
 endsnippet
 
 snippet coa "lowers the sample rate of a sample. i.e. 1 for original 2 for half, 3 for a third and so on." w
-coarse "$1"
+coarse $0
 endsnippet
 
 snippet cat "changes the fade in time of a sample" w
-attack "$1"
+attack $0
 endsnippet
 
 snippet ca "" w
-accelerate "$1"
+accelerate $0
 endsnippet
 
 snippet cg "" w
 gain $1
+endsnippet
+
+snippet ro "" w
+room $1
 endsnippet
 
 snippet cn "based on 60 beat temopo no matter cps" w
@@ -414,6 +464,10 @@ endsnippet
 
 snippet cd "" w
 delay "$1" # delayfb "$2" # delayt "$3"
+endsnippet
+
+snippet lo "Lock delay to cps" w
+lock 1
 endsnippet
 
 # Oscillators
@@ -565,6 +619,10 @@ snippet tfi "transistion by fading gain in n of cycles" w
 xfadeIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
 endsnippet
 
+snippet tt "Trigger on specified channel revaluation (can be itself)" w
+trigger ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
+endsnippet
+
 # Language
 
 snippet do "Block" b
@@ -663,7 +721,7 @@ snippet c15 "" w
 -- Tomato
 endsnippet
 
-# Chords
+# Chords and scales
 
 # https://en.wikipedia.org/wiki/List_of_chords
 
@@ -707,6 +765,14 @@ endsnippet
 
 snippet dom7 "More dissonant long major" w
 [0, 4, 7, 10]
+endsnippet
+
+snippet dom7a "More dissonant long major" w
+0 4 7 10
+endsnippet
+
+snippet indian "Last note is amazing" w
+0 4 5 7 10
 endsnippet
 
 snippet six "" w
@@ -811,6 +877,10 @@ endsnippet
 
 snippet 7sus4 "" w
 [0, 5, 7, 10]
+endsnippet
+
+snippet 7sus4a "" w
+0 5 7 10
 endsnippet
 
 snippet 9sus4 "" w

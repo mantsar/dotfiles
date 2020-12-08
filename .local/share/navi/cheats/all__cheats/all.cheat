@@ -105,6 +105,8 @@ pass edit /path/to/data
 ffmpeg -i file 2>%1 | grep Duration
 # extract audio portion from start for dur x
 ffmpeg -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3
+# convert mp3 to wav
+ffmpeg -i input.mp3 output.wav
 
 % unix, operators
 # separate commands on same line

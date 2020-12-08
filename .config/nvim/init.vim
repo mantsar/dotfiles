@@ -413,8 +413,10 @@ function! SourceVimscript(type)
 endfunction
 nnoremap <silent> gs :set opfunc=SourceVimscript<CR>g@
 nnoremap <silent> <leader>vv :call SourceVimscript("currentline")<CR>
+nnoremap <silent> <M-v> :call SourceVimscript("currentline")<CR>
 xnoremap <silent> gs :set opfunc=SourceVimscript<CR>g@
 xnoremap <silent> <leader>vv :<C-U>call SourceVimscript("visual")<CR>
+xnoremap <silent> <M-v> :<C-U>call SourceVimscript("visual")<CR>
 nnoremap <leader>vs :source $MYVIMRC<cr>
 let g:which_key_map.v = {
 			\ 'name' : '+vim' ,
@@ -758,7 +760,7 @@ augroup sc_au
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/synths.txt
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/controls.txt
 	"mappings
-	autocmd VimEnter *.scd inoremap <buffer> <M-cr> <cr><cr><up><tab>
+	autocmd FileType supercollider inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd imap <M-e> <C-o><Plug>(scnvim-send-block)
 	autocmd VimEnter *.scd xmap <M-e> <Plug>(scnvim-send-selection)
@@ -861,6 +863,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal commentstring=--\%s
 	autocmd FileType tidal setlocal formatoptions-=j "Do not concatenate # on J
 	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/default-synths-extra.scd
+	autocmd FileType tidal :badd ~/.config/SuperCollider/synthdef/effects-extra.scd
 	autocmd FileType tidal :badd ~/sp/tidal/Tidal.ghci
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/functions.txt
@@ -870,6 +873,8 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
+	autocmd FileType tidal inoremap <buffer> <M-cr> <cr>$<space>
+	autocmd FileType tidal inoremap <buffer> <M-m> <cr>#<space>
 	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>
 	autocmd FileType tidal nnoremap <buffer> <leader><leader>1 :TidalSend1 numberNoteMap<cr>
 	autocmd FileType tidal nnoremap <silent> <buffer> <expr> <M-a> Is_comment() ? '' : 'v$:s/\%V\(\$\\|#\)/\r\1<cr>lmmk$x`m'
@@ -951,8 +956,8 @@ augroup foxdot_au
 	autocmd!
 	autocmd FileType python nmap <buffer> <M-k>  :T Clock.clear()<cr>
 	autocmd FileType python imap <buffer> <M-k>  <C-o>:T Clock.clear()<cr>
-	autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
-	autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
+	" autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
+	" autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
 	" autocmd FileType python nnoremap <buffer> <M-u> :Ttoggle<cr>
 augroup END
 

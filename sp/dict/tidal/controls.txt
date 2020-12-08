@@ -117,3 +117,9 @@ mr4
 coef
 eq_fmul
 fb
+width
+ch
+dch
+pch
+wch
+fch
