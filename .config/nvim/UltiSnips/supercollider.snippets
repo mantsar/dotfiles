@@ -1227,6 +1227,10 @@ snippet DetectSilence2 "Safe DetectSilence for multichannel" w
 FreeSelf.kr(DetectSilence.ar(${1:${VISUAL:sig}} + Impulse.ar(0)).product);
 endsnippet
 
+snippet FreeSelf "Free enclosing synth on trig" w
+FreeSelf.kr(${1:t_trig})
+endsnippet
+
 snippet Linen "Simple linear envelope generator" w
 Linen.kr(${1:gate}, ${2:atk}, ${3:1}, ${4:rel}, doneAction: ${5:0})
 endsnippet
@@ -1946,7 +1950,7 @@ endsnippet
 
 snippet jix "Basically pipe to Pbind functionality and create new synth every duration" b
 (
-Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4).quant_(1);
+Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4)).quant_(1);
 );
 Ndef(\\$1)[${2:`!p if not snip.c: snip.rv = role_index()`}] = \xset -> Pdef(\\$1);
 endsnippet
