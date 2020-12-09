@@ -225,6 +225,10 @@ snippet pb "Combine several value patterns to one event stream by binding keys t
 Pbind(\\$1, $2,${VISUAL})
 endsnippet
 
+snippet pfo "Fork independent pattern" w
+Pdef(\\$1).fork(t, ${2:2});
+endsnippet
+
 snippet pbp "" w
 Pbindef(\\${1:k}, \instrument, $2,$0${VISUAL}).quant_(1).play;
 endsnippet
@@ -442,8 +446,8 @@ endsnippet
 
 # Randomness
 
-snippet randSeed "Set seed for any sc random acton which will be taken" 
-thisThread.randSeed = $0
+snippet randSeed "Set seed for any sc random acton which will be taken" w
+thisThread.randSeed = $0;
 endsnippet
 
 snippet pw "Random values with uniform distribution. dur - inf" w
@@ -454,8 +458,12 @@ snippet pga "Random values with normal distribution" w
 Pgauss(${1:0}, ${2:1}, ${3:inf})
 endsnippet
 
-snippet drb "Brownian motion (random walk). Step is continous range not a discrete value" w
+snippet prb "Brownian motion (random walk). Step is continous range not a discrete value" w
 Pbrown(${1:0}, ${2:1}, ${3:0.125}, ${4:inf})
+endsnippet
+
+snippet prgb "geometric" w
+Pgbrown(${1:0}, ${2:1}, ${3:0.125}, ${4:inf})
 endsnippet
 
 snippet pr "Select random values from collection. Whole patterns can be returned too" w
@@ -464,6 +472,55 @@ endsnippet
 
 snippet psee "Set the random seed in subpattern. randSeed overwittes repeats of inner patterns and resets on inner cycle." w
 Pseed(${1:randSeed}, ${VISUAL}$2)
+endsnippet
+
+# some random methods
+snippet .ra "" i
+.rand
+endsnippet
+
+snippet .li "probability decreases linearly from 0 to <number>" i
+.linrand
+endsnippet
+
+snippet .ra2 "evenly distributed" i
+.rand2
+endsnippet
+
+snippet .bi "probability is highest around 0" i
+.bilinrand
+endsnippet
+
+snippet .su "quasi-gaussian, bell-shaped distribution" i
+.sum3rand
+endsnippet
+
+snippet .rr "linear distribution in the given range" i
+.rrand($1, $2)
+endsnippet
+
+snippet .er "exponential distribution" i
+.exprand($1, $2)
+endsnippet
+
+snippet .co "" i
+.coin
+endsnippet
+
+snippet .ch "" i
+.choose
+endsnippet
+
+snippet .wch "" i
+.wchoose([$1])
+endsnippet
+
+snippet .sc "" i
+.scramble
+endsnippet
+
+snippet .cu "Randomly group a collection" i
+.curdle
 endsnippet
 
 snippet r "Rest in event patterns" w
@@ -499,8 +556,8 @@ Pbus(Pfx(${VISUAL}$1, \\$0))
 endsnippet
 
 snippet pfm "Finite State Machine (Markov chain)" w
-Pfsm([ #[${1:entry states}], 
-	${VISUAL}$2, #[$3], 
+Pfsm([ #[${1:entry states}],
+	${VISUAL}$2, #[$3],
 	nil, nil 
 ])
 endsnippet
@@ -781,8 +838,8 @@ snippet rl "Routine with loop, wait, play and global assignment" b
 endsnippet
 
 snippet fo "Embed function in Routine and play it" w
-{ 
-	${VISUAL}$1 
+{
+  ${VISUAL}$1
 }.fork;
 endsnippet
 
@@ -840,6 +897,14 @@ snippet ExpRand "Generate exp rand value on Synth creation (not def)" w
 ExpRand(${1:0.01}, ${2:1.0})
 endsnippet
 
+snippet "TExpRand(k)?" "" wr
+TExpRand`!p snip.rv = rate(match)`(${1:0.0}, ${2:1.0}, trig: ${3:0})
+endsnippet
+
+snippet "CoinGate(k)?" "" wr
+CoinGate`!p snip.rv = rate(match)`(${1:prob}, ${2:in})
+endsnippet
+
 snippet LinExp "Map a linear range to an exponential range" w
 LinExp(${1:sig}, ${2:-1}, ${3:1}, ${4:0.01}, ${5:1})
 endsnippet
@@ -860,7 +925,7 @@ snippet RandID "Set the synth's random generator ID" w
 RandID.kr(${1:0})
 endsnippet
 
-snippet "RandSeed(k)?" "Sets the synth random generator seed" w
+snippet "RandSeed(k)?" "Sets the synth random generator seed" wr
 RandSeed`!p snip.rv = rate(match)`(${1:0}, ${2:2})
 endsnippet
 
@@ -906,6 +971,14 @@ endsnippet
 
 snippet "SelectX(k)?" "With equal power crossfade between two adjacent channels. mul:0.5, add:0.5 trick" wr
 SelectX`!p snip.rv = rate(match)`(${1:0}, [$2])
+endsnippet
+
+snippet "TChoose(k)?" "Randomly select one of several inputs" wr
+TChoose`!p snip.rv = rate(match)`(${1:0}, [$2])
+endsnippet
+
+snippet "TWChoose(k)?" "Randomly select one of several inputs with weights" wr
+TWChoose`!p snip.rv = rate(match)`(${1:0}, [$2], [$3])
 endsnippet
 
 snippet Pulse "Square like wave with bzzzzz sound. Width values 0/1. 0.5 sounds most rich" w
@@ -994,7 +1067,7 @@ snippet MidEQ "Attenuates or boosts a frequency band." w
 MidEQ.ar(${1:${VISUAL:sig}}, ${2:440}, rq:${3:1}, db:${4:1}.ampdb)
 endsnippet
 
-snippet BRF "Band pass filter: reject. Higher rq means sharper exclusion band" w
+snippet BRF "Band pass filter: reject. Lower rq means sharper exclusion band" w
 BRF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
 endsnippet
 
@@ -1133,6 +1206,10 @@ endsnippet
 
 snippet WhiteNoise "WhiteNoise" w
 WhiteNoise.ar(${1:1})
+endsnippet
+
+snippet ClipNoise "-1 or 1 scaled" w
+ClipNoise.ar(${1:1})
 endsnippet
 
 snippet BrownNoise "BrownNoise. More energy at lower frequencies" w
@@ -2007,8 +2084,20 @@ snippet jcp "Copy Ndef to the key" b
 Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).copy(\\$2);
 endsnippet
 
-snippet jss "Stop monitoring proxy. Play in private. In other words: free the playback" b
+snippet jS "Stop monitoring proxy. Play in private. In other words: free the playback" b
 Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).stop;
+endsnippet
+
+snippet jP "" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).pause;
+endsnippet
+
+snippet jr "" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).resume;
+endsnippet
+
+snippet jse "Reevaluate synth" b
+Ndef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}).send;
 endsnippet
 
 snippet jmo "Adjust number of channels on running proxy to stereo" b
@@ -2041,24 +2130,36 @@ endsnippet
 
 snippet ta "Task. Can be paused and resumed inside routine" w
 Task {
-	${VISUAL}$1
+  ${VISUAL}$1
 }
 endsnippet
 
 snippet td "" b
-Tdef(\\$1, {${VISUAL}$2});
+Tdef(\\$1, {${VISUAL}$2}).quant_(${3:1});
 endsnippet
 
-snippet tq "" w
-Tdef(\\$1).quant = ${1:1};
+snippet tq "" b
+Tdef(\\$1).quant = ${2:1};
 endsnippet
 
 snippet tp "" b
-Tdef(\\$1}).play;
+Tdef(\\$1).play;
 endsnippet
 
-snippet tss "" b
-Tdef(\\$1}).stop;
+snippet tfo "" b
+Tdef(\\$1).fork(t, ${2:2});
+endsnippet
+
+snippet tS "" b
+Tdef(\\$1).stop;
+endsnippet
+
+snippet tP "" b
+Tdef(\\$1).pause;
+endsnippet
+
+snippet tr "" b
+Tdef(\\$1).resume;
 endsnippet
 
 # GUI
