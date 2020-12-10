@@ -523,6 +523,10 @@ snippet .cu "Randomly group a collection" i
 .curdle
 endsnippet
 
+snippet .le "Values are concetrated at the beginning" i
+.linexp(${1:-1}, ${2:1}, ${3:0.001}, ${4:1})
+endsnippet
+
 snippet r "Rest in event patterns" w
 Rest($1)
 endsnippet
@@ -537,6 +541,18 @@ endsnippet
 
 snippet .s "Preserve values from the output stream that pass the Boolean test; discard the rest" i
 ${VISUAL}.select {|e| $1}
+endsnippet
+
+snippet .d "Check if item exist in collection" i
+${VISUAL}.detect {|v,i| $1}
+endsnippet
+
+snippet .as "Convert to steam. Can use next method to retrvieve next value" i
+.asStream
+endsnippet
+
+snippet .n "" i
+.next
 endsnippet
 
 # snippet .r "Discard values from the output stream that pass the test; return the rest to the user" i
