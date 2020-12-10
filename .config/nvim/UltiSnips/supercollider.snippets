@@ -540,10 +540,10 @@ ${VISUAL}.collect {|e| $1; e}
 endsnippet
 
 snippet .s "Preserve values from the output stream that pass the Boolean test; discard the rest" i
-${VISUAL}.select {|e| $1}
+${VISUAL}.select {|v| $1}
 endsnippet
 
-snippet .d "Check if item exist in collection" i
+snippet .d "Check if item exist in collection (on collection)" i
 ${VISUAL}.detect {|v,i| $1}
 endsnippet
 
@@ -555,12 +555,16 @@ snippet .n "" i
 .next
 endsnippet
 
-# snippet .r "Discard values from the output stream that pass the test; return the rest to the user" i
-# ${VISUAL}.reject {|e| $1}
-# endsnippet
+snippet .re "Discard values from the output stream that pass the test; return the rest to the user" i
+${VISUAL}.reject {|v| $1}
+endsnippet
 
 snippet psel "Filters values returned by a source pattern. Same as .select method" w
 Pselect({|v| $1}, ${VISUAL}$2)
+endsnippet
+
+snippet prej "" w
+Preject({|v| $1}, ${VISUAL}$2)
 endsnippet
 
 snippet pfx "Add an effect synth to the synths of a given event stream" w
@@ -2036,7 +2040,7 @@ endsnippet
 
 snippet jip "Basically multiline set audio controls, and does not create new synth every duration. Also overwrites everything on revaluation (even undefined ones)" b
 (
-Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4).quant_(1);
+Pdef(\\${1:`!p if not snip.c: snip.rv = ndef_key()`}, Pbind(\\$3, $4)).quant_(1);
 );
 Ndef(\\$1)[${2:`!p if not snip.c: snip.rv = role_index()`}] = \pset -> Pdef(\\$1);
 endsnippet
