@@ -340,6 +340,10 @@ snippet rscb "" w
 someCyclesBy $1 ($2)
 endsnippet
 
+snippet rC "Repeat each random cycle" w
+repeatCycles ${1:3}
+endsnippet
+
 snippet rsp "" w
 spreadChoose ($) [$1]
 endsnippet
@@ -496,8 +500,8 @@ snippet ori "" w
 irand $1 + 1
 endsnippet
 
-snippet or "" w
-rand ($1)
+snippet op "random walk random" w
+perlin
 endsnippet
 
 # Patterns
