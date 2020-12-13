@@ -310,6 +310,10 @@ snippet pC "" w
 Pdef(\\$1).clear
 endsnippet
 
+snippet pac "Clear all Pdefs" w
+Pdef.clear
+endsnippet
+
 snippet pq "For referencing events" w
 Pdef(\\$1).quant = ${1:2};
 endsnippet
@@ -522,7 +526,7 @@ snippet .ch "" i
 endsnippet
 
 snippet .wch "" i
-.wchoose([$1])
+.wchoose([$1]).normalizeSum
 endsnippet
 
 snippet .sc "" i
@@ -1649,8 +1653,8 @@ s.stopRecording;
 endsnippet
 
 snippet waitForBoot "Routine which evaluates as soon as the server has booted." b
-s.waitForBoot({ 
-	${1:${VISUAL}}
+s.waitForBoot({
+  ${1:${VISUAL}}
 });
 endsnippet
 
@@ -1683,8 +1687,12 @@ snippet Group.tail "Add group at the tail of all groups or defined one" b
 ~$1 = Group.tail($2);
 endsnippet
 
+snippet bC "Reset bus indexes" b
+s.newBusAllocators;
+endsnippet
+
 snippet ba ".ar bus" w
-Bus.audio(s, ${1:1});
+Bus.audio(s, ${1:2});
 endsnippet
 
 snippet bk ".kr bus" w
@@ -1705,6 +1713,10 @@ endsnippet
 
 snippet Group.head "At group at the head of all groups" b
 $1 = Group.head($2);
+endsnippet
+
+snippet tc "New permanent tempo clock (not removed by M-k)" b
+~t = TempoClock(90/60).permanent_(true);
 endsnippet
 
 snippet sp "Play synth" b
@@ -1748,7 +1760,15 @@ $1.free;
 endsnippet
 
 snippet freeAll "Free everything in a server, group or buffer" b
-$1.freeAll;
+${1:s}.freeAll;
+endsnippet
+
+snippet free "Basically set to nil, e.g. bus, synth" b
+$1.free;
+endsnippet
+
+snippet .S "Lost of methods has this method like clock etc..." w
+${1:~t}.stop;
 endsnippet
 
 snippet Buffer.read "Read sample from Dirt-samples" b 
