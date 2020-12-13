@@ -541,6 +541,10 @@ snippet .le "Values are concetrated at the beginning" i
 .linexp(${1:-1}, ${2:1}, ${3:0.001}, ${4:1})
 endsnippet
 
+snippet .b2 "Ugen method. range from both side. Works like rand2" i
+.bipolar(${1:-1}, ${2:1}, ${3:0.001}, ${4:1})
+endsnippet
+
 snippet r "Rest in event patterns" w
 Rest($1)
 endsnippet
@@ -1202,8 +1206,12 @@ snippet Pan "Sound panning" w
 Pan2.ar(${1:${VISUAL:sig}}, ${2:pan})
 endsnippet
 
-snippet Balance "Sound panning" w
+snippet Balance "Sound panning from 2 signals. Similar to XFade2" w
 Balance2.ar(${1:sig[0]}, ${2:sig[1]}, ${2:pan})
+endsnippet
+
+snippet Osc "Interpolating wavetable oscillator." w
+Osc.ar(${1:buf}, ${2:freq})
 endsnippet
 
 snippet SinOsc "Basic sine oscillator" w
@@ -1689,6 +1697,36 @@ endsnippet
 
 snippet bC "Reset bus indexes" b
 s.newBusAllocators;
+endsnippet
+
+snippet bA "Default calulation is 1024" b
+Buffer.alloc(s, 2**${1:10});
+endsnippet
+
+snippet .lc "load collection into buffer. Usually wavetable" i
+.loadCollection(${1:wt})
+endsnippet
+
+snippet ssf "Create signal from sines for wavetable" b
+Signal.sineFill(2**${1:10}, ${2:amps}, ${3:0!32})
+endsnippet
+
+snippet .aS "Convert env to signal" i
+.asSignal(2**${1:10})
+endsnippet
+
+snippet bac "Create multiple buffers and fill them with wavetables" w
+Buffer.allocConsecutive(${1:n}, s, 2**${2:11}, 1, {|buf, index|
+  buf.setnMsg(0, ${3:sig}.asWavetable);
+})
+endsnippet
+
+snippet .aw "Convert signal to wavetable" i
+.asWavetable
+endsnippet
+
+snippet .s3 "Create wavetable directly in buffer. asWavetable:false for plotting" i
+.sine3(${1:freqs}, ${2:amps}, ${3:phases})
 endsnippet
 
 snippet ba ".ar bus" w
