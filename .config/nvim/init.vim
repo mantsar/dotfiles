@@ -1050,21 +1050,13 @@ augroup END
 "   { golden_size.ignore_by_window_flag }, -- default one, ignore windows with w:ignore_gold_size=1
 " })
 " EOF
-call minpac#add('Xuyuanp/scrollbar.nvim')
-let g:scrollbar_shape = {
-    \ 'head': '',
-    \ 'body': '█',
-    \ 'tail': '',
-    \ }
-augroup scrollbar_au
-    autocmd!
-    autocmd BufEnter    * silent! lua require('scrollbar').show()
-    autocmd BufLeave    * silent! lua require('scrollbar').clear()
-    autocmd CursorMoved * silent! lua require('scrollbar').show()
-    autocmd VimResized  * silent! lua require('scrollbar').show()
-    autocmd FocusGained * silent! lua require('scrollbar').show()
-    autocmd FocusLost   * silent! lua require('scrollbar').clear()
-augroup end
+call minpac#add('dstein64/nvim-scrollview')
+let g:scrollview_excluded_filetypes = ['scnvim'] "set ft?
+let g:scrollview_active_only = 1
+call minpac#add('dstein64/vim-win')
+map <leader>W <plug>WinWin
+let g:win_resize_height = 4
+let g:win_resize_width = 5
 call minpac#add('junegunn/limelight.vim')
 nnoremap <leader>ol :Limelight!!<cr>
 nmap gl <Plug>(Limelight)
