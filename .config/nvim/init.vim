@@ -86,6 +86,8 @@ xnoremap ? ?\v
 onoremap ? ?\v
 cnoremap %s %s/\v
 cnoremap g/ g/\v
+cnoremap g! g!/\v
+cnoremap gn g/\v/normal<left><left><left><left><left><left><left>
 nnoremap <c-_> /\V
 xnoremap <c-_> /\V
 onoremap <c-_> /\V
@@ -538,12 +540,12 @@ augroup neoterm_au
 	autocmd!
 	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-j> :TREPLSendLine<cr>
 	autocmd FileType r,rmd,haskell,python inoremap <buffer> <M-j> <C-o>:TREPLSendLine<cr>
-	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-e> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-e> mmvip:TREPLSendSelection<cr>`m
 	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-e> :TREPLSendSelection<cr>
-	autocmd FileType r,rmd,haskell,python inoremap <buffer> <M-e> <C-o>vip:TREPLSendSelection<cr>
-	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-o> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python inoremap <buffer> <M-e> <C-o>vip:TREPLSendSelection<cr>`m
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-o> mmvip:TREPLSendSelection`m<cr>
 	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-o> :TREPLSendSelection<cr>
-	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-p> vip:TREPLSendSelection<cr>
+	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-p> mmvip:TREPLSendSelection<cr>`m
 	autocmd FileType r,rmd,haskell,python xnoremap <buffer> <M-p> :TREPLSendSelection<cr>
 	autocmd FileType r,rmd,haskell,python nnoremap <buffer> <M-l> :Tclear<cr>
 	autocmd FileType r,rmd,haskell nnoremap <buffer> <M-u> :Ttoggle<cr>
@@ -745,6 +747,7 @@ augroup sc_au
 	" init
 	autocmd FileType supercollider,tidal,tidal ColorizerAttachToBuffer
 	autocmd FileType supercollider setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+	autocmd FileType supercollider set dictionary+=~/sp/dict/colors.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/synths.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/sc/controls.txt
@@ -947,15 +950,21 @@ function! Foxdot_init()
 	execute "tabe " . expand("%:r") . ".py"
 	call scnvim#sclang#send("~foxdot_start.value()")
 	:T ipython --no-autoindent -i ~/sp/foxdot/foxdot_cli.py
-	:exe "tabn ".g:lasttab
+	" :exe "tabn ".g:lasttab
 	:wincmd k
 	:normal G
 endfunction
 
 augroup foxdot_au
 	autocmd!
+	autocmd FileType python :badd ~/sp/dict/foxdot/synths.txt
+	autocmd FileType python setlocal dictionary+=~/sp/dict/foxdot/synths.txt
+	autocmd FileType python nmap <buffer> <M-t>  :T Clock.bpm=60*
 	autocmd FileType python nmap <buffer> <M-k>  :T Clock.clear()<cr>
 	autocmd FileType python imap <buffer> <M-k>  <C-o>:T Clock.clear()<cr>
+	autocmd FileType python nnoremap <silent> <buffer> <M-s> :e ./snips.py<cr>
+	autocmd FileType python nnoremap <buffer> <M-C-k> :call scnvim#hard_stop() <bar> T Clock.clear()<cr>
+	autocmd FileType python nnoremap <buffer> <leader><leader>1 :T print(Scale.default)<cr>
 	" autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
 	" autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
 	" autocmd FileType python nnoremap <buffer> <M-u> :Ttoggle<cr>
@@ -986,13 +995,16 @@ endfunction
 
 augroup improviz_au
 	autocmd!
-	autocmd FileType improviz setlocal commentstring=//\ %s
+	autocmd FileType improviz :badd ~/sp/dict/improviz/all.txt
+	autocmd FileType improviz setlocal dictionary+=~/sp/dict/improviz/all.txt
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-e> :ImprovizSend<cr>
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-j> :ImprovizSend<cr>
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-p> :ImprovizSend<cr>
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-l> :ImprovizToggleText<cr>
 	autocmd FileType improviz nnoremap <buffer> <M-u> :call Improviz_toggle()<cr>
 	autocmd FileType improviz nnoremap <silent> <buffer> <M-s> :e ./snips.pz<cr>
+	autocmd Syntax improviz match improvizComment "\v//.*$"
+	autocmd FileType improviz setlocal commentstring=//\ %s
 augroup END
 
 " Espgrid

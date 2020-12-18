@@ -118,11 +118,11 @@ s.latency = 0.3;
   ~dirt.addModule('post',
     {|dirtEvent|
       var e = dirtEvent.event, o = e.orbit;
-      1.postln;
+      // 1.postln;
       if (p[o].notNil) {
         p[o].do {|v|
-          e[v].postln;
-          // h.sendMsg("/vars/" ++ v ++ o, e[v])
+          // e[v].postln;
+          h.sendMsg("/vars/" ++ v ++ o, e[v])
         }
       }
     }
@@ -593,12 +593,12 @@ s.waitForBoot({
   b = (); // dict for holding buses
   t = TempoClock.default;
   // Steno
-  k = Steno.new;
+  k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
   StageLimiter.activate(2);
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "Setup done".postln;
-  d = ~read_dirt_samples.value(); // Samples
+  // d = ~read_dirt_samples.value(); // Samples
 });
 
 // Platform.userExtensionDir

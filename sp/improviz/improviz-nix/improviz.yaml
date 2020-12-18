@@ -8,12 +8,12 @@ font:
 assetsDirectory: "./assets"
 textureDirectories:
   - "./textures"
-#  - "./hellocatfood/gifs"
+  # - "./hellocatfood/gifs"
 geometryDirectories:
   - "./geometries"
 materialDirectories:
   - "./materials"
-#  - "./hellocatfood/geometries"
+  # - "./hellocatfood/geometries"
 codeFiles:
   - "./stdlib/variables.pz"
   - "./stdlib/transformations.pz"

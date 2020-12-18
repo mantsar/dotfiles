@@ -79,13 +79,13 @@ snippet s "sig" b
 sig = $1
 endsnippet
 
-snippet c "Named control style argument" w
-\\$1.kr($2)
-endsnippet
+# snippet c "Named control style argument" w
+# \\$1.kr($2)
+# endsnippet
 
-snippet a "Named control style argument" w
-\\$1.ar($2)
-endsnippet
+# snippet a "Named control style argument" w
+# \\$1.ar($2)
+# endsnippet
 
 snippet cc "Named control style argument" w
 \\$1.kr
@@ -1064,6 +1064,10 @@ snippet RLPF "Like LPF but with resonance. Lower rq bigger spike at cutoff freq"
 RLPF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
 endsnippet
 
+snippet RHPF "" w
+RHPF.ar(${1:${VISUAL:sig}}, ${2:freq}, rq:${3:0.1})
+endsnippet
+
 snippet RLPFD "Like LPFD but with distortion. Res 0-1, dist 0-1." w
 RLPFD.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:0.6}, ${4:0.5}, 3)
 endsnippet
@@ -1246,7 +1250,7 @@ snippet Pluck "Makes plucked string sound. Coef should be between -1 and 1. Only
 Pluck.ar(${1:sig}, ${2:Impulse.kr(1)}, `!p snip.rv = float(t[3])*2`, ${3:0.2}, ${4:1}, coef:${4:0.5})
 endsnippet
 
-snippet XFade "(UGen * 0.5) + (UGen * 0.5) wrapper" w
+snippet XFade "(UGen * 0.5) + (UGen * 0.5) wrapper. same .blend method" w
 XFade2.ar(${1:sig}, $2, pan: ${3:mix})
 endsnippet
 
@@ -1254,7 +1258,7 @@ snippet WhiteNoise "WhiteNoise" w
 WhiteNoise.ar(${1:1})
 endsnippet
 
-snippet ClipNoise "-1 or 1 scaled" w
+snippet ClipNoise "-1 or 1 scaled. Maximum energy" w
 ClipNoise.ar(${1:1})
 endsnippet
 
@@ -1279,7 +1283,7 @@ Logistic.ar(${1:3.0}, ${2:1000}, init: ${3:0.5})
 endsnippet
 
 snippet "Gendy1(k)?" "Dynamic stochastic synthesis generator. Black box :)" wr
-Gendy1`!p snip.rv = rate(match)`(minfreq:${1:30}, maxfreq:${2:100}, durscale:${3:0.05})
+Gendy1`!p snip.rv = rate(match)`(${1:2}, durdist:${2:3}, minfreq:${3:20}, maxfreq:${4:200}, durscale:${5:0.0}, initCPs:${6:40})
 endsnippet
 
 snippet "Gendy2(k)?" "Noisy version" wr
@@ -1372,6 +1376,10 @@ endsnippet
 
 snippet InRange "Works similar to neurons. Ouput 1 if in range, 0 otherwise" w
 InRange.ar(${1:sig}, lo:${2:0.0}, hi:${3:1.0})
+endsnippet
+
+snippet Formlet "Kinda like formant kinda like decay. 3rd, 4th arguments are atk, decay times. Used to modulate freq" w
+Formlet.ar(${1:sig}, ${2:200}, ${3:0.005}, ${4:1})
 endsnippet
 
 snippet Formant "Think of human voice formants and how it can be imitated. Bigger formfreq == more complexity. bwfreq must be larger than fundamental freq" w
@@ -1809,7 +1817,7 @@ snippet .S "Lost of methods has this method like clock etc..." w
 ${1:~t}.stop;
 endsnippet
 
-snippet Buffer.read "Read sample from Dirt-samples" b 
+snippet Buffer.read "Read sample from Dirt-samples" b
 $1 = Buffer.read(s, "./Dirt-Samples/$2");
 endsnippet
 
@@ -1819,6 +1827,10 @@ endsnippet
 
 snippet Quarks.install "Install Quark" b
 Quarks.install("$1");
+endsnippet
+
+snippet Quarks.folder "Quarks location" b
+Quarks.folder;
 endsnippet
 
 snippet f2 "Simple play function for quick testing" b
@@ -1994,7 +2006,7 @@ Ndef(\\$1)[0] = {|freq=440, atk=0.01, rel=1, curve=(-4)|
 Ndef(\\$1).play;
 
 Ndef(\\$1)[1] = \pset -> Pbind(
-	\freq, Pseq([300, 200], inf), 
+	\freq, Pseq([300, 200], inf),
 	\dur, 1,
 	);
 Ndef(\\$1).play;
@@ -2033,7 +2045,7 @@ Ndef(\\${1:`!p if not snip.c: snip.rv = temp_key()`})[0] = {|freq=440, sustain=1
   sig = ${VISUAL}$2
 }
 );
-Ndef(\\$1).play(0, 2);
+Ndef(\\$1).play;
 endsnippet
 
 snippet jpb "Define proxy pbind with index an play it" b
@@ -2076,7 +2088,7 @@ Pdef(\\$1,
   )
 ).quant_(1)
 );
-Ndef(\\$1).quant_(1).play(0, 2, vol:0.3);
+Ndef(\\$1).quant_(1).play(vol:0.3);
 endsnippet
 
 snippet jqb "Define with quant and play Ndef" w
@@ -2091,7 +2103,15 @@ snippet .ft "Ndef fadeTime method" i
 .fadeTime_(${1:2})
 endsnippet
 
-snippet .l "Set the lag values of proxy object. To remove setting set them to nil with .lag" i
+snippet .l "Lag method for UGen" i
+.lag(${1:0.1})
+endsnippet
+
+snippet .vl "lag with curve" i
+.varlag(${1:0.1}, ${2:-4})
+endsnippet
+
+snippet .jl "Set the lag values of proxy object. To remove setting set them to nil with .lag" i
 .lag(\\${1:freq}, ${2:0.1})
 endsnippet
 
@@ -2324,7 +2344,7 @@ snippet ov "Visualiser (Improviz) address" b
 h = NetAddr("127.0.0.1", 5520);
 endsnippet
 
-snippet os "Visualiser (Improviz) address" w
+snippet os "Send osc to visualiser (Improviz)" w
 h.sendMsg("/vars/$1", $2)
 endsnippet
 
@@ -2459,107 +2479,133 @@ ${VISUAL}.range(${1:0}, ${2:1})
 endsnippet
 
 # Steno
+
+# snippet k "" w
+# k.("$1");
+# endsnippet
+
+snippet k "" b
+--$0
+endsnippet
+
 snippet kf "" w
-k.quelle(\\${1:a}, {var a, b, c, sig;$2!2 });
+(
+k.quelle(\\${1:a}, {var a, b, c, sig;
+  $2
+})
+);
 endsnippet
 
 snippet kif "" w
-k.filter(\\${1:a}, {|sig, co| var a, b, c; $2 });
-endsnippet
-
-snippet kco "" w
-co.at(\\$1)
-endsnippet
-
-snippet ke "" w
-co[\env]
-endsnippet
-
-snippet k "" w
-k.("$1");
-endsnippet
-
-snippet kv "" w
-k.value;
-endsnippet
-
-snippet kc "" w
-k.clear.pop;
+(
+k.filter(\\${1:a}, {|sig, co| var a, b, c;
+  $2
+})
+);
 endsnippet
 
 snippet ks "" w
-k.set(\\$1, $2)
+k.set(\\${1:a}, \\${2:freq}, ${3:200});
 endsnippet
 
-snippet kt ""
-k.fadeTime = ${1:1};
+snippet kv "Resend every synth" w
+k.value;
 endsnippet
 
-snippet kq ""
+snippet kq "Global"
 k.quant = ${1:1};
 endsnippet
 
-snippet kg ""
-k.setGlobal(\fadeTime, ${1:1}, \attack, ${2:1});
+snippet kC "" w
+k.clear;
+endsnippet
+
+snippet kft "Global"
+k.fadeTime = ${1:1};
+endsnippet
+
+snippet ksft "For specific synth"
+k.set(\\${1:a}, \\${2:fadeTime}, ${3:2.0});
+endsnippet
+
+snippet ko "" w
+k.setGlobal(\fadeTime, 0.01, \quant, 1);
+endsnippet
+
+snippet ke "Use to free stuck filter synths" w
+co[\env]
 endsnippet
 
 # Colors
-snippet c1 "" w
+# https://www.rapidtables.com/web/color
+snippet "(c1|Blue)" "blue" r
 // Blue
 endsnippet
 
-snippet c2 "" w
+snippet "(c2|Red)" "red" r
 // Red
 endsnippet
 
-snippet c3 "" w
+snippet "(c3|Green)" "green" r
 // Green
 endsnippet
 
-snippet c4 "" w
-// Lime
-endsnippet
-
-snippet c5 "" w
-// Olive
-endsnippet
-
-snippet c6 "" w
-// Aqua
-endsnippet
-
-snippet c7 "" w
-// Teal
-endsnippet
-
-snippet c8 "" w
+snippet "(c4|Navy)" "blue" r
 // Navy
 endsnippet
 
-snippet c9 "" w
+snippet "(c5|Aqua)" "cyan" r
+// Aqua
+endsnippet
+
+snippet "(c6|Olive)" "green" r
+// Olive
+endsnippet
+
+snippet "(c7|Maroon)" "red" r
+// Maroon
+endsnippet
+
+snippet "(c8|Teal)" "cyan" r
+// Teal
+endsnippet
+
+snippet "(c9|Plum)" "purple" r
 // Plum
 endsnippet
 
-snippet c10 "" w
-// Purple
+snippet "(c10|Lime)" "green" r
+// Lime
 endsnippet
 
-snippet c11 "" w
-// Gray
+snippet "(c11|Salmon)" "red" r
+// Salmon
 endsnippet
 
-snippet c12 "" w
-// Brown
+snippet "(c12|Indigo)" "purple" r
+// Indigo
 endsnippet
 
-snippet c13 "" w
-// Khaki
+snippet "(c13|Grey)" "grey" r
+// Grey
 endsnippet
 
-snippet c14 "" w
+snippet "(c14|Crimson)" "red" r
 // Crimson
 endsnippet
 
-snippet c15 "" w
+snippet "(c15|Khaki)" "gold" r
+// Khaki
+endsnippet
+
+snippet "(c16|Brown)" "brown" r
+// Brown
+endsnippet
+
+snippet "(c17|Purple)" "purple" r
+// Purple
+endsnippet
+
+snippet "(c18|Tomato)" "orange" r
 // Tomato
 endsnippet

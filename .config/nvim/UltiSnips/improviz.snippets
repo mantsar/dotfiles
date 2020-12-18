@@ -1,11 +1,11 @@
 # Actions
 
 snippet fr "Rotate. 3 axis args" w
-rotate()
+rotate($1)
 endsnippet
 
 snippet fm "Move. 3 axis args" w
-move()
+move($1)
 endsnippet
 
 # Objects
@@ -37,7 +37,7 @@ fill(${1:255}, ${2:100}, ${3:0}, ${4:20})
 endsnippet
 
 snippet cnf "Removes fill. 0 args" w
-nofill()
+noFill()
 endsnippet
 
 snippet cs "Edges. 4 args, last one alpha" w
@@ -78,4 +78,78 @@ endsnippet
 
 snippet rr "Random value between 0 and 1" w
 random()
+endsnippet
+
+# Colors
+# https://www.rapidtables.com/web/color
+snippet "(c1|Blue)" "blue" r
+0,0,255
+endsnippet
+
+snippet "(c2|Red)" "red" r
+255,0,0
+endsnippet
+
+snippet "(c3|Green)" "green" r
+0,128,0
+endsnippet
+
+snippet "(c4|Navy)" "blue" r
+0,0,128
+endsnippet
+
+snippet "(c5|Aqua)" "cyan" r
+0,255,255
+endsnippet
+
+snippet "(c6|Olive)" "green" r
+128,128,0
+endsnippet
+
+snippet "(c7|Maroon)" "red" r
+128,0,0
+endsnippet
+
+snippet "(c8|Teal)" "cyan" r
+0,128,128
+endsnippet
+
+snippet "(c9|Plum)" "purple" r
+221,160,221
+endsnippet
+
+snippet "(c10|Lime)" "green" r
+0,255,0
+endsnippet
+
+snippet "(c11|Salmon)" "red" r
+250,128,114
+endsnippet
+
+snippet "(c12|Indigo)" "purple" r
+75,0,130
+endsnippet
+
+snippet "(c13|Grey)" "grey" r
+128,128,128
+endsnippet
+
+snippet "(c14|Crimson)" "red" r
+220,20,60
+endsnippet
+
+snippet "(c15|Khaki)" "gold" r
+240,230,140
+endsnippet
+
+snippet "(c16|Brown)" "brown" r
+165,42,42
+endsnippet
+
+snippet "(c17|Purple)" "purple" r
+128,0,128
+endsnippet
+
+snippet "(c18|Tomato)" "orange" r
+255,99,71
 endsnippet
