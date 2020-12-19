@@ -80,7 +80,7 @@ stutter
 endsnippet
 
 snippet .e "Similar to tidal cycles. Works on cycles (repetitions)" i
-.every(${1:3}, "${2:offadd}")
+.every(${1:3}, ${2:offadd})
 endsnippet
 
 snippet .ne "" i
@@ -295,6 +295,10 @@ snippet ,sld "" i
 , slidedelay=$0
 endsnippet
 
+snippet ,de "" i
+, delay=$0
+endsnippet
+
 snippet ,c "" i
 , chop=$0
 endsnippet
@@ -313,8 +317,9 @@ snippet tp "Print value of pattern/timevar periodically" b
 Clock.every(${1:1/2}, lambda: print($2))
 endsnippet
 
+# nextBar(lambda: ${1:d1.solo(1)})
 snippet nb "action on next bar" b
-nextBar(lambda: ${1:d1.solo(1)})
+nextBar($1)
 endsnippet
 
 snippet tf "relative" w
@@ -350,13 +355,13 @@ endsnippet
 # Language
 
 snippet fn "" b
-def ${1:f}:
-  $2
+def ${1:f}($2):
+    $3
 endsnippet
 
 snippet if "" w
 if $1:
-  $2
+    $2
 endsnippet
 
 snippet for "" b
