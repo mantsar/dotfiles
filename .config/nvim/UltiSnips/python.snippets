@@ -41,7 +41,7 @@ b${1:`!p if not snip.c: snip.rv = player_indexb()`}.stop()
 endsnippet
 
 snippet jas "Solo patterns starting with letter" b
-${1:b}_all.solo
+${1:b}_all.solo(1)
 endsnippet
 
 # Patterns
@@ -54,7 +54,7 @@ snippet v. "Solves a problem of need to reevaluate all places where var is used 
 var.$1([$2])
 endsnippet
 
-snippet .t "Dynamically apply function on pattern. Usually on var" i
+snippet .t "Dynamically apply function on pattern or var" i
 .tranform($1)
 endsnippet
 
@@ -95,8 +95,12 @@ snippet .sp "makes stereo more spacious" i
 .spread()
 endsnippet
 
-snippet .m "" i
-.map({"$1":$2})
+snippet .m "can provide default if mapping was not found (default=x)" i
+.map({$1:$2})
+endsnippet
+
+snippet .a "select closest value in the list. default is rel[0, 2, 4]" i
+.accompany(rel=[0,2,4$1])
 endsnippet
 
 snippet .st "stutter" i
@@ -105,6 +109,10 @@ endsnippet
 
 snippet .ro "rotate. same as rot in Tidal" i
 .rotate(${1:1})
+endsnippet
+
+snippet .n "same as .pitch" i
+.degree(${1:1})
 endsnippet
 
 snippet c "" w
@@ -177,6 +185,10 @@ endsnippet
 
 snippet M "all players in one place" b
 Master()
+endsnippet
+
+snippet G "group players. can be assigned to a variable" b
+Group($1)
 endsnippet
 
 # Envelopes
@@ -321,6 +333,14 @@ endsnippet
 
 snippet scd "Scale" b
 Scale.default = "${1:major}"
+endsnippet
+
+snippet scf "freq" b
+Scale.default = "${1:freq}"
+endsnippet
+
+snippet scc "freq" b
+Scale.default = "${1:chromatic}"
 endsnippet
 
 snippet sc "Scale" w
