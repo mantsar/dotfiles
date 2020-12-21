@@ -2,7 +2,7 @@
 
 if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
-	let g:neovide_transparency=0.9
+	let g:neovide_transparency=0.95
 	let g:neovide_cursor_vfx_mode = "ripple"
 	set guifont=FiraCode-Bold:h15
 	function! Toggle_neovide_fullscreen()
