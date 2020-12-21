@@ -153,11 +153,14 @@ bindsym $mod+Shift+z		gaps outer current minus 20
 
 bindsym $mod+b			bar mode toggle
 
+bindsym $mod+Shift+g			exec --no-startup-id "wal -i ~/.config/default.gif && alacritty_color_export && killall back4.sh ; back4.sh 0.03 ~/.config/default.gif"
+bindsym $mod+Shift+b			exec --no-startup-id "killall back4.sh ; wal -i ~/.config/default.png && alacritty_color_export"
+
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
 
 bindsym $mod+Shift+n 			exec $term -e ncmpcpp
-bindsym $mod+Shift+g 			exec --no-startup-id glava -m radial
+bindsym $mod+Shift+a 			exec --no-startup-id glava -m radial
 for_window [instance="GLava"] floating enable
 for_window [instance="GLava"] border pixel 0
 
