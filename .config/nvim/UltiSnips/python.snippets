@@ -1,3 +1,5 @@
+extends live_coding
+
 global !p
 
 def player_indexd():
@@ -93,6 +95,10 @@ endsnippet
 
 snippet .sp "makes stereo more spacious" i
 .spread()
+endsnippet
+
+snippet .sf "" i
+.shuffle()
 endsnippet
 
 snippet .m "can provide default if mapping was not found (default=x)" i
@@ -256,7 +262,7 @@ snippet ,R "" i
 endsnippet
 
 snippet ,ro "" i
-, room=$0
+, room=$1, mix=$0
 endsnippet
 
 snippet ,b "" i
@@ -265,6 +271,10 @@ endsnippet
 
 snippet ,co "" i
 , coarse=$0
+endsnippet
+
+snippet ,dr "" i
+, drive=$0
 endsnippet
 
 snippet ,sp "" i
@@ -297,6 +307,10 @@ endsnippet
 
 snippet ,de "" i
 , delay=$0
+endsnippet
+
+snippet ,e "" i
+, echo=$0
 endsnippet
 
 snippet ,c "" i

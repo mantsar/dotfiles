@@ -516,7 +516,7 @@ let g:deoplete#enable_at_startup = 1
 call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
 call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
-" call minpac#add('Shougo/deoplete-lsp')
+call minpac#add('Shougo/deoplete-lsp')
 call minpac#add("SirVer/ultisnips")
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -641,38 +641,41 @@ nmap <M-u> <Plug>MarkdownPreviewToggle
 " }}}2
 
 " LSP (langage server protocol) {{{2
-" call minpac#add('neovim/nvim-lsp', {'type': 'opt'})
-" packadd! nvim-lsp
-" nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
-" nnoremap <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
-" nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
-" vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
-" nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
+call minpac#add('neovim/nvim-lspconfig')
+
+lua <<EOF
+vim.cmd('packadd nvim-lspconfig')  -- If installed as a Vim "package".
+require'lspconfig'.r_language_server.setup{}
+require'lspconfig'.bashls.setup{}
+EOF
+
+nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <C-h> <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <leader>lF <cmd>lua vim.lsp.buf.formatting()<cr>
+vnoremap <leader>lf :lua vim.lsp.buf.range_formatting()<cr>
+nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
 
 " diagnostic-nvim
-" nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev()<cr>
-" nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next()<cr>
+nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev()<cr>
+nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next()<cr>
 
-" lua << EOF
-" require("vim")
-" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-"   vim.lsp.diagnostic.on_publish_diagnostics, {
-"     -- This will disable virtual text, like doing:
-"     -- let g:diagnostic_enable_virtual_text = 0
-"     virtual_text = false,
-
-"     -- This is similar to:
-"     -- let g:diagnostic_show_sign = 1
-"     -- To configure sign display,
-"     --  see: ":help vim.lsp.diagnostic.set_signs()"
-"     signs = true,
-
-"     -- This is similar to:
-"     -- "let g:diagnostic_insert_delay = 1"
-"     update_in_insert = false,
-"   }
-" )
-" EOF
+lua << EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
+EOF
 
 " }}}2
 
@@ -745,7 +748,7 @@ endfunction
 augroup sc_au
 	autocmd!
 	" init
-	autocmd FileType supercollider,tidal,tidal ColorizerAttachToBuffer
+	autocmd FileType supercollider,tidal,python ColorizerAttachToBuffer
 	autocmd FileType supercollider setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 	autocmd FileType supercollider set dictionary+=~/sp/dict/colors.txt
 	autocmd FileType supercollider setlocal dictionary+=~/sp/dict/samples.txt
@@ -860,6 +863,10 @@ function Is_comment()
     return hg =~? 'comment' ? 1 : 0
 endfunction
 
+function Hard_stop_tidal()
+	nnoremap <buffer> <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
+endfunction
+
 augroup tidal_au
 	autocmd!
 	autocmd FileType tidal setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -896,7 +903,7 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-o> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
-	autocmd FileType tidal nnoremap <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
+	autocmd FileType tidal :call Hard_stop_tidal()
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
 	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>', 'filetype': 'tidal'})
 	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>', 'filetype': 'tidal'})
@@ -951,8 +958,13 @@ function! Foxdot_init()
 	call scnvim#sclang#send("~foxdot_start.value()")
 	:T ipython --no-autoindent -i ~/sp/foxdot/foxdot_cli.py
 	" :exe "tabn ".g:lasttab
+	:ColorizerAttachToBuffer
 	:wincmd k
 	:normal G
+endfunction
+
+function Hard_stop_foxdot()
+	nnoremap <buffer> <M-C-k> :call scnvim#hard_stop() <bar> T Clock.clear()<cr>
 endfunction
 
 augroup foxdot_au
@@ -963,7 +975,7 @@ augroup foxdot_au
 	autocmd FileType python nmap <buffer> <M-k>  :T Clock.clear()<cr>
 	autocmd FileType python imap <buffer> <M-k>  <C-o>:T Clock.clear()<cr>
 	autocmd FileType python nnoremap <silent> <buffer> <M-s> :e ./snips.py<cr>
-	autocmd FileType python nnoremap <buffer> <M-C-k> :call scnvim#hard_stop() <bar> T Clock.clear()<cr>
+	autocmd FileType python :call Hard_stop_foxdot()
 	autocmd FileType python nnoremap <buffer> <leader><leader>1 :T print(Scale.default)<cr>
 	" autocmd FileType python nmap <buffer> <M-x>  :T d.stop<left><left><left><left><left>
 	" autocmd FileType python imap <buffer> <M-x>  <C-o>:T Clock.clear()<cr><left><left><left><left><left>
