@@ -154,7 +154,7 @@ bindsym $mod+Shift+z		gaps outer current minus 20
 bindsym $mod+b			bar mode toggle
 
 bindsym $mod+Shift+g			exec --no-startup-id "wal -i ~/.config/default.gif && alacritty_color_export && killall back4.sh ; back4.sh 0.03 ~/.config/default.gif"
-bindsym $mod+Shift+b			exec --no-startup-id "killall back4.sh ; wal -i ~/.config/default.png && alacritty_color_export"
+bindsym $mod+Shift+b			exec --no-startup-id "killall back4.sh ; wal -c && wal -i ~/.config/default.png && alacritty_color_export"
 
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
@@ -306,7 +306,7 @@ for_window [instance="dropdown_notesdd"] border pixel 2
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
-for_window [instance="dropdown_*"] scratchpad show
+# for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_*"] move position center
 
 # Set some windows traits
@@ -314,7 +314,7 @@ for_window [title="Freq Analyzer"] floating disable; sticky disable;
 for_window [title="NdefMixer_currentEnvironment"] floating disable; sticky disable;
 for_window [instance="Improviz"] floating enable
 for_window [instance="Improviz"] move scratchpad
-for_window [instance="Improviz"] scratchpad show
+# for_window [instance="Improviz"] scratchpad show
 
 # Steam
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
