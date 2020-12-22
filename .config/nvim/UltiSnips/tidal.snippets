@@ -207,6 +207,10 @@ snippet fsn "iter, operator, fun. Usually embedded in other function (e.g. n or 
 snowball ${1:4} (${2:+}) (${3:slow 1})
 endsnippet
 
+snippet fso "less general snowball. Applies new pattern by multiplying previous. Works with control patterns" w
+soak ${1:4} ($2)
+endsnippet
+
 snippet fw "" w
 whenmod ${1:9} ${2:7} ($3)
 endsnippet
@@ -623,6 +627,14 @@ endsnippet
 
 snippet tfi "transistion by fading gain in n of cycles" w
 xfadeIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
+endsnippet
+
+snippet ti "morph control values between patterns in four cycles" w
+interpolate ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
+endsnippet
+
+snippet tii "morph control values between patterns in n cycles" w
+interpolateIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
 endsnippet
 
 snippet tt "Trigger on specified channel revaluation (can be itself)" w

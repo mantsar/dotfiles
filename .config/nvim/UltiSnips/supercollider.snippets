@@ -63,7 +63,7 @@ def role_index():
 
 endglobal
 
-snippet b "" b 
+snippet b "" b
 (
 ${VISUAL}$0
 )
@@ -1896,6 +1896,10 @@ snippet ,i "" i
 , \instrument, $0
 endsnippet
 
+snippet ,b "" i
+, \buf, d[\\${1:bd}][${2:0}]
+endsnippet
+
 snippet ,j "" i
 , \j, 1
 endsnippet
@@ -1952,6 +1956,10 @@ endsnippet
 
 snippet ,i "" b
 \instrument, $0
+endsnippet
+
+snippet ,b "" b
+\buf, d[\\${1:bd}][${2:0}]
 endsnippet
 
 snippet ,de "" b

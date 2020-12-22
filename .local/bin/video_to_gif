@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
+
+f="$HOME/Pictures/gif/${4}.gif"
+
+ffmpeg -ss $2 -t $3 -i "${1}" -filter_complex "[0:v] fps=${5:-12},scale=${6:-480}:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" $f && mpv --loop-file=inf $f

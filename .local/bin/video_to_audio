@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# extract audio
+
+ffmpeg -i "${1}" -ss $2 -t $3 -q:a 0 -map a "$HOME/sp/samples/${4}.mp3"

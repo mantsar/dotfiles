@@ -5,6 +5,7 @@ if exists('g:neovide')
 	let g:neovide_transparency=0.95
 	let g:neovide_cursor_vfx_mode = "ripple"
 	set guifont=FiraCode-Bold:h15
+	" set guifont=UbuntuMono-B:h20
 	function! Toggle_neovide_fullscreen()
 		if g:neovide_fullscreen
 			let g:neovide_fullscreen = v:false
