@@ -175,9 +175,9 @@ alias \
 	s="$HOME/.local/bin" \
 	S="$HOME/Sync" \
 	vv="$HOME/Videos" \
-	cs="$HOME/.config/SuperCollider" \
-	css="$HOME/.config/SuperCollider/synthdef" \
-	csf="$HOME/.config/SuperCollider/Extensions/Faust"
+	cS="$HOME/.config/SuperCollider" \
+	cs="$HOME/.config/SuperCollider/synthdef" \
+	cf="$HOME/.config/SuperCollider/Extensions/Faust"
 
 # Files
 alias \

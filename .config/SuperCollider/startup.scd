@@ -615,4 +615,5 @@ s.waitForBoot({
 // Quarks.install("Vowel");
 // Quarks.install("XML");
 // Quarks.install("wslib");
+// Quarks.install("TabbedView");
 // Quarks.install("Steno");
