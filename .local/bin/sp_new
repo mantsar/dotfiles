@@ -1,4 +1,7 @@
 #!/bin/sh
 
 mkdir -p "$HOME/sp/$1"
+mkdir -p "$HOME/sp/$1/carla"
+mkdir -p "$HOME/sp/$1/tmp"
+mkdir -p "$HOME/sp/$1/ardour"
 touch "$HOME/sp/$1/$1.scd"

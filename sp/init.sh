@@ -20,6 +20,7 @@ mkdir $HOME/sp/txt
 mkdir $HOME/sp/tmp
 mkdir $HOME/sp/songs
 mkdir $HOME/sp/samples
+mkdir $HOME/sp/plugins
 # script to create new folder for a new project where everything will work the same. then shorctuts to open projects with dmenu
 
 # Uncheck box in Cadence gui PulseAdio bridge to not autostart
@@ -50,3 +51,10 @@ mkdir $HOME/sp/samples
 # https://tidalcycles.org/index.php/All_the_functions # copy into file then:
 # https://github.com/tidalcycles/Tidal/blob/main/src/Sound/Tidal/Chords.hs#L113
 # ...
+
+# Carla: add sp/plugins for lv2. Change default project dir to sp/a/carla
+
+# get latest lsp-plugins release
+# https://github.com/sadko4u/lsp-plugins/releases
+# wget https://github.com/sadko4u/lsp-plugins/releases/download/1.1.28/lsp-plugins-lv2-1.1.28-Linux-x86_64.tar.gz sp/plugins
+# mv last dir containing plugins to sp/plugins/dir  . Otherwise it does not find required .tll files
