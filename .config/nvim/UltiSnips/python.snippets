@@ -166,11 +166,11 @@ PTri(${1:5})
 endsnippet
 
 snippet pr "Like Pwhite but for integers only or Prand if list is supplied instead. Start and end are included! Last argument - seed" w
-PRand(${1:0},${2:10})
+PRand(${1:4})
 endsnippet
 
 snippet pxr "Same as Prand, but no elements are repeated" w
-PxRand(${1:0},${2:10})
+PxRand(${1:4})
 endsnippet
 
 snippet pwr "Controlled randomness. Weight of 2 means it is twice as likely to be picked as an item with a weight of 1" w
@@ -178,7 +178,19 @@ PwRand([${VISUAL}$1],[$2])
 endsnippet
 
 snippet pw "Random values with uniform distribution" w
-PWhite(${1:0.0},${2:1.0})
+PWhite(${1:0},${2:1})
+endsnippet
+
+snippet pfm "Markov chain" w
+PChain({${1:0}:[$2]$3})
+endsnippet
+
+snippet pwa "Random walk" w
+PWalk(${1:20},${2:4},${3:5})
+endsnippet
+
+snippet pde "" w
+PDelta([$1],${2:0})
 endsnippet
 
 snippet psq "Returns the series of square numbers" w
