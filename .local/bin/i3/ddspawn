@@ -15,6 +15,8 @@ then
 	i3 "[instance=\"dropdown_$script\"] scratchpad show; [instance=\"dropdown_$script\"] move position center"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL --class dropdown_$script $@ -e $script"
+	i3 "exec $TERMINAL --class dropdown_$script $@ -e $script"
+	sleep 0.2
+	i3 "[instance=\"dropdown_$script\"] scratchpad show; [instance=\"dropdown_$script\"] move position center"
 	# --name for termite
 fi

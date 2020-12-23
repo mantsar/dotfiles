@@ -200,8 +200,8 @@ s.latency = 0.3;
     })
   };
   Task {
-    if (key == nil) { 
-      d.keysDo {|key| 
+    if (key == nil) {
+      d.keysDo {|key|
         postln("the key ---------------------- : " ++ key);
         f.value(key)
       }

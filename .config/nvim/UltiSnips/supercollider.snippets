@@ -843,8 +843,8 @@ snippet if "If with syntax similar to R" w
 if ($1) { ${VISUAL}$2 }
 endsnippet
 
-snippet fn "Function definition" b
-~$1 = {|$2| ${VISUAL}$3 };
+snippet fn "Function definition" w
+${1:f} = {|$2| ${VISUAL}$3 };
 endsnippet
 
 snippet wh "while loop" w
@@ -1130,6 +1130,10 @@ endsnippet
 # https://www.youtube.com/watch?v=D5UClgX8gPc
 snippet MidEQ "Attenuates or boosts a frequency band." w
 MidEQ.ar(${1:${VISUAL:sig}}, ${2:440}, rq:${3:1}, db:${4:1}.ampdb)
+endsnippet
+
+snippet NLFiltL "Black box. Makes synths sounds more analog. All values should be in 1 range except last l" w
+NLFiltL.ar(${1:${VISUAL:sig}},${2:0.5},${3:-0.04},${4:0.8},${5:0.2},${6:200})
 endsnippet
 
 snippet BRF "Band pass filter: reject. Lower rq means sharper exclusion band" w
@@ -2521,7 +2525,8 @@ endsnippet
 
 snippet kf "" w
 (
-k.quelle(\\${1:a}, {var a, b, c, sig;
+k.quelle(\\${1:a}, {
+  var a,b,c,f,sig;
   $2
 })
 );
