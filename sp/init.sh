@@ -46,6 +46,10 @@ mkdir $HOME/sp/plugins
 # Fix ardour warning and real time scheduling if needed:
 # https://wiki.debian.org/Ardour
 # https://jackaudio.org/faq/linux_rt_config.html
+# ardour preferences:
+# Edit preferences -> MIDI -> Audition -> check Sound MIDI notes as they are selected in the editor
+# Session proterties -> Misc -> MIDI region copies are independent -> Use these settings as default
+# View -> Show editor mixer
 
 # Tidal completion sources:
 # https://tidalcycles.org/index.php/All_the_functions # copy into file then:

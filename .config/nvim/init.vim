@@ -811,7 +811,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ~/sp/a/ardour<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>r :StartAsync carla<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>A :call Hydra_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>i :call All_init()<cr>
 	" Ardour

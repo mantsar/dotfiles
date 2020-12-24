@@ -3,5 +3,5 @@
 mkdir -p "$HOME/sp/$1"
 mkdir -p "$HOME/sp/$1/carla"
 mkdir -p "$HOME/sp/$1/tmp"
-mkdir -p "$HOME/sp/$1/ardour"
+mkdir -p "$HOME/sp/$1/ardour_a"
 touch "$HOME/sp/$1/$1.scd"

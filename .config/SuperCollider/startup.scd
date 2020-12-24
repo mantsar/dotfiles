@@ -101,14 +101,8 @@ s.latency = 0.3;
   // MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
     MIDIClient.init(outports:outports);
-    ~m1 = MIDIOut(0);
-    ~m1.latency = 0;
-    ~m2 = MIDIOut(1);
-    ~m2.latency = 0;
-    ~m3 = MIDIOut(2);
-    ~m3.latency = 0;
-    ~m4 = MIDIOut(3);
-    ~m4.latency = 0;
+    m = 4.collect {|i| MIDIOut(i) };
+    m.do {|v| v.latency = 0 };
   }
 };
 
@@ -582,7 +576,7 @@ s.latency = 0.3;
 
 // INIT -----------------------------------------------------------------------
 s.waitForBoot({
-  // a = Ardour(); // Enable Ardour by default
+  a = Ardour(); // Enable Ardour by default
   s.sync;
   Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
   ~ndef_settings.value(nil, fadeTime:0.5, quant:1, clock:TempoClock.default);

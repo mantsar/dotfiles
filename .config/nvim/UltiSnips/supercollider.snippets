@@ -828,7 +828,7 @@ $1.collect {|v, i| $2 }
 endsnippet
 
 snippet ci "" w
-$1.collect { $2 }
+$1.collect {|i| $2 }
 endsnippet
 
 snippet ls "New empty List" w
@@ -2498,8 +2498,8 @@ a.rec_enable_toggle;
 endsnippet
 
 # MIDI
-snippet mpb "MIDI Pbind" w
-Pbind(\type, \midi, \midiout, ~m${1:1}, \\$2, $3, ${VISUAL})
+snippet mb "MIDI Pbind" w
+Pbind(\type, \midi, \midiout, m[${1:0}], \\$2, $3, ${VISUAL})
 endsnippet
 
 # FAUST
