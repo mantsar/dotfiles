@@ -934,8 +934,12 @@ endsnippet
 
 # UGens
 
-snippet .up "Poll UGen messages. 3rd argument is trig_id" w
+snippet .p "Poll UGen messages. 3rd argument is trig_id" w
 ${VISUAL}.poll(${1:10}, \\${2:test})
+endsnippet
+
+snippet .m "Get only positive values" w
+${VISUAL}.max(0)
 endsnippet
 
 snippet DynKlank "Similar to Klank, but ref values can be changed dynamically. Input usually noise or impulses. $3 is like decay times" w
@@ -1134,6 +1138,10 @@ endsnippet
 
 snippet NLFiltL "Black box. Makes synths sounds more analog. All values should be in 1 range except last l" w
 NLFiltL.ar(${1:${VISUAL:sig}},${2:0.5},${3:-0.04},${4:0.8},${5:0.2},${6:200})
+endsnippet
+
+snippet KmeansToBPSet1 "K-means clustering. Most important params are last 3" w
+KmeansToBPSet1.ar(${1:freq},20,4,4,${2:Impulse.kr(0)},${3:Impulse.kr(0)},0)
 endsnippet
 
 snippet BRF "Band pass filter: reject. Lower rq means sharper exclusion band" w
@@ -2499,7 +2507,21 @@ endsnippet
 
 # MIDI
 snippet mb "MIDI Pbind" w
-Pbind(\type, \midi, \midiout, m[${1:0}], \\$2, $3, ${VISUAL})
+Pbind(\type, \composite, \types, [\note, \midi], \midiout, m[${1:0}], 
+  \\instrument, \\$2, 
+	${VISUAL}$3
+)
+endsnippet
+
+snippet mbp "MIDI Pbind with play" w
+Pbind(\type, \composite, \types, [\note, \midi], \midiout, m[${1:0}], 
+  \\instrument, \\$2, 
+	${VISUAL}$3
+)
+endsnippet
+
+snippet ,m "" w
+\type, \composite, \types, [\note, \midi], \midiout, m[${1:0}]
 endsnippet
 
 # FAUST

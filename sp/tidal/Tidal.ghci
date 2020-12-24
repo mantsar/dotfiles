@@ -87,4 +87,7 @@ let detune_prob = pF "detune_prob"
     pch = pF "pch"
     wch = pF "wch"
     fch = pF "fch"
+    drate = pF "drate"
+    mrate = pF "mrate"
+    soft = pF "soft"
 :}

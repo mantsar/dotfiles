@@ -83,6 +83,10 @@ sfm3sawel
 sviolaep
 sviolaes
 sviolael
-blipep
-blipes
-blipel
+sblipep
+sblipes
+sblipel
+skmeans
+skmeansep
+skmeanses
+skmeansel

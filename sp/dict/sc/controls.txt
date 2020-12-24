@@ -36,3 +36,6 @@ ind_mul
 width
 
 instrument
+drate
+mrate
+soft

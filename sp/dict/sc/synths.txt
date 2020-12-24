@@ -38,3 +38,7 @@ hypnogabber
 hypnogabberep
 hypnogabberes
 hypnogabberel
+kmeans
+kmeansep
+kmeanses
+kmeansel

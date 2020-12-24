@@ -171,8 +171,8 @@ bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
 bindsym $mod+Shift+v exec --no-startup-id screenkey -s small --bak-mode baked --mods-mode emacs --opacity 0 -f "Ubuntu Mono Bold 10"
 
-bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|dropdown_|Steam|quake)).*$"] kill
-bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable_|dropdown_)).*$"] kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|neovide|dropdown_|Steam|quake)).*$"] kill
+bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable_|neovide|dropdown_)).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
 bindsym $mod+Shift+space 	floating toggle
@@ -316,7 +316,7 @@ for_window [instance="Improviz"] floating enable
 for_window [instance="Improviz"] move scratchpad
 # for_window [instance="Improviz"] scratchpad show
 for_window [title="Ardour"] move container to workspace number 3
-for_window [title="Carla"] move container to workspace number 3
+# for_window [title="Carla"] move container to workspace number 3
 
 # Steam
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040

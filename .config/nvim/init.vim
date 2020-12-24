@@ -4,7 +4,8 @@ if exists('g:neovide')
 	let g:neovide_fullscreen=v:false
 	let g:neovide_transparency=0.95
 	let g:neovide_cursor_vfx_mode = "ripple"
-	set guifont=FiraCode-Bold:h15
+	" set guifont=FiraCode-Bold:h15
+	set guifont=iosevka-bold:h17
 	" set guifont=UbuntuMono-B:h20
 	function! Toggle_neovide_fullscreen()
 		if g:neovide_fullscreen
@@ -188,6 +189,7 @@ set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
 call minpac#add('liuchengxu/space-vim-dark')
 call minpac#add('endel/vim-github-colorscheme')
+call minpac#add('bluz71/vim-moonfly-colors')
 function! Toggle_colorcheme()
 		if g:colorscheme == 1
 			set colorcolumn=999
@@ -196,7 +198,8 @@ function! Toggle_colorcheme()
 			augroup ui
 				autocmd!
 			augroup END
-			colorscheme paramount
+			colorscheme moonfly
+			" colorscheme paramount
 			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
 			let g:colorscheme = 2
 		elseif g:colorscheme == 2
@@ -234,8 +237,9 @@ call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('itchyny/lightline.vim')
 " remove -- INSERT --
 set noshowmode 
+" \ 'colorscheme': 'Tomorrow_Night',
 let g:lightline = {
-			\ 'colorscheme': 'Tomorrow_Night',
+			\ 'colorscheme': 'moonfly',
 			\ 'active': {
 			\   'left': [ [ 'mode', 'paste' ],
 			\             [ 'readonly', 'filename', 'modified', 'scnvim' ] ]
@@ -805,7 +809,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
 	" midi/tidal/foxdot/imroviz
-	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()") \| StartAsync midivisualizer --config ~/.config/midivisualizer/config.ini<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>

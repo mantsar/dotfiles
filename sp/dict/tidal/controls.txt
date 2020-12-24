@@ -123,3 +123,6 @@ dch
 pch
 wch
 fch
+drate
+mrate
+soft
