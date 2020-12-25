@@ -1,3 +1,13 @@
+tremdp
+tremr
+speed
+lpf
+lpq
+hpf
+hpq
+djf
+fshift
+triode
 begin
 end
 accelerate
@@ -49,12 +59,10 @@ lrate
 lsize
 waveloss
 squiz
-
 resonance
 voice
 semitone
 pitch1
-
 det
 detune_prob
 trem
