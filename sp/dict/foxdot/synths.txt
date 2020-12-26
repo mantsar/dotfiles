@@ -183,6 +183,7 @@ bend
 slidedelay
 delay
 echo
+echotime
 chop
 Clock
 Clock

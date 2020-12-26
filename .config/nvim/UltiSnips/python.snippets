@@ -30,7 +30,7 @@ snippet j "Play SynthDef" b
 d${1:`!p if not snip.c: snip.rv = player_indexd() + 1`} >> ${2:viola}(${VISUAL}$3)
 endsnippet
 
-snippet jj "Play sample" b
+snippet k "Play sample" b
 b${1:`!p if not snip.c: snip.rv = player_indexb() + 1`} >> play("$2"$3)
 endsnippet
 
@@ -38,7 +38,7 @@ snippet js "Stop player" b
 d${1:`!p if not snip.c: snip.rv = player_indexd()`}.stop()
 endsnippet
 
-snippet jss "Stop player" b
+snippet ks "Stop player" b
 b${1:`!p if not snip.c: snip.rv = player_indexb()`}.stop()
 endsnippet
 
@@ -46,7 +46,7 @@ snippet jas "Solo patterns starting with letter" b
 ${1:b}_all.solo(1)
 endsnippet
 
-# Patterns
+# Functions
 
 snippet v "By default duration is 4 beat (one bar)" w
 var([$1])
@@ -69,15 +69,15 @@ snippet .oa "Similar to tidal" i
 .offadd(${1:2}, ${2:dur})
 endsnippet
 
-snippet foa "" w
+snippet ofa "" w
 offadd
 endsnippet
 
-snippet fom "" w
+snippet ofm "" w
 offmul
 endsnippet
 
-snippet fst "" w
+snippet st "" w
 stutter
 endsnippet
 
@@ -125,6 +125,8 @@ snippet c "" w
 const($1)
 endsnippet
 
+# Patterns
+
 snippet p "Pattern" w
 P[$1]$0
 endsnippet
@@ -153,12 +155,14 @@ snippet pE "Euclidian pattern" w
 PEuclid(${1:3},${2:8})
 endsnippet
 
+# ,${3:0},${4:0.25}
 snippet pe "Returns the output of PEuclid as a series of durations where each element is a step of duration dur" w
-PDur(${1:3},${2:8},${3:0},${4:0.25})
+PDur(${1:3},${2:8})
 endsnippet
 
+# ,${3:1}
 snippet pser "Arithmetic series" w
-PRange(${1:0},${2:1},${3:1})
+PRange(${1:0},${2:1})
 endsnippet
 
 snippet ptr "Ascend $1 - 1 descend start + 1" w
@@ -313,7 +317,7 @@ snippet ,be "" i
 , bend=$0
 endsnippet
 
-snippet ,sld "" i
+snippet ,sd "" i
 , slidedelay=$0
 endsnippet
 

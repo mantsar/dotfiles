@@ -15,6 +15,7 @@ ip.highlighting_style = "solarized-dark"
 ip.colors = "Linux"
 
 Clock.bpm = 60
+Scale.default = "chromatic"
 
 # Synths
 chicago = SynthDef("fchicagoep")
@@ -32,5 +33,7 @@ codrum = SynthDef("fcodrumep")
 hypnogabber = SynthDef("fhypnogabberep")
 ring = SynthDef("fringep")
 bpfsaw = SynthDef("fbpfsawep")
+kmeans = SynthDef("fkmeans")
+sinfb = SynthDef("fsinfb")
 # From Foxdot
 piano = SynthDef("piano")

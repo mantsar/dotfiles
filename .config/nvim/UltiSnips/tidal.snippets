@@ -20,7 +20,7 @@ snippet j "Sound pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $ $0
 endsnippet
 
-snippet jj "Sound pattern on new line" b
+snippet k "Sound pattern on new line" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`}
 $ $0
 endsnippet
@@ -56,45 +56,6 @@ nmap <M-z> :TidalSend1 asap $ s "glitch:3" <cr>
 nmap <M-x> :TidalSend1 asap $ s "glitch:6" <cr>
 endsnippet
 
-# Envelopes
-snippet et "triange" w
-smooth "$1"
-endsnippet
-
-snippet el "Linear envelope. Use for gain with trigger, etc. We can range it" w
-envL
-endsnippet
-
-# Oscillators
-
-snippet sine "" w
-sine
-endsnippet
-
-snippet tri "A triangle wave, starting at 0, then linearly rising to 1 halfway through a cycle, then down again." w
-tri
-endsnippet
-
-snippet saw "" w
-saw
-endsnippet
-
-snippet cosine "sine shifted in time by a quarter of a cycle" w
-cosine
-endsnippet
-
-snippet square "A squarewave, starting at 0, then going up to 1 halfway through a cycle" w
-square
-endsnippet
-
-snippet irand "" w
-irand $1 + 1
-endsnippet
-
-snippet perlin "random walk random" w
-perlin
-endsnippet
-
 # Functions
 
 snippet .. "" w
@@ -123,10 +84,6 @@ endsnippet
 
 snippet cat "Concat for different cycles. Pattern maintains it's original duration." w
 cat [$1]
-endsnippet
-
-snippet rc "Pick random every cycle" w
-randcat [$1]
 endsnippet
 
 snippet fc "concat for same cycle" w
@@ -193,7 +150,7 @@ snippet ply "Repeats each event the given number of times. Excluding rests (~)" 
 ply "$1"
 endsnippet
 
-snippet fix "" w
+snippet if "" w
 fix ($1) (${2:s} "$3")
 endsnippet
 
@@ -231,22 +188,6 @@ endsnippet
 
 snippet wm "" w
 whenmod ${1:9} ${2:7} ($3)
-endsnippet
-
-snippet struct "" w
-struct ($1)
-endsnippet
-
-snippet mask "Binary gain of 1s and 0s. It's like gain but with binary functions like inv" w
-mask ($1)
-endsnippet
-
-snippet sew "1(t) for the first pattern. 0(f) for the second one. Structure comes from source patterns." w
-sew "$1" ($2) ($3)
-endsnippet
-
-snippet stich "1(t) for the first pattern. 0(f) for the second one. Structure comes from binary pattern." w
-stitch "$1" ($2) ($3)
 endsnippet
 
 snippet il "16 cycles. Sine waves. Changes shape control." w
@@ -288,10 +229,6 @@ endsnippet
 
 snippet ts "Apply scale without naming it" w
 toScale [$1] "$2"
-endsnippet
-
-snippet of "Superimpose and shift in time" w
-off $1 ($2)
 endsnippet
 
 snippet si "Superimpose" w
@@ -348,6 +285,18 @@ endsnippet
 
 # Random functions
 
+snippet wr "Continous! Always use numbers (more safe). Fist value then probability" w
+wchoose [($1,$2),($3,$4)]
+endsnippet
+
+snippet choose "Continous! So it cannot be used as structure pattern" w
+choose [$1]
+endsnippet
+
+snippet rc "Pick random every cycle" w
+randcat [$1]
+endsnippet
+
 snippet degrade "Degrade by 50%. Similar to ?" w
 degrade
 endsnippet
@@ -384,6 +333,36 @@ snippet scramble "Divides the pattern and returns a new pattern by randomly sele
 scramble ${1:3} ""
 endsnippet
 
+# Binary
+
+snippet binary "max 255 values" w
+binary $1
+endsnippet
+
+snippet bN "inf values. It needs to be 2**n + 1 (like 251)" w
+binaryN $1 ${2:512}
+endsnippet
+
+snippet ascii "8 bit like binary" w
+ascii $1
+endsnippet
+
+snippet struct "" w
+struct ($1)
+endsnippet
+
+snippet mask "Binary gain of 1s and 0s. It's like gain but with binary functions like inv" w
+mask ($1)
+endsnippet
+
+snippet sew "1(t) for the first pattern. 0(f) for the second one. Structure comes from source patterns." w
+sew "$1" ($2) ($3)
+endsnippet
+
+snippet stitch "1(t) for the first pattern. 0(f) for the second one. Structure comes from binary pattern." w
+stitch "$1" ($2) ($3)
+endsnippet
+
 # Controls
 
 snippet const "Replace pattern (including its stucture)" w
@@ -410,7 +389,7 @@ snippet fshift "Absolute frequency shift" w
 fshift $0
 endsnippet
 
-snippet octave "" w
+snippet o "" w
 octave $0
 endsnippet
 
@@ -442,7 +421,7 @@ snippet djf "0-0.49 lpf, 0.51-1 hpf" w
 djf $0
 endsnippet
 
-snippet speed "rate" w
+snippet r "rate" w
 speed $0
 endsnippet
 
@@ -462,11 +441,11 @@ snippet accelerate "" w
 accelerate $0
 endsnippet
 
-snippet gain "" w
+snippet a "" w
 gain $1
 endsnippet
 
-snippet room "" w
+snippet ro "" w
 room $1
 endsnippet
 
@@ -490,7 +469,7 @@ snippet tremr "tremolo rate" w
 tremr "$1"
 endsnippet
 
-snippet delay "" w
+snippet de "" w
 delay "$1" # delayfb "$2" # delayt "$3"
 endsnippet
 
@@ -500,16 +479,12 @@ endsnippet
 
 # Patterns
 
-snippet r "Continous! So it cannot be used as structure pattern" w
-choose [$1]
+snippet of "Superimpose and shift in time" w
+off $1 ($2)
 endsnippet
 
-snippet s "Use to change randomness seed" w
+snippet se "Use to change randomness seed" w
 (0.000000${1:1} <~)
-endsnippet
-
-snippet wr "Continous! Always use numbers (more safe). Fist value then probability" w
-wchoose [($1,$2),($3,$4)]
 endsnippet
 
 snippet st "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> ControlPattern -> ControlPattern" w
@@ -520,30 +495,18 @@ snippet sw "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> Con
 stutWith ${1:2} ${2:0.5} (${3:fn})${VISUAL}
 endsnippet
 
-snippet binary "max 255 values" w
-binary $1
-endsnippet
-
-snippet bN "inf values. It needs to be 2**n + 1 (like 251)" w
-binaryN $1 ${2:512}
-endsnippet
-
-snippet ascii "8 bit like binary" w
-ascii $1
-endsnippet
-
-snippet prw "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
+snippet rw "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
 (step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
 
-snippet ppar "" w
+snippet p "" w
 stack [
   ${VISUAL}$1,
   $2
 ]
 endsnippet
 
-snippet p "$6 means how many repetitions for event divided by elements in cycle" w
+snippet pp "$6 means how many repetitions for event divided by elements in cycle" w
 let ${1:pats} =
       [
         ("${2:a}", stack [$3
@@ -610,6 +573,44 @@ do
   ]
 }
 endsnippet
+
+# Envelopes
+snippet et "triange" w
+smooth "$1"
+endsnippet
+
+snippet el "Linear envelope. Use for gain with trigger, etc. We can range it" w
+envL
+endsnippet
+
+snippet es "" w
+sine
+endsnippet
+
+snippet etr "A triangle wave, starting at 0, then linearly rising to 1 halfway through a cycle, then down again." w
+tri
+endsnippet
+
+snippet esa "" w
+saw
+endsnippet
+
+snippet ec "sine shifted in time by a quarter of a cycle" w
+cosine
+endsnippet
+
+snippet esq "A squarewave, starting at 0, then going up to 1 halfway through a cycle" w
+square
+endsnippet
+
+snippet ei "" w
+irand $1 + 1
+endsnippet
+
+snippet ep "random walk random" w
+perlin
+endsnippet
+
 
 # Transistions
 

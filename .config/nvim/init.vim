@@ -198,8 +198,8 @@ function! Toggle_colorcheme()
 			augroup ui
 				autocmd!
 			augroup END
-			colorscheme moonfly
-			" colorscheme paramount
+			" colorscheme moonfly
+			colorscheme paramount
 			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
 			let g:colorscheme = 2
 		elseif g:colorscheme == 2
