@@ -23,6 +23,7 @@ s.latency = 0.3;
   s.waitForBoot {
     // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
+    ~dirt.loadSoundFiles("~/sp/samples/*");
     // s.sync; // optionally: wait for samples to be read
     ~dirt.start(57120, 0!12);
     // ~dirt.start(57120, [0, 2, 4, 6, 8, 10]); // uncomment if mastering

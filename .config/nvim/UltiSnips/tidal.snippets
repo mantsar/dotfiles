@@ -122,6 +122,10 @@ snippet brak "Breakbeat feel. every 2 squash the pattern to fit half of cycle an
 brak
 endsnippet
 
+snippet fit "" w
+fit ${1:3} [$2] "$3"
+endsnippet
+
 snippet bite "" w
 bite ${1:n} "$2"
 endsnippet
@@ -152,6 +156,14 @@ endsnippet
 
 snippet if "" w
 fix ($1) (${2:s} "$3")
+endsnippet
+
+snippet uif "" w
+unfix ($1) (${2:s} "$3")
+endsnippet
+
+snippet ife "" w
+contrast ($1) ($2) (${3:s} "$3")
 endsnippet
 
 snippet jux "" w

@@ -814,7 +814,9 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>d :call Faust_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
+
+	autocmd VimEnter *.scd nnoremap <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load')<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>r :StartAsync carla<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>A :call Hydra_init()<cr>

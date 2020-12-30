@@ -215,3 +215,10 @@ ulgab
 armora
 sid
 bass2
+
+cr78
+et60
+et60bd
+et60hh
+et60mt
+et60sn

@@ -90,3 +90,7 @@ skmeans
 skmeansep
 skmeanses
 skmeansel
+s808bd
+s808lt
+s808mt
+s808ht

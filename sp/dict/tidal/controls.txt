@@ -126,11 +126,13 @@ coef
 eq_fmul
 fb
 width
-ch
-dch
-pch
 wch
 fch
 drate
 mrate
 soft
+schop
+bmf
+bmq
+bmm
+dec

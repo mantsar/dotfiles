@@ -12,6 +12,10 @@ codrum
 hypnogabber
 ring
 bpfsaw
+f808bd
+f808lt
+f808mt
+f808ht
 
 loop
 stretch
@@ -195,3 +199,5 @@ schedule
 Root
 default
 lambda
+decay
+dec

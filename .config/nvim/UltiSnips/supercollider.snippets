@@ -556,8 +556,9 @@ snippet .ll "Map to linear range" i
 ${VISUAL}.linlin(${1:-1}, ${2:1}, ${3:1}, ${4:4})
 endsnippet
 
+# ${VISUAL}.collect {|e| $1; e}
 snippet .c "Retrieve whole event on every step or apply the function to each return value from the pattern" i
-${VISUAL}.collect {|e| $1; e}
+${VISUAL}.collect {|e| $1}
 endsnippet
 
 snippet .s "Preserve values from the output stream that pass the Boolean test; discard the rest" i
@@ -705,7 +706,7 @@ endsnippet
 
 snippet psp "Dynamic control of multiple event streams from a Routine" w
 Pspawner({|sp| var a, c;
-	${VISUAL}$1
+  ${VISUAL}$1
 });
 endsnippet
 
@@ -1152,6 +1153,10 @@ snippet MoogFF "Magical filter. Works like RLPF, but easier to use and sounds be
 MoogFF.ar(${1:${VISUAL:sig}}, ${2:freq}, gain:${3:2})
 endsnippet
 
+snippet BMoog "Best filter ever" w
+BMoog.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:0.2}, ${4:0})
+endsnippet
+
 snippet MoogLadder "Similar to RLPFD but without distortion parameter" w
 MoogLadder.ar(${1:${VISUAL:sig}}, ${2:freq}, ${3:0.6})
 endsnippet
@@ -1215,10 +1220,11 @@ endsnippet
 
 # Fourier FFT
 
+# sig = FFT(LocalBuf(${1:2048}!2, 2), ${2:${VISUAL:sig}});
 snippet FFT "Fast Fourier Transform" w
-sig = FFT(LocalBuf(${1:2048}!2, 2), ${2:${VISUAL:sig}});
+sig = FFT(LocalBuf(${1:2048}), ${2:${VISUAL:sig}});
 sig = $3;
-IFFT(sig);
+sig = IFFT(sig);
 endsnippet
 
 snippet IFFT "Inverse FFT" w
@@ -1230,7 +1236,11 @@ PV_MagAbove(${1:${VISUAL:sig}}, ${2:0})
 endsnippet
 
 snippet PV_RectComb "Makes a series of gaps in a spectrum" w
-PV_RectComb(${1:${VISUAL:sig}}, ${2:8}, ${3:phase}, ${4:width})
+PV_RectComb(${1:${VISUAL:sig}}, ${2:0}, ${3:0}, ${4:0.5})
+endsnippet
+
+snippet PV_BinScramble "Randomizes the order of the bins. The trigger will select a new random ordering." w
+PV_BinScramble(${1:${VISUAL:sig}}, ${2:0}, ${3:0.2})
 endsnippet
 
 snippet "Decay(k)?" "Exponentialy lower amplitude of burst signal. Similar to lag. Good on short burst signals like Impulse" wr
@@ -1801,7 +1811,7 @@ snippet tc "New permanent tempo clock (not removed by M-k)" b
 endsnippet
 
 snippet sp "Play synth" b
-Synth(\\$1, [$2]);
+Synth('$1', [$2]);
 endsnippet
 
 snippet Synth.head "Similar abstraction to Group.head" b

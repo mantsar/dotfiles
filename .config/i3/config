@@ -315,7 +315,7 @@ for_window [title="NdefMixer_currentEnvironment"] floating disable; sticky disab
 for_window [instance="Improviz"] floating enable
 for_window [instance="Improviz"] move scratchpad
 # for_window [instance="Improviz"] scratchpad show
-for_window [title="Ardour"] move container to workspace number 3
+# for_window [title="Ardour"] move container to workspace number 3
 # for_window [title="Carla"] move container to workspace number 3
 
 # Steam
