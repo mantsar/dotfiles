@@ -612,3 +612,4 @@ s.waitForBoot({
 // Quarks.install("wslib");
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
+// Quarks.install("Feedback");
