@@ -63,6 +63,8 @@ pacman -Ql
 sudo pacman -Syyu
 # Remove orphaned packages
 sudo pacman -Rns $(pacman -Qtdq)
+# When signatures are corrupted
+pacman -Sy archlinux-keyring
 
 % music, mpd, mpc
 # Show info about the currently playing song
