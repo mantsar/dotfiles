@@ -3,7 +3,10 @@
 sudo pacman -S vulkan-intel
 
 # Bluetooth support
-sudo pacman -S bluez bluez-utils bluemoon # pulseaudio-bluetooth
+# https://wiki.archlinux.org/index.php/Bluetooth#Device_does_not_show_up_in_scan
+sudo pacman -S bluez blueman # pulseaudio-bluetooth # bluez-utils
+
+yay -S bluez-utils-compat
 
 # For headphones
 # https://wiki.archlinux.org/index.php/bluetooth_headset

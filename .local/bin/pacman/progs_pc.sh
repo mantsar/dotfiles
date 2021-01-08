@@ -14,7 +14,10 @@ sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib3
 # Settings > interface > select which Steam window appears when program starts > library
 
 # Bluetooth support
-sudo pacman -S bluez bluez-utils bluemoon # pulseaudio-bluetooth
+# https://wiki.archlinux.org/index.php/Bluetooth#Device_does_not_show_up_in_scan
+sudo pacman -S bluez blueman # pulseaudio-bluetooth bluez-utils
+
+yay -S bluez-utils-compat
 
 # For headphones
 # https://wiki.archlinux.org/index.php/bluetooth_headset

@@ -39,6 +39,7 @@ mkdir $HOME/.cache/zsh && touch $HOME/.cache/zsh/history
 
 # MPD
 mkdir $HOME/.config/mpd/playlists
+touch $HOME/.config/mpd/db
 
 # i3
 pip3 install --user i3-workspace-names-daemon

@@ -11,4 +11,4 @@ sudo pacman -Syy
 yay -S neovide ttf-fira-code ttf-iosevka slack-desktop mongodb-bin mongodb-tools-bin rstudio-desktop-bin midivisualizer-git htslib # provides bgzip/tabix
 
 # shiny-server-git
-Rscript progs_r.R
+Rscript progs.R
