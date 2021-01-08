@@ -56,9 +56,15 @@ mkdir $HOME/sp/plugins
 # https://github.com/tidalcycles/Tidal/blob/main/src/Sound/Tidal/Chords.hs#L113
 # ...
 
-# Carla: add sp/plugins for lv2. Change default project dir to sp/a/carla
+# Carla: add sp/plugins for lv2. Change default project dir to sp/carla
 
 # get latest lsp-plugins release
 # https://github.com/sadko4u/lsp-plugins/releases
 # wget https://github.com/sadko4u/lsp-plugins/releases/download/1.1.28/lsp-plugins-lv2-1.1.28-Linux-x86_64.tar.gz sp/plugins
 # mv last dir containing plugins to sp/plugins/dir  . Otherwise it does not find required .tll files
+
+# bitwig
+# uncheck in cadence ALSA MIDI -> start with jack (otherwise external midi controllers cant connect)
+# bitwig support for launchpad mk3 https://github.com/git-moss/DrivenByMoss-Documentation/blob/master/Installation.md
+# run bitwig_midi script and launch alsa jack midi bridge (in cadence) for midi routing to work in bitwig
+# use carla to load patchbay templates

@@ -1291,6 +1291,22 @@ snippet Pluck "Makes plucked string sound. Coef should be between -1 and 1. Only
 Pluck.ar(${1:sig}, ${2:Impulse.kr(1)}, $3, ${3:0.2}, ${4:1}, coef:${4:0.5})
 endsnippet
 
+snippet Fb "Second argument delay. If not provided uses server block size" w
+FbL({|fb| LPF.ar(${1:fb}*0.99+sig})
+endsnippet
+
+snippet fbNode "" w
+var fb = FbNode(${2:1}, 0.1);
+endsnippet
+
+snippet fbd "" w
+fb.delay($1)
+endsnippet
+
+snippet fbw "" w
+fb.write(${1:sig})
+endsnippet
+
 snippet XFade "(UGen * 0.5) + (UGen * 0.5) wrapper. same .blend method" w
 XFade2.ar(${1:sig}, $2, pan: ${3:mix})
 endsnippet
@@ -2530,8 +2546,16 @@ Pbind(\type, \composite, \types, [\note, \midi], \midiout, m[${1:0}],
 )
 endsnippet
 
-snippet ,m "" w
+snippet ,mc "" i
 \type, \composite, \types, [\note, \midi], \midiout, m[${1:0}]
+endsnippet
+
+snippet ,m "" i
+\type, \midi, \midiout, m[0], \chan, ${0:0}
+endsnippet
+
+snippet lp "" w
+l, quant:Quant(${1:4}, timingOffset:${2:0})
 endsnippet
 
 # FAUST

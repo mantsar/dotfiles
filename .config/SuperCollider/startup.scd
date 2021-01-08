@@ -19,14 +19,14 @@ s.latency = 0.3;
 
 ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 
-~superdirt_start = {
+~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]|
   s.waitForBoot {
     // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
     ~dirt.loadSoundFiles("~/sp/samples/*");
     // s.sync; // optionally: wait for samples to be read
-    ~dirt.start(57120, 0!12);
-    // ~dirt.start(57120, [0, 2, 4, 6, 8, 10]); // uncomment if mastering
+    ~dirt.start(57120, dirt_channels);
+    // ~dirt.start(57120, [8, 10, 12, 14]); // uncomment if mastering
     (
       ~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
       ~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
@@ -61,7 +61,6 @@ s.latency = 0.3;
       ~dirt_orbit_buses.();
     };
     ~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
-    ~superdirt_midi_start = { ~dirt.soundLibrary.addMIDI(\m1, ~m1) };
     // ~dirt_orbit_filter = { |key, orbit, bus| 
     // orbit.outBus = bus;
     // Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
@@ -69,7 +68,7 @@ s.latency = 0.3;
     // [~d, ~b].flop.do {|v, i|
     // ~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1])
     // };
-    // ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } }); 
+    // ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } });
     c = NetAddr("127.0.0.1", 6010);
     SuperDirt.default = ~dirt;
     // ADDITIONAL EFFECTS
@@ -98,13 +97,35 @@ s.latency = 0.3;
   };
 };
 
-~midi_start = {|outports=4|
+~midi_start = {|outports=2|
   // MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
     MIDIClient.init(outports:outports);
-    m = 4.collect {|i| MIDIOut(i) };
+    m = outports.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
+    ~dirt.soundLibrary.addMIDI(\midi, m[1])
   }
+};
+
+~bitwig_start = {
+  s.reboot({
+    // need to execute twice sometimes
+    // s.options.numOutputBusChannels = 2;
+    s.options.numOutputBusChannels = 8;
+    "~/.config/SuperCollider/startup.scd".load;
+    s.waitForBoot {
+      s.sync;
+      ~superdirt_start.(#[0, 2, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0]);
+      s.sync;
+      // ~dirt.start(57120, [8, 10, 12, 14]);
+      // ~dirt.start(57120, 0!12);
+      // 0-7 are sc buses, 8-15 for tidal
+      ~midi_start.();
+      ServerTree.add({
+        l = LinkClock(1).latency_(Server.default.latency);
+      })
+    }
+  })
 };
 
 ~improviz_start = {

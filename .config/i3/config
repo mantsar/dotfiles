@@ -160,13 +160,15 @@ bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p			exec --no-startup-id ddspawn pyradiodd
 
 bindsym $mod+Shift+n 			exec $term -e ncmpcpp
-bindsym $mod+Shift+a 			exec --no-startup-id glava -m radial
+# bindsym $mod+Shift+a 			exec --no-startup-id glava -m radial
 for_window [instance="GLava"] floating enable
 for_window [instance="GLava"] border pixel 0
+bindsym $mod+Shift+a  exec --no-startup-id bitwig-studio
 
 bindsym $mod+m 			exec $term -e fzf_mpd
 bindsym $mod+Shift+x 			exec $term -e fzf_mpd " "
 bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
+# bindsym $mod+Shift+m		exec --no-startup-id midivisualizer
 
 bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
 bindsym $mod+Shift+v exec --no-startup-id screenkey -s small --bak-mode baked --mods-mode emacs --opacity 0 -f "Ubuntu Mono Bold 10"

@@ -21,7 +21,9 @@ sudo pacman -S bluez bluez-utils bluemoon # pulseaudio-bluetooth
 
 # For LDAC codec support
 # https://wiki.archlinux.org/index.php/bluetooth_headset#LDAC/aptX
-yay -S pulseaudio-modules-bt libldac
+yay -S pulseaudio-modules-bt libldac bitwig-studio
+
+sudo pacman -S abletonlink
 
 # MANUALLY
 # Instructions to set up Bluetooth: https://wiki.archlinux.org/index.php/Bluetooth

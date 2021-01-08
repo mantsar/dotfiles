@@ -138,8 +138,16 @@ snippet slice "Same as bite but for samples" w
 slice ${1:8} "$2"
 endsnippet
 
+snippet rs "" w
+randslice ${1:4} "$2"
+endsnippet
+
 snippet splice "Same as chew but for samples" w
 splice ${1:8} "$2"
+endsnippet
+
+snippet stripe "" w
+stripe ${1:2}
 endsnippet
 
 snippet chop "Cuts each sample into n parts. Granula synthesis effect" w
@@ -309,6 +317,10 @@ snippet rc "Pick random every cycle" w
 randcat [$1]
 endsnippet
 
+snippet wc "" w
+wrandcat [("$1", ${2:0.5})$3]
+endsnippet
+
 snippet degrade "Degrade by 50%. Similar to ?" w
 degrade
 endsnippet
@@ -342,7 +354,11 @@ spreadChoose ($) [$1]
 endsnippet
 
 snippet scramble "Divides the pattern and returns a new pattern by randomly selecting. Can repeat." w
-scramble ${1:3} ""
+scramble ${1:4}
+endsnippet
+
+snippet shuffle "" w
+shuffle ${1:4}
 endsnippet
 
 # Binary
@@ -982,4 +998,15 @@ snippet f "vim default fold" b
 -- {{{ $1
 ${VISUAL}$0
 -- }}}
+endsnippet
+
+# Link
+snippet lp "vim default fold" b
+sock <- carabiner tidal 4 (-0.14)
+endsnippet
+
+# MIDI
+
+snippet ,m "vim default fold" i
+# s "midi" # midichan ${0:7}
 endsnippet

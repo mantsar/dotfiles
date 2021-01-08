@@ -770,6 +770,7 @@ augroup sc_au
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/synthdef/Main.sc
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/synths.txt
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/controls.txt
+	autocmd VimEnter *.scd :badd ~/sp/a/bitwig.txt
 	"mappings
 	autocmd FileType supercollider inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
@@ -809,7 +810,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
 	" midi/tidal/foxdot/imroviz
-	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()") \| StartAsync midivisualizer --config ~/.config/midivisualizer/config.ini<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>b :call scnvim#sclang#send("~bitwig_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>

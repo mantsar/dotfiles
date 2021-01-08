@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CARLA-PROJECT>
+<CARLA-PROJECT VERSION='2.2'>
+ <EngineSettings>
+  <ForceStereo>false</ForceStereo>
+  <PreferPluginBridges>false</PreferPluginBridges>
+  <PreferUiBridges>true</PreferUiBridges>
+  <UIsAlwaysOnTop>false</UIsAlwaysOnTop>
+  <MaxParameters>200</MaxParameters>
+  <UIBridgesTimeout>4000</UIBridgesTimeout>
+ </EngineSettings>
+
+ <ExternalPatchbay>
+  <Connection>
+   <Source>system:capture_1</Source>
+   <Target>PulseAudio JACK Source:front-left</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_1</Source>
+   <Target>SuperCollider:in_1</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_2</Source>
+   <Target>PulseAudio JACK Source:front-right</Target>
+  </Connection>
+  <Connection>
+   <Source>system:capture_2</Source>
+   <Target>SuperCollider:in_2</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-left</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>PulseAudio JACK Sink:front-right</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_1</Source>
+   <Target>Bitwig Studio:Stereo In-L</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_2</Source>
+   <Target>Bitwig Studio:Stereo In-R</Target>
+  </Connection>
+  <Connection>
+   <Source>Bitwig Studio:Speakers-L</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>Bitwig Studio:Speakers-R</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_3</Source>
+   <Target>Bitwig Studio:Stereo In 2-L</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_4</Source>
+   <Target>Bitwig Studio:Stereo In 2-R</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_5</Source>
+   <Target>Bitwig Studio:Stereo In 3-L</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_6</Source>
+   <Target>Bitwig Studio:Stereo In 3-R</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_7</Source>
+   <Target>Bitwig Studio:Stereo In 4-L</Target>
+  </Connection>
+  <Connection>
+   <Source>SuperCollider:out_8</Source>
+   <Target>Bitwig Studio:Stereo In 4-R</Target>
+  </Connection>
+  <Connection>
+   <Source>a2j:SuperCollider [128] (capture): out0</Source>
+   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
+  </Connection>
+  <Connection>
+   <Source>a2j:SuperCollider [128] (capture): out1</Source>
+   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
+  </Connection>
+  <Positions>
+   <Position x1="942" y1="1296" x2="1998" y2="1171">
+    <Name>system</Name>
+   </Position>
+   <Position x1="1658" y1="1355">
+    <Name>PulseAudio JACK Sink</Name>
+   </Position>
+   <Position x1="1296" y1="1478">
+    <Name>PulseAudio JACK Source</Name>
+   </Position>
+   <Position x1="1104" y1="1080">
+    <Name>SuperCollider</Name>
+   </Position>
+   <Position x1="1415" y1="1237">
+    <Name>Bitwig Studio</Name>
+   </Position>
+   <Position x1="1423" y1="875" x2="1965" y2="877">
+    <Name>a2j</Name>
+   </Position>
+  </Positions>
+ </ExternalPatchbay>
+</CARLA-PROJECT>
