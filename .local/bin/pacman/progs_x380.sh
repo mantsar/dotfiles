@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S vulkan-intel
+sudo pacman -S vulkan-intel onboard
 
 # Bluetooth support
 # https://wiki.archlinux.org/index.php/Bluetooth#Device_does_not_show_up_in_scan
@@ -18,6 +18,8 @@ yay -S pulseaudio-modules-bt libldac bitwig-studio
 sudo pacman -S abletonlink
 
 # MANUALLY
+# onboard-settings to change on screen keyboard looks
+
 # Instructions to set up Bluetooth: https://wiki.archlinux.org/index.php/Bluetooth
 # MX Anywhere 2s
 # https://askubuntu.com/questions/763509/logitech-mx-master-wireless-mouse-under-ubuntu-14-04
