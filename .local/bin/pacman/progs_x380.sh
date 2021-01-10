@@ -1,6 +1,10 @@
 #!/bin/bash
 
-sudo pacman -S vulkan-intel onboard
+sudo pacman -S vulkan-intel
+
+# For tablet
+# https://wiki.archlinux.org/index.php/Tablet_PC
+sudo pacman -S gnome xf86-input-wacom onboard iio-sensor-proxy
 
 # Bluetooth support
 # https://wiki.archlinux.org/index.php/Bluetooth#Device_does_not_show_up_in_scan
@@ -39,3 +43,8 @@ sudo pacman -S abletonlink
 # gsettings set org.blueman.plugins.powermanager auto-power-on true
 # Make bluetooth permanent for a session
 # adapter > always visible
+
+# Gnome
+# display settings scale -> 200%
+# add/remove favorites application in Activities
+# use Night Light instead of redshift
