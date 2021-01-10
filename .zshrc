@@ -136,7 +136,7 @@ alias \
 alias \
 	g="git" \
 	d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME" \
-	da="d add -u && d reset -- $HOME/.config/alacritty/alacritty.yml $HOME/.config/i3blocks/config $HOME/.config/i3/config" \
+	da="d add -u && d reset -- $HOME/.config/alacritty/alacritty.yml $HOME/.config/i3blocks/config" \
 	trem="transmission-remote" \
 	px="pwd | xclip -r" \
 	sdn="sudo shutdown -h now" \
