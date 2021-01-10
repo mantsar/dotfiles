@@ -22,3 +22,7 @@ export LV2_PATH="$HOME/.config/SuperCollider/synthdef"
 
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
+
+if [[ -z $DISPLAY && $(tty) == /dev/tty2 ]]; then
+  XDG_SESSION_TYPE=x11 GDK_BACKEND=x11 exec startx
+fi
