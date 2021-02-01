@@ -14,8 +14,11 @@ ip.prompts = MyPrompt(ip)
 ip.highlighting_style = "solarized-dark"
 ip.colors = "Linux"
 
-Clock.bpm = 60
-Scale.default = "chromatic"
+# Clock.bpm = 60
+# Scale.default = "chromatic"
+
+Clock.bpm = 120
+Scale.default = "major"
 
 # Synths
 chicago = SynthDef("fchicagoep")

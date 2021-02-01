@@ -1,0 +1,6 @@
+#!/bin/sh
+
+python2 $HOME/sp/plugins/midi_to_tidalcycles/src/midi_to_tidalcycles.py "$@"
+
+# amp + legato + consolidate with !
+# midi_to_tidalcycles -alc test.mid

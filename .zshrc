@@ -174,6 +174,7 @@ alias \
 	pp="$HOME/Pictures" \
 	s="$HOME/.local/bin" \
 	S="$HOME/Sync" \
+	M="$HOME/Bitwig\ Studio/Library/Templates/midi_export.bwtemplate/project" \
 	vv="$HOME/Videos" \
 	cS="$HOME/.config/SuperCollider" \
 	cs="$HOME/.config/SuperCollider/synthdef" \
@@ -224,9 +225,8 @@ bindkey -M vicmd '^[q' sudo-command-line
 #     if [ -f "/home/mantas/miniconda3/etc/profile.d/conda.sh" ]; then
 #         . "/home/mantas/miniconda3/etc/profile.d/conda.sh"
 #     else
-#         export PATH="/home/mantas/miniconda3/bin:$PATH"
+        export PATH="/home/mantas/miniconda3/bin:$PATH"
 #     fi
 # fi
 # unset __conda_setup
 # <<< conda initialize <<<
-

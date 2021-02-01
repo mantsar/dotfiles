@@ -93,3 +93,7 @@ let detune_prob = pF "detune_prob"
     bmm = pF "bmm"
     dec = pF "dec"
 :}
+
+-- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
+-- bug workaround
+resetCycles = Tempo.changeTempo (sTempoMV tidal) (\t tempo -> tempo {Tempo.atTime = t + 0.1, Tempo.atCycle = 0})

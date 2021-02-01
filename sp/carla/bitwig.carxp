@@ -36,6 +36,14 @@
    <Target>system:playback_2</Target>
   </Connection>
   <Connection>
+   <Source>Bitwig Studio:Speakers-L</Source>
+   <Target>system:playback_1</Target>
+  </Connection>
+  <Connection>
+   <Source>Bitwig Studio:Speakers-R</Source>
+   <Target>system:playback_2</Target>
+  </Connection>
+  <Connection>
    <Source>SuperCollider:out_1</Source>
    <Target>Bitwig Studio:Stereo In-L</Target>
   </Connection>
@@ -44,12 +52,12 @@
    <Target>Bitwig Studio:Stereo In-R</Target>
   </Connection>
   <Connection>
-   <Source>Bitwig Studio:Speakers-L</Source>
-   <Target>system:playback_1</Target>
+   <Source>a2j:Virtual Raw MIDI 2-0 [24] (capture): VirMIDI 2-0</Source>
+   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
   </Connection>
   <Connection>
-   <Source>Bitwig Studio:Speakers-R</Source>
-   <Target>system:playback_2</Target>
+   <Source>a2j:Virtual Raw MIDI 2-1 [25] (capture): VirMIDI 2-1</Source>
+   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
   </Connection>
   <Connection>
    <Source>SuperCollider:out_3</Source>
@@ -75,16 +83,8 @@
    <Source>SuperCollider:out_8</Source>
    <Target>Bitwig Studio:Stereo In 4-R</Target>
   </Connection>
-  <Connection>
-   <Source>a2j:SuperCollider [128] (capture): out0</Source>
-   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
-  </Connection>
-  <Connection>
-   <Source>a2j:SuperCollider [128] (capture): out1</Source>
-   <Target>a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0</Target>
-  </Connection>
   <Positions>
-   <Position x1="942" y1="1296" x2="1998" y2="1171">
+   <Position x1="942" y1="1296" x2="2030" y2="1215">
     <Name>system</Name>
    </Position>
    <Position x1="1658" y1="1355">
@@ -93,14 +93,14 @@
    <Position x1="1296" y1="1478">
     <Name>PulseAudio JACK Source</Name>
    </Position>
-   <Position x1="1104" y1="1080">
-    <Name>SuperCollider</Name>
-   </Position>
-   <Position x1="1415" y1="1237">
-    <Name>Bitwig Studio</Name>
-   </Position>
    <Position x1="1423" y1="875" x2="1965" y2="877">
     <Name>a2j</Name>
+   </Position>
+   <Position x1="1264" y1="1077">
+    <Name>SuperCollider</Name>
+   </Position>
+   <Position x1="1608" y1="1117">
+    <Name>Bitwig Studio</Name>
    </Position>
   </Positions>
  </ExternalPatchbay>

@@ -5,6 +5,7 @@ sudo groupadd realtime
 sudo gpasswd -a $USER realtime
 sudo gpasswd -a $USER audio
 
+git clone https://github.com/TylerMclaughlin/midi_to_tidalcycles $HOME/sp/midi_to_tidalcycles
 git clone https://github.com/tidalcycles/Dirt-Samples $HOME/sp/Dirt-Samples
 git clone https://github.com/mantsar/synthdef $HOME/.config/SuperCollider/synthdef
 cd $HOME/.config/SuperCollider/synthdef
@@ -21,7 +22,14 @@ mkdir $HOME/sp/tmp
 mkdir $HOME/sp/songs
 mkdir $HOME/sp/samples
 mkdir $HOME/sp/plugins
-# script to create new folder for a new project where everything will work the same. then shorctuts to open projects with dmenu
+mkdir $HOME/sp/orca
+
+# midi to tidal script
+# https://github.com/TylerMclaughlin/midi_to_tidalcycles
+sudo pacman -S python2-numpy python2-setuptools swig
+git clone https://github.com/vishnubob/python-midi $HOME/sp/tmp
+cd $HOME/sp/tmp/python-midi
+python2 setup.py install --user --prefix=
 
 # Uncheck box in Cadence gui PulseAdio bridge to not autostart
 # In ALSA audio select ALSA -> PulseAudio > JACK bridge type

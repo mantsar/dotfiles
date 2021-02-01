@@ -817,6 +817,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>o :StartAsync cd ~/sp/orca/Orca/desktop && npm start<cr>
 
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load')<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>
@@ -1064,6 +1065,33 @@ augroup faust_au
 	autocmd FileType faust nnoremap <silent> <buffer> <M-s> :e ./snips.dsp<cr>
 augroup END
 " }}}2
+
+" Sonic Pi
+" call minpac#add('lilyinstarlight/vim-sonic-pi')
+
+" augroup sonicpi_au
+" 	autocmd!
+" 	" autocmd FileType faust :execute "StartAsync FaustLive " . expand("%:p")
+" 	autocmd FileType ruby :SonicPiStartServer
+" 	autocmd FileType ruby :SonicPiShowLog
+" 	autocmd FileType ruby nnoremap <silent> <buffer> <M-e> :SonicPiEval<cr>
+" 	autocmd FileType ruby vnoremap <silent> <buffer> <M-e> :SonicPiEval<cr>
+" 	autocmd FileType ruby nnoremap <silent> <buffer> <M-j> V:SonicPiEval<cr>
+" 	autocmd FileType ruby nnoremap <silent> <buffer> <M-k> :SonicPiStop<cr>
+" augroup END
+
+" Set keymaps in Normal mode
+function! s:load_keymaps()
+  if g:sonic_pi_logs != '' && (has('nvim') || has('terminal')) && g:sonic_pi_autolog_enabled
+    nnoremap <leader>r :SonicPiShowLog<CR>:SonicPiEval<CR>
+    vnoremap <leader>r :<C-U>SonicPiShowLog<CR>:'<,'>SonicPiEval<CR>
+    nnoremap <leader>c :SonicPiCloseLog<CR>
+  else
+    nnoremap <leader>r :SonicPiEval<CR>
+    vnoremap <leader>r :SonicPiEval<CR>
+  endif
+  nnoremap <leader>S :SonicPiStop<CR>
+endfunction
 
 " Misc {{{2
 " call minpac#add('dm1try/golden_size', {'type': 'opt'})

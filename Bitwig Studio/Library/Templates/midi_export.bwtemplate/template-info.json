@@ -1,0 +1,10 @@
+{
+	name : midi_export,
+	author : mantas,
+	category : Template,
+	description : "",
+	url : "",
+	tags : "",
+	show_welcome_screen : false,
+	creation_date : 1611007275575
+}

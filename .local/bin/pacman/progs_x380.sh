@@ -2,6 +2,8 @@
 
 sudo pacman -S vulkan-intel
 
+sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-guest-iso
+
 # For tablet
 # https://wiki.archlinux.org/index.php/Tablet_PC
 sudo pacman -S gnome xf86-input-wacom onboard iio-sensor-proxy

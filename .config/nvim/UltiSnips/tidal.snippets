@@ -527,6 +527,14 @@ snippet rw "L-system. No spaces after commas allowed. Wraps if taken more elemen
 (step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
 
+snippet pfm "Markov chain" w
+(fmap ([$1,$2]!!) $ markovPat ${3:8} 1 [[$4,$5], [$6,$7]])
+endsnippet
+
+snippet m "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
+(step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
+endsnippet
+
 snippet p "" w
 stack [
   ${VISUAL}$1,
@@ -666,7 +674,7 @@ snippet in "morph control values between patterns in n cycles" w
 interpolateIn ${1:`!p if not snip.c: snip.rv = cycle_index()`} ${2:10} $ $0
 endsnippet
 
-snippet trigger "Trigger on specified channel revaluation (can be itself)" w
+snippet t "Trigger on specified channel revaluation (can be itself)" w
 trigger ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
 endsnippet
 
