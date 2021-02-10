@@ -24,6 +24,9 @@ mkdir $HOME/sp/samples
 mkdir $HOME/sp/plugins
 mkdir $HOME/sp/orca
 
+# mi-UGens
+makepkg -si $HOME/pkgbuilds/mi-UGens
+
 # midi to tidal script
 # https://github.com/TylerMclaughlin/midi_to_tidalcycles
 sudo pacman -S python2-numpy python2-setuptools swig

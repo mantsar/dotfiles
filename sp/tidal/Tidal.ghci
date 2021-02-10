@@ -92,6 +92,10 @@ let detune_prob = pF "detune_prob"
     bmq = pF "bmq"
     bmm = pF "bmm"
     dec = pF "dec"
+    harm = pF "harm"
+    timbre = pF "timbre"
+    morph = pF "morph"
+    engine = pI "engine"
 :}
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8

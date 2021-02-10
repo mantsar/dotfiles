@@ -5,6 +5,7 @@ c.downloads.location.directory = "~/Downloads"
 c.tabs.close_mouse_button = 'right'
 c.scrolling.smooth = True
 c.editor.command = ['termite', '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
+c.content.blocking.method = 'both'
 
 # UI
 # Colorscheme

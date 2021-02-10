@@ -225,11 +225,7 @@ bindkey -M vicmd '^[q' sudo-command-line
 #     if [ -f "/home/mantas/miniconda3/etc/profile.d/conda.sh" ]; then
 #         . "/home/mantas/miniconda3/etc/profile.d/conda.sh"
 #     else
-<<<<<<< HEAD
 #         export PATH="/home/mantas/miniconda3/bin:$PATH"
-=======
-        # export PATH="/home/mantas/miniconda3/bin:$PATH"
->>>>>>> 5b107dc0f6fc6bde3935c96883958da40fd73877
 #     fi
 # fi
 # unset __conda_setup
