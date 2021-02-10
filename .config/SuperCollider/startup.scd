@@ -627,7 +627,7 @@ s.waitForBoot({
 // Quarks.install("FoxDot");
 // Quarks.install("MathLib");
 // Quarks.install("Spectrogram");
-// Quarks.install("SuperDirt");
+// Quarks.install("SuperDirt"); # sometimes need to remove folder by hand to update
 // Quarks.install("Vowel");
 // Quarks.install("XML");
 // Quarks.install("wslib");
