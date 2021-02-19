@@ -72,6 +72,7 @@ s.latency = 0.3;
     c = NetAddr("127.0.0.1", 6010);
     SuperDirt.default = ~dirt;
     // ADDITIONAL EFFECTS
+    s.sync;
     (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   };
 };

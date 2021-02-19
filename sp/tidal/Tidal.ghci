@@ -96,6 +96,17 @@ let detune_prob = pF "detune_prob"
     timbre = pF "timbre"
     morph = pF "morph"
     engine = pI "engine"
+    mu = pF "mu"
+    bypass = pF "bypass"
+    mtime = pF "mtime"
+    mverb = pF "mverb"
+    mdamp = pF "mdamp"
+    mhp = pF "mhp"
+    mfreeze = pF "mfreeze"
+    mdiff = pF "mdiff"
+    mlpf = pF "mlpf"
+    mrq = pF "mrq"
+    mdrive = pF "mdrive"
 :}
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8

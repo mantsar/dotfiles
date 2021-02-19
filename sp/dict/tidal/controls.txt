@@ -136,3 +136,15 @@ bmf
 bmq
 bmm
 dec
+harm
+timbre
+morph
+engine
+mu
+bypass
+mtime
+mverb
+mdamp
+mhp
+mfreeze
+mdiff

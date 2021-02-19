@@ -42,5 +42,7 @@ f808bd = SynthDef("0f808bd")
 f808lt = SynthDef("0f808lt")
 f808mt = SynthDef("0f808mt")
 f808ht = SynthDef("0f808ht")
+# Effects
+reverb2 = SynthDef("reverb2")
 # From Foxdot
 piano = SynthDef("piano")
