@@ -1,5 +1,6 @@
 c:~/.config
 dt:~/projects/data.table
+j:~/projects/rbs_covid19
 l:~/projects/lsmu
 slog:/var/log/shiny-server
 sp:~/.config/SuperCollider

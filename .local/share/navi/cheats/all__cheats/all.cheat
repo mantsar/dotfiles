@@ -223,6 +223,8 @@ git diff old...new
 git init
 # show repo information
 git remote -v
+# show all branches
+git branch -a
 
 % mongo
 # Export to file
@@ -329,3 +331,5 @@ lsb_release -a
 % conda
 # Deactivate conda (base) by default
 conda config --set auto_activate_base false
+# https://towardsdatascience.com/getting-started-with-python-environments-using-conda-32e9f2779307
+conda env create -f environment.yml
