@@ -168,7 +168,7 @@ rlpq
 drive
 ripples
 
-epitch
+epit
 elements
 econtour
 ebowlevel
@@ -191,7 +191,7 @@ tsmooth
 tshift
 tmode
 
-cpitch
+cpit
 cpos
 clouds
 cdens
@@ -203,3 +203,12 @@ cfb
 cfreeze
 cmode
 clofi
+
+rtrig
+rpit
+rings
+rdamp
+rpos
+rmodel
+rpoly
+reasteregg

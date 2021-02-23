@@ -1786,6 +1786,40 @@ MiClouds.ar(
 )
 endsnippet
 
+snippet MiRings "" w
+MiRings.ar(
+  ${1:sig},
+  ${2:0},
+  ${3:60},
+  struct:${4:0.25},
+  bright:${5:0.5},
+  damp:${6:0.7},
+  pos:${7:0.25},
+  model:${8:0},
+  poly:${9:1},
+  intern_exiter:${10:0},
+  easteregg:${11:0}
+)
+endsnippet
+
+snippet MiWarps "" w
+MiWarps.ar(
+  ${1:0},
+  ${2:0},
+  lev1:${3:0.5},
+  lev2:${4:0.5},
+  algo:${5:0},
+  timb:${6:0},
+  osc:${7:0},
+  freq:${8:110},
+  vgain:${9:1}
+)
+endsnippet
+
+snippet MiVerb "" w
+MiVerb.ar(${1:sig}, time:${2:0.7}, drywet:${3:0.5}, damp:${4:0.5}, hp:${5:0.05}, freeze:${6:0}, diff:${7:0.625})
+endsnippet
+
 # Pseudo UGens
 
 snippet Pad "Smooth pad" w
