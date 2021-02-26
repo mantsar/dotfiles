@@ -218,6 +218,10 @@ snippet wm "" w
 whenmod ${1:9} ${2:7} ($3)
 endsnippet
 
+snippet wh "chunk but boolean" w
+while "${1:1 0}" ($2)
+endsnippet
+
 snippet il "16 cycles. Sine waves. Changes shape control." w
 interlace ($1) ($2)
 endsnippet
@@ -385,6 +389,10 @@ endsnippet
 
 snippet struct "" w
 struct ($1)
+endsnippet
+
+snippet setB "" w
+setB "$1" "$2"
 endsnippet
 
 snippet mask "Binary gain of 1s and 0s. It's like gain but with binary functions like inv" w
@@ -649,6 +657,10 @@ endsnippet
 
 snippet ei "" w
 irand $1 + 1
+endsnippet
+
+snippet eb "between 0 and 1" w
+brand
 endsnippet
 
 snippet ep "random walk random" w

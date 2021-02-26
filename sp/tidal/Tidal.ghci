@@ -167,6 +167,11 @@ let detune_prob = pF "detune_prob"
     reasteregg = pF "reasteregg"
     :}
 
+
+-- bus params
+
+ripplesbus busid pat = (pF "ripples" pat) # (pI "^ripples" busid)
+
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround
 resetCycles = Tempo.changeTempo (sTempoMV tidal) (\t tempo -> tempo {Tempo.atTime = t + 0.1, Tempo.atCycle = 0})
