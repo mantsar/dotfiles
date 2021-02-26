@@ -171,6 +171,7 @@ let detune_prob = pF "detune_prob"
 -- bus params
 
 ripplesbus busid pat = (pF "ripples" pat) # (pI "^ripples" busid)
+fchopbus busid pat = (pF "fchop" pat) # (pI "^fchop" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround
