@@ -144,7 +144,7 @@ pengine
 pdecay
 plpg_colour
 mu
-ubypass
+mbypass
 vtime
 verb
 vdamp
@@ -163,9 +163,8 @@ ofilter_mode
 ocutoff
 oreson
 oenv
-rlpf
 rlpq
-drive
+rdrive
 ripples
 
 epit

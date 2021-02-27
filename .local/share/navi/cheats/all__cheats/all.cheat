@@ -123,6 +123,8 @@ ffmpeg -i input.mp3 output.wav
 gpasswd -a user group
 # create new group
 groupadd group
+# remove user from froup
+gpasswd -d user group
 # check which users belong to group
 groups user
 # Change group
@@ -309,6 +311,8 @@ tmux attach -t name
 prefix-d
 # rename window
 prefix-,
+# select client (solves resizing problem)
+prefix + Shift-b
 
 % R, shiny
 # install R on ubuntu
@@ -333,3 +337,19 @@ lsb_release -a
 conda config --set auto_activate_base false
 # https://towardsdatascience.com/getting-started-with-python-environments-using-conda-32e9f2779307
 conda env create -f environment.yml
+# list conda environments
+conda info --envs
+# activate conda envir
+conda activate your_env_name
+# deactivate conda envir
+conda activate your_env_name
+# install specific package to envir
+conda install -n your_env_name pynvim
+# install specific package from specific channel to envir
+conda install -n r36_mkl -c conda-forge r-languageserver
+
+% snakemake
+# dry run
+snakemake -n
+# snakemake with 4 cores
+snakemake --cores 4
