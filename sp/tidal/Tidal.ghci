@@ -176,6 +176,14 @@ pharmbus busid pat = (pF "pharm" pat) # (pI "^pharm" busid)
 ptimbrebus busid pat = (pF "ptimbre" pat) # (pI "^ptimbre" busid)
 pmorphbus busid pat = (pF "pmorph" pat) # (pI "^pmorph" busid)
 penginebus busid pat = (pF "pengine" pat) # (pI "^pengine" busid)
+mubus busid pat = (pF "mu" pat) # (pI "^mu" busid)
+ind1bus busid pat = (pF "ind1" pat) # (pI "^ind1" busid)
+ind2bus busid pat = (pF "ind2" pat) # (pI "^ind2" busid)
+ind3bus busid pat = (pF "ind3" pat) # (pI "^ind3" busid)
+cr1bus busid pat = (pF "cr1" pat) # (pI "^cr1" busid)
+cr2bus busid pat = (pF "cr2" pat) # (pI "^cr2" busid)
+cr3bus busid pat = (pF "cr3" pat) # (pI "^cr3" busid)
+cr4bus busid pat = (pF "cr4" pat) # (pI "^cr4" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround
