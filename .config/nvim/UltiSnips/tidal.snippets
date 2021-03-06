@@ -102,6 +102,14 @@ snippet within "" w
 within (0.${1:0}, ${2:1}) ($3)
 endsnippet
 
+snippet linger "" w
+linger ${1:0.25}
+endsnippet
+
+snippet trunc "" w
+trunc ${1:0.25}
+endsnippet
+
 snippet zoom "" w
 zoom (0.${1:0}, ${2:1})
 endsnippet
@@ -359,6 +367,10 @@ endsnippet
 
 snippet rC "Repeat each random cycle" w
 repeatCycles ${1:3}
+endsnippet
+
+snippet outside "tasty with repeatCycles" w
+outside ${1:2} $0
 endsnippet
 
 snippet sC "" w
