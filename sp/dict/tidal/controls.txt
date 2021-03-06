@@ -211,3 +211,10 @@ rpos
 rmodel
 rpoly
 reasteregg
+
+btimbre
+bcolor
+bengine
+bresamp
+bdecim
+bbits

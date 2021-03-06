@@ -165,6 +165,14 @@ let detune_prob = pF "detune_prob"
     rmodel = pF "rmodel"
     rpoly = pF "rpoly"
     reasteregg = pF "reasteregg"
+
+    btimbre = pF "btimbre"
+    bcolor = pF "bcolor"
+    bengine = pI "bengine"
+    bresamp = pI "bresamp"
+    bdecim = pI "bdecim"
+    bbits = pI "bbits"
+
     :}
 
 
@@ -172,11 +180,21 @@ let detune_prob = pF "detune_prob"
 
 ripplesbus busid pat = (pF "ripples" pat) # (pI "^ripples" busid)
 fchopbus busid pat = (pF "fchop" pat) # (pI "^fchop" busid)
+
 pharmbus busid pat = (pF "pharm" pat) # (pI "^pharm" busid)
 ptimbrebus busid pat = (pF "ptimbre" pat) # (pI "^ptimbre" busid)
 pmorphbus busid pat = (pF "pmorph" pat) # (pI "^pmorph" busid)
 penginebus busid pat = (pF "pengine" pat) # (pI "^pengine" busid)
+
+btimbrebus busid pat = (pF "btimbre" pat) # (pI "^btimbre" busid)
+bcolorbus busid pat = (pF "bcolor" pat) # (pI "^bcolor" busid)
+benginebus busid pat = (pF "bengine" pat) # (pI "^bengine" busid)
+bresampbus busid pat = (pF "bresamp" pat) # (pI "^bresamp" busid)
+bdecimbus busid pat = (pF "bdecim" pat) # (pI "^bdecim" busid)
+bbitsbus busid pat = (pF "bbits" pat) # (pI "^bbits" busid)
+
 mubus busid pat = (pF "mu" pat) # (pI "^mu" busid)
+
 ind1bus busid pat = (pF "ind1" pat) # (pI "^ind1" busid)
 ind2bus busid pat = (pF "ind2" pat) # (pI "^ind2" busid)
 ind3bus busid pat = (pF "ind3" pat) # (pI "^ind3" busid)
