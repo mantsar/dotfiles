@@ -563,6 +563,18 @@ snippet m "L-system. No spaces after commas allowed. Wraps if taken more element
 (step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
 
+snippet nt "" w
+nTake "$1" [$2]
+endsnippet
+
+snippet nc "" w
+nCount "$1"
+endsnippet
+
+snippet nct "" w
+nCountTo "$1"
+endsnippet
+
 snippet p "" w
 stack [
   ${VISUAL}$1,

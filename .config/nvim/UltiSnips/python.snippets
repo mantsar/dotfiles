@@ -1,19 +1,7 @@
 extends live_coding
 
 global !p
-
-def player_indexd():
-	i = vim.current.window.cursor[0] - 1
-	regex = f'^\s*d([0-9]+)\s*>>.*'
-	while i >= 0:
-		m = re.match(regex, snip.buffer[i])
-		if m:
-			return int(m.group(1))
-		i -= 1
-	return 0
-
-def player_indexb():
-	i = vim.current.window.cursor[0] - 1
+ 11G = vim.current.window.cursor[0] - 1
 	regex = f'^\s*b([0-9]+)\s*>>.*'
 	while i >= 0:
 		m = re.match(regex, snip.buffer[i])
