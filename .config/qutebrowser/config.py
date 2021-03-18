@@ -18,7 +18,7 @@ dracula.draw.blood(c, {
     }
 })
 c.qt.args = ["blink-settings=darkMode=4,darkModeImagePolicy=0"]
-c.colors.webpage.prefers_color_scheme_dark = True
+c.colors.webpage.preferred_color_scheme = "dark"
 
 # Completion
 config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
