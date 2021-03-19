@@ -312,7 +312,7 @@ prefix-d
 # rename window
 prefix-,
 # select client (solves resizing problem)
-prefix + Shift-b
+prefix + Shift-d
 
 % R, shiny
 # install R on ubuntu
