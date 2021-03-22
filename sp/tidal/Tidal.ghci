@@ -169,9 +169,32 @@ let detune_prob = pF "detune_prob"
     btimbre = pF "btimbre"
     bcolor = pF "bcolor"
     bengine = pI "bengine"
-    bresamp = pI "bresamp"
-    bdecim = pI "bdecim"
-    bbits = pI "bbits"
+    bresamp = pF "bresamp"
+    bdecim = pF "bdecim"
+    bbits = pF "bbits"
+
+    tone = pF "tone"
+    accent = pF "accent"
+    attackfm = pF "attackfm"
+    selffm = pF "selffm"
+    snappy = pF "snappy"
+
+    resonator = pF "resonator"
+    repos = pF "repos"
+    rres = pF "rres"
+    rfreq = pF "rfreq"
+    restruct = pF "restruct"
+    redamp = pF "redamp"
+
+    structure = pF "structure"
+    bright = pF "bright"
+
+    f0 = pF "f0"
+    harmonicstretch = pF "harmonicstretch"
+    pos = pF "pos"
+    loss = pF "loss"
+    modenum = pF "modenum"
+    cosfreq = pF "cosfreq"
 
     :}
 

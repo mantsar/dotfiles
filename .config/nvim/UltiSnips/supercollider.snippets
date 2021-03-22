@@ -1824,6 +1824,33 @@ snippet MiVerb "" w
 MiVerb.ar(${1:sig}, time:${2:0.7}, drywet:${3:0.5}, damp:${4:0.5}, hp:${5:0.05}, freeze:${6:0}, diff:${7:0.625})
 endsnippet
 
+# mkplugins
+
+snippet Resonator "" w
+Resonator.ar(
+  ${1:sig},
+  ${2:0},
+  accent:${3:0.1},
+  freq:${4:200},
+  tone:${5:0.5},
+  decay:${6:0.5},
+  snappy:${7:0.5}
+)
+endsnippet
+
+snippet AnalogBassDrum "" w
+AnalogBassDrum.ar(
+  ${1:sig},
+  ${2:0},
+  accent:${3:0.5},
+  freq:${4:50},
+  tone:${5:0.5},
+  decay:${6:0.5},
+  attackfm:${7:0.5},
+  selffm:${8:0.25}
+)
+endsnippet
+
 # Pseudo UGens
 
 snippet Pad "Smooth pad" w
