@@ -88,6 +88,7 @@ let detune_prob = pF "detune_prob"
     mrate = pF "mrate"
     soft = pF "soft"
     fchop = pF "fchop"
+    flag = pF "flag"
     bmf = pF "bmf"
     bmq = pF "bmq"
     bmm = pF "bmm"
@@ -203,6 +204,7 @@ let detune_prob = pF "detune_prob"
 
 ripplesbus busid pat = (pF "ripples" pat) # (pI "^ripples" busid)
 fchopbus busid pat = (pF "fchop" pat) # (pI "^fchop" busid)
+flagbus busid pat = (pF "flag" pat) # (pI "^flag" busid)
 
 pharmbus busid pat = (pF "pharm" pat) # (pI "^pharm" busid)
 ptimbrebus busid pat = (pF "ptimbre" pat) # (pI "^ptimbre" busid)
@@ -221,10 +223,16 @@ mubus busid pat = (pF "mu" pat) # (pI "^mu" busid)
 ind1bus busid pat = (pF "ind1" pat) # (pI "^ind1" busid)
 ind2bus busid pat = (pF "ind2" pat) # (pI "^ind2" busid)
 ind3bus busid pat = (pF "ind3" pat) # (pI "^ind3" busid)
+crbus busid pat = (pF "cr" pat) # (pI "^cr" busid)
 cr1bus busid pat = (pF "cr1" pat) # (pI "^cr1" busid)
 cr2bus busid pat = (pF "cr2" pat) # (pI "^cr2" busid)
 cr3bus busid pat = (pF "cr3" pat) # (pI "^cr3" busid)
 cr4bus busid pat = (pF "cr4" pat) # (pI "^cr4" busid)
+mr1bus busid pat = (pF "mr1" pat) # (pI "^mr1" busid)
+mr2bus busid pat = (pF "mr2" pat) # (pI "^mr2" busid)
+mr3bus busid pat = (pF "mr3" pat) # (pI "^mr3" busid)
+
+fbbus busid pat = (pF "fb" pat) # (pI "^fb" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround
