@@ -13,6 +13,7 @@ cd yay
 makepkg -si
 
 yay -S neovim-git zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git xcwd-git nerd-fonts-hack i3-layout-manager-git
+yay -S supercollider-mkplugins
 
 # haskell-language-server-bin
 # arduino
