@@ -246,3 +246,16 @@ pos
 loss
 modenum
 cosfreq
+
+atape
+atsaturation
+atbias
+atoversample
+atmode
+
+adist
+adbias
+adlo
+adhi
+addrive
+adoversample

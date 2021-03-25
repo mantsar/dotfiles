@@ -197,6 +197,19 @@ let detune_prob = pF "detune_prob"
     modenum = pF "modenum"
     cosfreq = pF "cosfreq"
 
+    atape = pF "atape"
+    atsaturation = pF "atsaturation"
+    atbias = pF "atbias"
+    atoversample = pF "atoversample"
+    atmode = pF "atmode"
+
+    adist = pF "adist"
+    adbias = pF "adbias"
+    adlo = pF "adlo"
+    adhi = pF "adhi"
+    addrive = pF "addrive"
+    adoversample = pF "adoversample"
+
     :}
 
 
