@@ -34,6 +34,12 @@ git clone https://github.com/vishnubob/python-midi $HOME/sp/tmp
 cd $HOME/sp/tmp/python-midi
 python2 setup.py install --user --prefix=
 
+# vcv rack
+# mkdir ~/sp/vcvrack
+# cd ~/sp/vcvrack
+# wget https://vcvrack.com/downloads/Rack-1.1.6-lin.zip
+# rm Rack-1.1.6-lin.zip
+
 # Uncheck box in Cadence gui PulseAdio bridge to not autostart
 # In ALSA audio select ALSA -> PulseAudio > JACK bridge type
 
