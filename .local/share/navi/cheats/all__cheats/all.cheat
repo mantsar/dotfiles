@@ -353,3 +353,9 @@ conda install -n r36_mkl -c conda-forge r-languageserver
 snakemake -n
 # snakemake with 4 cores
 snakemake --cores 4
+
+% jack-matchmaker
+# output current connections (optionally provide pattern)
+jack-matchmaker -c pattern
+# read pattern file
+jack-matchmaker -p file

@@ -1,0 +1,18 @@
+system:capture_1
+    PulseAudio JACK Source:front-left
+
+system:capture_2
+    PulseAudio JACK Source:front-right
+
+PulseAudio JACK Sink:front-left
+    system:playback_1
+
+PulseAudio JACK Sink:front-right
+    system:playback_2
+
+VCV Rack:outport 0
+    system:playback_1
+
+VCV Rack:outport 1
+    system:playback_2
+

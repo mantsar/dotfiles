@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Default browser
+Exec=/usr/bin/qutebrowser %u
