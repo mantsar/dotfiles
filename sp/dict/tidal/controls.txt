@@ -259,3 +259,10 @@ adlo
 adhi
 addrive
 adoversample
+
+pitch
+volt
+gate
+clock
+trig
+glide

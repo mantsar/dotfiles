@@ -250,3 +250,15 @@ fbbus busid pat = (pF "fb" pat) # (pI "^fb" busid)
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround
 resetCycles = Tempo.changeTempo (sTempoMV tidal) (\t tempo -> tempo {Tempo.atTime = t + 0.1, Tempo.atCycle = 0})
+
+-- https://github.com/mashaal/superdirt-voltage
+pitch pitch = n pitch # s "pitch"
+scale scale = stepsPerOctave scale
+volt volt = n volt # s "voltage"
+gate gate = n gate # s "gate"
+clock = rate "[1 0]*2" # s "voltage"
+ar w x = attack w # decay x # s "ar"
+trig trig = n trig
+x x = channel x
+glide p r = portamento p # rate r
+o o p = orbit o # pan p

@@ -359,3 +359,5 @@ snakemake --cores 4
 jack-matchmaker -c pattern
 # read pattern file
 jack-matchmaker -p file
+# reload config file
+pkill -1 jack-matchmaker

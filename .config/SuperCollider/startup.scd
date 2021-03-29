@@ -6,14 +6,15 @@
 s.options.memSize = 8192 * 128; // increase memory to 512 Mb
 s.options.sampleRate = 48000;
 s.options.numAudioBusChannels = 1024 * 10;
-s.volume.volume = -10; // default volume
+// s.volume.volume = -9; // default volume is 0
+s.volume.setVolumeRange(-30, 5);
 s.options.numRGens = 64; // n of seedable random number generators
 // from SuperDirt
 s.options.numBuffers = 1024 * 256; // 1024 default
 s.options.numWireBufs = 256;
 s.options.maxNodes = 1024 * 32;
-// s.options.numOutputBusChannels = 24;
-s.options.numOutputBusChannels = 2; // change to 24 if mastering (6 per tidal and sc)
+s.options.numOutputBusChannels = 8;
+// s.options.numOutputBusChannels = 2; // change to 24 if mastering (6 per tidal and sc)
 s.options.numInputBusChannels = 2;
 s.latency = 0.3;
 
@@ -197,14 +198,14 @@ s.waitForBoot {
 
 // Server functions ----------
 
-~make_toggle_mute = {|state=1| 
+~make_toggle_mute = {|state=1|
   {
-    if (state==1) { 
+    if (state==1) {
       state = 0; 
       s.volume.mute;
       "muted".postln;
-    } { 
-      state = 1; 
+    } {
+      state = 1;
       s.volume.unmute;
       "unmuted".postln;
     };
@@ -663,6 +664,7 @@ s.waitForBoot({
   DiffString.tempFilePath = "~/sp/tmp";
   StageLimiter.activate(2);
   "./synthdef/synth_def.scd".loadRelative; // Synths
+  "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;
   // d = ~read_dirt_samples.value(); // Samples
 });

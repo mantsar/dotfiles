@@ -1053,12 +1053,18 @@ ${VISUAL}$0
 endsnippet
 
 # Link
+# sendMsg sock "bpm 60"
 snippet lp "" b
 sock <- carabiner tidal 4 (-0.14)
 endsnippet
 
 # MIDI
-
 snippet ,m "vim default fold" i
 # s "midi" # midichan ${0:7}
+endsnippet
+
+# Rack
+# requires setcps 1 to work properly
+snippet 01 "" iwA
+[0 1]
 endsnippet
