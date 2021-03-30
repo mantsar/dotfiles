@@ -253,7 +253,7 @@ resetCycles = Tempo.changeTempo (sTempoMV tidal) (\t tempo -> tempo {Tempo.atTim
 
 -- https://github.com/mashaal/superdirt-voltage
 pitch pitch = n pitch # s "pitch"
-scale scale = stepsPerOctave scale
+spo scale = stepsPerOctave scale
 volt volt = n volt # s "voltage"
 gate gate = n gate # s "gate"
 clock = rate "[1 0]*2" # s "voltage"

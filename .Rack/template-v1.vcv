@@ -50,7 +50,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 22,
       "plugin": "SkJack",
       "version": "1.0.0",
       "model": "JackAudioIn8",
@@ -200,7 +200,7 @@
           "value": 0.671671927
         }
       ],
-      "rightModuleId": 13,
+      "rightModuleId": 22,
       "data": {
         "enable_start_stop": false
       },
@@ -271,22 +271,6 @@
       "inputModuleId": 40,
       "inputId": 0,
       "color": "#c91847"
-    },
-    {
-      "id": 94,
-      "outputModuleId": 13,
-      "outputId": 2,
-      "inputModuleId": 12,
-      "inputId": 0,
-      "color": "#0986ad"
-    },
-    {
-      "id": 96,
-      "outputModuleId": 13,
-      "outputId": 2,
-      "inputModuleId": 37,
-      "inputId": 2,
-      "color": "#0986ad"
     }
   ]
 }
