@@ -7,7 +7,7 @@ s.options.memSize = 8192 * 128; // increase memory to 512 Mb
 s.options.sampleRate = 48000;
 s.options.numAudioBusChannels = 1024 * 10;
 // s.volume.volume = -9; // default volume is 0
-s.volume.setVolumeRange(-30, 5);
+s.volume.setVolumeRange(-50, 5);
 s.options.numRGens = 64; // n of seedable random number generators
 // from SuperDirt
 s.options.numBuffers = 1024 * 256; // 1024 default
