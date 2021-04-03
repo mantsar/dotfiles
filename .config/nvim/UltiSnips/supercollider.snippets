@@ -2588,6 +2588,16 @@ Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
 )
 endsnippet
 
+snippet "d([0-9]+)w(([0-9]+))" "Warps" br
+Ndef(\d`!p snip.rv = match.group(1)`).play;
+(
+Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
+	var a, b, c, sig = [InBus.ar(~b`!p snip.rv = match.group(1)`, 2), InBus.ar(~b`!p snip.rv = match.group(2)`, 2)];
+	sig = SelectX.ar(MouseX.kr(0, 1) * sig.size, sig);
+};
+)
+endsnippet
+
 snippet "db([0-9]+)" "Dry bus for side chain effect" w
 c = InBus.ar(~dirt.orbits[`!p snip.rv = match.group(1)`].dryBus, 2).sum;
 Compander.ar(sig, c, thresh:0.006, slopeBelow:1, slopeAbove: 0.1, clampTime:0.05, relaxTime:0.1)

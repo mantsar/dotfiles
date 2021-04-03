@@ -817,7 +817,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>o :StartAsync cd ~/sp/orca/Orca/desktop && npm start<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>o :StartAsync Orca<cr>
 
 	autocmd VimEnter *.scd nnoremap <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load')<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>

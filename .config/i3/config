@@ -145,6 +145,7 @@ bindsym $mod+Shift+j		move down 30
 bindsym $mod+k			focus up
 bindsym $mod+Shift+k		move up 30
 
+bindsym $mod+o		exec --no-startup-id Orca
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
 bindsym $mod+l			focus right
@@ -172,9 +173,9 @@ bindsym $mod+Shift+x 			exec $term -e fzf_mpd " "
 bindsym $mod+Shift+m		exec --no-startup-id amixer -D pulse set Master 1+ toggle && pkill -RTMIN+10 i3blocks
 # bindsym $mod+Shift+m		exec --no-startup-id midivisualizer
 
-bindsym $mod+v [instance="Improviz"] scratchpad show ; focus mode_toggle
+bindsym $mod+Shift+v [instance="Improviz"] scratchpad show ; focus mode_toggle
 # bindsym $mod+Shift+v exec --no-startup-id screenkey -s small --bak-mode baked --mods-mode emacs --opacity 0 -f "Ubuntu Mono Bold 10"
-bindsym $mod+Shift+v exec --no-startup-id rack
+bindsym $mod+v exec --no-startup-id rack
 
 bindsym $mod+q			[con_id="__focused__" instance="^(?!(unkillable_|neovide|dropdown_|Steam|quake)).*$"] kill
 bindsym --whole-window $mod+button3 [con_id="__focused__" instance="^(?!(unkillable_|neovide|dropdown_)).*$"] kill
