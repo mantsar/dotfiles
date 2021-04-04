@@ -7,3 +7,4 @@ yay -Syu --devel --timeupdate
 pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U --use-feature=2020-resolver
 apm upgrade
 nvim --headless +PackUpdate +qa
+nvim --headless +TSUpdate +qa # treesitter

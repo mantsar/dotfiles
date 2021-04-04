@@ -186,49 +186,72 @@ command! PackStatus call minpac#status() "See plugins status
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~ ui ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{2
 " Colorscheme
+call minpac#add('nvim-treesitter/nvim-treesitter')
+" :TSUpdate " updates all
+" :TSUninstall all
+" :TSInstall supercollider
+" :TSInstall python
+" :TSInstall r
+" :TSInstall haskell
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	highlight = {
+enable = true
+},
+indent = {
+enable = true
+},
+incremental_selection = {
+enable = true
+}
+}
+EOF
 set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
-call minpac#add('liuchengxu/space-vim-dark')
+" call minpac#add('liuchengxu/space-vim-dark')
 call minpac#add('endel/vim-github-colorscheme')
 call minpac#add('bluz71/vim-moonfly-colors')
+call minpac#add('rktjmp/lush.nvim')
+call minpac#add('npxbr/gruvbox.nvim')
 function! Toggle_colorcheme()
-		if g:colorscheme == 1
-			set colorcolumn=999
-			set nocursorline
-			set nocursorcolumn
-			augroup ui
-				autocmd!
-			augroup END
-			" colorscheme moonfly
-			colorscheme paramount
-			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
-			let g:colorscheme = 2
-		elseif g:colorscheme == 2
-			colorscheme github
-			hi Comment gui=italic
-			hi Comment guifg=#5c6370 ctermfg=59
-			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
-			set colorcolumn=80 "Nicer code -> better code
-			set cursorline "Highlight current line
-			let g:colorscheme = 0
-		else
-			set colorcolumn=80 "Nicer code -> better code
-			set cursorline "Highlight current line
-			set cursorcolumn "Highlight current column
-			" Only show cursor lines in selected window
-			augroup ui
-				autocmd!
-				au WinLeave * set nocursorline nocursorcolumn colorcolumn=""
-				au WinEnter * set cursorline cursorcolumn colorcolumn=80
-			augroup END
-			colorscheme space-vim-dark
-			hi Comment guifg=#5c6370 ctermfg=59
-			hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
-			let g:colorscheme = 1
-		endif
-		au VimEnter * hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
-		" au VimEnter * hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
-		" au VimEnter * hi SneakScope guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
+	if g:colorscheme == 1
+		set colorcolumn=999
+		set nocursorline
+		set nocursorcolumn
+		augroup ui
+			autocmd!
+		augroup END
+		" colorscheme paramount
+		colorscheme gruvbox
+		hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
+		let g:colorscheme = 2
+	elseif g:colorscheme == 2
+		colorscheme github
+		hi Comment gui=italic
+		hi Comment guifg=#5c6370 ctermfg=59
+		hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
+		set colorcolumn=80 "Nicer code -> better code
+		set cursorline "Highlight current line
+		let g:colorscheme = 0
+	else
+		set colorcolumn=80 "Nicer code -> better code
+		set cursorline "Highlight current line
+		set cursorcolumn "Highlight current column
+		" Only show cursor lines in selected window
+		augroup ui
+			autocmd!
+			au WinLeave * set nocursorline nocursorcolumn colorcolumn=""
+			au WinEnter * set cursorline cursorcolumn colorcolumn=80
+		augroup END
+		colorscheme moonfly
+		" colorscheme space-vim-dark
+		hi Comment guifg=#5c6370 ctermfg=59
+		hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
+		let g:colorscheme = 1
+	endif
+	au VimEnter * hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline 
+	" au VimEnter * hi Sneak guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
+	" au VimEnter * hi SneakScope guifg=black guibg=#5FD7A7 ctermfg=black ctermbg=10
 endfunction
 let g:colorscheme = 1
 call Toggle_colorcheme()
@@ -565,7 +588,7 @@ let g:rnvimr_enable_picker = 1
 let g:rnvimr_presets = [ {'width': 0.800, 'height': 0.800},
 			\ {'width': 0.950, 'height': 0.950},
 			\ {'width': 0.700, 'height': 0.700} ]
-call minpac#add('junegunn/fzf', { 'do': './install --bin'}) "Intall fzf only for vim
+" call minpac#add('junegunn/fzf', { 'do': './install --bin'}) "Intall fzf only for vim
 call minpac#add('junegunn/fzf.vim') "Bundle of fzf-based commands and mappings
 " Define way to open fzf line
 let g:fzf_action = {
