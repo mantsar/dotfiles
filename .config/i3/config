@@ -110,10 +110,10 @@ bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+s			exec --no-startup-id ukspawn scuk
-# bindsym $mod+Shift+s			exec --no-startup-id  neovide ~/sp/a/a.scd
+bindsym $mod+Shift+s			exec --no-startup-id sh -c "cd ~/sp/a && neovide a.scd"
 # temporary fix
-bindsym $mod+Shift+s			exec --no-startup-id $term -t neobug -e sh -c "cd ~/sp/a && neovide a.scd"
-for_window [title="neobug"] move container to workspace number 7
+# bindsym $mod+Shift+s			exec --no-startup-id $term -t neobug -e sh -c "cd ~/sp/a && neovide a.scd"
+# for_window [title="neobug"] move container to workspace number 7
 
 bindsym $mod+i 			exec $term -e htop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
