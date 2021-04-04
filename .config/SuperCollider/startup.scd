@@ -671,6 +671,7 @@ s.waitForBoot({
 
 // Platform.userExtensionDir
 // Quarks.gui
+// Quarks.checkForUpdates(quarkAction: { |quark| Quarks.update(quark.name) });
 // Quarks.install("ArdourOSC");
 // Quarks.install("BatLib");
 // Quarks.install("Bjorklund");
