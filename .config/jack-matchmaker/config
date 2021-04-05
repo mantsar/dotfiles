@@ -29,19 +29,52 @@ VCV Rack-01:outport 1
     system:playback_2
 
 SuperCollider:out_3
-    VCV Rack:P4Oze3:2-in
+    VCV Rack:P4Oze3:0-in
 
 SuperCollider:out_4
-    VCV Rack:P4Oze3:3-in
+    VCV Rack:P4Oze3:1-in
 
 SuperCollider:out_5
-    VCV Rack:P4Oze3:4-in
+    VCV Rack:P4Oze3:2-in
 
 SuperCollider:out_6
-    VCV Rack:P4Oze3:5-in
+    VCV Rack:P4Oze3:3-in
 
 SuperCollider:out_7
-    VCV Rack:P4Oze3:6-in
+    VCV Rack:P4Oze3:4-in
 
 SuperCollider:out_8
+    VCV Rack:P4Oze3:5-in
+
+SuperCollider:out_9
+    VCV Rack:P4Oze3:6-in
+
+SuperCollider:out_10
     VCV Rack:P4Oze3:7-in
+
+SuperCollider:out_8
+    VCV Rack:P4Oze3:5-in
+
+SuperCollider:out_3
+    VCV Rack:ZKga3wxzZP:0-in
+
+SuperCollider:out_4
+    VCV Rack:ZKga3wxzZP:1-in
+
+SuperCollider:out_5
+    VCV Rack:ZKga3wxzZP:2-in
+
+SuperCollider:out_6
+    VCV Rack:ZKga3wxzZP:3-in
+
+SuperCollider:out_7
+    VCV Rack:ZKga3wxzZP:4-in
+
+SuperCollider:out_8
+    VCV Rack:ZKga3wxzZP:5-in
+
+SuperCollider:out_9
+    VCV Rack:ZKga3wxzZP:6-in
+
+SuperCollider:out_10
+    VCV Rack:ZKga3wxzZP:7-in

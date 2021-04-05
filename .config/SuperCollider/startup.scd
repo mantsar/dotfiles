@@ -13,14 +13,14 @@ s.options.numRGens = 64; // n of seedable random number generators
 s.options.numBuffers = 1024 * 256; // 1024 default
 s.options.numWireBufs = 256;
 s.options.maxNodes = 1024 * 32;
-s.options.numOutputBusChannels = 8;
+s.options.numOutputBusChannels = 10;
 // s.options.numOutputBusChannels = 2; // change to 24 if mastering (6 per tidal and sc)
 s.options.numInputBusChannels = 2;
 s.latency = 0.3;
 
 ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 
-~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]|
+~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8]|
 s.waitForBoot {
   // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
   ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)

@@ -259,6 +259,6 @@ gate gate = n gate # s "gate"
 clock = rate "[1 0]*2" # s "voltage"
 ar w x = attack w # decay x # s "ar"
 trig trig = n trig
-x x = channel x
+x x = channel (x + 2)
 glide p r = portamento p # rate r
 o o p = orbit o # pan p
