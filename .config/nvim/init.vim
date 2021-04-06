@@ -1118,7 +1118,7 @@ function! s:load_keymaps()
 endfunction
 
 " Misc {{{2
-" call minpac#add('dm1try/golden_size', {'type': 'opt'})
+call minpac#add('dm1try/golden_size')
 " packadd! golden_size
 " " Disable automatic resizing for specific windows
 " lua << EOF
