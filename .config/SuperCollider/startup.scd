@@ -77,6 +77,7 @@ s.waitForBoot {
   (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   // then add the effect to the orbits
   s.sync;
+  d = ~dirt.buffers;
   ~dirt.orbits.do {|x|
     var verb = GlobalDirtEffect(\global_dirt_miverb, [\verb, \vtime, \vdamp, \vhp, \vfreeze, \vdiff]);
     // var clouds = GlobalDirtEffect(\global_dirt_miclouds, [
@@ -214,14 +215,15 @@ s.waitForBoot {
 
 // Sample/buffer functions ----------
 
-// ~play_samples = {|key=nil|
-//   // Play using a pbind
-//   Pbind(
-//   \instrument, \bp2,
-//     \buffer, Pseq(d[key.asSymbol], 1), // Randomly choose from the kick drum samples
-//     \dur, Pseq([0.25, 0.5, 0.25, 0.125, 0.125],inf) // A terrible rhythm
-//   ).play;
-// };
+~play_samples = {|key=nil|
+  var inst, dd = d[key.asSymbol];
+  if (dd[0].numChannels == 2) { inst = \bp2 } { inst = \bp };
+  Pbind(
+    \instrument, inst,
+    \buf, Pseq(dd, 1).trace,
+    \dur, dd[0].duration
+  ).play;
+};
 
 // Proxy functions ----------
 ~ndef_settings = {|key=nil, fadeTime=nil, quant=nil, clock=nil| // , reshaping=nil
@@ -611,7 +613,6 @@ s.waitForBoot({
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;
-  // d = BufFolders(s, "~/sp/samples");
 });
 
 // Platform.userExtensionDir
@@ -632,4 +633,3 @@ s.waitForBoot({
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
-// Quarks.install("https://github.com/madskjeldgaard/PolyBuf.git");
