@@ -195,17 +195,22 @@ call minpac#add('nvim-treesitter/nvim-treesitter')
 " :TSInstall haskell
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-	highlight = {
+rainbow = {
+	enable = true,
+	extended_mode = true
+	},
+highlight = {
 enable = true
-},
+	},
 indent = {
-enable = false
+	enable = false
 },
 incremental_selection = {
-enable = true
-}
+	enable = true
+	}
 }
 EOF
+call minpac#add('p00f/nvim-ts-rainbow')
 set termguicolors
 call minpac#add('owickstrom/vim-colors-paramount')
 " call minpac#add('liuchengxu/space-vim-dark')
@@ -786,7 +791,6 @@ augroup sc_au
 	autocmd FileType supercollider nnoremap <silent> <buffer> <M-s> :e ./snips.scd<cr>
 	autocmd VimEnter *.scd normal G
 	" autocmd VimEnter *.scd Limelight!!
-	" autocmd VimEnter *.scd RainbowParentheses!!
 	autocmd VimEnter *.scd SCNvimStart
 	autocmd VimEnter *.scd SCNvimStatusLine
 	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/startup.scd
@@ -1154,22 +1158,15 @@ nnoremap <leader>og :Goyo<cr>
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
 " Toggle
-call minpac#add('junegunn/rainbow_parentheses.vim')
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>'], ['"', '"']]
-nnoremap <leader>or :RainbowParentheses!!<cr>
-let g:rainbow#blacklist = ["#a790d5", "#F1F1F1", "#FFFFFF", "#A8A8A8", "#C6C6C6", "#EEEEEE"]
 call minpac#add('norcalli/nvim-colorizer.lua')
 nnoremap <leader>ov :ColorizerToggle<cr>
 let g:rcl = 1
 function! Toggle_rcl()
 	if g:rcl == 1
-		RainbowParentheses
 		Limelight
 		ColorizerAttachToBuffer
 		let g:rcl = 0
 	else
-		RainbowParentheses!
 		Limelight!
 		ColorizerDetachFromBuffer
 		let g:rcl = 1
