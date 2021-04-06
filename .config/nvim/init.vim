@@ -762,8 +762,8 @@ function! Scale_summary(item)
 	execute 'call scnvim#sclang#send("~scale_summary.value(Scale.' . a:item . ')")'
 endfunction
 
-function! Sample_fetch(item)
-	execute 'call scnvim#sclang#send("~read_dirt_samples1.value(' . '\"' . a:item . '\"' . ')")'
+function! Samples_play(item)
+	execute 'call scnvim#sclang#send("~play_samples.value(' . '\"' . a:item . '\"' . ')")'
 endfunction
 
 function! All_init()
@@ -824,7 +824,7 @@ augroup sc_au
 	autocmd VimEnter *.scd xnoremap <leader><leader>n :call Pattern_summary()<cr>
 	autocmd VimEnter *.scd nmap <leader><leader>n mm?P<cr>v%:call Pattern_summary()<cr><C-l>`m
 	autocmd VimEnter *.scd nnoremap <leader><leader>1 :call fzf#run({ 'source':  'cat ~/sp/dict/sc/scales.txt', 'sink': function('Scale_summary') })<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ~/sp/dict/samples.txt', 'sink': function('Sample_fetch') })<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>2 :call fzf#run({ 'source':  'cat ~/sp/dict/samples.txt', 'sink': function('Samples_play') })<cr>
 	" Show samples dir tree
 	autocmd VimEnter *.scd nnoremap <leader><leader>3 :!tree ~/sp/Dirt-Samples/<cword>
 	autocmd VimEnter *.scd nnoremap <leader><leader>h :call Toggle_scnvim_scdoc()<cr>

@@ -214,69 +214,14 @@ s.waitForBoot {
 
 // Sample/buffer functions ----------
 
-~read_dirt_samples = {
-  var buf_n, dirs, res;
-  Buffer.freeAll;
-  res = Event.new(n:2030);
-  dirs = PathName("~/sp/Dirt-Samples").entries;
-  dirs.do {|v, i| 
-    v.entries.do {|path_name| 
-      var buf, dir=path_name.folderName.asSymbol, file=path_name.fullPath;
-      buf = Buffer.read(s, file);
-      if (res.includesKey(dir)) {res[dir].add(buf)} {res[dir] = List[buf]};
-    };
-  };
-  buf_n = res.values.flat.size;
-  "% samples with % keys \n".postf(buf_n, res.keys.size);
-  res
-};
-
-~read_dirt_samples1 = {|dir|
-  var entries = (PathName("~/sp/Dirt-Samples") +/+ dir).entries;
-  Routine {
-    if (d.isNil) { d = ~read_dirt_samples.value() };
-    s.sync;
-    d[dir.asSymbol] = entries.collect {|path_name, i| 
-      var buf, file = path_name.fullPath;
-      i.postln;
-      buf = Buffer.read(s, file);
-      s.sync;
-      if (i%10 == 0) { "\\%: %\n".postf(((i/entries.size)*100).round(1)) };
-      buf
-    };
-    "Loaded %\n".postf(dir);
-    s.sync;
-    ~play_samples.value(dir);
-  }.play;
-};
-
-~play_samples = {|key=nil|
-  var f = {|key|
-    var dur, nc;
-    d[key.asSymbol].do({|v|
-      try {
-        dur = v.duration;
-        nc = v.numChannels;
-      } {|error|
-        dur = 1;
-        nc = 1;
-      };
-      v.postln;
-      if (nc == 2) { Synth(\bp2, [\buf, v]) } { Synth(\bp, [\buf, v])};
-      (dur+0.25).wait;
-    })
-  };
-  Task {
-    if (key == nil) {
-      d.keysDo {|key|
-        postln("the key ---------------------- : " ++ key);
-        f.value(key)
-      }
-    } {
-      f.value(key)
-    };
-  }.play;
-};
+// ~play_samples = {|key=nil|
+//   // Play using a pbind
+//   Pbind(
+//   \instrument, \bp2,
+//     \buffer, Pseq(d[key.asSymbol], 1), // Randomly choose from the kick drum samples
+//     \dur, Pseq([0.25, 0.5, 0.25, 0.125, 0.125],inf) // A terrible rhythm
+//   ).play;
+// };
 
 // Proxy functions ----------
 ~ndef_settings = {|key=nil, fadeTime=nil, quant=nil, clock=nil| // , reshaping=nil
@@ -666,7 +611,7 @@ s.waitForBoot({
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;
-  // d = ~read_dirt_samples.value(); // Samples
+  // d = BufFolders(s, "~/sp/samples");
 });
 
 // Platform.userExtensionDir
@@ -687,3 +632,4 @@ s.waitForBoot({
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
+// Quarks.install("https://github.com/madskjeldgaard/PolyBuf.git");
