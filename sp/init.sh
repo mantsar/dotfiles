@@ -5,7 +5,6 @@ sudo groupadd realtime
 sudo gpasswd -a $USER realtime
 sudo gpasswd -a $USER audio
 
-git clone https://github.com/TylerMclaughlin/midi_to_tidalcycles $HOME/sp/midi_to_tidalcycles
 git clone https://github.com/tidalcycles/Dirt-Samples $HOME/sp/Dirt-Samples
 git clone https://github.com/mantsar/synthdef $HOME/.config/SuperCollider/synthdef
 cd $HOME/.config/SuperCollider/synthdef
@@ -83,7 +82,7 @@ rm Rack-1.1.6-lin.zip
 # get latest lsp-plugins release
 # https://github.com/sadko4u/lsp-plugins/releases
 # wget https://github.com/sadko4u/lsp-plugins/releases/download/1.1.28/lsp-plugins-lv2-1.1.28-Linux-x86_64.tar.gz sp/plugins
-# mv last dir containing plugins to sp/plugins/dir  . Otherwise it does not find required .tll files
+# mv last dir containing plugins to sp/plugins/dir . Otherwise it does not find required .tll files
 
 # bitwig
 # uncheck in cadence ALSA MIDI -> start with jack (otherwise external midi controllers cant connect)

@@ -922,6 +922,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
+	autocmd FileType tidal nmap <leader>m :read !midi_to_tidalcycles -Hcal -q 4 ~/Bitwig\ Studio/Projects/a/t.mid<M-b><M-b><left>
 	autocmd FileType tidal inoremap <buffer> <M-cr> <cr>$<space>
 	autocmd FileType tidal inoremap <buffer> <M-m> <cr>#<space>
 	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>

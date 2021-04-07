@@ -161,17 +161,7 @@ s.waitForBoot {
 
 ~bitwig_start = {
   s.reboot({
-    // need to execute twice sometimes
-    // s.options.numOutputBusChannels = 2;
-    s.options.numOutputBusChannels = 8;
-    "~/.config/SuperCollider/startup.scd".load;
     s.waitForBoot {
-      s.sync;
-      ~superdirt_start.(#[0, 2, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0]);
-      s.sync;
-      // ~dirt.start(57120, [8, 10, 12, 14]);
-      // ~dirt.start(57120, 0!12);
-      // 0-7 are sc buses, 8-15 for tidal
       ~midi_start.();
       ServerTree.add({
         l = LinkClock(1).latency_(Server.default.latency);
