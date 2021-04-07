@@ -77,6 +77,8 @@ s.waitForBoot {
   (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   // then add the effect to the orbits
   s.sync;
+  ~dirt.soundLibrary.addMIDI(\midi, m[0]);
+  s.sync;
   d = ~dirt.buffers;
   ~dirt.orbits.do {|x|
     var verb = GlobalDirtEffect(\global_dirt_miverb, [\verb, \vtime, \vdamp, \vhp, \vfreeze, \vdiff]);
@@ -150,12 +152,13 @@ s.waitForBoot {
 // )
 
 ~midi_start = {|outports=2|
-  // MIDIClient.disposeClient;
+  MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
-    MIDIClient.init(outports:outports);
+    MIDIClient.init(2, outports:outports);
     m = outports.collect {|i| MIDIOut(i) };
+    // m = MIDIOut(outports);
     m.do {|v| v.latency = 0 };
-    ~dirt.soundLibrary.addMIDI(\midi, m[1])
+    // m.latency = 0;
   }
 };
 
@@ -600,6 +603,7 @@ s.waitForBoot({
   k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
   StageLimiter.activate(2);
+  ~midi_start.value();
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;

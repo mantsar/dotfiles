@@ -54,7 +54,8 @@ exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 # Remapping keys
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 # Jack connections
-exec --no-startup-id "jack-matchmaker -p $HOME/.config/jack-matchmaker/config"
+exec --no-startup-id "jack-matchmaker -e -p $HOME/.config/jack-matchmaker/config"
+exec --no-startup-id midi
 
 # #---Bar---# #
 bar {

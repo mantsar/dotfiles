@@ -559,7 +559,7 @@ snippet pfm "Markov chain" w
 (fmap ([$1,$2]!!) $ markovPat ${3:8} 1 [[$4,$5], [$6,$7]])
 endsnippet
 
-snippet m "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
+snippet mm "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
 (step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
 
@@ -1059,8 +1059,8 @@ sock <- carabiner tidal 4 (-0.14)
 endsnippet
 
 # MIDI
-snippet ,m "vim default fold" i
-# s "midi" # midichan ${0:7}
+snippet m "vim default fold" w
+# s "midi" # midichan ${0:0}
 endsnippet
 
 # Rack

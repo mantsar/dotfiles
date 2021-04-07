@@ -1,3 +1,5 @@
+# VCV Rack
+
 VCV Rack-01:outport 0
     system:playback_1
 
@@ -52,6 +54,8 @@ SuperCollider:out_9
 SuperCollider:out_10
     VCV Rack:ZKga3wxzZP:7-in
 
+# Bitwig
+
 SuperCollider:out_3
     Bitwig Studio:Stereo In 2-L
 
@@ -75,3 +79,8 @@ SuperCollider:out_9
 
 SuperCollider:out_10
     Bitwig Studio:Stereo In 5-R
+
+# MIDI
+
+a2j:SuperCollider [129] (capture): out0
+    a2j:Virtual Raw MIDI 1-0 [20] (playback): VirMIDI 1-0
