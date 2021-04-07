@@ -87,5 +87,5 @@ rm Rack-1.1.6-lin.zip
 # bitwig
 # uncheck in cadence ALSA MIDI -> start with jack (otherwise external midi controllers cant connect)
 # bitwig support for launchpad mk3 https://github.com/git-moss/DrivenByMoss-Documentation/blob/master/Installation.md
-# run bitwig_midi script and launch alsa jack midi bridge (in cadence) for midi routing to work in bitwig
+# run midi script and launch alsa jack midi bridge (in cadence) for midi routing to work in bitwig
 # use carla to load patchbay templates

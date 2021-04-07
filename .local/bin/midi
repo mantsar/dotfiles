@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# https://tldp.org/HOWTO/MIDI-HOWTO-10.html (because Bitwig does not have JACK midi support)
+sudo modprobe snd-virmidi
+# a2jmidid -e &
+# carla ~/sp/carla/bitwig.carxp &
+# carabiner
