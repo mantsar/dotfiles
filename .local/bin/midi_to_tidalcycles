@@ -4,3 +4,10 @@ python2 $HOME/sp/plugins/midi_to_tidalcycles/src/midi_to_tidalcycles.py "$@"
 
 # amp + legato + consolidate with !
 # midi_to_tidalcycles -alc test.mid
+# -l, --legato            print legato pattern
+# -a, --amp               print amplitude pattern
+# -c, --consolidate       simplify repeating values using mini-notation 
+# -H, --hide              hide inferred polyphony and midi file info (useful for automatic copying of tidalcycles code) 
+# -q, --resolution        specify number of quanta per quarter note : 4 IS DEFAULT! That means 16th notes
+
+# increase -q to max 960 for correct spacing of notes and legatos

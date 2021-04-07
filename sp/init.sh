@@ -34,6 +34,10 @@ git clone https://github.com/vishnubob/python-midi $HOME/sp/tmp
 cd $HOME/sp/tmp/python-midi
 python2 setup.py install --user --prefix=
 
+# midi to foxdot script
+# https://github.com/mathigatti/midi2foxdot
+pip install music21
+
 # vcv rack
 mkdir ~/sp/vcvrack
 cd ~/sp/vcvrack
