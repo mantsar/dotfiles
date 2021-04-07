@@ -84,3 +84,6 @@ SuperCollider:out_10
 
 a2j:SuperCollider [129] (capture): out0
     a2j:Virtual Raw MIDI 1-0 [20] (playback): VirMIDI 1-0
+
+a2j:SuperCollider [129] (capture): out0
+    a2j:Virtual Raw MIDI 2-0 [24] (playback): VirMIDI 2-0
