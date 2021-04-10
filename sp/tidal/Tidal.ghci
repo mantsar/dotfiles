@@ -262,3 +262,10 @@ trig trig = n trig
 x x = channel (x + 2)
 glide p r = portamento p # rate r
 o o p = orbit o # pan p
+
+contrastM = contrastBy (>=)
+fixM f = contrastM f id
+unfixM = contrastM id
+contrastL = contrastBy (<=)
+fixL f = contrastL f id
+unfixL = contrastL id

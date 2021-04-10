@@ -120,6 +120,8 @@ chooseBy
 chunk
 chunk'
 contrast
+contrastM
+contrastL
 contrastBy
 contrastRange
 cycleChoose
@@ -144,6 +146,8 @@ fastspread
 fit
 fit'
 fix
+fixM
+fixL
 fixRange
 flatpat
 ghost
@@ -239,6 +243,8 @@ triple
 trunc
 unDegradeBy
 unfix
+unfixM
+unfixL
 unfixRange
 unwrap'
 ur
