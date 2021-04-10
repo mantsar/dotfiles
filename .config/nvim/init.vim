@@ -932,9 +932,9 @@ augroup tidal_au
 	" Always autoscroll
 	autocmd FileType tidal nmap <M-u> <Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
 	autocmd FileType tidal imap <M-u> <C-o><Plug>(scnvim-postwindow-toggle):call scnvim#sclang#send("nil")<cr>
-	autocmd FileType tidal xmap <buffer> <M-e> <Plug>TidalRegionSend
-	autocmd FileType tidal xmap <buffer> <M-p> <Plug>TidalRegionSend
-	autocmd FileType tidal xmap <buffer> <M-o> <Plug>TidalRegionSend
+	autocmd FileType tidal xmap <buffer> <M-e> mm<Plug>TidalRegionSend`m
+	autocmd FileType tidal xmap <buffer> <M-p> mm<Plug>TidalRegionSend`m
+	autocmd FileType tidal xmap <buffer> <M-o> mm<Plug>TidalRegionSend`m
 	autocmd FileType tidal nmap <buffer> <M-j> <Plug>TidalLineSend
 	autocmd FileType tidal imap <buffer> <M-j> <C-o><Plug>TidalLineSend
 	autocmd FileType tidal nmap <buffer> <M-e> <Plug>TidalParagraphSend
