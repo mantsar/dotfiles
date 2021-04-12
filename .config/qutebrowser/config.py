@@ -105,6 +105,7 @@ config.bind(",c", "hint code userscript code_select.py")
 config.bind("<Alt-c>", "hint code userscript code_select.py")
 
 # UI
+c.tabs.title.format = "{index}: {current_title}" # fix audio/mute bug by disabling it...
 c.tabs.padding = {'top': 2, 'bottom': 2, 'left': 5, 'right': 5}
 c.tabs.favicons.scale = 1.2
 c.tabs.indicator.padding = {'top': 2, 'bottom': 2, 'left': 0, 'right': 4}
