@@ -21,8 +21,6 @@ yay -S bluez-utils-compat
 # https://wiki.archlinux.org/index.php/bluetooth_headset#LDAC/aptX
 yay -S pulseaudio-modules-bt libldac bitwig-studio
 
-sudo pacman -S abletonlink
-
 # MANUALLY
 # onboard-settings to change on screen keyboard looks
 

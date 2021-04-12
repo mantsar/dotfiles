@@ -266,3 +266,8 @@ gate
 clock
 trig
 glide
+
+pfreq
+pgain
+ppan
+plag

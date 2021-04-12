@@ -210,6 +210,11 @@ let detune_prob = pF "detune_prob"
     addrive = pF "addrive"
     adoversample = pF "adoversample"
 
+    pfreq = pF "pfreq"
+    pgain = pF "pgain"
+    ppan = pF "ppan"
+    plag = pF "plag"
+
     :}
 
 
@@ -263,9 +268,9 @@ x x = channel (x + 2)
 glide p r = portamento p # rate r
 o o p = orbit o # pan p
 
-contrastM = contrastBy (>=)
+contrastM = contrastBy (<=)
 fixM f = contrastM f id
 unfixM = contrastM id
-contrastL = contrastBy (<=)
+contrastL = contrastBy (>=)
 fixL f = contrastL f id
 unfixL = contrastL id

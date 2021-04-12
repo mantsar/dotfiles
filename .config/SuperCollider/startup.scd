@@ -80,7 +80,7 @@ s.waitForBoot {
   ~dirt.soundLibrary.addMIDI(\midi, m[0]);
   s.sync;
   d = ~dirt.buffers;
-  ~dirt.orbits.do {|x|
+  ~dirt.orbits[0..2].do {|x|
     var verb = GlobalDirtEffect(\global_dirt_miverb, [\verb, \vtime, \vdamp, \vhp, \vfreeze, \vdiff]);
     // var clouds = GlobalDirtEffect(\global_dirt_miclouds, [
     //   \cpitch,
@@ -101,6 +101,21 @@ s.waitForBoot {
     x.globalEffects = x.globalEffects .addFirst(verb);
     x.initNodeTree;
   };
+  s.sync;
+  ~dirt.orbits[7].globalEffects = ~dirt.orbits[7].globalEffects .addFirst(GlobalDirtEffect(\global_plaits, [
+    \plag,
+    \pgain,
+    \ppan,
+    \pfreq,
+    \pengine,
+    \pharm,
+    \ptimbre,
+    \pmorph,
+    \pdecay,
+    \plpg_colour
+  ]));
+  s.sync;
+  ~dirt.orbits[7].initNodeTree;
 };
 };
 
