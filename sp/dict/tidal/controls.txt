@@ -271,3 +271,11 @@ pfreq
 pgain
 ppan
 plag
+
+rho
+vel
+
+gf1
+gf2
+gd1
+gd2

@@ -20,7 +20,11 @@ snippet j "Sound pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`} $ $0
 endsnippet
 
-snippet k "Sound pattern on new line" b
+snippet k "6 and 7 channels are with longer fadeTime to reduce clipping if present" b
+d${1:6} $ $0
+endsnippet
+
+snippet jj "Sound pattern on new line" b
 d${1:`!p if not snip.c: snip.rv = cycle_index() + 1`}
 $ $0
 endsnippet
@@ -703,8 +707,11 @@ snippet ep "random walk random" w
 perlin
 endsnippet
 
-
 # Transistions
+
+snippet f "Solves problem of clipping for fast spawning synths" w
+fadeTime ${1:0.1}
+endsnippet
 
 snippet clutch "transistion by replacaing events" w
 clutch ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
@@ -1065,13 +1072,6 @@ snippet "(c18|Tomato)" "orange" r
 -- Tomato
 endsnippet
 
-# Folds
-snippet f "vim default fold" b
--- {{{ $1
-${VISUAL}$0
--- }}}
-endsnippet
-
 # Link
 # sendMsg sock "bpm 60"
 snippet lp "" b
@@ -1087,4 +1087,13 @@ endsnippet
 # requires setcps 1 to work properly
 snippet a01 "" iwA
 [0 1]
+endsnippet
+
+priority 10
+
+# Folds
+snippet f "vim default fold" b
+-- {{{ $1
+${VISUAL}$0
+-- }}}
 endsnippet

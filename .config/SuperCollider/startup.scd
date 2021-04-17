@@ -80,6 +80,12 @@ s.waitForBoot {
   ~dirt.soundLibrary.addMIDI(\midi, m[0]);
   s.sync;
   d = ~dirt.buffers;
+  // https://github.com/tidalcycles/Tidal/issues/618
+  // solves clicking problem, but makes everything less punchy. Can be set with fadeTime param
+  ~dirt.orbits[5].set(\fadeTime, 0.01);
+  ~dirt.orbits[6].set(\fadeTime, 0.1);
+  // ~dirt.orbits[0].fadeTime;
+  // ~dirt.orbits[5].fadeTime;
   ~dirt.orbits[0..2].do {|x|
     var verb = GlobalDirtEffect(\global_dirt_miverb, [\verb, \vtime, \vdamp, \vhp, \vfreeze, \vdiff]);
     // var clouds = GlobalDirtEffect(\global_dirt_miclouds, [
@@ -99,6 +105,7 @@ s.waitForBoot {
     // ]);
     // x.globalEffects = x.globalEffects .addFirst(verb) .addFirst(clouds);
     x.globalEffects = x.globalEffects .addFirst(verb);
+    // ~dirt.orbits[0].globalEffects
     x.initNodeTree;
   };
   s.sync;
