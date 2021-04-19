@@ -46,6 +46,10 @@ kmeansel
 808lt
 808mt
 808ht
+808rs
+808c
+808h
+808oh
 
 plaits
 plaitsep

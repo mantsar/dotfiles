@@ -94,6 +94,10 @@ s808bd
 s808lt
 s808mt
 s808ht
+808rs
+808c
+808h
+808oh
 
 splaitsep
 splaitses
