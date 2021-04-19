@@ -223,6 +223,12 @@ let detune_prob = pF "detune_prob"
     gd1 = pF "gd1"
     gd2 = pF "gd2"
 
+    warps = pF "warps"
+    walgo = pF "walgo"
+    wfreq = pF "wfreq"
+    wosc = pF "wosc"
+    wchan = pF "wchan"
+
     :}
 
 

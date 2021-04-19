@@ -279,3 +279,9 @@ gf1
 gf2
 gd1
 gd2
+
+warps
+walgo
+wfreq
+wosc
+wchan
