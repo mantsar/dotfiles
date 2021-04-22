@@ -78,8 +78,12 @@ rate
 mix
 damp
 ftrig
-trig
-trigd
+drate
+drt5
+drt2
+drated
+datk
+drel
 vrate
 vphase
 vdepth
@@ -227,6 +231,7 @@ attackfm
 selffm
 s808asn
 snappy
+infsustain
 
 resonator
 repos

@@ -33,8 +33,11 @@ let detune_prob = pF "detune_prob"
     nlpf = pF "nlpf"
     fspread = pF "fspread"
     ftrig = pF "ftrig"
-    trig = pF "trig"
-    trigd = pF "trigd"
+    drate = pF "drate"
+    drt5 = pF "drt5"
+    drt2 = pF "drt2"
+    drated = pF "drated"
+    drtd = pF "drtd"
     datk = pF "datk"
     drel = pF "drel"
     pregain = pF "pregain"
@@ -84,7 +87,6 @@ let detune_prob = pF "detune_prob"
     width = pF "width"
     wch = pF "wch"
     fch = pF "fch"
-    drate = pF "drate"
     mrate = pF "mrate"
     soft = pF "soft"
     fchop = pF "fchop"
@@ -179,6 +181,7 @@ let detune_prob = pF "detune_prob"
     attackfm = pF "attackfm"
     selffm = pF "selffm"
     snappy = pF "snappy"
+    infsustain = pF "infsustain"
 
     resonator = pF "resonator"
     repos = pF "repos"
@@ -265,6 +268,8 @@ mr2bus busid pat = (pF "mr2" pat) # (pI "^mr2" busid)
 mr3bus busid pat = (pF "mr3" pat) # (pI "^mr3" busid)
 
 fbbus busid pat = (pF "fb" pat) # (pI "^fb" busid)
+
+dampbus busid pat = (pF "damp" pat) # (pI "^damp" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround

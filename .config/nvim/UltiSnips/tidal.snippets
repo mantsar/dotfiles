@@ -567,6 +567,10 @@ snippet sw "stut :: Pattern Integer -> Pattern Double -> Pattern Rational -> Con
 stutWith ${1:2} ${2:0.5} (${3:fn})${VISUAL}
 endsnippet
 
+snippet dr "" w
+drt 9 # drtd 1 # datk 0.05
+endsnippet
+
 snippet rw "L-system. No spaces after commas allowed. Wraps if taken more elements than exists" w
 (step' ["$1", "$2"] (take ${3:24} $ lindenmayer ${4:5} "0:$5,1:$6,~:$7" "0"))
 endsnippet
