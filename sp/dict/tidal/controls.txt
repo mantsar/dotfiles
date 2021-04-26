@@ -290,3 +290,5 @@ walgo
 wfreq
 wosc
 wchan
+
+fadeTime

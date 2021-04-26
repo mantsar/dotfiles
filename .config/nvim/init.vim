@@ -1154,8 +1154,15 @@ call minpac#add('junegunn/limelight.vim')
 nnoremap <leader>ol :Limelight!!<cr>
 nmap gl <Plug>(Limelight)
 xmap gl <Plug>(Limelight)
-call minpac#add('junegunn/goyo.vim')
-nnoremap <leader>og :Goyo<cr>
+" call minpac#add('junegunn/goyo.vim')
+" nnoremap <leader>og :Goyo<cr>
+call minpac#add('kdav5758/TrueZen.nvim')
+function Zen()
+	:TZFocus
+	:TZBottom
+	:TZTop
+endfunction
+nnoremap <silent> <leader>og :call Zen()<cr>
 " Navi integration
 au BufEnter,BufNew *.cheat au TextChanged,TextChangedI <buffer> write
 " Toggle

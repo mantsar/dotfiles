@@ -86,8 +86,8 @@ s.waitForBoot {
   d = ~dirt.buffers;
   // https://github.com/tidalcycles/Tidal/issues/618
   // solves clicking problem, but makes everything less punchy. Can be set with fadeTime param
-  // ~dirt.orbits[4].set(\fadeTime, 0.01);
-  ~dirt.orbits[5].set(\fadeTime, 0.1);
+  ~dirt.orbits[3].set(\fadeTime, 0.01);
+  ~dirt.orbits[4].set(\fadeTime, 0.1);
   // ~dirt.orbits[0].fadeTime;
   // ~dirt.orbits[5].fadeTime;
   ~dirt.orbits[0..2].do {|x|
