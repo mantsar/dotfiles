@@ -2578,29 +2578,42 @@ endsnippet
 
 # Tidal
 
+# Ndef(\d`!p snip.rv = int(match.group(1))+5`).play;
 snippet "d([0-9]+)" "Filter with JIT" br
-Ndef(\d`!p snip.rv = match.group(1)`).play;
 (
-Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
-	var a, b, c, sig = InBus.ar(~b`!p snip.rv = match.group(1)`, 2);
-	sig $0
+Ndef(\d`!p snip.rv = int(match.group(1))+5`)[0] = {
+	var a, b, c, sig = InBus.ar(~b`!p snip.rv = int(match.group(1))+5`, 2);
 };
 )
 endsnippet
 
-snippet "d([0-9]+)w(([0-9]+))" "Warps" br
-Ndef(\d`!p snip.rv = match.group(1)`).play;
+snippet dwarps "Warps" b
 (
-Ndef(\d`!p snip.rv = match.group(1)`)[0] = {
-	var a, b, c, sig = [InBus.ar(~b`!p snip.rv = match.group(1)`, 2), InBus.ar(~b`!p snip.rv = match.group(2)`, 2)];
+Ndef(\dwarps)[0] = {
+	var a, b, c, sig = [InBus.ar(~b6, 2), InBus.ar(~b7, 2)];
 	sig = SelectX.ar(MouseX.kr(0, 1) * sig.size, sig);
 };
 )
 endsnippet
 
-snippet "db([0-9]+)" "Dry bus for side chain effect" w
-c = InBus.ar(~dirt.orbits[`!p snip.rv = match.group(1)`].dryBus, 2).sum;
-Compander.ar(sig, c, thresh:0.006, slopeBelow:1, slopeAbove: 0.1, clampTime:0.05, relaxTime:0.1)
+snippet "db([0-9]+)" "" r
+dry`!p snip.rv = int(match.group(1))` = InBus.ar(~dirt.orbits[`!p snip.rv = int(match.group(1))-1`].dryBus, 2).mean;
+endsnippet
+
+snippet "dc([0-9]+)" "Dry bus for side chain effect" r
+Compander.ar(sig, dry`!p snip.rv = int(match.group(1))`, thresh:0.006, slopeBelow:1, slopeAbove: 0.1, clampTime:0.05, relaxTime:0.1)
+endsnippet
+
+snippet "df([0-9]+)" "Envelope follower" r
+EnvFollow.ar(dry`!p snip.rv = int(match.group(1))`, 0.99)
+endsnippet
+
+snippet "da([0-9]+)" "" r
+Amplitude.ar(dry`!p snip.rv = int(match.group(1))`)
+endsnippet
+
+snippet "dn([0-9]+)" "" r
+dry`!p snip.rv = int(match.group(1))` = Normalizer.ar(dry`!p snip.rv = int(match.group(1))`)
 endsnippet
 
 snippet cs "Visualiser (Improviz) address" w

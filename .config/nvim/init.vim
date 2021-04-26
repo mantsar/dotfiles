@@ -226,8 +226,8 @@ function! Toggle_colorcheme()
 		augroup ui
 			autocmd!
 		augroup END
-		" colorscheme paramount
-		colorscheme gruvbox
+		colorscheme paramount
+		" colorscheme gruvbox
 		hi QuickScopePrimary guifg=NONE gui=underline guisp=#5FD7A7 ctermfg=NONE cterm=underline
 		let g:colorscheme = 2
 	elseif g:colorscheme == 2
@@ -1146,10 +1146,10 @@ call minpac#add('dm1try/golden_size')
 call minpac#add('dstein64/nvim-scrollview')
 let g:scrollview_excluded_filetypes = ['scnvim'] "set ft?
 let g:scrollview_active_only = 1
-call minpac#add('dstein64/vim-win')
-map <leader>W <plug>WinWin
-let g:win_resize_height = 4
-let g:win_resize_width = 5
+" call minpac#add('dstein64/vim-win')
+" map <leader>W <plug>WinWin
+" let g:win_resize_height = 4
+" let g:win_resize_width = 5
 call minpac#add('junegunn/limelight.vim')
 nnoremap <leader>ol :Limelight!!<cr>
 nmap gl <Plug>(Limelight)

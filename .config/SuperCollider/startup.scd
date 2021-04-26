@@ -20,7 +20,7 @@ s.latency = 0.3;
 
 ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 
-~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8]|
+~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16]|
 s.waitForBoot {
   // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
   ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
@@ -33,17 +33,21 @@ s.waitForBoot {
     ~d4 = ~dirt.orbits[3]; ~d5 = ~dirt.orbits[4]; ~d6 = ~dirt.orbits[5];
     ~d7 = ~dirt.orbits[6]; ~d8 = ~dirt.orbits[7]; ~d9 = ~dirt.orbits[8];
     ~d10 = ~dirt.orbits[9]; ~d11 = ~dirt.orbits[10]; ~d12 = ~dirt.orbits[11];
+    ~d13 = ~dirt.orbits[12]; ~d14 = ~dirt.orbits[13]; ~d15 = ~dirt.orbits[14];
+    ~d16 = ~dirt.orbits[15];
   );
   // ------
   ~b1 = Bus.audio(s, 2); ~b2 = Bus.audio(s, 2); ~b3 = Bus.audio(s, 2);
   ~b4 = Bus.audio(s, 2); ~b5 = Bus.audio(s, 2); ~b6 = Bus.audio(s, 2);
   ~b7 = Bus.audio(s, 2); ~b8 = Bus.audio(s, 2); ~b9 = Bus.audio(s, 2);
   ~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
-  ~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12];
-  ~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12];
+  ~b13 = Bus.audio(s, 2); ~b14 = Bus.audio(s, 2); ~b15 = Bus.audio(s, 2);
+  ~b16 = Bus.audio(s, 2);
+  ~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12, ~d13, ~d14, ~d15, ~d16];
+  ~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12, ~b13, ~b14, ~b15, ~b16];
   ~dirt_orbit_buses = {
     ~d.do { |v, i|
-      if (v.outBus == 0) { 
+      if (v.outBus == 0) {
         "--- ~d% inactive \n".postf(i+1);
       } {
         "+++ ~d% active \n".postf(i+1);
@@ -51,18 +55,18 @@ s.waitForBoot {
     };
     nil
   };
-  ~toggle_dirt_orbit_bus = {|orbit, bus| 
-    if (orbit.outBus == 0) { 
+  ~toggle_dirt_orbit_bus = {|orbit, bus|
+    if (orbit.outBus == 0) {
       orbit.outBus = bus;
       "activated\n\n".postln;
-    } { 
+    } {
       orbit.outBus = 0;
       "inactivated\n\n".postln;
     };
     ~dirt_orbit_buses.();
   };
   ~dMix = {|... d| Mix( d.collect {|v| Ndef(("d" ++ v)).stop; InBus.ar(~b[v-1], 2); } ) };
-  // ~dirt_orbit_filter = { |key, orbit, bus| 
+  // ~dirt_orbit_filter = { |key, orbit, bus|
   // orbit.outBus = bus;
   // Ndef(key, { var sig = InBus.ar(bus, 2); sig} ).play;
   // };
@@ -82,8 +86,8 @@ s.waitForBoot {
   d = ~dirt.buffers;
   // https://github.com/tidalcycles/Tidal/issues/618
   // solves clicking problem, but makes everything less punchy. Can be set with fadeTime param
-  ~dirt.orbits[5].set(\fadeTime, 0.01);
-  ~dirt.orbits[6].set(\fadeTime, 0.1);
+  // ~dirt.orbits[4].set(\fadeTime, 0.01);
+  ~dirt.orbits[5].set(\fadeTime, 0.1);
   // ~dirt.orbits[0].fadeTime;
   // ~dirt.orbits[5].fadeTime;
   ~dirt.orbits[0..2].do {|x|
@@ -123,6 +127,11 @@ s.waitForBoot {
   ]));
   s.sync;
   ~dirt.orbits[7].initNodeTree;
+  ~d6.outBus = ~b6;
+  ~d7.outBus = ~b7;
+  Ndef(\d6)[0] = { InBus.ar(~b6, 2) };
+  Ndef(\d7)[0] = { InBus.ar(~b7, 2) };
+  ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
 };
 };
 

@@ -142,6 +142,7 @@ let detune_prob = pF "detune_prob"
     epos = pF "epos"
     espace = pF "espace"
     emodel = pF "emodel"
+    i = pF "i"
     tshape = pF "tshape"
     tslope = pF "tslope"
     tsmooth = pF "tsmooth"
@@ -270,6 +271,8 @@ mr3bus busid pat = (pF "mr3" pat) # (pI "^mr3" busid)
 fbbus busid pat = (pF "fb" pat) # (pI "^fb" busid)
 
 dampbus busid pat = (pF "damp" pat) # (pI "^damp" busid)
+
+ibus busid pat = (pF "i" pat) # (pI "^i" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround

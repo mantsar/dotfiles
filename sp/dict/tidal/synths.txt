@@ -144,3 +144,12 @@ sstringvoice
 srongsep
 srongses
 srongsel
+
+srhodes
+srhodesep
+srhodeses
+srhodesel
+sbass8
+sacid309
+spbass
+scs80lead
