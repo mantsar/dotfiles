@@ -1,0 +1,34 @@
+{
+  "slug": "AS",
+  "version": "1.0.4",
+  "license": "MIT",
+  "name": "AS",
+  "brand": "AS",
+  "author": "Alfredo Santamaria",
+  "authorEmail": "ascustomworks@gmail.com",
+  "pluginUrl": "https://github.com/AScustomWorks/AS/blob/master/README.md",
+  "authorUrl": "https://github.com/AScustomWorks/AS",
+  "manualUrl": "https://github.com/AScustomWorks/AS/blob/master/README.md",
+  "sourceUrl": "https://github.com/AScustomWorks/AS",
+  "changelogUrl": "https://github.com/AScustomWorks/AS/blob/master/README.md",
+  "modules": [
+    {
+      "slug": "Mixer4ch",
+      "disabled": false,
+      "name": "Mixer4ch",
+      "description": "4 channel Mixer",
+      "tags": [
+        "Mixer"
+      ]
+    },
+    {
+      "slug": "Mixer8ch",
+      "disabled": false,
+      "name": "Mixer8ch",
+      "description": "8 channel Mixer",
+      "tags": [
+        "Mixer"
+      ]
+    }
+  ]
+}
