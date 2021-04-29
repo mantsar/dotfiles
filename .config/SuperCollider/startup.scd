@@ -132,7 +132,34 @@ s.waitForBoot {
   Ndef(\d6)[0] = { InBus.ar(~b6, 2) };
   Ndef(\d7)[0] = { InBus.ar(~b7, 2) };
   ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
+  // MIDI controller
+  // Evaluate the block below to start the mapping MIDI -> OSC.
+  // ~tidal_midi_start.();
 };
+};
+
+~tidal_midi_start = {
+  var on, off, cc;
+  var osc;
+  osc = NetAddr.new("127.0.0.1", 6010);
+  MIDIIn.connectAll;
+  on = MIDIFunc.noteOn({ |val, num, chan, src|
+    osc.sendMsg("/ctrl", num.asString, val/127);
+  });
+  off = MIDIFunc.noteOff({ |val, num, chan, src|
+    osc.sendMsg("/ctrl", num.asString, 0);
+  });
+  cc = MIDIFunc.cc({ |val, num, chan, src|
+    osc.sendMsg("/ctrl", num.asString, val/127);
+  });
+  if (~stopMidiToOsc != nil, {
+    ~stopMidiToOsc.value;
+  });
+  ~stopMidiToOsc = {
+    on.free;
+    off.free;
+    cc.free;
+  };
 };
 
 ~foxdot_start = {
@@ -156,36 +183,10 @@ s.waitForBoot {
   };
 };
 
-// Evaluate the block below to start the mapping MIDI -> OSC.
-// (
-// var on, off, cc;
-// var osc;
-// osc = NetAddr.new("127.0.0.1", 6010);
-// MIDIClient.init;
-// MIDIIn.connectAll;
-// on = MIDIFunc.noteOn({ |val, num, chan, src|
-//   osc.sendMsg("/ctrl", num.asString, val/127);
-// });
-// off = MIDIFunc.noteOff({ |val, num, chan, src|
-//   osc.sendMsg("/ctrl", num.asString, 0);
-// });
-// cc = MIDIFunc.cc({ |val, num, chan, src|
-//   osc.sendMsg("/ctrl", num.asString, val/127);
-// });
-// if (~stopMidiToOsc != nil, {
-//   ~stopMidiToOsc.value;
-// });
-// ~stopMidiToOsc = {
-//   on.free;
-//   off.free;
-//   cc.free;
-// };
-// )
-
-~midi_start = {|outports=2|
+~midi_start = {|outports=1|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
-    MIDIClient.init(2, outports:outports);
+    MIDIClient.init(0, outports:outports);
     m = outports.collect {|i| MIDIOut(i) };
     // m = MIDIOut(outports);
     m.do {|v| v.latency = 0 };
@@ -196,7 +197,7 @@ s.waitForBoot {
 ~bitwig_start = {
   s.reboot({
     s.waitForBoot {
-      ~midi_start.();
+      // ~midi_start.();
       ServerTree.add({
         l = LinkClock(1).latency_(Server.default.latency);
       })
