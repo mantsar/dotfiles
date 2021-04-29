@@ -296,3 +296,6 @@ unfixM = contrastM id
 contrastL = contrastBy (>=)
 fixL f = contrastL f id
 unfixL = contrastL id
+
+-- For upTake hack
+cup val = [(x/12)+1 | x <- val]

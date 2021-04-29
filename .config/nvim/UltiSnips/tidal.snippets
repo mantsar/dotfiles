@@ -419,8 +419,8 @@ snippet struct "" w
 struct ($1)
 endsnippet
 
-snippet setB "" w
-setB "$1" "$2"
+snippet setb "" w
+setB "$1" $0
 endsnippet
 
 snippet mask "Binary gain of 1s and 0s. It's like gain but with binary functions like inv" w
@@ -437,7 +437,7 @@ endsnippet
 
 # Controls
 
-snippet const "Replace pattern (including its stucture)" w
+snippet c "Replace pattern (including its stucture)" w
 const ($1)
 endsnippet
 
@@ -467,6 +467,18 @@ endsnippet
 
 snippet l "" w
 legato $0
+endsnippet
+
+snippet l2 "" w
+legato 2
+endsnippet
+
+snippet l5 "" w
+legato 5
+endsnippet
+
+snippet lr "" w
+legato (rand * ${1:1} + $1)
 endsnippet
 
 snippet squiz "simplistic pitch raising. 1 .. n" w
