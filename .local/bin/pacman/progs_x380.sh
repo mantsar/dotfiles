@@ -21,6 +21,10 @@ yay -S bluez-utils-compat
 # https://wiki.archlinux.org/index.php/bluetooth_headset#LDAC/aptX
 yay -S pulseaudio-modules-bt libldac bitwig-studio
 
+# For midi logging
+# https://freesoftwaremusic.wordpress.com/2015/03/29/midi-monitors/comment-page-1/
+yay -S mididings-git
+
 # MANUALLY
 # onboard-settings to change on screen keyboard looks
 

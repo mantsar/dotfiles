@@ -134,7 +134,7 @@ s.waitForBoot {
   ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
   // MIDI controller
   // Evaluate the block below to start the mapping MIDI -> OSC.
-  // ~tidal_midi_start.();
+  ~tidal_midi_start.();
 };
 };
 
@@ -142,7 +142,6 @@ s.waitForBoot {
   var on, off, cc;
   var osc;
   osc = NetAddr.new("127.0.0.1", 6010);
-  MIDIIn.connectAll;
   on = MIDIFunc.noteOn({ |val, num, chan, src|
     osc.sendMsg("/ctrl", num.asString, val/127);
   });
@@ -186,11 +185,12 @@ s.waitForBoot {
 ~midi_start = {|outports=1|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
-    MIDIClient.init(0, outports:outports);
-    m = outports.collect {|i| MIDIOut(i) };
-    // m = MIDIOut(outports);
+    // MIDIClient.init(2, outports:outports);
+    // MIDIClient.init(verbose:false);
+    MIDIIn.connectAll(false); // init in-built
+    // m = outports.collect {|i| MIDIOut(i) };
+    m = 1.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
-    // m.latency = 0;
   }
 };
 

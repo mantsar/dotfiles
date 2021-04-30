@@ -838,7 +838,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
 	" midi/tidal/foxdot/imroviz
-	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("MIDIIn.connectAll")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>b :call scnvim#sclang#send("~bitwig_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>

@@ -999,19 +999,27 @@ thumbupdown
 endsnippet
 
 # OSC Control
-snippet cF "Float" w
-cF 1 "$1"
+snippet cf "Float" w
+cF ${1:1} "${2:0}"
 endsnippet
 
-snippet cI "Integer" w
+snippet mf "Float" w
+"^${1:0}"
+endsnippet
+
+snippet cn "Take only one value per cycle" w
+cN ${1:0} "${2:0}"
+endsnippet
+
+snippet ci "Integer" w
 cI 1 "$1"
 endsnippet
 
-snippet cS "String" w
+snippet cs "String" w
 cS 1 "$1"
 endsnippet
 
-snippet cB "Boolean" w
+snippet cb "Boolean" w
 cB 1 "$1"
 endsnippet
 
