@@ -44,6 +44,13 @@ wget https://vcvrack.com/downloads/Rack-1.1.6-lin.zip
 unzip Rack-1.1.6-lin.zip
 rm Rack-1.1.6-lin.zip
 
+# processing
+mkdir $HOME/sp/processing
+cd $HOME/sp/processing
+wget https://download.processing.org/processing-3.5.4-linux64.tgz
+tar xvfz processing-3.5.4
+rm processing-3.5.4-linux64.tgz
+
 # Uncheck box in Cadence gui PulseAdio bridge to not autostart
 # In ALSA audio select ALSA -> PulseAudio > JACK bridge type
 
