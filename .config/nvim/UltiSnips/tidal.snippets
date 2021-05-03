@@ -259,7 +259,7 @@ snippet weave "Similar to interlace. But can me customized more easily" w
 weave ${1:16} (${2:gain} ${3:sine}) [${4:pat1}, ${5:patn}]
 endsnippet
 
-snippet e "" w
+snippet ev "" w
 every $1 ($2)
 endsnippet
 
@@ -415,7 +415,7 @@ snippet ascii "8 bit like binary" w
 ascii $1
 endsnippet
 
-snippet struct "" w
+snippet str "" w
 struct ($1)
 endsnippet
 
@@ -1121,4 +1121,17 @@ snippet f "vim default fold" b
 -- {{{ $1
 ${VISUAL}$0
 -- }}}
+endsnippet
+
+# Grid
+snippet s "16th notes grid" w
+"[1 0 0 0] [1 0 0 0] [1 0 0 0]  [1 0 0 0]"
+endsnippet
+
+snippet e "16th notes grid" w
+"[1 0 0 0] [1 0 0 0]"
+endsnippet
+
+snippet ac "" w
+accent [$1]
 endsnippet

@@ -444,12 +444,12 @@ Ppatlace([${VISUAL}$1], ${2:inf})
 endsnippet
 
 snippet prw "L-system" w
-Prewrite(${1:0}, dict: 
-	${2:(0: #[2,0],
-	1: #[0,0,1],
-	2: #[1,0,1]
-	)},
-	levels: ${3:1}
+Prewrite(${1:0}, dict:
+  ${2:(0: #[2,0],
+  1: #[0,0,1],
+  2: #[1,0,1]
+  )},
+  levels: ${3:1}
 )
 endsnippet
 
@@ -2890,4 +2890,43 @@ snippet f "vim default fold" b
 // {{{ $1
 ${VISUAL}$0
 // }}}
+endsnippet
+
+# SuperUtilities
+# https://github.com/lvm/SuperUtilities
+
+snippet pdl "Same as swing above but simplified" w
+Pdilla(${VISUAL}$1, swingAmount:${2:0.25}, swingBase:${3:1/3}, swingThreshold:${4:0})
+endsnippet
+
+snippet psec "" w
+Psec(${VISUAL}$1)
+endsnippet
+
+snippet pife "" w
+PifEqual(\\$1, \\$2, true, false)
+endsnippet
+
+snippet pls "L-system" w
+Pls(${1:0}, (${2:0}: [$3]), ${4:3})
+endsnippet
+
+snippet pifr "" w
+PifRest($1, true, false)
+endsnippet
+
+snippet dl "" w
+DrumLoop.$1
+endsnippet
+
+snippet dld "" w
+DrumLoop.directory
+endsnippet
+
+snippet dlf "" w
+DrumLoop.$1.flop
+endsnippet
+
+snippet dlp "" w
+DrumLoop.$1.pattern['$1']
 endsnippet

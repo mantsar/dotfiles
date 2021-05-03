@@ -659,3 +659,4 @@ s.waitForBoot({
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
+// "git clone https://github.com/mantsar/SuperUtilities" + Platform.userExtensionDir +/+ "/SuperUtilities"
