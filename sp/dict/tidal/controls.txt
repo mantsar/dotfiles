@@ -216,6 +216,7 @@ rpos
 rmodel
 rpoly
 reasteregg
+rstruct
 
 btimbre
 bcolor

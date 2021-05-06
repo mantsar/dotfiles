@@ -183,15 +183,15 @@ s.waitForBoot {
 };
 
 ~midi_start = {|outports=1|
-  MIDIClient.disposeClient;
-  if (MIDIClient.initialized.not) {
-    // MIDIClient.init(2, outports:outports);
-    // MIDIClient.init(verbose:false);
-    MIDIIn.connectAll(false); // init in-built
-    // m = outports.collect {|i| MIDIOut(i) };
-    m = 1.collect {|i| MIDIOut(i) };
-    m.do {|v| v.latency = 0 };
-  }
+  // MIDIClient.disposeClient;
+  // if (MIDIClient.initialized.not) {
+  //   // MIDIClient.init(2, outports:outports);
+  //   // MIDIClient.init(verbose:false);
+  //   MIDIIn.connectAll(false); // init in-built
+  //   // m = outports.collect {|i| MIDIOut(i) };
+  m = 1.collect {|i| MIDIOut(i) };
+  m.do {|v| v.latency = 0 };
+  // }
 };
 
 ~bitwig_start = {
@@ -635,7 +635,7 @@ s.waitForBoot({
   k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
   StageLimiter.activate(2);
-  // ~midi_start.value();
+  ~midi_start.value();
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;
@@ -652,7 +652,7 @@ s.waitForBoot({
 // Quarks.install("FoxDot");
 // Quarks.install("MathLib");
 // Quarks.install("Spectrogram");
-// Quarks.install("SuperDirt"); # sometimes need to remove folder by hand to update
+// Quarks.install("SuperDirt"); // sometimes need to remove folder by hand to update
 // Quarks.install("Vowel");
 // Quarks.install("XML");
 // Quarks.install("wslib");

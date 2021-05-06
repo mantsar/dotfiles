@@ -169,6 +169,7 @@ let detune_prob = pF "detune_prob"
     rmodel = pF "rmodel"
     rpoly = pF "rpoly"
     reasteregg = pF "reasteregg"
+    rstruct = pF "rstruct"
 
     btimbre = pF "btimbre"
     bcolor = pF "bcolor"
