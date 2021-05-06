@@ -73,7 +73,7 @@ snippet dd "" w
 d[\\${1:hh}][${2:0}]
 endsnippet
 
-snippet v "Global variable" b
+snippet g "Global variable" b
 ~$1 = $2;
 endsnippet
 
@@ -2629,7 +2629,7 @@ Pdef(\\${1:tmp}, Pbind(\\type, \\dirt,
 )).quant_(1).play;
 endsnippet
 
-snippet dinfo "Get infromation from taidal in seqeunce form. Understands off too." b
+snippet dinfo "Get infromation from tidal in seqeunce form. Understands off too." b
 ~dirt.addModule('info',
   {|dirtEvent|
     var e = dirtEvent.event, o = e.orbit, p = (0:['n']);
@@ -2929,4 +2929,27 @@ endsnippet
 
 snippet dlp "" w
 DrumLoop.$1.pattern['$1']
+endsnippet
+
+# Scintillator
+
+snippet V "" b
+(
+y = ScinServer.new.bootSync;
+// y.quit;
+)
+endsnippet
+
+snippet v "" b
+(
+fork {
+  ~$1.free;
+  ScinthDef(\\$1, {
+    $0
+  }).add;
+  y.sync;
+  ~$1 = Scinth(\\$1);
+};
+// ~$1.set();
+)
 endsnippet

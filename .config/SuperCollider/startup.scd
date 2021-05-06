@@ -635,7 +635,7 @@ s.waitForBoot({
   k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
   StageLimiter.activate(2);
-  ~midi_start.value();
+  // ~midi_start.value();
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   "Setup done".postln;
@@ -659,4 +659,12 @@ s.waitForBoot({
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
-// "git clone https://github.com/mantsar/SuperUtilities" + Platform.userExtensionDir +/+ "/SuperUtilities"
+// Quarks.install("https://github.com/scztt/Twister.quark");
+// Quarks.install("https://github.com/mantsar/SuperUtilities");
+
+// Quarks.uninstall("Scintillator");
+// ScinServerInstaller.disableAutoInstall;
+// get binary from https://github.com/ScintillatorSynth/Scintillator/issues/124
+// put into quark bin directory
+// chmod u+x scinsynth-x86_64.AppImage
+// sudo pacman -S fuse2

@@ -822,6 +822,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nmap <M-0> :call scnvim#sclang#send("~toggle_mute.value()")<cr>
 	autocmd VimEnter *.scd nmap <silent> <M-=> :call scnvim#sclang#send("s.volume.volume = s.volume.volume + 5; s.volume.volume")<cr>
 	autocmd VimEnter *.scd nmap <silent> <M--> :call scnvim#sclang#send("s.volume.volume = s.volume.volume - 5; s.volume.volume")<cr>
+	" autocmd VimEnter *.scd nnoremap <M-y> :call Scintillator_toggle()<cr>
 	autocmd VimEnter *.scd nnoremap <M-m> :call scnvim#sclang#send("NdefMixer(s, 24)")<cr>
 	autocmd VimEnter *.scd nnoremap <M-,> :call scnvim#sclang#send("Pdef.gui(24)")<cr>
 	autocmd VimEnter *.scd nnoremap <M-t> :call scnvim#sclang#send("~global_tempo.value()")<left><left><left>
@@ -841,6 +842,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("MIDIIn.connectAll")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>b :call scnvim#sclang#send("~bitwig_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>y :call Scintillator_init()<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>Y :call scnvim#sclang#send("y.quit")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
@@ -1043,6 +1046,19 @@ function! Improviz_toggle()
 	:StartAsync i3-msg '[instance="Improviz"]' scratchpad show
 	sleep 1ms
 	:StartAsync i3-msg '[instance="Improviz"]' focus mode_toggle
+endfunction
+
+function! Scintillator_init()
+	call scnvim#sclang#send("y = ScinServer.new.boot;")
+	sleep 2000ms
+	:StartAsync i3-msg '[instance="ScintillatorSynth"]' move position 1100 100
+	:StartAsync i3-msg '[instance="ScintillatorSynth"]' focus mode_toggle
+endfunction
+
+function! Scintillator_toggle()
+	:StartAsync i3-msg '[instance="ScintillatorSynth"]' scratchpad show
+	sleep 1ms
+	:StartAsync i3-msg '[instance="ScintillatorSynth"]' focus mode_toggle
 endfunction
 
 augroup improviz_au
