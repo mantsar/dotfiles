@@ -1824,6 +1824,20 @@ snippet MiVerb "" w
 MiVerb.ar(${1:sig}, time:${2:0.7}, drywet:${3:0.5}, damp:${4:0.5}, hp:${5:0.05}, freeze:${6:0}, diff:${7:0.625})
 endsnippet
 
+snippet MiGrids "All values except 1st are from 0 to 1" w
+MiGrids.ar(
+  ${1:120},
+  map_x:${2:0.5},
+  map_y:${3:0.5},
+  chaos:${4:0},
+  bd_density:${5:0.25},
+  sd_density:${6:0.25},
+  hh_density:${7:0.25},
+  mode:${8:1},
+  swing:${9:0}
+)
+endsnippet
+
 # mkplugins
 
 snippet Resonator "" w
