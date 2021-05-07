@@ -215,6 +215,12 @@ let detune_prob = pF "detune_prob"
     addrive = pF "addrive"
     adoversample = pF "adoversample"
 
+    aphase = pF "aphase"
+    apskew = pF "apskew"
+    apfb = pF "apfb"
+    apmod = pF "apmod"
+    apstages = pF "apstages"
+
     pfreq = pF "pfreq"
     pgain = pF "pgain"
     ppan = pF "ppan"
@@ -274,6 +280,8 @@ fbbus busid pat = (pF "fb" pat) # (pI "^fb" busid)
 dampbus busid pat = (pF "damp" pat) # (pI "^damp" busid)
 
 ibus busid pat = (pF "i" pat) # (pI "^i" busid)
+
+aphasebus busid pat = (pF "aphase" pat) # (pI "^aphase" busid)
 
 -- https://club.tidalcycles.org/t/resetting-cycle-start/546/8
 -- bug workaround

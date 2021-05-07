@@ -266,6 +266,12 @@ adhi
 addrive
 adoversample
 
+aphase
+apskew
+apfb
+apmod
+apstages
+
 pitch
 volt
 gate

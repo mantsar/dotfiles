@@ -1851,6 +1851,17 @@ AnalogBassDrum.ar(
 )
 endsnippet
 
+snippet AnalogPhaser "" w
+AnalogPhaser.ar(
+  ${1:sig},
+  ${2:lfo},
+  skew:${3:0},
+  feedback:${4:0.25},
+  modulation:${5:0.5},
+  stages:${6:8}
+)
+endsnippet
+
 # Pseudo UGens
 
 snippet Pad "Smooth pad" w
