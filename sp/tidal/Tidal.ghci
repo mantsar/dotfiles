@@ -311,7 +311,7 @@ cup val = [(x/12)+1 | x <- val]
 
 -- https://club.tidalcycles.org/t/260-drum-machine-patterns/2921/8
 :{
-accent ds = gain (fast 16 $ Sound.Tidal.Core.fromList accs)
+acc ds = gain (fast 16 $ Sound.Tidal.Core.fromList accs)
           where accs = [ f x | x <- [1..16]]
                 f x = if elem x ds then 1.3 else 1
     :}
