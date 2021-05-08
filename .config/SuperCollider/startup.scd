@@ -183,15 +183,15 @@ s.waitForBoot {
 };
 
 ~midi_start = {|outports=1|
-  // MIDIClient.disposeClient;
-  // if (MIDIClient.initialized.not) {
-  //   // MIDIClient.init(2, outports:outports);
-  //   // MIDIClient.init(verbose:false);
-  //   MIDIIn.connectAll(false); // init in-built
-  //   // m = outports.collect {|i| MIDIOut(i) };
-  m = 1.collect {|i| MIDIOut(i) };
-  m.do {|v| v.latency = 0 };
-  // }
+  MIDIClient.disposeClient;
+  if (MIDIClient.initialized.not) {
+    // MIDIClient.init(2, outports:outports);
+    MIDIClient.init(verbose:false);
+    MIDIIn.connectAll(false); // init in-built
+    // m = outports.collect {|i| MIDIOut(i) };
+    m = 1.collect {|i| MIDIOut(i) };
+    m.do {|v| v.latency = 0 };
+  }
 };
 
 ~bitwig_start = {
@@ -659,9 +659,9 @@ s.waitForBoot({
 // Quarks.install("TabbedView");
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
-// Quarks.install("https://github.com/scztt/Twister.quark");
 // Quarks.install("https://github.com/mantsar/SuperUtilities");
 
+// If messy Quarks.clear (and reinstall)
 // Quarks.uninstall("Scintillator");
 // ScinServerInstaller.disableAutoInstall;
 // get binary from https://github.com/ScintillatorSynth/Scintillator/issues/124

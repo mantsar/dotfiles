@@ -315,3 +315,16 @@ accent ds = gain (fast 16 $ Sound.Tidal.Core.fromList accs)
           where accs = [ f x | x <- [1..16]]
                 f x = if elem x ds then 1.3 else 1
     :}
+
+import Data.List(sortOn)
+
+
+:{
+densityFilter:: Eq a => Double -> [Event a] -> [Event a]
+densityFilter density events = foldl (fi density) events [0..length events -1]
+                      where fi density es n | length es > n = filter (\e -> e == es!!n || abs ((eventPartStart e) - (eventPartStart (es!!n))) >= toRational density ) es
+                                            | otherwise = es
+
+lessDense :: Eq a => Double -> Pattern a -> Pattern a
+lessDense density p = p {query = (densityFilter density). sortOn whole . query p}
+:}
