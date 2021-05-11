@@ -473,11 +473,11 @@ call minpac#add('tpope/vim-unimpaired')
 nmap <leader>j mm]<space>`m
 nmap <leader>k mm[<space>`m
 " Bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
+nmap <M-]> [e
+nmap <M-[> ]e
 " Bubble multiple lines
-xmap <C-k> [egv
-xmap <C-j> ]egv
+xmap <M-]> [egv
+xmap <M-[> ]egv
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tommcdo/vim-exchange') "Easy text exchange operator for Vim
 call minpac#add('thinca/vim-visualstar') "Makes * and # work on visual mode too.
@@ -525,7 +525,23 @@ omap i, if,
 omap a, af,
 xmap i, if,
 xmap a, af,
- "Provides a text object Snake and underscore cases
+call minpac#add('terryma/vim-expand-region')
+map <C-k> <Plug>(expand_region_expand)
+map <C-j> <Plug>(expand_region_shrink)
+" Default settings. (NOTE: Remove comments in dictionary before sourcing)
+let g:expand_region_text_objects = {
+      \ 'i]'  :1,
+      \ 'a]'  :1,
+      \ 'i>'  :1,
+      \ 'a>'  :1,
+      \ 'i"'  :0,
+      \ 'a"'  :0,
+      \ 'i)'  :1,
+      \ 'a)'  :1,
+      \ 'i''' :0,
+      \ 'a''' :0,
+      \ }
+"Provides a text object Snake and underscore cases
 call minpac#add('Julian/vim-textobj-variable-segment')
 " }}}2
 

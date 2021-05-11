@@ -90,14 +90,14 @@ skmeans
 skmeansep
 skmeanses
 skmeansel
-s808bd
-s808lt
-s808mt
-s808ht
-808rs
-808c
-808h
-808oh
+s8bd
+s8lt
+s8mt
+s8ht
+8rs
+8c
+8h
+8oh
 
 splaitsep
 splaitses
@@ -135,9 +135,9 @@ spianoel
 sbowep
 sbowes
 sbowel
-s808abd
-s808asn
-s808asnes
+s8abd
+s8asn
+s8asnes
 sneurosn
 scy
 sstringvoice

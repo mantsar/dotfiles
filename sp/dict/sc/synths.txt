@@ -42,14 +42,14 @@ kmeans
 kmeansep
 kmeanses
 kmeansel
-808bd
-808lt
-808mt
-808ht
-808rs
-808c
-808h
-808oh
+8bd
+8lt
+8mt
+8ht
+8rs
+8c
+8h
+8oh
 
 plaits
 plaitsep
@@ -99,9 +99,9 @@ bow
 bowep
 bowes
 bowel
-808abd
-808asn
-808asnes
+8abd
+8asn
+8asnes
 neurosn
 cy
 stringvoice
