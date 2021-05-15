@@ -299,3 +299,8 @@ wosc
 wchan
 
 fadeTime
+
+d2909
+ds2909
+dcr78
+dscr78

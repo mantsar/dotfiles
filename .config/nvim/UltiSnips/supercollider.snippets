@@ -2747,6 +2747,31 @@ snippet lp "" w
 l, quant:Quant(${1:4}, timingOffset:${2:0})
 endsnippet
 
+snippet m "Mapping 1st 16 Midi Fighter Twister knobs" b
+(
+MIDIIn.control={|src,ch,n,v|
+  v = v/127.0;
+  case
+  { n == 0 } { $1 }
+  { n == 1 } {  }
+  { n == 2 } {  }
+  { n == 3 } {  }
+  { n == 4 } {  }
+  { n == 5 } {  }
+  { n == 6 } {  }
+  { n == 7 } {  }
+  { n == 8 } {  }
+  { n == 9 } {  }
+  { n == 10 } {  }
+  { n == 11 } {  }
+  { n == 12 } {  }
+  { n == 13 } {  }
+  { n == 14 } {  }
+  { n == 15 } {  }
+}
+);
+endsnippet
+
 # FAUST
 snippet Faust "UGen compiled with Faust" w
 Faust$1.ar($2)

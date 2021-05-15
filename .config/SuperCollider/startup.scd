@@ -22,6 +22,7 @@ s.latency = 0.3;
 
 ~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16]|
 s.waitForBoot {
+  if (m.isNil) { ~sync = Condition.new; ~sync.hang;};
   // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
   ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
   ~dirt.loadSoundFiles("~/sp/samples/*");
@@ -81,15 +82,15 @@ s.waitForBoot {
   (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   // then add the effect to the orbits
   s.sync;
-  ~dirt.soundLibrary.addMIDI(\midi, m[0]);
-  s.sync;
   d = ~dirt.buffers;
   // https://github.com/tidalcycles/Tidal/issues/618
   // solves clicking problem, but makes everything less punchy. Can be set with fadeTime param
-  ~dirt.orbits[3].set(\fadeTime, 0.01);
+  ~dirt.orbits[2].set(\fadeTime, 0.1);
+  ~dirt.orbits[3].set(\fadeTime, 0.1);
   ~dirt.orbits[4].set(\fadeTime, 0.1);
   // ~dirt.orbits[0].fadeTime;
   // ~dirt.orbits[5].fadeTime;
+  s.sync;
   ~dirt.orbits[0..2].do {|x|
     var verb = GlobalDirtEffect(\global_dirt_miverb, [\verb, \vtime, \vdamp, \vhp, \vfreeze, \vdiff]);
     // var clouds = GlobalDirtEffect(\global_dirt_miclouds, [
@@ -132,7 +133,11 @@ s.waitForBoot {
   Ndef(\d6)[0] = { InBus.ar(~b6, 2) };
   Ndef(\d7)[0] = { InBus.ar(~b7, 2) };
   ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
-  // MIDI controller
+  // MIDI
+  ~dirt.soundLibrary.addMIDI(\midi, m[0]);
+  ~dirt.soundLibrary.addMIDI(\sc8, m[1]);
+  s.sync;
+  // Controller
   // Evaluate the block below to start the mapping MIDI -> OSC.
   ~tidal_midi_start.();
 };
@@ -182,14 +187,14 @@ s.waitForBoot {
   };
 };
 
-~midi_start = {|outports=1|
+~midi_start = {|outports=2|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
     // MIDIClient.init(2, outports:outports);
-    MIDIClient.init(verbose:false);
+    // MIDIClient.init(verbose:false);
     MIDIIn.connectAll(false); // init in-built
     // m = outports.collect {|i| MIDIOut(i) };
-    m = 1.collect {|i| MIDIOut(i) };
+    m = 2.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
   }
 };
@@ -634,10 +639,12 @@ s.waitForBoot({
   // Steno
   k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
-  StageLimiter.activate(2);
-  ~midi_start.value();
+  s.sync;
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
+  if (~sync.notNil) { ~sync.unhang };
+  ~midi_start.value();
+  StageLimiter.activate(2);
   "Setup done".postln;
 });
 

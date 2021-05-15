@@ -1,3 +1,5 @@
+// Modified free version by Yoshinosuke Horiuchi
+// https://www.patreon.com/4H
 
 // (//booting a sever and connect to midi
 // s.boot;
@@ -14,8 +16,8 @@
 //////////////////////////////////////////SOUND DESIGN/////////////////////////////////////////////
 
 
-SynthDef.new(\bd, {
-	arg decay=30, amp=2, gate=0, tone=56;
+SynthDef.new(\BD, {
+	arg decay=3, amp=2, a=1, gate=0, tone=56;
 	var fenv, env, trienv, sig, sub, punch, pfenv;
 	env = EnvGen.kr(Env.new([0.11, 1, 0], [0, decay], -225),doneAction:2);
 	trienv = EnvGen.kr(Env.new([0.11, 0.6, 0], [0, decay], -230),doneAction:0);
@@ -26,13 +28,14 @@ SynthDef.new(\bd, {
 	punch = SinOsc.ar(pfenv, pi/2) * env * 2;
 	punch = HPF.ar(punch, 350);
 	sig = (sig + sub + punch) * 2.5;
-	sig = Limiter.ar(sig, 0.5) * amp;
+	sig = Limiter.ar(sig, 0.5) * amp * a;
+  sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);
 }).add;
 
-SynthDef.new(\sn, {
-	arg amp=2, tone=340, tone2=189, snappy=0.3, gate=0, amp2=1;
+SynthDef.new(\SN, {
+	arg amp=2, a=1, tone=340, tone2=189, snappy=0.3, gate=0, amp2=1;
 	var noiseEnv, atkEnv, sig, noise, osc1, osc2, sum;
 	noiseEnv = EnvGen.kr(Env.perc(0.001, 4.2, 1, -115), doneAction:2);
 	atkEnv = EnvGen.kr(Env.perc(0.001, 0.8,curve:-95), doneAction:0);
@@ -43,98 +46,107 @@ SynthDef.new(\sn, {
 	osc1 = SinOsc.ar(tone2, pi/2) * 0.6;
 	osc2 = SinOsc.ar(tone, pi/2) * 0.7;
 	sum = (osc1+osc2) * atkEnv * amp2;
-	sig = Pan2.ar((noise + sum) * amp * 2.5, 0);
+	sig = Pan2.ar((noise + sum) * amp * 2.5 * a, 0);
 	sig = HPF.ar(sig, 340);
+  sig = sig * 0.35;
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\cpRaw, {
-	arg amp=1, gate=0;
+	arg amp=1, a=1, gate=0;
 	var atkenv, atk, decay, sum, denv;
 	atkenv = EnvGen.kr(Env.new([0.5,1,0],[0, 0.3], -160), doneAction:2);
 	denv = EnvGen.kr(Env.dadsr(0.026, 0, 6, 0, 1, 1, curve:-157), doneAction:0);
 	atk = WhiteNoise.ar * atkenv * 1.4;
 	decay = WhiteNoise.ar * denv;
-	sum = atk + decay * amp;
+	sum = atk + decay * amp * a;
 	sum = HPF.ar(sum, 500);
 	sum = BPF.ar(sum, 1062, 0.5);
+  sum = sum * 0.35;
 	Out.ar(0, Pan2.ar(sum * 1.5, 0));
 }).add;
 
 SynthDef.new(\cpReverb, {
-	arg amp=1, gate=0;
+	arg amp=1, a=1, gate=0;
 	var reverb, revgen;
 	revgen = EnvGen.kr(Env.perc(0.1, 4, curve:-9), gate, doneAction:2);
 	reverb = WhiteNoise.ar * revgen * 0.02;
 	reverb = HPF.ar(reverb, 500);
 	reverb = LPF.ar(reverb, 1000);
-	Out.ar(0, Pan2.ar(reverb * amp, 0));
+	reverb = reverb * 0.35;
+	Out.ar(0, Pan2.ar(reverb * amp * a, 0));
 }).add;
 
 SynthDef.new(\LT, {
-	arg amp=1, freq=80;
+	arg amp=1, a=1, freq=80;
 	var sig, fenv, env, pnoise, penv;
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 20], -250),doneAction:2);
 	penv = EnvGen.kr(Env.new([0.6, 1, 0], [0, 30], -225),doneAction:2);
 	fenv = Env([freq*1.25, freq*1.125, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2) * env;
-	sig = Pan2.ar(sig * amp * 3, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * amp * 3 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\MT, {
-	arg amp, freq=120;
+	arg amp=1, a=1, freq=120;
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 16], -250),doneAction:2);
 	fenv = Env([freq*1.33333, freq*1.125, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2);
-	sig = Pan2.ar(sig * env * amp * 2, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\HT, {
-	arg amp, freq=165;
+	arg amp=1, a=1, freq=165;
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 11], -250),doneAction:2);
 	fenv = Env([freq*1.333333, freq*1.121212, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2);
-	sig = Pan2.ar(sig * env * amp * 2, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\LC, {
-	arg amp=1, freq=165;
+	arg amp=1, a=1, freq=165;
 	var sig, fenv, env, pnoise, penv;
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 18], -250),doneAction:2);
 	penv = EnvGen.kr(Env.new([0.6, 1, 0], [0, 30], -225),doneAction:2);
 	fenv = Env([freq*1.333333, freq*1.121212, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2) * env;
-	sig = Pan2.ar(sig * amp * 3, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * amp * 3 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\MC, {
-	arg amp=1, freq=250;
+	arg amp=1, a=1, freq=250;
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 9], -250),doneAction:2);
 	fenv = Env([freq*1.24, freq*1.12, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2);
-	sig = Pan2.ar(sig * env * amp * 2, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\HC, {
-	arg amp=1, freq=370;
+	arg amp=1, a=1, freq=370;
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 6], -250),doneAction:2);
 	fenv = Env([freq*1.22972, freq*1.08108, freq], [0.1, 0.5], -4).kr;
 	sig = SinOsc.ar(fenv, pi/2);
-	sig = Pan2.ar(sig * env * amp * 2, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\rimshot, {
-	arg amp=1;
+	arg amp=1, a=1;
 	var fenv, env, sig, punch, tri1, tri2;
 	env = EnvGen.kr(Env.new([1, 1, 0], [0.00272, 0.07], -42), doneAction:2);
 	tri1 = LFTri.ar(1667 * 1.1, 1) * env;
@@ -144,15 +156,17 @@ SynthDef.new(\rimshot, {
 	sig = BPeakEQ.ar(sig, 464, 0.44, 8);
 	sig = HPF.ar(sig, 315);
 	sig = LPF.ar(sig, 7300);
-	sig = Pan2.ar(sig * amp, 0);
+  sig = sig * 0.35;
+	sig = Pan2.ar(sig * amp * a, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\claves, {
-	arg amp=1;
+	arg amp=1, a=1;
 	var  env, sig;
 	env = EnvGen.kr(Env.new([1, 1, 0], [0, 0.1], -20), doneAction:2);
-	sig = SinOsc.ar(2500, pi/2) * env * amp;
+	sig = SinOsc.ar(2500, pi/2) * env * amp * a;
+  sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);
 }).add;
@@ -160,17 +174,18 @@ SynthDef.new(\claves, {
 
 
 SynthDef.new(\maracas, {
-	arg amp=1, gate=0;
+	arg amp=1, a=1, gate=0;
 	var env, sig;
 	env = EnvGen.kr(Env.new([0.3, 1, 0], [0.027, 0.07], -250), gate, doneAction:2);
-	sig = WhiteNoise.ar * env * amp;
+	sig = WhiteNoise.ar * env * amp * a;
 	sig = HPF.ar(sig, 5500);
+  sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);
 }).add;
 
 SynthDef.new(\cowbell, {
-	arg amp=1;
+	arg amp=1, a=1;
 	var sig, pul1, pul2, env, atk, atkenv, datk;
 	atkenv = EnvGen.kr(Env.perc(0, 1, 1, -215),doneAction:0);
 	env = EnvGen.kr(Env.perc(0.01, 9.5, 1, -90),doneAction:2);
@@ -178,16 +193,17 @@ SynthDef.new(\cowbell, {
 	pul2 = LFPulse.ar(538.75);
 	atk = (pul1 + pul2) * atkenv * 6;
 	datk = (pul1 + pul2) * env;
-	sig = (atk + datk) * amp;
+	sig = (atk + datk) * amp * a;
 	sig = HPF.ar(sig, 250);
 	sig = LPF.ar(sig, 4500);
+  sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);
 }).add;
 
 
 SynthDef.new(\hat, {
-	arg decay=0.42, amp=1, pan=0;
+	arg decay=0.42, amp=1, a=1, pan=0;
 	var sig, sighi,siglow, sum, env, osc1, osc2, osc3, osc4, osc5, osc6;
 	env = EnvGen.kr(Env.perc(0.005, decay, 1, -30),doneAction:2);
 	osc1 = LFPulse.ar(203.52);
@@ -203,14 +219,15 @@ SynthDef.new(\hat, {
     siglow = BBandPass.ar(siglow, 8900, 0.8);
     siglow = BHiPass.ar(siglow, 9000, 0.3);
     sig = BPeakEQ.ar((siglow+sighi), 9700, 0.8, 0.7);
-    sig = sig * env * amp;
+    sig = sig * env * amp * a;
     sig = Pan2.ar(sig, pan);
+    sig = sig * 0.35;
     Out.ar(0, sig);
 }).add;
 
 
 SynthDef.new(\openhihat, {
-	arg decay=0.5, amp=4, pan=0;
+	arg decay=0.5, amp=4, a=1, pan=0;
 	var sig, siga, sigb, env1, env2, osc1, osc2, osc3, osc4, osc5, osc6, sum;
 	env1 = EnvGen.kr(Env.perc(0.1, decay, curve:-3), doneAction:2);
 	env2 = EnvGen.kr(Env.new([0, 1, 0], [0, decay*5], curve:-150), doneAction:0);
@@ -231,12 +248,13 @@ SynthDef.new(\openhihat, {
 	sum = siga + sigb;
 	sum = LPF.ar(sum, 4000);
 	sum = Pan2.ar(sum, 0);
-	sum = sum * amp * 2;
+	sum = sum * amp * 2 * a;
+  sum = sum * 0.35;
 	Out.ar(0, sum);
 }).add;
 
 SynthDef.new(\cymbal, {
-	arg decay=2, amp=20, pan=0, gate=0, tone=0.002;
+	arg decay=2, amp=20, a=1, pan=0, gate=0, tone=0.002;
 	var sig, sig1,sig2, sig2a, sig2b, sig3, env1, env2, env2b, env3, osc1, osc2, osc3, osc4, osc5, osc6, sum;
 	env1 = EnvGen.kr(Env.perc(0.3, decay, curve:-3), doneAction:2);
 	env2 = EnvGen.kr(Env.new([0, 0.6, 0], [0.1, decay*0.7], -5), doneAction:0);
@@ -271,7 +289,8 @@ SynthDef.new(\cymbal, {
 	sum = sig1 + sig2a + sig2b + sig3;
 	sum = LPF.ar(sum, 4000);
 	sum = Pan2.ar(sum, 0);
-	sum = sum * amp;
+	sum = sum * amp * a;
+  sum = sum * 0.35;
 	Out.ar(0, sum);
 }).add;
 
@@ -323,43 +342,44 @@ SynthDef.new(\cymbal, {
 
 MIDIdef.noteOn(\bdON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~bdamp = vel.linexp(0, 127, 0.3, 2);
-	~bd[nn] = Synth.new(\bd,
+	~bd[nn] = Synth.new(\BD,
 		[
 			\amp, ~bdamp,
+			\a, ~bda,
 			\decay, ~decaybd,
 			\tone, ~toneBD,
 			\gate, 1
 		]
 	);
-},36);
+},36).permanent_(true);
 
 MIDIdef.noteOff(\bdOFF, {
 	arg vel, nn;
 	~bd[nn].set(\gate, 0);
 	~bd[nn] = nil;
-},36);
+},36).permanent_(true);
 
 MIDIdef.cc(\bdDECAY, {
 	arg val, cnum,nn;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~decaybd = val.linlin(0, 127, 6, 110);
 	~bd.do({
 		arg bdcc;
 		bdcc.set(\decay, ~decaybd);
 	});
-},1);
+},1).permanent_(true);
 
 MIDIdef.cc(\bdTONE, {
 	arg val, cnum,nn;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~toneBD = val.linexp(0, 127, 50, 70);
 	~bd.do({
 		arg bdcc;
 		bdcc.set(\tone, ~toneBD);
 	});
-},11);
+},11).permanent_(true);
 
 
 
@@ -368,11 +388,12 @@ MIDIdef.cc(\bdTONE, {
 
 MIDIdef.noteOn(\snON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~snamp = vel.linexp(0, 127, 0.08, 2);
-	~sn[nn] = Synth.new(\sn,
+	~sn[nn] = Synth.new(\SN,
 		[
 			\amp, ~snamp,
+			\a, ~sna,
 			\tone, ~tonesn,
 			\tone2, ~tone2sn,
 			\snappy, ~snappy,
@@ -380,36 +401,36 @@ MIDIdef.noteOn(\snON, {
 			\gate, 1
 		]
 	);
-},38);
+},38).permanent_(true);
 
 MIDIdef.noteOff(\snOFF, {
 	arg nn;
 	~sn[nn].set(\gate, 0);
 	~sn[nn] = nil;
-},38);
+},38).permanent_(true);
 
 MIDIdef.cc(\snTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~tonesn = val.linlin(0, 127, 340*0.62, 340*1.15);
 	~tone2sn = val.linlin(0, 127, 189*0.62, 189*1.15);
 	~sn.do({
 		arg tone;
 		tone.set(\tone, ~tonesn, \tone2, ~tone2sn)
 	});
-},21);
+},21).permanent_(true);
 
 
 MIDIdef.cc(\snappy, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~snappy = val.linlin(0, 127, 0.002, 0.45);
 	~amp2SN = val.linexp(0, 127, 1, 0.6);
 	~sn.do({
 		arg snappy;
 		snappy.set(\snappy, ~snappy, \amp2, ~amp2SN)
 	});
-},22);
+},22).permanent_(true);
 
 
 
@@ -418,38 +439,40 @@ MIDIdef.cc(\snappy, {
 
 MIDIdef.noteOn(\cpRawON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~cpRawamp = vel.linexp(0, 127, 0.1, 3);
 	~cpRaw[nn] = Synth.new(\cpRaw,
 		[
 			\amp, ~cpRawamp,
+			\a, ~cpRawa,
 			\gate, 1
 		]
 	);
-},[37, 39]);
+},[37, 39]).permanent_(true);
 
 MIDIdef.noteOff(\cpRawOFF, {
 	arg nn;
 	~cpRaw[nn].set(\gate, 0);
 	~cpRaw[nn]=nil;
-},[37, 39]);
+},[37, 39]).permanent_(true);
 
 MIDIdef.noteOn(\cpReverbON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~cpReverbamp = vel.linexp(0, 127, 0.1, 2);
 	~cpReverb[nn] = Synth.new(\cpReverb,
 		[
 			\amp, ~cpReverbamp,
+			\a, ~cpReverba,
 			\gate, 1
 		]
 	);
-},37);
+},37).permanent_(true);
 
 MIDIdef.noteOff(\cpReverbOFF, {
 	arg vel, nn;
 	~cpReverb[nn]=nil;
-},37);
+},37).permanent_(true);
 
 
 
@@ -458,19 +481,20 @@ MIDIdef.noteOff(\cpReverbOFF, {
 
 MIDIdef.noteOn(\rmON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~rsamp = vel.linexp(0, 127, 0.08, 0.9);
 	~rimshot[nn] = Synth.new(\rimshot,
 		[
-			\amp, ~rsamp
+			\amp, ~rsamp,
+			\a, ~rsa
 		]
 	);
-},40);
+},40).permanent_(true);
 
 MIDIdef.noteOff(\rmOFF, {
 	arg nn;
 	~rimshot[nn]=nil;
-},40);
+},40).permanent_(true);
 
 
 
@@ -479,19 +503,20 @@ MIDIdef.noteOff(\rmOFF, {
 
 MIDIdef.noteOn(\cowbellON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~cbamp = vel.linexp(0, 127, 0.01, 0.2);
 	~cowbell[nn] = Synth.new(\cowbell,
 		[
-			\amp, ~cbamp
+			\amp, ~cbamp,
+			\a, ~cba
 		]
 	);
-},49);
+},49).permanent_(true);
 
 MIDIdef.noteOff(\cowbellOFF, {
 	arg nn;
 	~cowbell[nn]=nil;
-},49);
+},49).permanent_(true);
 
 
 
@@ -500,20 +525,21 @@ MIDIdef.noteOff(\cowbellOFF, {
 
 MIDIdef.noteOn(\maracasON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~maracasamp = vel.linexp(0, 127, 0.01, 0.3);
 	~maracas[nn] = Synth.new(\maracas,
 		[
 			\amp, ~maracasamp,
+			\a, ~maracasa,
 			\gate, 1
 		]
 	);
-},51);
+},51).permanent_(true);
 
 MIDIdef.noteOff(\maracasOFF, {
 	arg nn;
 	~maracas[nn]=nil;
-},51);
+},51).permanent_(true);
 
 
 
@@ -522,30 +548,31 @@ MIDIdef.noteOff(\maracasOFF, {
 
 MIDIdef.noteOn(\lowtomON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~lowtomamp = vel.linexp(0, 127, 0.01, 1);
 	~lowtom[nn] = Synth.new(\LT,
 		[
 			\amp, ~lowtomamp,
+			\a, ~lowtoma,
 			\freq, ~lowtomFreq
 		]
 	);
-},41);
+},41).permanent_(true);
 
 MIDIdef.noteOff(\lowtomOFF, {
 	arg nn;
 	~lowtom[nn]=nil;
-},41);
+},41).permanent_(true);
 
 MIDIdef.cc(\LTTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~lowtomFreq = val.linexp(0, 127, 80*0.9, 80*1.25);
 	~lowtom.do({
 		arg ltcc;
 		ltcc.set(\freq, ~lowtomFreq);
 	});
-},102);
+},102).permanent_(true);
 
 
 
@@ -555,31 +582,32 @@ MIDIdef.cc(\LTTONE, {
 
 MIDIdef.noteOn(\midtomON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~midtomamp = vel.linexp(0, 127, 0.01, 1);
 	~midtom[nn] = Synth.new(\MT,
 		[
 			\amp, ~midtomamp,
+			\a, ~midtoma,
 			\freq, ~midtomFreq
 		]
 	);
-},43);
+},43).permanent_(true);
 
 MIDIdef.noteOff(\midtomOFF, {
 	arg nn;
 	~midtom[nn]=nil;
-},43);
+},43).permanent_(true);
 
 
 MIDIdef.cc(\MTTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~midtomFreq = val.linexp(0, 127, 128*0.65, 120*1.1);
 	~midtom.do({
 		arg mtcc;
 		mtcc.set(\freq, ~midtomFreq);
 	});
-},103);
+},103).permanent_(true);
 
 
 
@@ -588,31 +616,32 @@ MIDIdef.cc(\MTTONE, {
 
 MIDIdef.noteOn(\hitomON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~hitomamp = vel.linexp(0, 127, 0.01, 1);
 	~hitom[nn] = Synth.new(\HT,
 		[
 			\amp, ~hitomamp,
+			\a, ~hitoma,
 			\freq, ~hitomFreq
 		]
 	);
-},45);
+},45).permanent_(true);
 
 MIDIdef.noteOff(\hitomOFF, {
 	arg nn;
 	~hitom[nn]=nil;
-},45);
+},45).permanent_(true);
 
 
 MIDIdef.cc(\HTTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~hitomFreq = val.linexp(0, 127, 165*0.7, 165*1.2);
 	~hitom.do({
 		arg htcc;
 		htcc.set(\freq, ~hitomFreq);
 	});
-},104);
+},104).permanent_(true);
 
 
 
@@ -622,30 +651,31 @@ MIDIdef.cc(\HTTONE, {
 
 MIDIdef.noteOn(\lowcongaON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~lowcongaamp = vel.linexp(0, 127, 0.01, 1);
 	~lowconga[nn] = Synth.new(\LC,
 		[
 			\amp, ~lowcongaamp,
+			\a, ~lowcongaa,
 			\freq, ~lowcongaFreq
 		]
 	);
-},47);
+},47).permanent_(true);
 
 MIDIdef.noteOff(\lowcongaOFF, {
 	arg nn;
 	~lowconga[nn]=nil;
-},47);
+},47).permanent_(true);
 
 MIDIdef.cc(\LCTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~lowcongaFreq = val.linexp(0, 127, 165*0.7, 165*1.15);
 	~lowconga.do({
 		arg lccc;
 		lccc.set(\freq, ~lowcongaFreq);
 	});
-},105);
+},105).permanent_(true);
 
 
 
@@ -655,31 +685,32 @@ MIDIdef.cc(\LCTONE, {
 
 MIDIdef.noteOn(\midcongaON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~midcongaamp = vel.linexp(0, 127, 0.01, 1);
 	~midconga[nn] = Synth.new(\MC,
 		[
 			\amp, ~midcongaamp,
+			\a, ~midcongaa,
 			\freq, ~midcongaFreq
 		]
 	);
-},48);
+},48).permanent_(true);
 
 MIDIdef.noteOff(\midcongaOFF, {
 	arg nn;
 	~midconga[nn]=nil;
-},48);
+},48).permanent_(true);
 
 
 MIDIdef.cc(\MCTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~midcongaFreq = val.linexp(0, 127, 250*0.7, 250*1.1);
 	~midconga.do({
 		arg mccc;
 		mccc.set(\freq, ~midcongaFreq);
 	});
-},106);
+},106).permanent_(true);
 
 
 
@@ -689,30 +720,31 @@ MIDIdef.cc(\MCTONE, {
 
 MIDIdef.noteOn(\hicongaON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~hicongaamp = vel.linexp(0, 127, 0.01, 1);
 	~hiconga[nn] = Synth.new(\HC,
 		[
 			\amp, ~hicongaamp,
+			\a, ~hicongaa,
 			\freq, ~hicongaFreq
 		]
 	);
-},50);
+},50).permanent_(true);
 
 MIDIdef.noteOff(\hicongaOFF, {
 	arg nn;
 	~hiconga[nn]=nil;
-},50);
+},50).permanent_(true);
 
 MIDIdef.cc(\HCTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~hicongaFreq = val.linexp(0, 127, 370*0.7, 370*1.2);
 	~hiconga.do({
 		arg hccc;
 		hccc.set(\freq, ~hicongaFreq);
 	});
-},107);
+},107).permanent_(true);
 
 
 
@@ -722,19 +754,20 @@ MIDIdef.cc(\HCTONE, {
 
 MIDIdef.noteOn(\clavesON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~clavesamp = vel.linexp(0, 127, 0.01, 1);
 	~claves[nn] = Synth.new(\claves,
 		[
-			\amp, ~clavesamp
+			\amp, ~clavesamp,
+			\a, ~clavesa
 		]
 	);
-},52);
+},52).permanent_(true);
 
 MIDIdef.noteOff(\clavesOFF, {
 	arg nn;
 	~claves[nn]=nil;
-},52);
+},52).permanent_(true);
 
 
 
@@ -743,19 +776,20 @@ MIDIdef.noteOff(\clavesOFF, {
 
 MIDIdef.noteOn(\hihatON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~champ = vel.linexp(0, 127, 0.1, 1.5);
 	~hihat[nn] = Synth.new(\hat,
 		[
-			\amp, ~champ
+			\amp, ~champ,
+			\a, ~cha
 		]
 	);
-},42);
+},42).permanent_(true);
 
 MIDIdef.noteOff(\hihatOFF, {
 	arg nn;
 	~hihat[nn]=nil;
-},42);
+},42).permanent_(true);
 
 
 
@@ -764,30 +798,31 @@ MIDIdef.noteOff(\hihatOFF, {
 
 MIDIdef.noteOn(\openhihatON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~ohamp = vel.linexp(0, 127, 1, 6);
 	~openhihat[nn] = Synth.new(\openhihat,
 		[
 			\amp, ~ohamp,
+			\a, ~oha,
 			\decay, ~ohdecay
 		]
 	);
-},44);
+},44).permanent_(true);
 
 MIDIdef.noteOff(\openhihatOFF, {
 	arg nn;
 	~openhihat[nn]=nil;
-},44);
+},44).permanent_(true);
 
 MIDIdef.cc(\OHDecay, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~ohdecay = val.linexp(0, 127, 0.1, 1);
 	~openhihat.do({
 		arg ohcc;
 		ohcc.set(\decay, ~ohdecay);
 	});
-},108);
+},108).permanent_(true);
 
 
 
@@ -796,41 +831,42 @@ MIDIdef.cc(\OHDecay, {
 
 MIDIdef.noteOn(\cymbalON, {
 	arg vel, nn;
-	[vel, nn].postln;
+	// [vel, nn].postln;
 	~cyamp = vel.linexp(0, 127, 1, 22);
 	~cymbal[nn] = Synth.new(\cymbal,
 		[
 			\amp, ~cyamp,
+			\a, ~cya,
 			\decay, ~cydecay,
 			\tone, ~cytone
 		]
 	);
-},46);
+},46).permanent_(true);
 
 MIDIdef.noteOff(\cymbalOFF, {
 	arg nn;
 	~openhihat[nn]=nil;
-},46);
+},46).permanent_(true);
 
 MIDIdef.cc(\CYTONE, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~cytone = val.linexp(0, 127, 0.005, 0.0002);
 	~cymbal.do({
 		arg cycc;
 		cycc.set(\tone, ~cytone);
 	});
-},109);
+},109).permanent_(true);
 
 MIDIdef.cc(\CYDecay, {
 	arg val, cnum;
-	[val, cnum].postln;
+	// [val, cnum].postln;
 	~cydecay = val.linexp(0, 127, 0.5, 4);
 	~cymbal.do({
 		arg cycc;
 		cycc.set(\decay, ~cydecay);
 	});
-},110);
+},110).permanent_(true);
 
 
 
@@ -1138,10 +1174,10 @@ for(12, 15, {
 
 ~knobs[0].children[0].action_({
 	arg obj;
-	~bdamp = obj.value.linexp(0, 1, 1, 2.1);
+	~bda = obj.value.linexp(0, 1, 0.3, 1.3);
 	~bdGUI.do({
 		arg amp;
-		amp.set(\amp, ~bdamp);
+		amp.set(\a, ~bda);
 	});
 })
 .valueAction_(0.5);
@@ -1158,7 +1194,8 @@ for(12, 15, {
 
 ~knobs[2].children[0].action_({
 	arg obj;
-	~decaybd = obj.value.linlin(0, 1, 6, 110);
+	// ~decaybd = obj.value.linlin(0, 1, 6, 110);
+	~decaybd = obj.value.linlin(0, 1, 6, 30);
 	~bdGUI.do({
 		arg decay;
 		decay.set(\decay, ~decaybd);
@@ -1167,9 +1204,10 @@ for(12, 15, {
 .valueAction_(0.5);
 
 ~buttons[0].children[0].mouseDownAction_({
-	~bdGUI = Synth.new(\bd,
+	~bdGUI = Synth.new(\BD,
 		[
 			\amp, ~bdamp,
+			\a, ~bda,
 			\decay, ~decaybd,
 			\tone, ~toneBD,
 			\gate, 1
@@ -1188,10 +1226,10 @@ for(12, 15, {
 
 ~knobs[0].children[1].action_({
 	arg obj;
-	~snamp = obj.value.linexp(0, 1, 0.5, 2.5);
+	~sna = obj.value.linexp(0, 1, 0.3, 1.3);
 	~snGUI.do({
 		arg amp;
-		amp.set(\amp, ~snamp);
+		amp.set(\a, ~sna);
 	});
 })
 .valueAction_(0.5);
@@ -1219,9 +1257,10 @@ for(12, 15, {
 .valueAction_(0.5);
 
 ~buttons[0].children[1].mouseDownAction_({
-	~snGUI = Synth.new(\sn,
+	~snGUI = Synth.new(\SN,
 		[
 			\amp, ~snamp,
+			\a, ~sna,
 			\tone, ~tonesn,
 			\tone2, ~tone2sn,
 			\snappy, ~snappy,
@@ -1240,10 +1279,10 @@ for(12, 15, {
 
 ~knobs[0].children[2].action_({
 	arg obj;
-	~lowtomamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~lowtoma = obj.value.linexp(0, 1, 0.3, 1.3);
 	~lowtomGUI.do({
 		arg amp;
-		amp.set(\amp, ~lowtomamp);
+		amp.set(\a, ~lowtoma);
 	});
 })
 .valueAction_(0.5);
@@ -1262,7 +1301,8 @@ for(12, 15, {
 	~lowtomGUI = Synth.new(\LT,
 		[
 			\freq, ~lowtomFreq,
-			\amp, ~lowtomamp
+			\amp, ~lowtomamp,
+			\a, ~lowtoma
 		]
 	);
 	~buttons2[0].children[2].states = [["•", Color.red, Color.red(0.85)]];
@@ -1276,10 +1316,10 @@ for(12, 15, {
 
 ~knobs[0].children[3].action_({
 	arg obj;
-	~midtomamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~midtoma = obj.value.linexp(0, 1, 0.3, 1.3);
 	~midtomGUI.do({
 		arg amp;
-		amp.set(\amp, ~midtomamp);
+		amp.set(\a, ~midtoma);
 	});
 })
 .valueAction_(0.5);
@@ -1298,7 +1338,8 @@ for(12, 15, {
 	~midtomGUI = Synth.new(\MT,
 		[
 			\freq, ~midtomFreq,
-			\amp, ~midtomamp
+			\amp, ~midtomamp,
+			\a, ~midtoma
 		]
 	);
 	~buttons2[0].children[3].states = [["•", Color.red, Color.red(0.85)]];
@@ -1313,10 +1354,10 @@ for(12, 15, {
 
 ~knobs[0].children[4].action_({
 	arg obj;
-	~hitomamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~hitoma = obj.value.linexp(0, 1, 0.3, 1.3);
 	~hitomGUI.do({
 		arg amp;
-		amp.set(\amp, ~hitomamp);
+		amp.set(\a, ~hitoma);
 	});
 })
 .valueAction_(0.5);
@@ -1335,7 +1376,8 @@ for(12, 15, {
 	~hitomGUI = Synth.new(\HT,
 		[
 			\freq, ~hitomFreq,
-			\amp, ~hitomamp
+			\amp, ~hitomamp,
+			\a, ~hitoma
 		]
 	);
 	~buttons2[0].children[4].states = [["•", Color.red, Color.new(1, 0.3)]];
@@ -1350,10 +1392,10 @@ for(12, 15, {
 
 ~knobs[0].children[5].action_({
 	arg obj;
-	~lowcongaamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~lowcongaa = obj.value.linexp(0, 1, 0.3, 1.3);
 	~lowcongaGUI.do({
 		arg amp;
-		amp.set(\amp, ~lowcongaamp);
+		amp.set(\a, ~lowcongaa);
 	});
 })
 .valueAction_(0.5);
@@ -1372,7 +1414,8 @@ for(12, 15, {
 	~lowcongaGUI = Synth.new(\LC,
 		[
 			\freq, ~lowcongaFreq,
-			\amp, ~lowcongaamp
+			\amp, ~lowcongaamp,
+			\a, ~lowcongaa
 		]
 	);
 	~buttons2[0].children[5].states = [["•", Color.red, Color.new(1, 0.3)]];
@@ -1386,10 +1429,10 @@ for(12, 15, {
 
 ~knobs[0].children[6].action_({
 	arg obj;
-	~midcongaamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~midcongaa = obj.value.linexp(0, 1, 0.3, 1.3);
 	~midcongaGUI.do({
 		arg amp;
-		amp.set(\amp, ~midcongaamp);
+		amp.set(\a, ~midcongaa);
 	});
 })
 .valueAction_(0.5);
@@ -1408,7 +1451,8 @@ for(12, 15, {
 	~midcongaGUI = Synth.new(\MC,
 		[
 			\freq, ~midcongaFreq,
-			\amp, ~midcongaamp
+			\amp, ~midcongaamp,
+			\a, ~midcongaa
 		]
 	);
 	~buttons2[0].children[6].states = [["•", Color.red, Color.new(1, 0.3)]];
@@ -1423,10 +1467,10 @@ for(12, 15, {
 
 ~knobs[0].children[7].action_({
 	arg obj;
-	~hicongaamp = obj.value.linexp(0, 1, 0.1, 1);
+	~hicongaa = obj.value.linexp(0, 1, 0.3, 1.3);
 	~hicongaGUI.do({
 		arg amp;
-		amp.set(\amp, ~hicongaamp);
+		amp.set(\a, ~hicongaa);
 	});
 })
 .valueAction_(0.5);
@@ -1445,7 +1489,8 @@ for(12, 15, {
 	~hicongaGUI = Synth.new(\HC,
 		[
 			\freq, ~hicongaFreq,
-			\amp, ~hicongaamp
+			\amp, ~hicongaamp,
+			\a, ~hicongaa
 		]
 	);
 	~buttons2[0].children[7].states = [["•", Color.red, Color.new(1, 0.3)]];
@@ -1461,10 +1506,10 @@ for(12, 15, {
 
 ~knobs[0].children[8].action_({
 	arg obj;
-	~clamp = obj.value.linexp(0, 1, 0.2, 1.5);
+	~cla = obj.value.linexp(0, 1, 0.3, 1.3);
 	~clGUI.do({
 		arg amp;
-		amp.set(\amp, ~clamp);
+		amp.set(\a, ~cla);
 	});
 })
 .valueAction_(0.5);
@@ -1472,7 +1517,8 @@ for(12, 15, {
 ~buttons[0].children[8].mouseDownAction_({
 	~clGUI = Synth.new(\claves,
 		[
-			\amp, ~clamp
+			\amp, ~clamp,
+			\a, ~cla
 		]
 	);
 	~buttons2[0].children[8].states = [["•", Color.red, Color.new(1, 0.75, 0.2)]];
@@ -1487,10 +1533,10 @@ for(12, 15, {
 
 ~knobs[0].children[9].action_({
 	arg obj;
-	~rsamp = obj.value.linexp(0, 1, 0.2, 1.2);
+	~rsa = obj.value.linexp(0, 1, 0.3, 1.3);
 	~rimshotGUI.do({
 		arg amp;
-		amp.set(\amp, ~rsamp);
+		amp.set(\a, ~rsa);
 	});
 })
 .valueAction_(0.5);
@@ -1498,7 +1544,8 @@ for(12, 15, {
 ~buttons[0].children[9].mouseDownAction_({
 	~rimshotGUI = Synth.new(\rimshot,
 		[
-			\amp, ~rsamp
+			\amp, ~rsamp,
+			\a, ~rsa
 		]
 	);
 	~buttons2[0].children[9].states = [["•", Color.red, Color.new(1, 0.75, 0.2)]];
@@ -1514,10 +1561,10 @@ for(12, 15, {
 
 ~knobs[0].children[10].action_({
 	arg obj;
-	~maracasamp = obj.value.linexp(0, 1, 0.1, 1.5);
+	~maracasa = obj.value.linexp(0, 1, 0.3, 1.3);
 	~maracasGUI.do({
 		arg amp;
-		amp.set(\amp, ~maracasamp);
+		amp.set(\a, ~maracasa);
 	});
 })
 .valueAction_(0.5);
@@ -1526,6 +1573,7 @@ for(12, 15, {
 	~maracasGUI = Synth.new(\maracas,
 		[
 			\amp, ~maracasamp,
+			\a, ~maracasa,
 			\gate, 1
 		]
 	);
@@ -1544,15 +1592,15 @@ for(12, 15, {
 
 ~knobs[0].children[11].action_({
 	arg obj;
-	~cpRawamp = obj.value.linexp(0, 1, 1.2, 5);
-	~cpReverbamp = obj.value.linexp(0, 1, 1.2, 4.2);
+	~cpRawa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cpReverba = obj.value.linexp(0, 1, 0.3, 1.3);
 	~clapRawGUI.do({
 		arg amp;
-		amp.set(\amp, ~cpRawamp);
+		amp.set(\a, ~cpRawa);
 	});
 	~clapReverbGUI.do({
 		arg amp;
-		amp.set(\amp, ~cpReverbamp);
+		amp.set(\a, ~cpReverba);
 	});
 })
 .valueAction_(0.5);
@@ -1561,12 +1609,14 @@ for(12, 15, {
 	~clapRawGUI = Synth.new(\cpRaw,
 		[
 			\amp, ~cpRawamp,
+			\a, ~cpRawa,
 			\gate, 1
 		]
 	);
 	~clapReverbGUI = Synth.new(\cpReverb,
 		[
 			\amp, ~cpReverbamp,
+			\a, ~cpReverba,
 			\gate, 1
 		]
 	);
@@ -1585,10 +1635,10 @@ for(12, 15, {
 
 ~knobs[0].children[12].action_({
 	arg obj;
-	~cbamp = obj.value.linexp(0, 1, 0.05, 0.3);
+	~cba = obj.value.linexp(0, 1, 0.3, 1.3);
 	~cowbellGUI.do({
 		arg amp;
-		amp.set(\amp, ~cbamp);
+		amp.set(\a, ~cba);
 	});
 })
 .valueAction_(0.5);
@@ -1596,7 +1646,8 @@ for(12, 15, {
 ~buttons[0].children[12].mouseDownAction_({
 	~cowbellGUI = Synth.new(\cowbell,
 		[
-			\amp, ~cbamp
+			\amp, ~cbamp,
+			\a, ~cba
 		]
 	);
 	~buttons2[0].children[12].states = [["•", Color.red, Color.gray(0.8)]];
@@ -1611,10 +1662,10 @@ for(12, 15, {
 
 ~knobs[0].children[13].action_({
 	arg obj;
-	~cyamp = obj.value.linexp(0, 1, 5, 22);
+	~cya = obj.value.linexp(0, 1, 0.3, 1.3);
 	~cymbalGUI.do({
 		arg amp;
-		amp.set(\amp, ~cyamp);
+		amp.set(\a, ~cya);
 	});
 })
 .valueAction_(0.5);
@@ -1643,6 +1694,7 @@ for(12, 15, {
 	~cymbalGUI = Synth.new(\cymbal,
 		[
 			\amp, ~cyamp,
+			\a, ~cya,
 			\decay, ~cydecay,
 			\tone, ~cytone
 		]
@@ -1662,10 +1714,10 @@ for(12, 15, {
 
 ~knobs[0].children[14].action_({
 	arg obj;
-	~ohamp = obj.value.linexp(0, 1, 4, 6);
+	~oha = obj.value.linexp(0, 1, 0.3, 1.3);
 	~openhihatGUI.do({
 		arg amp;
-		amp.set(\amp, ~ohamp);
+		amp.set(\a, ~oha);
 	});
 })
 .valueAction_(0.5);
@@ -1684,6 +1736,7 @@ for(12, 15, {
 	~openhihatGUI = Synth.new(\openhihat,
 		[
 			\amp, ~ohamp,
+			\a, ~oha,
 			\decay, ~ohdecay
 		]
 	);
@@ -1701,10 +1754,10 @@ for(12, 15, {
 
 ~knobs[0].children[15].action_({
 	arg obj;
-	~champ = obj.value.linexp(0, 1, 0.3, 3.5);
+	~cha = obj.value.linexp(0, 1, 0.3, 1.3);
 	~closehihatGUI.do({
 		arg amp;
-		amp.set(\amp, ~champ);
+		amp.set(\a, ~cha);
 	});
 })
 .valueAction_(0.5);
@@ -1712,7 +1765,8 @@ for(12, 15, {
 ~buttons[0].children[15].mouseDownAction_({
 	~closehihatGUI = Synth.new(\hat,
 		[
-			\amp, ~champ
+			\amp, ~champ,
+			\a, ~cha
 		]
 	);
 	~buttons2[0].children[15].states = [["•", Color.red, Color.gray(0.8)]];
@@ -1721,4 +1775,65 @@ for(12, 15, {
 	~closehihatGUI = nil;
 	~buttons2[0].children[15].states = [["•", Color.black, Color.gray(0.9)]];
 });
+);
+
+// ----------------------------------------------------------------------------
+
+// Initial amps
+~bdamp = 0.5.value.linexp(0, 1, 1, 2.1);
+~snamp = 0.5.value.linexp(0, 1, 0.5, 2.5);
+~lowtomamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~midtomamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~hitomamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~lowcongaamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~midcongaamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~hicongaamp = 0.5.value.linexp(0, 1, 0.1, 1);
+~clamp = 0.5.value.linexp(0, 1, 0.2, 1.5);
+~rsamp = 0.5.value.linexp(0, 1, 0.2, 1.2);
+~maracasamp = 0.5.value.linexp(0, 1, 0.1, 1.5);
+~cpRawamp = 0.5.value.linexp(0, 1, 1.2, 5);
+~cpReverbamp = 0.5.value.linexp(0, 1, 1.2, 4.2);
+~cbamp = 0.5.value.linexp(0, 1, 0.05, 0.3);
+~cyamp = 0.5.value.linexp(0, 1, 5, 22);
+~ohamp = 0.5.value.linexp(0, 1, 4, 6);
+~champ = 0.5.value.linexp(0, 1, 0.3, 3.5);
+
+// MIDI controller integration
+
+(
+MIDIIn.control={arg src,chan,num,val;
+  val = val/127.0;
+  case
+  // { num == 16 } { {~knob_color.value=val; ~knob_color.valueAction_(val)}.defer }
+  { num == 52 } { {~knobs[1].allChildren[1].valueAction_(val)}.defer }
+  { num == 53 } { {~knobs[1].allChildren[2].valueAction_(val)}.defer }
+  { num == 54 } { {~knobs[1].allChildren[3].valueAction_(val)}.defer }
+  { num == 55 } { {~knobs[1].allChildren[4].valueAction_(val)}.defer }
+  { num == 64 } { {~knobs[1].allChildren[5].valueAction_(val)}.defer }
+  { num == 65 } { {~knobs[1].allChildren[6].valueAction_(val)}.defer }
+  { num == 66 } { {~knobs[1].allChildren[7].valueAction_(val)}.defer }
+  { num == 67 } { {~knobs[1].allChildren[8].valueAction_(val)}.defer }
+  { num == 58 } { {~knobs[1].allChildren[9].valueAction_(val)}.defer }
+  { num == 56 } { {~knobs[2].allChildren[1].valueAction_(val)}.defer }
+  { num == 57 } { {~knobs[2].allChildren[2].valueAction_(val)}.defer }
+  { num == 62 } { {~knobs[2].allChildren[3].valueAction_(val)}.defer }
+  { num == 63 } { {~knobs[2].allChildren[4].valueAction_(val)}.defer }
+  // global amplitude knobs
+  { num == 36} { {~knobs[0].allChildren[1].valueAction_(val)}.defer }
+  { num == 37 } { {~knobs[0].allChildren[2].valueAction_(val)}.defer }
+  { num == 38 } { {~knobs[0].allChildren[3].valueAction_(val)}.defer }
+  { num == 39 } { {~knobs[0].allChildren[4].valueAction_(val)}.defer }
+  { num == 40 } { {~knobs[0].allChildren[5].valueAction_(val)}.defer }
+  { num == 41 } { {~knobs[0].allChildren[6].valueAction_(val)}.defer }
+  { num == 42 } { {~knobs[0].allChildren[7].valueAction_(val)}.defer }
+  { num == 43 } { {~knobs[0].allChildren[8].valueAction_(val)}.defer }
+  { num == 44 } { {~knobs[0].allChildren[9].valueAction_(val)}.defer }
+  { num == 45 } { {~knobs[0].allChildren[10].valueAction_(val)}.defer }
+  { num == 46 } { {~knobs[0].allChildren[11].valueAction_(val)}.defer }
+  { num == 47 } { {~knobs[0].allChildren[12].valueAction_(val)}.defer }
+  { num == 48 } { {~knobs[0].allChildren[13].valueAction_(val)}.defer }
+  { num == 49 } { {~knobs[0].allChildren[14].valueAction_(val)}.defer }
+  { num == 50 } { {~knobs[0].allChildren[15].valueAction_(val)}.defer }
+  { num == 51 } { {~knobs[0].allChildren[16].valueAction_(val)}.defer }
+};
 )

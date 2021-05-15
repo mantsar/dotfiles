@@ -1,0 +1,177 @@
+-- https://club.tidalcycles.org/t/writing-addon-library-for-midi-instruments/472/7
+-- https://github.com/kindohm/tidal-meetup-2021-05-08
+
+-- http://learnyouahaskell.com/syntax-in-functions#pattern-matching
+-- pattern matching
+
+-- 2909 - 19 samples
+:{
+d2909 :: Pattern String -> ControlPattern
+d2909 = n . (d2909N <$>)
+d2909N :: Num a => String -> a
+d2909N "bd" = 0
+d2909N "ch" = 3
+d2909N "cp" = 6
+d2909N "oh" = 9
+d2909N "rs" = 13
+d2909N "sn" = 14
+d2909N "lt" = 16
+d2909N "bd1" = 1
+d2909N "chl" = 2
+d2909N "chs" = 3
+d2909N "ch1" = 4
+d2909N "ch2" = 5
+d2909N "cp1" = 7
+d2909N "oh1" = 8
+d2909N "ohl" = 9
+d2909N "ohs" = 10
+d2909N "oh2" = 11
+d2909N "oh3" = 12
+d2909N "sn1" = 15
+d2909N "lt1" = 17
+d2909N "lt2" = 18
+d2909N "0" = 0
+d2909N "1" = 1
+d2909N "2" = 2
+d2909N "3" = 3
+d2909N "4" = 4
+d2909N "5" = 5
+d2909N "6" = 6
+d2909N "7" = 7
+d2909N "8" = 8
+d2909N "9" = 9
+d2909N "10" = 10
+d2909N "11" = 11
+d2909N "12" = 12
+d2909N "13" = 13
+d2909N "14" = 14
+d2909N "15" = 15
+d2909N "16" = 16
+d2909N "17" = 17
+d2909N "18" = 18
+d2909N _ = 0
+ds2909 x = d2909 x # s "2909"
+:}
+
+-- cr78 - 17 samples
+:{
+dcr78 :: Pattern String -> ControlPattern
+dcr78 = n . (dcr78N <$>)
+dcr78N :: Num a => String -> a
+dcr78N "hb" = 0
+dcr78N "lb" = 1
+dcr78N "lc" = 2
+dcr78N "cb" = 3
+dcr78N "cy" = 4
+dcr78N "gu" = 5
+dcr78N "gu1" = 6
+dcr78N "hh1" = 7
+dcr78N "hh2" = 8
+dcr78N "hh" = 9
+dcr78N "bd1" = 10
+dcr78N "bd" = 11
+dcr78N "rs" = 12
+dcr78N "sn1" = 13
+dcr78N "sn" = 14
+dcr78N "ta" = 15
+dcr78N "ta1" = 16
+dcr78N "0" = 0
+dcr78N "1" = 1
+dcr78N "2" = 2
+dcr78N "3" = 3
+dcr78N "4" = 4
+dcr78N "5" = 5
+dcr78N "6" = 6
+dcr78N "7" = 7
+dcr78N "8" = 8
+dcr78N "9" = 9
+dcr78N "10" = 10
+dcr78N "11" = 11
+dcr78N "12" = 12
+dcr78N "13" = 13
+dcr78N "14" = 14
+dcr78N "15" = 15
+dcr78N "16" = 16
+dcr78N _ = 0
+dscr78 x = dcr78 x # s "cr78"
+:}
+
+-- cpu - 23 samples
+:{
+dcpu :: Pattern String -> ControlPattern
+dcpu = n . (dcpuN <$>)
+dcpuN :: Num a => String -> a
+dcpuN "bd" = 0
+dcpuN "rs" = 1
+dcpuN "sn" = 2
+dcpuN "cp" = 3
+dcpuN "ch" = 4
+dcpuN "oh" = 5
+dcpuN "rd" = 6
+dcpuN "cb" = 7
+dcpuN "lt" = 8
+dcpuN "mt" = 9
+dcpuN "ht" = 10
+dcpuN "hc" = 11
+dcpuN "mc" = 12
+dcpuN "lc" = 13
+dcpuN "ma" = 14
+dcpuN "cl" = 15
+dcpuN "hq" = 16
+dcpuN "ra" = 17
+dcpuN "sc" = 18
+dcpuN "sc1" = 19
+dcpuN "sp" = 20
+dcpuN "dr" = 21
+dcpuN "dr" = 22
+dcpuN "0" = 0
+dcpuN "1" = 1
+dcpuN "2" = 2
+dcpuN "3" = 3
+dcpuN "4" = 4
+dcpuN "5" = 5
+dcpuN "6" = 6
+dcpuN "7" = 7
+dcpuN "8" = 8
+dcpuN "9" = 9
+dcpuN "10" = 10
+dcpuN "11" = 11
+dcpuN "12" = 12
+dcpuN "13" = 13
+dcpuN "14" = 14
+dcpuN "15" = 15
+dcpuN "16" = 16
+dcpuN "17" = 17
+dcpuN "18" = 18
+dcpuN "19" = 19
+dcpuN "20" = 20
+dcpuN "21" = 21
+dcpuN "22" = 22
+dcpuN _ = 0
+dscpu9 x = dcpu x # s "cpu"
+:}
+
+-- SC-808
+:{
+sc8T :: Pattern String -> ControlPattern
+sc8T = n . (subtract 60 . sc8N <$>)
+sc8N :: Num a => String -> a
+sc8N "bd" = 36
+sc8N "sd" = 38
+sc8N "sn" = 38
+sc8N "lt" = 41
+sc8N "mt" = 43
+sc8N "ht" = 45
+sc8N "lc" = 47
+sc8N "mc" = 48
+sc8N "hc" = 50
+sc8N "rs" = 40
+sc8N "ma" = 51
+sc8N "cp" = 39
+sc8N "cb" = 49
+sc8N "cy" = 46
+sc8N "oh" = 44
+sc8N "ch" = 42
+sc8N _ = 0
+sc8 x = sc8T x # s "sc8"
+:}

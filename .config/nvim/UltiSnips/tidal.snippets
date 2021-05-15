@@ -303,7 +303,7 @@ snippet nudge "nudge" w
 nudge "$1"
 endsnippet
 
-snippet i "Pushes divisions to left" w
+snippet it "Pushes divisions to left" w
 iter "$1"
 endsnippet
 
@@ -726,7 +726,7 @@ endsnippet
 
 # Transistions
 
-snippet f "Solves problem of clipping for fast spawning synths" w
+snippet ft "Solves problem of clipping for fast spawning synths" w
 fadeTime ${1:0.1}
 endsnippet
 
@@ -1053,7 +1053,7 @@ snippet "(c7|Maroon)" "red" r
 -- Maroon
 endsnippet
 
-snippet "(c8|Teal)" "cyan" r
+snippet "(c8|Teal)" "cyan" rb
 -- Teal
 endsnippet
 
@@ -1104,8 +1104,31 @@ sock <- carabiner tidal 4 (-0.14)
 endsnippet
 
 # MIDI
-snippet m "vim default fold" w
+snippet m "" w
 # s "midi" # midichan ${0:0}
+endsnippet
+
+snippet sc8 "SC-808" w
+$ sc8 "$1" # amp 1
+endsnippet
+
+snippet cc8 "SC-808 cc" b
+p "cc8" $ density 8 $ stack [
+  ccn 16 # ccv (range 0 127 $ slow 30 sine), -- bd tone
+  ccn 17 # ccv (range 0 127 $ slow 30 sine), -- sn tone
+  ccn 18 # ccv (range 0 127 $ slow 30 sine), -- lt tune
+  ccn 19 # ccv (range 0 127 $ slow 30 sine), -- mt tune
+  ccn 20 # ccv (range 0 127 $ slow 30 sine), -- ht tune
+  ccn 21 # ccv (range 0 127 $ slow 30 sine), -- lc tune
+  ccn 22 # ccv (range 0 127 $ slow 30 sine), -- mc tune
+  ccn 23 # ccv (range 0 127 $ slow 30 sine), -- hc tune
+  ccn 24 # ccv (range 0 127 $ slow 30 sine), -- cy tone
+  --
+  ccn 25 # ccv (range 0 127 $ slow 30 sine), -- bd decay
+  ccn 26 # ccv (range 0 127 $ slow 30 sine), -- sn snappy
+  ccn 27 # ccv (range 0 127 $ slow 30 sine), -- cy decay
+  ccn 28 # ccv (range 0 127 $ slow 30 sine) -- oh decay
+] # s "sc8"
 endsnippet
 
 # Rack
