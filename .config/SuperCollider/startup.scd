@@ -19,6 +19,7 @@ s.options.numInputBusChannels = 2;
 s.latency = 0.3;
 
 ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
+~dirt.doNotReadYet = false; // lazy loading of samples (broken with synths)
 
 ~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16]|
 s.waitForBoot {
@@ -134,36 +135,21 @@ s.waitForBoot {
   Ndef(\d7)[0] = { InBus.ar(~b7, 2) };
   ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
   // MIDI
-  ~dirt.soundLibrary.addMIDI(\midi, m[0]);
-  ~dirt.soundLibrary.addMIDI(\sc8, m[1]);
-  s.sync;
+  // s.sync;
   // Controller
-  // Evaluate the block below to start the mapping MIDI -> OSC.
-  ~tidal_midi_start.();
-};
+  // ~tidal_midi_start.();
+}
 };
 
+// MIDIFunc.cc is broken
 ~tidal_midi_start = {
-  var on, off, cc;
-  var osc;
-  osc = NetAddr.new("127.0.0.1", 6010);
-  on = MIDIFunc.noteOn({ |val, num, chan, src|
+  var osc = NetAddr.new("127.0.0.1", 6010);
+  MIDIdef.noteOn(\on, {arg val, num;
+    osc.sendMsg("/off", num.asString, val/127);
+  });
+  MIDIdef.noteOff(\bb, {arg val, num;
     osc.sendMsg("/ctrl", num.asString, val/127);
   });
-  off = MIDIFunc.noteOff({ |val, num, chan, src|
-    osc.sendMsg("/ctrl", num.asString, 0);
-  });
-  cc = MIDIFunc.cc({ |val, num, chan, src|
-    osc.sendMsg("/ctrl", num.asString, val/127);
-  });
-  if (~stopMidiToOsc != nil, {
-    ~stopMidiToOsc.value;
-  });
-  ~stopMidiToOsc = {
-    on.free;
-    off.free;
-    cc.free;
-  };
 };
 
 ~foxdot_start = {
@@ -191,7 +177,7 @@ s.waitForBoot {
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
     // MIDIIn.connectAll(false); // init in-built
-    MIDIClient.init(outports:outports, verbose:false);
+    MIDIClient.init(outports:outports, verbose:true);
     // MIDIClient.externalSources.select { |src|
     //   src.device != "Launchpad Mini MK3"
     // }.do {|src,i|
@@ -200,6 +186,9 @@ s.waitForBoot {
     // m = outports.collect {|i| MIDIOut(i) };
     m = 2.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
+    // tidal
+    ~dirt.soundLibrary.addMIDI(\midi, m[0]);
+    ~dirt.soundLibrary.addMIDI(\sc8, m[1]);
   }
 };
 
@@ -648,6 +637,7 @@ s.waitForBoot({
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   if (~sync.notNil) { ~sync.unhang };
   ~midi_start.value();
+  (Platform.userConfigDir +/+ "SC-808/SC-808.scd").load;
   StageLimiter.activate(2);
   "Setup done".postln;
 });
@@ -663,7 +653,7 @@ s.waitForBoot({
 // Quarks.install("FoxDot");
 // Quarks.install("MathLib");
 // Quarks.install("Spectrogram");
-// Quarks.install("SuperDirt"); // sometimes need to remove folder by hand to update
+// Quarks.install("SuperDirt"); // need to remove folder by hand or git pull to update
 // Quarks.install("Vowel");
 // Quarks.install("XML");
 // Quarks.install("wslib");

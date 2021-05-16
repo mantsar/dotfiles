@@ -815,6 +815,7 @@ augroup sc_au
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/synths.txt
 	autocmd VimEnter *.scd :badd ~/sp/dict/sc/controls.txt
 	autocmd VimEnter *.scd :badd ~/sp/a/bitwig.txt
+	autocmd VimEnter *.scd :badd ~/.config/SuperCollider/SC-808/SC-808.scd
 	"mappings
 	autocmd FileType supercollider inoremap <buffer> <M-cr> <cr><cr><up><tab>
 	autocmd VimEnter *.scd nmap <M-e> <Plug>(scnvim-send-block)
@@ -860,12 +861,13 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>y :call Scintillator_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>Y :call scnvim#sclang#send("y.quit")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>o :StartAsync Orca<cr>
-	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load') <bar> badd ~/.config/SuperCollider/SC-808/SC-808.scd <cr>
+	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load')<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>r :StartAsync carla<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>A :call Hydra_init()<cr>

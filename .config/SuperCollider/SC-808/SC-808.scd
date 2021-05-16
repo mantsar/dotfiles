@@ -1802,7 +1802,9 @@ for(12, 15, {
 
 (
 MIDIIn.control={arg src,chan,num,val;
+  var osc = NetAddr.new("127.0.0.1", 6010);
   val = val/127.0;
+  osc.sendMsg("/ctrl", num.asString, val); // tidal
   case
   // { num == 16 } { {~knob_color.value=val; ~knob_color.valueAction_(val)}.defer }
   { num == 52 } { {~knobs[1].allChildren[1].valueAction_(val)}.defer }
