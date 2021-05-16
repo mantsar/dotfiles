@@ -13,38 +13,8 @@
   "donateUrl": "",
   "modules": [
     {
-      "slug": "ExpertSleepers-Encoders-8CV",
-      "name": "8CV Encoder",
-      "description": "",
-      "tags": ["External"]
-    },
-    {
-      "slug": "ExpertSleepers-Encoders-8GT",
-      "name": "8GT Encoder",
-      "description": "",
-      "tags": ["External"]
-    },
-    {
       "slug": "ExpertSleepers-Encoders-ES5",
       "name": "ES-5 Encoder",
-      "description": "",
-      "tags": ["External"]
-    },
-    {
-      "slug": "ExpertSleepers-Encoders-ES40",
-      "name": "ES-4(0) Encoder",
-      "description": "",
-      "tags": ["External"]
-    },
-    {
-      "slug": "ExpertSleepers-Encoders-Calibrator",
-      "name": "Calibrator",
-      "description": "",
-      "tags": ["External"]
-    },
-    {
-      "slug": "ExpertSleepers-Encoders-SMUX",
-      "name": "SMUX",
       "description": "",
       "tags": ["External"]
     }
