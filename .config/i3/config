@@ -53,10 +53,11 @@ exec --no-startup-id syncthing --no-browser
 exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 # Remapping keys
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+exec --no-startup-id midi
 # Jack connections
 exec --no-startup-id "jack-matchmaker -e -p $HOME/.config/jack-matchmaker/config"
-exec --no-startup-id midi
 exec_always --no-startup-id flashfocus
+exec --no-startup-id "amidiminder -f $HOME/.config/amidiminder/config"
 
 # #---Bar---# #
 bar {

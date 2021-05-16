@@ -1,0 +1,3 @@
+"SuperCollider":"out0" --> "Virtual Raw MIDI 2-0":"VirMIDI 2-0"
+"SuperCollider":"out1" --> "SuperCollider":"in0"
+"Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "SuperCollider":"in3"

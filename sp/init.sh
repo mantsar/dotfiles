@@ -94,5 +94,8 @@ rm processing-3.5.4-linux64.tgz
 # bitwig
 # uncheck in cadence ALSA MIDI -> start with jack (otherwise external midi controllers cant connect)
 # bitwig support for launchpad mk3 https://github.com/git-moss/DrivenByMoss-Documentation/blob/master/Installation.md
-# run midi script and launch alsa jack midi bridge (in cadence) for midi routing to work in bitwig
-# use carla to load patchbay templates
+# run midi script with amidiminder
+# https://github.com/mzero/amidiminder/blob/master/test.rules
+# https://llllllll.co/t/minding-midi-on-linux/39435/10
+
+# https://www.reddit.com/r/Bitwig/comments/jeg1xt/bitwig_studio_linux_frustrated_by_lack_of/

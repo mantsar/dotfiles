@@ -190,9 +190,13 @@ s.waitForBoot {
 ~midi_start = {|outports=2|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
-    // MIDIClient.init(2, outports:outports);
-    // MIDIClient.init(verbose:false);
-    MIDIIn.connectAll(false); // init in-built
+    // MIDIIn.connectAll(false); // init in-built
+    MIDIClient.init(outports:outports, verbose:false);
+    // MIDIClient.externalSources.select { |src|
+    //   src.device != "Launchpad Mini MK3"
+    // }.do {|src,i|
+    //   MIDIIn.connect(i,src);
+    // };
     // m = outports.collect {|i| MIDIOut(i) };
     m = 2.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
