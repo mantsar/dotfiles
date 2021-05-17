@@ -24,11 +24,12 @@ SynthDef.new(\BD, {
 	fenv = Env([tone*7, tone*1.35, tone], [0.05, 0.6], -14).kr;
 	pfenv = Env([tone*7, tone*1.35, tone], [0.03, 0.6], -10).kr;
 	sig = SinOsc.ar(fenv, pi/2) * env;
-	sub = LFTri.ar(fenv, pi/2) * trienv * 0.05;
-	punch = SinOsc.ar(pfenv, pi/2) * env * 2;
+	sub = LFTri.ar(fenv, pi) * trienv * 0.05;
+	punch = SinOsc.ar(pfenv, pi) * env * 2;
 	punch = HPF.ar(punch, 350);
 	sig = (sig + sub + punch) * 2.5;
-	sig = Limiter.ar(sig, 0.5) * amp * a;
+	// sig = Limiter.ar(sig, 0.5) * amp * a;
+	sig = sig * amp * a * 0.2;
   sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);
@@ -43,8 +44,8 @@ SynthDef.new(\SN, {
 	noise = HPF.ar(noise, 1800);
 	noise = LPF.ar(noise, 8850);
 	noise = noise * noiseEnv * snappy;
-	osc1 = SinOsc.ar(tone2, pi/2) * 0.6;
-	osc2 = SinOsc.ar(tone, pi/2) * 0.7;
+	osc1 = SinOsc.ar(tone2, pi) * 0.6;
+	osc2 = SinOsc.ar(tone, pi) * 0.7;
 	sum = (osc1+osc2) * atkEnv * amp2;
 	sig = Pan2.ar((noise + sum) * amp * 2.5 * a, 0);
 	sig = HPF.ar(sig, 340);
@@ -83,7 +84,7 @@ SynthDef.new(\LT, {
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 20], -250),doneAction:2);
 	penv = EnvGen.kr(Env.new([0.6, 1, 0], [0, 30], -225),doneAction:2);
 	fenv = Env([freq*1.25, freq*1.125, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2) * env;
+	sig = SinOsc.ar(fenv, pi) * env;
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * amp * 3 * a, 0);
 	Out.ar(0, sig);
@@ -94,7 +95,7 @@ SynthDef.new(\MT, {
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 16], -250),doneAction:2);
 	fenv = Env([freq*1.33333, freq*1.125, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2);
+	sig = SinOsc.ar(fenv, pi);
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
@@ -105,7 +106,7 @@ SynthDef.new(\HT, {
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.4, 1, 0], [0, 11], -250),doneAction:2);
 	fenv = Env([freq*1.333333, freq*1.121212, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2);
+	sig = SinOsc.ar(fenv, pi);
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
@@ -117,7 +118,7 @@ SynthDef.new(\LC, {
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 18], -250),doneAction:2);
 	penv = EnvGen.kr(Env.new([0.6, 1, 0], [0, 30], -225),doneAction:2);
 	fenv = Env([freq*1.333333, freq*1.121212, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2) * env;
+	sig = SinOsc.ar(fenv, pi) * env;
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * amp * 3 * a, 0);
 	Out.ar(0, sig);
@@ -128,7 +129,7 @@ SynthDef.new(\MC, {
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 9], -250),doneAction:2);
 	fenv = Env([freq*1.24, freq*1.12, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2);
+	sig = SinOsc.ar(fenv, pi);
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
@@ -139,7 +140,7 @@ SynthDef.new(\HC, {
 	var sig, fenv, env;
 	env = EnvGen.kr(Env.new([0.15, 1, 0], [0, 6], -250),doneAction:2);
 	fenv = Env([freq*1.22972, freq*1.08108, freq], [0.1, 0.5], -4).kr;
-	sig = SinOsc.ar(fenv, pi/2);
+	sig = SinOsc.ar(fenv, pi);
   sig = sig * 0.35;
 	sig = Pan2.ar(sig * env * amp * 2 * a, 0);
 	Out.ar(0, sig);
@@ -165,7 +166,7 @@ SynthDef.new(\claves, {
 	arg amp=1, a=1;
 	var  env, sig;
 	env = EnvGen.kr(Env.new([1, 1, 0], [0, 0.1], -20), doneAction:2);
-	sig = SinOsc.ar(2500, pi/2) * env * amp * a;
+	sig = SinOsc.ar(2500, pi) * env * amp * a;
   sig = sig * 0.35;
 	sig = Pan2.ar(sig, 0);
 	Out.ar(0, sig);

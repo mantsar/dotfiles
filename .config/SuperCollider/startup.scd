@@ -278,6 +278,9 @@ s.waitForBoot {
 
 // Pattern functions ----------
 
+// get default synth freq
+f = {|name, key| SynthDescLib.global.at(name).controlDict['freq'].defaultValue };
+
 ~ch_returning_pb = {|base ... d| 
   var pb, src, src_pp_dict, synth_name;
   base = base.asSymbol;
