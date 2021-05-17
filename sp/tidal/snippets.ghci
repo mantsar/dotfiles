@@ -172,6 +172,51 @@ sc8N "cb" = 49
 sc8N "cy" = 46
 sc8N "oh" = 44
 sc8N "ch" = 42
+sc8N "cl" = 39
+sc8N "cl1" = 37
 sc8N _ = 0
 sc8 x = sc8T x # s "sc8"
+:}
+
+-- Bitwig 808
+:{
+bw8T :: Pattern String -> ControlPattern
+bw8T = n . (bw8N <$>)
+bw8N :: Num a => String -> a
+bw8N "bd" = -24
+bw8N "bd1" = -20
+bw8N "sd" = -23
+bw8N "sn" = -23
+bw8N "sd1" = -19
+bw8N "sn1" = -19
+bw8N "ch" = -22
+bw8N "ch1" = -18
+bw8N "oh" = -21
+bw8N "oh1" = -17
+bw8N "ma" = -16
+bw8N "ma1" = -12
+bw8N "cp" = -15
+bw8N "cp1" = -11
+bw8N "cb" = -14
+bw8N "cb1" = -10
+bw8N "cy" = -13
+bw8N "cy1" = -9
+bw8N "rs" = -8
+bw8N "rs1" = -4
+bw8N "lt" = -7
+bw8N "lt1" = -3
+bw8N "mt" = -6
+bw8N "mt1" = -2
+bw8N "ht" = -5
+bw8N "ht1" = -1
+bw8N "cl" = 0
+bw8N "cl1" = 4
+bw8N "lc" = 1
+bw8N "lc1" = 5
+bw8N "mc" = 2
+bw8N "mc1" = 6
+bw8N "hc" = 3
+bw8N "hc1" = 7
+bw8N _ = 0
+bw8 x = bw8T x # s "midi"
 :}

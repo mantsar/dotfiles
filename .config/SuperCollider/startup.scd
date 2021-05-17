@@ -619,7 +619,8 @@ s.waitForBoot {
 
 // INIT -----------------------------------------------------------------------
 s.waitForBoot({
-  a = Ardour(); // Enable Ardour by default
+  // a = Ardour(); // Enable Ardour by default
+  a = NetAddr("127.0.0.1", 8000); // Enable Bitwig OSC port
   s.sync;
   Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
   ~ndef_settings.value(nil, fadeTime:0.5, quant:1, clock:TempoClock.default);

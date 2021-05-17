@@ -2685,39 +2685,30 @@ k.quelle(\\`!p snip.rv = match.group(1)`, {
 });
 endsnippet
 
-# Ardour
+# Bitwig
 
-snippet ai "Init mastering with ardour" b
-s.reboot({
-  // need to execute twice sometimes
-  // s.options.numOutputBusChannels = 2;
-  s.options.numOutputBusChannels = 24;
-  "~/.config/SuperCollider/startup.scd".load;
-  s.waitForBoot {
-    s.sync;
-    ~superdirt_start.();
-    s.sync;
-    // ~dirt.start(57120, 0!12);
-    ~dirt.start(57120, [0, 2, 4, 6, 8, 10]);
-    // 0-11 are tidal buses, 12-23 for sc
-  }
-});
+snippet ap "" w
+a.sendMsg("/play")
 endsnippet
 
-snippet ae "Puts transport in play mode" b
-a.play;
+snippet as "" w
+a.sendMsg("/stop")
 endsnippet
 
-snippet ak "Stops a rolling transport" b
-a.stop;
+snippet ar "" w
+a.sendMsg("/record")
 endsnippet
 
-snippet aa "Move playhead to start of session" b
-a.start;
+snippet aR "" w
+a.sendMsg("/restart")
 endsnippet
 
-snippet ar "Toggles master record enable" b
-a.rec_enable_toggle;
+snippet ac "" w
+a.sendMsg("/click")
+endsnippet
+
+snippet are "" w
+a.sendMsg("/repeat")
 endsnippet
 
 # MIDI

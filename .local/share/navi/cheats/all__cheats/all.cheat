@@ -366,3 +366,6 @@ pkill -1 jack-matchmaker
 
 # log midi input (after command connect in patchbay)
 mididings "Print()"
+
+# crack simple zip password
+fcrackzip xxx.zip

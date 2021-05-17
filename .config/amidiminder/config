@@ -1,3 +1,8 @@
+"SuperCollider":"out0" --> "Virtual Raw MIDI 3-0":"VirMIDI 3-0"
 "SuperCollider":"out0" --> "Virtual Raw MIDI 2-0":"VirMIDI 2-0"
+"SuperCollider":"out0" --> "Virtual Raw MIDI 1-0":"VirMIDI 1-0"
 "SuperCollider":"out1" --> "SuperCollider":"in0"
+"Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "Virtual Raw MIDI 3-2":"VirMIDI 3-2"
+"Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "Virtual Raw MIDI 2-2":"VirMIDI 2-2"
+"Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "Virtual Raw MIDI 1-2":"VirMIDI 1-2"
 "Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "SuperCollider":"in3"
