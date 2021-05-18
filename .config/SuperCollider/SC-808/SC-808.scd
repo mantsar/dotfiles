@@ -1191,7 +1191,7 @@ for(12, 15, {
 		tone.set(\tone, ~toneBD);
 	});
 })
-.valueAction_(0);
+.valueAction_(0.5);
 
 ~knobs[2].children[0].action_({
 	arg obj;
@@ -1227,7 +1227,7 @@ for(12, 15, {
 
 ~knobs[0].children[1].action_({
 	arg obj;
-	~sna = obj.value.linexp(0, 1, 0.3, 1.3);
+	~sna = obj.value.linexp(0, 1, 0.3, 2.3);
 	~snGUI.do({
 		arg amp;
 		amp.set(\a, ~sna);
@@ -1280,7 +1280,7 @@ for(12, 15, {
 
 ~knobs[0].children[2].action_({
 	arg obj;
-	~lowtoma = obj.value.linexp(0, 1, 0.3, 1.3);
+	~lowtoma = obj.value.linexp(0, 1, 0.3, 2.3);
 	~lowtomGUI.do({
 		arg amp;
 		amp.set(\a, ~lowtoma);
@@ -1317,7 +1317,7 @@ for(12, 15, {
 
 ~knobs[0].children[3].action_({
 	arg obj;
-	~midtoma = obj.value.linexp(0, 1, 0.3, 1.3);
+	~midtoma = obj.value.linexp(0, 1, 0.3, 2.3);
 	~midtomGUI.do({
 		arg amp;
 		amp.set(\a, ~midtoma);
@@ -1355,7 +1355,7 @@ for(12, 15, {
 
 ~knobs[0].children[4].action_({
 	arg obj;
-	~hitoma = obj.value.linexp(0, 1, 0.3, 1.3);
+	~hitoma = obj.value.linexp(0, 1, 0.3, 2.3);
 	~hitomGUI.do({
 		arg amp;
 		amp.set(\a, ~hitoma);
@@ -1393,7 +1393,7 @@ for(12, 15, {
 
 ~knobs[0].children[5].action_({
 	arg obj;
-	~lowcongaa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~lowcongaa = obj.value.linexp(0, 1, 0.3, 2.3);
 	~lowcongaGUI.do({
 		arg amp;
 		amp.set(\a, ~lowcongaa);
@@ -1430,7 +1430,7 @@ for(12, 15, {
 
 ~knobs[0].children[6].action_({
 	arg obj;
-	~midcongaa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~midcongaa = obj.value.linexp(0, 1, 0.3, 2.3);
 	~midcongaGUI.do({
 		arg amp;
 		amp.set(\a, ~midcongaa);
@@ -1468,7 +1468,7 @@ for(12, 15, {
 
 ~knobs[0].children[7].action_({
 	arg obj;
-	~hicongaa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~hicongaa = obj.value.linexp(0, 1, 0.3, 2.3);
 	~hicongaGUI.do({
 		arg amp;
 		amp.set(\a, ~hicongaa);
@@ -1507,7 +1507,7 @@ for(12, 15, {
 
 ~knobs[0].children[8].action_({
 	arg obj;
-	~cla = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cla = obj.value.linexp(0, 1, 0.3, 2.3);
 	~clGUI.do({
 		arg amp;
 		amp.set(\a, ~cla);
@@ -1534,7 +1534,7 @@ for(12, 15, {
 
 ~knobs[0].children[9].action_({
 	arg obj;
-	~rsa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~rsa = obj.value.linexp(0, 1, 0.3, 2.3);
 	~rimshotGUI.do({
 		arg amp;
 		amp.set(\a, ~rsa);
@@ -1562,7 +1562,7 @@ for(12, 15, {
 
 ~knobs[0].children[10].action_({
 	arg obj;
-	~maracasa = obj.value.linexp(0, 1, 0.3, 1.3);
+	~maracasa = obj.value.linexp(0, 1, 0.3, 2.3);
 	~maracasGUI.do({
 		arg amp;
 		amp.set(\a, ~maracasa);
@@ -1593,8 +1593,8 @@ for(12, 15, {
 
 ~knobs[0].children[11].action_({
 	arg obj;
-	~cpRawa = obj.value.linexp(0, 1, 0.3, 1.3);
-	~cpReverba = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cpRawa = obj.value.linexp(0, 1, 0.3, 2.3);
+	~cpReverba = obj.value.linexp(0, 1, 0.3, 2.3);
 	~clapRawGUI.do({
 		arg amp;
 		amp.set(\a, ~cpRawa);
@@ -1636,7 +1636,7 @@ for(12, 15, {
 
 ~knobs[0].children[12].action_({
 	arg obj;
-	~cba = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cba = obj.value.linexp(0, 1, 0.3, 2.3);
 	~cowbellGUI.do({
 		arg amp;
 		amp.set(\a, ~cba);
@@ -1663,7 +1663,7 @@ for(12, 15, {
 
 ~knobs[0].children[13].action_({
 	arg obj;
-	~cya = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cya = obj.value.linexp(0, 1, 0.3, 2.3);
 	~cymbalGUI.do({
 		arg amp;
 		amp.set(\a, ~cya);
@@ -1715,7 +1715,7 @@ for(12, 15, {
 
 ~knobs[0].children[14].action_({
 	arg obj;
-	~oha = obj.value.linexp(0, 1, 0.3, 1.3);
+	~oha = obj.value.linexp(0, 1, 0.3, 2.3);
 	~openhihatGUI.do({
 		arg amp;
 		amp.set(\a, ~oha);
@@ -1755,7 +1755,7 @@ for(12, 15, {
 
 ~knobs[0].children[15].action_({
 	arg obj;
-	~cha = obj.value.linexp(0, 1, 0.3, 1.3);
+	~cha = obj.value.linexp(0, 1, 0.3, 2.3);
 	~closehihatGUI.do({
 		arg amp;
 		amp.set(\a, ~cha);
