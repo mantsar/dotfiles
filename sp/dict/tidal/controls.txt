@@ -306,3 +306,6 @@ dcr78
 dscr78
 sc8
 bw8
+
+dist
+rdec

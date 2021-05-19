@@ -91,6 +91,7 @@ skmeansep
 skmeanses
 skmeansel
 s8bd
+s8bd1
 s8lt
 s8mt
 s8ht
@@ -145,11 +146,13 @@ srongsep
 srongses
 srongsel
 
-srhodes
-srhodesep
-srhodeses
-srhodesel
+srhodes1
+srhodes1ep
+srhodes1es
+srhodes1el
 sbass8
 sacid309
 spbass
 scs80lead
+
+srhodes

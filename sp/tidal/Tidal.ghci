@@ -241,6 +241,11 @@ let detune_prob = pF "detune_prob"
     wosc = pF "wosc"
     wchan = pF "wchan"
 
+    dist = pF "dist"
+    rdec = pF "rdec"
+
+    chc = pF "chc"
+
     :}
 
 
