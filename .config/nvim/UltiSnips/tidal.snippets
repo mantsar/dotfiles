@@ -37,12 +37,24 @@ snippet js "Silence a pattern" b
 d${1:`!p if not snip.c: snip.rv = cycle_index()`} silence
 endsnippet
 
-snippet j1 "Silence all except this" b
+snippet j1 "Silence (mute) all except this" b
 solo ${1:`!p if not snip.c: snip.rv = cycle_index()`}
 endsnippet
 
 snippet ju "Undo solo action" b
 unsolo ${1:`!p if not snip.c: snip.rv = cycle_index()`}
+endsnippet
+
+snippet jm "" b
+mute ${1:`!p if not snip.c: snip.rv = cycle_index()`}
+endsnippet
+
+snippet jmu "" b
+unmute ${1:`!p if not snip.c: snip.rv = cycle_index()`}
+endsnippet
+
+snippet jM "" b
+unmuteAll
 endsnippet
 
 snippet D "Deconstruct" b
@@ -648,15 +660,15 @@ in
 d1 $ ur $8 "$9" $1 fx
 endsnippet
 
+# do
+# {
+#   resetCycles;
 snippet psp "Similar to SC Pspawner. Stack by default" b
-do
-{
-  resetCycles;
-  d${1:1} $ seqP [
-    (${2:0}, ${3:12}, ${VISUAL}$4)$5
-  ]
-}
+d${1:1} $ qtrigger 1 $ seqP [
+  (${2:0}, ${3:12}, ${VISUAL}$4)$5
+]
 endsnippet
+# }
 
 snippet ps "Similar to SC Pspawner. Stack by default" w
 seqP [(0, ${1:24},
@@ -664,27 +676,23 @@ seqP [(0, ${1:24},
 endsnippet
 
 snippet psl "To loop specific amount wrap inside seqP. Similar as wrapping in Pn in SC" b
-do
-{
-  resetCycles;
-  d${1:1} $ seqPLoop [
-    (${2:0}, ${3:12}, ${VISUAL}$4)$5
-  ]
-}
+d${1:1} $ qtrigger 1 $ seqPLoop [
+  (${2:0}, ${3:12}, ${VISUAL}$4)$5
+]
 endsnippet
 
-snippet rL "Only offsets seqPLoop first cycle " b
+snippet rL "Only offsets seqPLoop first cycle " w
 rotL ${1:3}
 endsnippet
 
+snippet rR "" w
+rotR ${1:3}
+endsnippet
+
 snippet pls "Start at specific cycle" b
-do
-{
-  resetCycles;
-  d${1:1} $ rotL ${2:4} $ seqP [
-    (${3:0}, ${4:12}, ${VISUAL}$5)$6
-  ]
-}
+d${1:1} $ qtrigger 1 $ rotL ${2:4} $ seqP [
+  (${3:0}, ${4:12}, ${VISUAL}$5)$6
+]
 endsnippet
 
 # Envelopes
@@ -760,6 +768,10 @@ endsnippet
 
 snippet t "Trigger on specified channel revaluation (can be itself)" w
 trigger ${1:`!p if not snip.c: snip.rv = cycle_index()`} $ $0
+endsnippet
+
+snippet qt "" w
+qtrigger 1
 endsnippet
 
 # Language

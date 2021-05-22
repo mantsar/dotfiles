@@ -267,7 +267,7 @@ splice
 snowball
 soak
 scale
-getScale 
+getScale
 scaleTable
 const
 perlin
@@ -278,3 +278,6 @@ take
 resetCycles
 rotL
 trigger
+mute
+unmute
+unmuteAll
