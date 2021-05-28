@@ -852,6 +852,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>h :call Toggle_scnvim_scdoc()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>s :call scnvim#sclang#send("s.scope")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>f :call scnvim#sclang#send("FreqScope.new(1200)")<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>F :call scnvim#sclang#send("Japa.new")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>t :call scnvim#sclang#send("s.plotTree")<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
@@ -865,7 +866,7 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <leader><leader>c :call Tidal_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>p :call Foxdot_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>e :call Espgrid_init()<cr>
-	autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
+	" autocmd VimEnter *.scd nnoremap <leader><leader>F :call Faust_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>o :StartAsync Orca<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>d :call scnvim#sclang#send('(Platform.userConfigDir +/+ "SC-808/SC-808.scd").load')<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>a :StartAsync ardour6 ardour_a<cr>

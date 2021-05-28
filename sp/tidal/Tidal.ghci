@@ -246,8 +246,10 @@ let detune_prob = pF "detune_prob"
 
     chc = pF "chc"
 
-    :}
+    sup = pF "sup"
+    sdown = pF "sdown"
 
+    :}
 
 -- bus params
 

@@ -136,7 +136,7 @@ bindsym $mod+e			gaps inner current plus 20
 bindsym $mod+Shift+e		gaps inner current minus 20
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f exec --no-startup-id myjapa
+# bindsym $mod+Shift+f exec --no-startup-id myjapa
 bindsym --whole-window $mod+button1 fullscreen toggle
 
 bindsym $mod+h			focus left

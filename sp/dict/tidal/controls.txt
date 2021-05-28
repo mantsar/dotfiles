@@ -23,6 +23,7 @@ pan
 note
 freq
 midinote
+midichan
 octave
 offset
 cut
@@ -309,3 +310,6 @@ bw8
 
 dist
 rdec
+
+sup
+sdown

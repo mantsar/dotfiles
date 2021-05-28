@@ -99,11 +99,19 @@ rot "$1"
 endsnippet
 
 snippet cat "Concat for different cycles. Pattern maintains it's original duration." w
-cat [$1]
+cat
+[
+  ${VISUAL}$1,
+  $2
+]
 endsnippet
 
 snippet fc "concat for same cycle" w
-fastcat [${VISUAL}$1]
+fastcat
+[
+  ${VISUAL}$1,
+  $2
+]
 endsnippet
 
 snippet append "same as cat family, but applies to diff cycles simlar to <> " w
@@ -509,6 +517,10 @@ snippet lpq "low pass filter" w
 lpf $1 # lpq $0
 endsnippet
 
+snippet sl "" w
+sup 0.${1:05} # sdown 0.${2:01}
+endsnippet
+
 snippet hpf "high pass filter" w
 hpf $1
 endsnippet
@@ -624,40 +636,30 @@ nCountTo "$1"
 endsnippet
 
 snippet p "" w
-stack [
-  ${VISUAL}$1
-	,
+stack
+[
+  ${VISUAL}$1,
   $2
 ]
 endsnippet
 
-snippet pp "$6 means how many repetitions for event divided by elements in cycle" w
-let ${1:pats} =
-      [
-        ("${2:a}", stack [$3
-                    ]
-        ),
-        ("${4:b}", stack [$5
-                    ]
-        )
-      ]
-in
-d1 $ ur $6 "$7" $1 []
+snippet ur "$6 means how many repetitions for event divided by elements in cycle" w
+ur ${1:2} "$2"
+[
+  ("${3:m}", $4),
+  ("${5:d}", $6)
+] []
 endsnippet
 
-snippet pfx "ur with effects" w
-let ${1:pats} =
-      [
-        ("${2:a}", stack [$3
-                    ]
-        ),
-        ("${4:b}", stack [$5
-                    ]
-        )
-      ]
-      fx = [("${6:a}", ($7))]
-in
-d1 $ ur $8 "$9" $1 fx
+snippet urfx "ur with effects" w
+ur ${1:2} "$2"
+[
+  ("${3:m}", $4),
+  ("${5:d}", $6)
+]
+[
+  ("${7:fx}", $8)
+]
 endsnippet
 
 # do
@@ -1126,6 +1128,10 @@ endsnippet
 # MIDI
 snippet m "" w
 # s "midi" # midichan ${0:0}
+endsnippet
+
+snippet mc "" w
+midichan 4
 endsnippet
 
 snippet sc8 "SC-808" w

@@ -641,7 +641,7 @@ s.waitForBoot({
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
   if (~sync.notNil) { ~sync.unhang };
   ~midi_start.value();
-  (Platform.userConfigDir +/+ "SC-808/SC-808.scd").load;
+  // (Platform.userConfigDir +/+ "SC-808/SC-808.scd").load;
   StageLimiter.activate(2);
   "Setup done".postln;
 });
@@ -665,6 +665,7 @@ s.waitForBoot({
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
 // Quarks.install("https://github.com/mantsar/SuperUtilities");
+// Quarks.install("https://github.com/madskjeldgaard/linuxutils-quark")
 
 // If messy Quarks.clear (and reinstall)
 // Quarks.uninstall("Scintillator");

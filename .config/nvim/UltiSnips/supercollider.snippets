@@ -1880,6 +1880,26 @@ AnalogPhaser.ar(
 )
 endsnippet
 
+# vb_UGens
+snippet Lores "" w
+Lores.ar(${1:sig}, ${2:freq}, ${3:0.5})
+endsnippet
+
+snippet VBJonVerb "stereo" w
+VBJonVerb.ar(
+  ${1:sig},
+  decay:${2:0.6},
+  damping:${3:0.3},
+  inputbw:${4:0.8},
+  erfl:${5:0.5},
+  tail:${6:0.5}
+)
+endsnippet
+
+snippet Slide "" w
+Slide.ar(${1:sig}, ${2:50}, ${3:3000})
+endsnippet
+
 # Pseudo UGens
 
 snippet Pad "Smooth pad" w
