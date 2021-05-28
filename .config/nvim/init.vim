@@ -667,7 +667,7 @@ let g:vista_default_executive = 'lspconfig'
 let g:vista#renderer#enable_icon = 1
 let g:vista_echo_cursor_strategy = 'echo'
 autocmd FileType vista,vista_kind nnoremap <buffer> <silent> / :<c-u>call vista#finder#fzf#Run()<cr>
-nnoremap <silent> <M-space> :Vista!!<cr>
+" nnoremap <silent> <M-space> :Vista!!<cr>
 " }}}2
 
 " Markdown {{{2
@@ -1159,24 +1159,25 @@ endfunction
 " Misc {{{2
 call minpac#add('dm1try/golden_size')
 " packadd! golden_size
-" " Disable automatic resizing for specific windows
-" lua << EOF
-" local function ignore_by_buftype(types)
-"   local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
-"   for _, type in pairs(types) do
-"     if type == buftype then
-"       return 1
-"     end
-"   end
-" end
-" local golden_size = require("golden_size")
-" -- set the callbacks, preserve the defaults
-" golden_size.set_ignore_callbacks({
-"   { ignore_by_buftype, {'quickfix', 'terminal', 'nofile'} },
-"   { golden_size.ignore_float_windows }, -- default one, ignore float windows
-"   { golden_size.ignore_by_window_flag }, -- default one, ignore windows with w:ignore_gold_size=1
-" })
-" EOF
+" Disable automatic resizing for specific windows
+lua << EOF
+local function ignore_by_buftype(types)
+  local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+  for _, type in pairs(types) do
+    if type == buftype then
+      return 1
+    end
+  end
+end
+local golden_size = require("golden_size")
+-- set the callbacks, preserve the defaults
+golden_size.set_ignore_callbacks({
+  { ignore_by_buftype, {'terminal','quickfix', 'nofile'} },
+  { golden_size.ignore_float_windows }, -- default one, ignore float windows
+  { golden_size.ignore_by_window_flag }, -- default one, ignore windows with w:ignore_gold_size=1
+})
+EOF
+nnoremap <silent> <M-space> :lua golden_size.on_win_enter()<cr>
 call minpac#add('dstein64/nvim-scrollview')
 let g:scrollview_excluded_filetypes = ['scnvim'] "set ft?
 let g:scrollview_active_only = 1
