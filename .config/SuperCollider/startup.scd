@@ -666,6 +666,7 @@ s.waitForBoot({
 // Quarks.install("Feedback");
 // Quarks.install("https://github.com/mantsar/SuperUtilities");
 // Quarks.install("https://github.com/madskjeldgaard/linuxutils-quark")
+// Quarks.install("https://github.com/shimpe/panola");
 
 // If messy Quarks.clear (and reinstall)
 // Quarks.uninstall("Scintillator");

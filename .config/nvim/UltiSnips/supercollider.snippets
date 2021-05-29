@@ -718,7 +718,7 @@ endsnippet
 # sp.seq(${VISUAL}$1);
 # endsnippet
 
-snippet pa "Parallel" b
+snippet par "Parallel" b
 sp.par(${VISUAL}$1);
 endsnippet
 
@@ -3017,4 +3017,13 @@ fork {
 };
 // ~$1.set();
 )
+endsnippet
+
+# Panola
+snippet pa "" w
+Panola("$1", tempo_default: "60")
+endsnippet
+
+snippet .pb "" w
+asPbind
 endsnippet
