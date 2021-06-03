@@ -563,7 +563,7 @@ nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gl :Git log<cr>
 call minpac#add('Shougo/deoplete.nvim') "Asynchronous completion
 let g:deoplete#enable_at_startup = 1
-call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
+" call minpac#add('deoplete-plugins/deoplete-tag') "Source for ctags
 call minpac#add('deathlyfrantic/deoplete-spell') "Requires :set spell
 call minpac#add('deoplete-plugins/deoplete-dictionary')
 call minpac#add('Shougo/deoplete-lsp')
@@ -857,7 +857,8 @@ augroup sc_au
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>] :SCNvimRecompile<cr>
 	autocmd VimEnter *.scd nnoremap <silent> <leader><leader>T :SCNvimTags<cr>
 	" midi/tidal/foxdot/imroviz
-	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("MIDIIn.connectAll")<cr>
+	autocmd VimEnter *.scd nnoremap <leader><leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
+	autocmd VimEnter *.scd nnoremap <leader>m :call scnvim#sclang#send("~midi_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>b :call scnvim#sclang#send("~bitwig_start.()")<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>v :call Improviz_init()<cr>
 	autocmd VimEnter *.scd nnoremap <leader><leader>y :call Scintillator_init()<cr>
@@ -924,7 +925,9 @@ function Is_comment()
 endfunction
 
 function Hard_stop_tidal()
-	nnoremap <buffer> <M-C-k> :call scnvim#hard_stop() <bar> TidalHush<cr>
+	call scnvim#hard_stop()
+	TidalHush
+	TidalSend1 once $ midicmd "stop" # s "rd6"
 endfunction
 
 augroup tidal_au
@@ -943,7 +946,7 @@ augroup tidal_au
 	autocmd FileType tidal setlocal dictionary+=~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/synths.txt
 	autocmd FileType tidal :badd ~/sp/dict/tidal/controls.txt
-	autocmd FileType tidal nmap <leader>m :read !midi_to_tidalcycles -Hcal -q 4 ~/Bitwig\ Studio/Projects/a/t.mid<M-b><M-b><left>
+	autocmd FileType tidal nmap <buffer> <leader>m :read !midi_to_tidalcycles -Hcal -q 4 ~/Bitwig\ Studio/Projects/a/t.mid<M-b><M-b><left>
 	autocmd FileType tidal inoremap <buffer> <M-cr> <cr>$<space>
 	autocmd FileType tidal inoremap <buffer> <M-m> <cr>#<space>
 	autocmd FileType tidal nnoremap <silent> <buffer> K :execute "StartAsync qutebrowser 'https://tidalcycles.org/index.php?search=" . expand("<cword>") . "'"<cr>
@@ -964,7 +967,7 @@ augroup tidal_au
 	autocmd FileType tidal nmap <buffer> <M-o> <Plug>TidalParagraphSend
 	autocmd FileType tidal imap <buffer> <M-o> <esc><Plug>TidalParagraphSend<esc>i<right>
 	autocmd FileType tidal nnoremap <buffer> <M-k> mm:TidalHush<cr>`m
-	autocmd FileType tidal :call Hard_stop_tidal()
+	autocmd FileType tidal nnoremap <M-C-k> :call Hard_stop_tidal()<cr>
 	autocmd FileType tidal nnoremap <buffer> <M-t> :TidalSend1 setcps<space>
 	au FileType tidal call lexima#add_rule({'char': '<', 'input_after': '>', 'filetype': 'tidal'})
 	au FileType tidal call lexima#add_rule({'char': '<Space>', 'at': '<\%#>', 'input_after': '<Space>', 'filetype': 'tidal'})

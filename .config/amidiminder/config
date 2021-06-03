@@ -6,3 +6,5 @@
 "Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "Virtual Raw MIDI 2-2":"VirMIDI 2-2"
 "Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "Virtual Raw MIDI 1-2":"VirMIDI 1-2"
 "Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "SuperCollider":"in3"
+"nanoKONTROL2":"nanoKONTROL2 MIDI 1" --> "SuperCollider":"in4"
+"SuperCollider":"out2" --> "nanoKONTROL2":"nanoKONTROL2 MIDI 1"

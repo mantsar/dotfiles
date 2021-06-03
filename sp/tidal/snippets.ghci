@@ -220,3 +220,22 @@ bw8N "hc1" = 7
 bw8N _ = 0
 bw8 x = bw8T x # s "midi"
 :}
+
+-- RD-6
+:{
+rd6T :: Pattern String -> ControlPattern
+rd6T = n . (subtract 60 . rd6N <$>)
+rd6N :: Num a => String -> a
+rd6N "bd" = 36
+rd6N "sd" = 40
+rd6N "sn" = 40
+rd6N "lt" = 45
+rd6N "ht" = 50
+rd6N "cp" = 39
+rd6N "cy" = 51
+rd6N "oh" = 46
+rd6N "ch" = 42
+rd6N "hc" = 42
+rd6N _ = 0
+rd6 x = rd6T x # s "rd6"
+:}

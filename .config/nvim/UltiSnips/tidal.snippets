@@ -1157,6 +1157,14 @@ p "cc8" $ density 8 $ stack [
 ] # s "sc8"
 endsnippet
 
+snippet rd6c "RD-6 midiclock" b
+p "midiclock" $ midicmd "midiClock*48" # s "rd6"
+endsnippet
+
+snippet rd6 "RD-6" w
+$ rd6 "$1" # amp 1
+endsnippet
+
 # Rack
 # requires setcps 1 to work properly
 snippet a01 "" iwA

@@ -336,3 +336,18 @@ densityFilter density events = foldl (fi density) events [0..length events -1]
 lessDense :: Eq a => Double -> Pattern a -> Pattern a
 lessDense density p = p {query = (densityFilter density). sortOn whole . query p}
 :}
+
+-- rd-6
+-- p "midiclock" $ midicmd "midiClock*48" # s "rd6"
+let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16]
+
+-- nanoKONTROL2
+-- 127 bus values
+nk1 = ampbus 0 (cF 0.5 "0") # panbus 16 (range (-1) 1 (cF 1 "16"))
+nk2 = ampbus 1 (cF 0.5 "1") # panbus 17 (range (-1) 1 (cF 1 "17"))
+nk3 = ampbus 2 (cF 0.5 "2") # panbus 18 (range (-1) 1 (cF 1 "18"))
+nk4 = ampbus 3 (cF 0.5 "3") # panbus 19 (range (-1) 1 (cF 1 "19"))
+nk5 = ampbus 4 (cF 0.5 "4") # panbus 20 (range (-1) 1 (cF 1 "20"))
+nk6 = ampbus 5 (cF 0.5 "5") # panbus 21 (range (-1) 1 (cF 1 "21"))
+nk7 = ampbus 6 (cF 0.5 "6") # panbus 22 (range (-1) 1 (cF 1 "22"))
+nk8 = ampbus 7 (cF 0.5 "7") # panbus 23 (range (-1) 1 (cF 1 "23"))

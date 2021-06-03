@@ -136,20 +136,7 @@ s.waitForBoot {
   ServerTree.add({Ndef(\d6).play; Ndef(\d7).play});
   // MIDI
   // s.sync;
-  // Controller
-  // ~tidal_midi_start.();
 }
-};
-
-// MIDIFunc.cc is broken
-~tidal_midi_start = {
-  var osc = NetAddr.new("127.0.0.1", 6010);
-  MIDIdef.noteOn(\on, {arg val, num;
-    osc.sendMsg("/off", num.asString, val/127);
-  });
-  MIDIdef.noteOff(\bb, {arg val, num;
-    osc.sendMsg("/ctrl", num.asString, val/127);
-  });
 };
 
 ~foxdot_start = {
@@ -173,22 +160,72 @@ s.waitForBoot {
   };
 };
 
-~midi_start = {|outports=2|
+~nk2 = {
+  var osc = NetAddr.new("127.0.0.1", 6010);
+  var flash = {|bt| { bt.ledState = 1; 0.1.wait; bt.ledState = 0; }.fork};
+  ~slub = Slub.new;
+  n = NanoKontrol2(\external);
+  n.ledsOff; // turn leds off
+  n.sBtns.do {|btn, i|
+    btn.onPress = {|val, bt|
+      bt.ledState = (bt.ledState + 1) % 2;
+      if (bt.ledState == 0) { osc.sendMsg("/unsolo", i+1) } { osc.sendMsg("/solo", i+1) };
+    }
+  };
+  n.mBtns.do {|btn, i|
+    btn.onPress = {|val, bt|
+      bt.ledState = (bt.ledState + 1) % 2;
+      if (bt.ledState == 0) { osc.sendMsg("/unmute", i+1) } { osc.sendMsg("/mute", i+1) };
+    }
+  };
+  n.stopBtn.onPress = {|val, bt|
+    flash.(bt);
+    osc.sendMsg("/muteAll");
+    n.mBtns.do {|btn| btn.ledState = 1; };
+  };
+  n.playBtn.onPress = {|val, bt|
+    flash.(bt);
+    osc.sendMsg("/unmuteAll");
+    n.mBtns.do {|btn| btn.ledState = 0; };
+  };
+  n.recBtn.onPress = {|val, bt|
+    flash.(bt);
+    osc.sendMsg("/unsoloAll");
+    n.sBtns.do {|btn| btn.ledState = 0; };
+  };
+  n.bwBtn.onPress = {|val, bt|
+    // flash.(bt);
+    ~slub.bang(5.5);
+  };
+  n.fwdBtn.onPress = {|val, bt|
+    // flash.(bt);
+    ~slub.bang(5.75);
+  };
+};
+
+~midi_start = {|outports=3|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
-    // MIDIIn.connectAll(false); // init in-built
     MIDIClient.init(outports:outports, verbose:true);
-    // MIDIClient.externalSources.select { |src|
-    //   src.device != "Launchpad Mini MK3"
-    // }.do {|src,i|
-    //   MIDIIn.connect(i,src);
-    // };
-    // m = outports.collect {|i| MIDIOut(i) };
     m = 2.collect {|i| MIDIOut(i) };
     m.do {|v| v.latency = 0 };
     // tidal
     ~dirt.soundLibrary.addMIDI(\midi, m[0]);
     ~dirt.soundLibrary.addMIDI(\sc8, m[1]);
+    try {
+      ~rd6 = MIDIOut.newByName("RHYTHM DESIGNER RD-6", "RHYTHM DESIGNER RD-6 MIDI 1");
+      ~rd6.latency = 0;
+      ~dirt.soundLibrary.addMIDI(\rd6, ~rd6);
+    };
+    // forward to tidal
+    MIDIIn.control={arg src,chan,num,val;
+      var osc = NetAddr.new("127.0.0.1", 6010);
+      val = val/127.0;
+      osc.sendMsg("/ctrl", num.asString, val); // tidal
+    };
+    try {
+      ~nk2.();
+    }
   }
 };
 
@@ -642,6 +679,7 @@ s.waitForBoot({
   if (~sync.notNil) { ~sync.unhang };
   ~midi_start.value();
   // (Platform.userConfigDir +/+ "SC-808/SC-808.scd").load;
+  // Safety(s).disable;
   StageLimiter.activate(2);
   "Setup done".postln;
 });
@@ -665,13 +703,17 @@ s.waitForBoot({
 // Quarks.install("Steno");
 // Quarks.install("Feedback");
 // Quarks.install("https://github.com/mantsar/SuperUtilities");
+// Quarks.install("https://github.com/mantsar/NanoKontrol2");
 // Quarks.install("https://github.com/madskjeldgaard/linuxutils-quark")
 // Quarks.install("https://github.com/shimpe/panola");
 
-// If messy Quarks.clear (and reinstall)
+// If messy Quarks.clear (and reinstall) or use Quarks.gui to uninstall
 // Quarks.uninstall("Scintillator");
 // ScinServerInstaller.disableAutoInstall;
 // get binary from https://github.com/ScintillatorSynth/Scintillator/issues/124
 // put into quark bin directory
 // chmod u+x scinsynth-x86_64.AppImage
 // sudo pacman -S fuse2
+// Quarks.uninstall("https://github.com/totalgee/bacalao");
+// Quarks.uninstall("SafetyNet") // required by bacalao
+// Quarks.uninstall("https://github.com/dkmayer/miSCellaneous_lib");
