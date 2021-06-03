@@ -98,6 +98,9 @@ git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/pkgbuilds/tmux-re
 # bind n findnext 1
 # bind N findnext -1
 
+# about:config -> browser.proton.enabled = false
+
+
 # set searchurls.g https://www.google.com/search?q=
 # set searchurls.y https://www.youtube.com/results?search_query=
 # set searchurls.r https://old.reddit.com/search?q=
