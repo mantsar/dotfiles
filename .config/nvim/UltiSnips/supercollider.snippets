@@ -2666,7 +2666,7 @@ dry`!p snip.rv = int(match.group(1))` = Normalizer.ar(dry`!p snip.rv = int(match
 endsnippet
 
 snippet cs "Visualiser (Improviz) address" w
-c.sendMsg("/ctrl", "${1:n}", $2)
+~ptidal.sendMsg("/ctrl", "${1:n}", $2)
 endsnippet
 
 snippet dp "" b
@@ -3026,4 +3026,37 @@ endsnippet
 
 snippet .pb "" w
 asPbind
+endsnippet
+
+# bacalao
+snippet c "" w
+c.p(\\${1:a}, deg"$2");
+endsnippet
+
+snippet co "" w
+c.once(\\${1:a}, deg"$2");
+endsnippet
+
+snippet # "" A
+<<
+endsnippet
+
+snippet cc "" w
+c.clear(\\${1:a}, ${2:4});
+endsnippet
+
+# c.hush over one second
+snippet cC "" w
+c.clear(c.trks, ${1:4});
+endsnippet
+
+snippet cd "" w
+c.defSet(\\${1:a}, (instrument: \\${2:pluck}));
+endsnippet
+
+snippet cp "" w
+(
+var p = Pseq([0,4], inf);
+$1
+)
 endsnippet

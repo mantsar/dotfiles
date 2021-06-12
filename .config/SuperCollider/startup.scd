@@ -18,16 +18,11 @@ s.options.numOutputBusChannels = 10;
 s.options.numInputBusChannels = 2;
 s.latency = 0.3;
 
-~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
-~dirt.doNotReadYet = false; // lazy loading of samples (broken with synths)
-
 ~superdirt_start = {|dirt_channels = #[0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16]|
 s.waitForBoot {
-  if (m.isNil) { ~sync = Condition.new; ~sync.hang;};
+  // if (m.isNil) { ~sync = Condition.new; ~sync.hang;};
   // ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
-  ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
-  ~dirt.loadSoundFiles("~/sp/samples/*");
-  // s.sync; // optionally: wait for samples to be read
+  s.sync; // optionally: wait for samples to be read
   ~dirt.start(57120, dirt_channels);
   // ~dirt.start(57120, [8, 10, 12, 14]); // uncomment if mastering
   (
@@ -45,10 +40,10 @@ s.waitForBoot {
   ~b10 = Bus.audio(s, 2); ~b11 = Bus.audio(s, 2); ~b12 = Bus.audio(s, 2);
   ~b13 = Bus.audio(s, 2); ~b14 = Bus.audio(s, 2); ~b15 = Bus.audio(s, 2);
   ~b16 = Bus.audio(s, 2);
-  ~d = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12, ~d13, ~d14, ~d15, ~d16];
+  ~dirt_orbits = [~d1, ~d2, ~d3, ~d4, ~d5, ~d6, ~d7, ~d8, ~d9, ~d10, ~d11, ~d12, ~d13, ~d14, ~d15, ~d16];
   ~b = [~b1, ~b2, ~b3, ~b4, ~b5, ~b6, ~b7, ~b8, ~b9, ~b10, ~b11, ~b12, ~b13, ~b14, ~b15, ~b16];
   ~dirt_orbit_buses = {
-    ~d.do { |v, i|
+    ~dirt_orbits.do { |v, i|
       if (v.outBus == 0) {
         "--- ~d% inactive \n".postf(i+1);
       } {
@@ -76,14 +71,13 @@ s.waitForBoot {
   // ~dirt_orbit_filter.(("d" ++ (i+1)).asSymbol, v[0], v[1])
   // };
   // ServerTree.add({12.do {|v, i| Ndef(("d" ++ (i+1)).asSymbol).play } });
-  c = NetAddr("127.0.0.1", 6010);
+  ~ptidal = NetAddr("127.0.0.1", 6010);
   SuperDirt.default = ~dirt;
   // ADDITIONAL EFFECTS
   // s.sync;
   (Platform.userConfigDir +/+ "synthdef/effects-extra.scd").load; // Effects
   // then add the effect to the orbits
   s.sync;
-  d = ~dirt.buffers;
   // https://github.com/tidalcycles/Tidal/issues/618
   // solves clicking problem, but makes everything less punchy. Can be set with fadeTime param
   ~dirt.orbits[2].set(\fadeTime, 0.1);
@@ -661,7 +655,6 @@ f = {|name, key| SynthDescLib.global.at(name).controlDict['freq'].defaultValue }
 s.waitForBoot({
   // a = Ardour(); // Enable Ardour by default
   a = NetAddr("127.0.0.1", 8000); // Enable Bitwig OSC port
-  s.sync;
   Ndef(\g_tempo, 1); // Gloabl tempo for proxies and patterns
   ~ndef_settings.value(nil, fadeTime:0.5, quant:1, clock:TempoClock.default);
   // Ndef.defaultReshaping = \elastic;
@@ -673,13 +666,21 @@ s.waitForBoot({
   // Steno
   k = Steno.push;
   DiffString.tempFilePath = "~/sp/tmp";
-  s.sync;
+  ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
+  ~dirt.doNotReadYet = false; // lazy loading of samples (broken with synths)
+  ~dirt.loadSoundFiles; // (path containing a wildcard can be passed in)
+  ~dirt.loadSoundFiles("~/sp/samples/*");
+  d = ~dirt.buffers;
+  ~d = ~dirt.buffers;
+  ~midi_start.value();
   "./synthdef/synth_def.scd".loadRelative; // Synths
   "./synthdef/voltage.scd".loadRelative; // synths for CV control
-  if (~sync.notNil) { ~sync.unhang };
-  ~midi_start.value();
   // (Platform.userConfigDir +/+ "SC-808/SC-808.scd").load;
-  // Safety(s).disable;
+  s.sync;
+  // c = Bacalao(verbose:false);
+  // s.sync;
+  // if (~sync.notNil) { ~sync.unhang };
+  Safety(s).disable;
   StageLimiter.activate(2);
   "Setup done".postln;
 });
@@ -706,6 +707,9 @@ s.waitForBoot({
 // Quarks.install("https://github.com/mantsar/NanoKontrol2");
 // Quarks.install("https://github.com/madskjeldgaard/linuxutils-quark")
 // Quarks.install("https://github.com/shimpe/panola");
+// Quarks.install("SafetyNet") // required by bacalao
+// Quarks.install("https://github.com/mantsar/bacalao");
+// Quarks.install("https://github.com/triss/ChordSymbol")
 
 // If messy Quarks.clear (and reinstall) or use Quarks.gui to uninstall
 // Quarks.uninstall("Scintillator");
@@ -714,6 +718,4 @@ s.waitForBoot({
 // put into quark bin directory
 // chmod u+x scinsynth-x86_64.AppImage
 // sudo pacman -S fuse2
-// Quarks.uninstall("https://github.com/totalgee/bacalao");
-// Quarks.uninstall("SafetyNet") // required by bacalao
 // Quarks.uninstall("https://github.com/dkmayer/miSCellaneous_lib");

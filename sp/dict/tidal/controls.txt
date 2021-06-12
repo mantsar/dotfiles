@@ -313,3 +313,5 @@ rdec
 
 sup
 sdown
+
+maths
