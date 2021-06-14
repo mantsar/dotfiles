@@ -197,7 +197,7 @@ s.waitForBoot {
   };
 };
 
-~midi_start = {|outports=3|
+~midi_start = {|outports=4|
   MIDIClient.disposeClient;
   if (MIDIClient.initialized.not) {
     MIDIClient.init(outports:outports, verbose:true);

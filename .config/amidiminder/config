@@ -8,3 +8,4 @@
 "Midi Fighter Twister":"Midi Fighter Twister MIDI 1" --> "SuperCollider":"in3"
 "nanoKONTROL2":"nanoKONTROL2 MIDI 1" --> "SuperCollider":"in4"
 "SuperCollider":"out2" --> "nanoKONTROL2":"nanoKONTROL2 MIDI 1"
+"SuperCollider":"out3" --> "RHYTHM DESIGNER RD-6":"RHYTHM DESIGNER RD-6 MIDI 1"
