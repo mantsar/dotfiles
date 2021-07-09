@@ -14,8 +14,10 @@ makepkg -si
 
 yay -S neovim-git zsh-plugin-wd-git zsh-fast-syntax-highlighting-git navi pyradio-git faustlive-git xcwd-git nerd-fonts-hack i3-layout-manager-git flashfocus-git
 yay -S supercollider-mkplugins supercollider-f0plugins supercollider-maths-git
-yay -S supercollider-vstplugin
 yay -S jack-matchmaker
+
+sudo pacman -S vulkan-headers
+yay -S supercollider-vstplugin dpf-plugins-git
 
 # haskell-language-server-bin
 # arduino
